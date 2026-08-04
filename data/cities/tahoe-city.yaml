@@ -8,7 +8,7 @@ geo:
   lat: 39.1677
   lng: -120.1452
 hero:
-  headline: Tahoe City with a dog, done right.
+  headline: Tahoe City with a dog.
   subhead: Patios, trails, lake access, and lodging on Tahoe's West Shore — every dog policy verified.
 hero_image: tahoe-city/lakefront.jpg
 hero_image_alt: View over Lake Tahoe and the marina from Tahoe City, pines in the foreground
@@ -17,13 +17,13 @@ hero_image_credit_url: https://commons.wikimedia.org/wiki/File:View_over_Lake_Ta
 intro: >-
   Tahoe City sits where the Truckee River leaves Lake Tahoe — a walkable lakefront
   town ringed by national forest, state parks, and 23 miles of paved trail.
-  It's a genuinely good dog town, but the rules are a patchwork: county leash law,
+  It's a genuinely good dog town with a patchwork of rules: county leash law,
   utility-district beach rules, State Parks orders, and Forest Service closures
-  all apply within a few miles. We read the ordinances so you don't have to.
+  all apply within a few miles. Every policy here comes from the ordinances themselves.
 seasonal_notes:
   - "Winter (Nov 1 – May 1): dogs are prohibited on designated Nordic ski trails in Sierra District state parks when snow is present — including the trail networks at Burton Creek State Park (directly behind town) and Ed Z'berg Sugar Pine Point State Park."
-  - "Summer: check California's harmful algal bloom (HAB) map before letting your dog swim — dogs can be seriously sickened within hours by algal blooms, and advisories have been posted around Lake Tahoe."
-  - "Year-round: the US Forest Service warns that giardia is present in Tahoe-area lakes and streams — carry drinking water for your dog."
+  - "Summer: harmful algal blooms can seriously sicken a dog within hours, and advisories have been posted around Lake Tahoe — California's HAB map lists the current ones."
+  - "Year-round: the US Forest Service warns that giardia is present in Tahoe-area lakes and streams, which rules them out as drinking water for dogs."
 regulations:
   - summary: Dogs must be leashed (or otherwise restrained) everywhere off your own property in Tahoe City.
     detail: >-
@@ -42,8 +42,8 @@ regulations:
   - summary: Dogs are welcome on the paved trail system — on a short leash.
     detail: >-
       TCPUD's rules for the Truckee River, West Shore, and North Shore multi-use
-      trails require dogs on a short leash. The trails are shared with bikes,
-      so keep your dog to your side.
+      trails require dogs on a short leash, kept to the handler's side. The trails
+      are shared with bikes.
     jurisdiction: Tahoe City PUD
     source_url: https://www.tcpud.org/trails
   - summary: At Tahoe State Recreation Area, dogs are limited to the Truckee River Outlet ("Gatekeepers") day-use area.
@@ -54,7 +54,7 @@ regulations:
       developed areas only, and not on beaches or unpaved trails unless posted.
     jurisdiction: California State Parks (Sierra District)
     source_url: https://www.parks.ca.gov/?page_id=504
-  - summary: On national forest land, keep dogs leashed — and know the six no-dog beaches.
+  - summary: On national forest land, dogs must be leashed at all times — and six designated swim beaches ban pets.
     detail: >-
       The Forest Service's Lake Tahoe Basin Management Unit asks that dogs be
       leashed at all times and prohibits pets at six designated swim beaches,
@@ -75,7 +75,7 @@ resources:
     note: Trail rules, construction detours, and which paved miles are plowed in winter.
   - label: California HAB (harmful algal bloom) map
     url: https://mywaterquality.ca.gov/habs/resources/reports-map/
-    note: Check before letting your dog swim, especially late summer.
+    note: Statewide map of active bloom advisories — Tahoe's have come in late summer.
   - label: USFS Lake Tahoe Basin — where can I take my dog?
     url: https://www.fs.usda.gov/r05/laketahoebasin/recreation/where-can-i-take-my-dog-lake-tahoe
     note: The Forest Service's own list of dog-legal beaches and trails.

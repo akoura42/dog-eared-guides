@@ -32,30 +32,25 @@ summary: Groomed meadow ski trails with lake views in the middle of downtown —
 image: null
 ---
 
-The Winter Sports Park is downtown Tahoe City's snow-season front yard — a
-groomed meadow with classic tracks and a skate lane, a sled hill, an ice
-rink, and, crucially for us, designated dog trails. It's run by TCPUD,
-which means the dog rules are posted plainly rather than left to folklore.
+The Winter Sports Park is downtown Tahoe City's groomed meadow: classic
+tracks and a skate lane, a sled hill, an ice rink, and designated dog
+trails. TCPUD runs it, so the dog rules are posted rather than left to
+folklore.
 
-The system mirrors Tahoe XC's across town: dogs stay on the designated dog
-trails, leashed in the parking lot and at the trailhead, close and under
-voice command out on the snow. The district hands out free poop bags at the
-trailhead and stations garbage cans along the trail — use them, since this
-meadow doubles as the town's showcase. Know the boundaries: the sled hill
-(itself limited to kids ten and under) and the ice rink are dog-free zones,
-and inside the day lodge it's certified service dogs only.
+The system mirrors Tahoe XC's across town. Dogs stay on the designated
+dog trails, leashed in the parking lot and at the trailhead, close and
+under voice command out on the snow. Free poop bags sit at the trailhead,
+with garbage cans stationed along the trail. The boundaries: the sled
+hill, itself limited to kids ten and under, and the ice rink are dog-free
+zones, and the day lodge admits certified service dogs only.
 
-What makes this venue special is pure geography. The four kilometers of
-groomed trail sit in the middle of town at 251 N Lake Blvd, with lake views
-from the meadow — you can walk here from Basecamp or Mother Nature's Inn,
-ski a relaxed hour with the dog, and be on a patio (or at least at a
-take-out window) by lunch. No mountain drive, no chain controls. Ski and
-snowshoe rentals live in the day lodge, so a spontaneous "it snowed, let's
-try it" morning actually works even if you flew in with nothing.
+The geography is the draw. Four kilometers of groomed trail sit in the
+middle of town at 251 N Lake Blvd, with lake views from the meadow — no
+mountain drive, no chain controls. Basecamp and Mother Nature's Inn are
+within walking distance. Ski and snowshoe rentals live in the day lodge.
 
 What TCPUD doesn't publish: current trail pass prices, whether dogs need
-their own pass here (as they do at Tahoe XC), and exact season hours —
-check the district's winter page or call before you commit. Pair this with
-Tahoe XC's eight paw-marked kilometers and the plowed sections of the
-Truckee River Trail, and winter in Tahoe City with a dog stops being a
-consolation prize and becomes the actual itinerary.
+their own pass here the way they do at Tahoe XC, and exact season hours.
+Those live on the district's winter page and phone line, not here. The
+meadow doubles as the town's winter showcase, and the dog trails run
+through the middle of it.

@@ -4,12 +4,14 @@ import Base from '~/layouts/Base.astro';
 import Breadcrumbs from '~/components/Breadcrumbs.astro';
 import DogPolicyBlock from '~/components/DogPolicyBlock.astro';
 import Photo from '~/components/Photo.astro';
+import GoogleReviews from '~/components/GoogleReviews.astro';
+import VenueMenu from '~/components/VenueMenu.astro';
 import AdSlot from '~/components/AdSlot.astro';
 import AffiliateCTA from '~/components/AffiliateCTA.astro';
 import AffiliateDisclosure from '~/components/AffiliateDisclosure.astro';
 import { getCollection } from 'astro:content';
 import { getCity, getCategoryByKey } from '~/lib/config';
-import { venueSlug, MIN_HUB_VENUES } from '~/lib/venues';
+import { venueSlug } from '~/lib/venues';
 import { venueJsonLd, breadcrumbJsonLd } from '~/lib/jsonld';
 import { BRAND_NAME } from '~/lib/site';
 
@@ -27,10 +29,8 @@ const city = getCity(d.city);
 const category = getCategoryByKey(d.category);
 const { Content } = await render(venue);
 
-// Link back to the category hub only if that hub actually exists (>=4 venues)
-const cityVenues = await getCollection('venues', (v) => v.data.city === d.city);
-const categoryCount = cityVenues.filter((v) => v.data.category === d.category).length;
-const categoryHubUrl = categoryCount >= MIN_HUB_VENUES ? `/${d.city}/${category.slug}/` : null;
+// Category hub pages exist from 1 venue up (thin ones are noindexed)
+const categoryHubUrl = `/${d.city}/${category.slug}/`;
 
 const crumbs = [
   { name: 'Home', url: '/' },
@@ -59,7 +59,10 @@ const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
 
     <article class="venue">
       <header>
-        <p class="eyebrow">{category.label} · {city.name}, {city.state_code}</p>
+        <p class="eyebrow">
+          {category.label} · {city.name}, {city.state_code}
+          {d.field_notes && <span class="field-tested">Field-tested</span>}
+        </p>
         <h1>{d.name}</h1>
         <p class="summary">{d.summary}</p>
         <p class="meta">
@@ -80,6 +83,20 @@ const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
 
       <DogPolicyBlock venue={venue} />
 
+      {d.field_notes && (
+        <aside class="field-notes">
+          <p class="fn-head">Field notes</p>
+          <p>{d.field_notes}</p>
+        </aside>
+      )}
+
+      <GoogleReviews
+        name={d.name}
+        address={d.address}
+        placeId={d.google_place_id}
+        gmapsUrl={mapsUrl}
+      />
+
       {hasAffiliate && <AffiliateDisclosure />}
       {affiliateUrl && (
         <AffiliateCTA
@@ -92,6 +109,8 @@ const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
       <div class="prose body">
         <Content />
       </div>
+
+      <VenueMenu venue={venue} />
 
       <AdSlot placement="end-of-content" />
 
@@ -125,6 +144,37 @@ const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
   }
   .body {
     margin-top: 1rem;
+  }
+  .field-tested {
+    display: inline-block;
+    background: var(--pine);
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    border-radius: 999px;
+    padding: 0.15rem 0.6rem;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+  .field-notes {
+    background: color-mix(in srgb, var(--moss) 14%, var(--paper));
+    border-left: 3px solid var(--pine);
+    border-radius: var(--radius);
+    padding: 0.9rem 1.2rem;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+  .fn-head {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pine);
+    margin: 0 0 0.3rem;
+  }
+  .field-notes p:last-child {
+    margin: 0;
   }
   .verify-note {
     margin-top: 2.5rem;

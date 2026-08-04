@@ -52,6 +52,27 @@ image: null
 - Cross-reference other venues in the same city naturally ("five minutes from
   the 64-Acres trailhead") — no forced link stuffing.
 
+## Menus (eat/drink venues)
+
+When a venue's own website publishes a readable menu, capture it in
+frontmatter so dish search works:
+
+```yaml
+menu:
+  source_url: <url of the official menu page/PDF (archive.org capture of the official site is acceptable)>
+  last_verified: YYYY-MM-DD
+  items:
+    - "SECTION: Starters"          # section headers use the SECTION: prefix
+    - Buffalo Wings
+    - Spaghetti & Meatballs        # item names exactly as printed — never invented or normalized
+```
+
+- Only items actually readable on the official menu. No inference from
+  cuisine ("Italian, so probably spaghetti" is exactly what this feature
+  exists to avoid). No third-party menu sites (Yelp/DoorDash).
+- If no official menu is readable, set `menu: null` and note it in open
+  questions.
+
 ## Guide files (MDX)
 
 Path: `src/content/guides/<city-slug>/<guide-slug>.mdx`

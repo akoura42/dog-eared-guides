@@ -33,31 +33,27 @@ summary: The classic lakefront lodge on the West Shore takes dogs in pet-designa
 image: null
 ---
 
-Sunnyside is the West Shore's landmark — a lakefront lodge and restaurant
-two miles south of Tahoe City whose deck is one of the most famous places
-to watch a Tahoe afternoon go by. For dog owners, the important news is the
-lodge half: a real, published pet policy that puts dogs in pet-designated
-guest rooms for a flat $60 per stay.
+Sunnyside is the West Shore's landmark, a lakefront lodge and restaurant
+two miles south of Tahoe City with one of the best-known dining decks on
+the lake. The lodge half carries a published pet policy: dogs stay in
+pet-designated guest rooms for a flat $60 per stay, not per night.
 
-The terms, straight from the policy page: leashed at all times when your
-pet is with you on the property, pet-designated rooms only (say so when
-booking), and no pets in the lodge building's interior common areas or
-anywhere food is being served. On unattended dogs, Sunnyside takes a middle
-path — they'd prefer you never leave the dog alone in the room, and if it's
-unavoidable, the dog must be in a carrier. The policy also asks you to
-coordinate with the front desk on housekeeping times, which in practice
-means a morning conversation and a door hanger.
+The terms come straight from the policy page. Pets are leashed at all
+times on the property. Pet-designated rooms only, arranged at booking.
+No pets in the lodge building's interior common areas or anywhere food is
+being served. On unattended dogs the lodge takes a middle path: it
+prefers pets never be left alone in a room, and where that's unavoidable,
+the dog must be in a carrier. The policy also asks guests to coordinate
+housekeeping times with the front desk.
 
-Now the caveat that matters, because third-party directories get this
-wrong: **we cannot call the famous dining deck dog-friendly.** The lodge's
-own policy bars pets from "any areas where food is being served," which on
-its face includes the deck. Maybe there's a designated corner in practice —
-but nothing official says so, and our rule is that unpublished policies
-don't get published here. Call ahead if the deck is the point of your trip.
+The deck needs its own paragraph. The lodge's policy bars pets from "any
+areas where food is being served," and on its face that language includes
+the famous deck. No official source says a dog-friendly corner exists
+there, so the deck isn't listed as dog-friendly here — third-party
+directories that claim otherwise are going beyond what the lodge
+publishes. The lodge itself is the only source that could settle it.
 
-What's unambiguous: the location is superb for a dog stay. The policy
-itself points dog walkers to "the bike path located in front of our
-facility" — that's the TCPUD West Shore Trail, leashed dogs welcome, which
-runs from your door toward Tahoe City in one direction and deeper down the
-West Shore in the other. Morning trail, lake air, and a flat pet fee that
-beats per-night pricing on longer stays.
+The policy points dog walkers to "the bike path located in front of our
+facility." That's the TCPUD West Shore Trail, where leashed dogs are
+allowed. It runs from the lodge's frontage toward Tahoe City in one
+direction and deeper down the West Shore in the other.

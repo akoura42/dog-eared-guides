@@ -136,12 +136,30 @@ on markers and venue pages are free Google Maps deep links (Maps URLs).
 Upgrade path if wanted later: a native embedded Google map needs a Maps
 JavaScript API key with billing (Dynamic Maps SKU: 10K free loads/month,
 then $7/1K as of 2026). The swap is contained to
-`apps/web/src/components/CityVenueMap.astro`. Showing star ratings inline
-would need the Places API ($17/1K, no caching allowed by ToS) — not
-recommended for a static site; the deep link is the compliant pattern.
+`apps/web/src/components/CityVenueMap.astro`.
+
+### Click-to-reveal Google reviews (built, dormant)
+
+Venue pages include a "Google rating & reviews" panel that stays entirely
+absent until `PUBLIC_GMAPS_API_KEY` is set. Cost design: nothing loads or
+bills until a reader expands the panel; the place-ID lookup uses the free
+IDs-only text search, and the single billed call is Place Details with
+rating/review fields (~$40/1K, 1,000 free/month, as of 2026). Expect cost
+≈ $0.04 × (number of panel-expands beyond 1,000/month).
+
+To activate:
+1. Google Cloud Console → create an API key with billing enabled.
+2. Restrict it: HTTP referrers (your domains) + API restriction to
+   "Maps JavaScript API".
+3. Set `PUBLIC_GMAPS_API_KEY` in Cloudflare Pages env vars and redeploy.
+4. Optional: set a billing budget alert (e.g. $50) in Google Cloud.
+
+Optional per-venue tuning: add `google_place_id` to venue frontmatter
+(place IDs are the one thing Google's ToS lets you cache) to skip the
+lookup and guarantee the right listing. Find a place ID with Google's
+place-ID finder or the first panel-expand's network response.
 
 ## Brand name
 
-Still `BRAND_NAME`. When it lands, change `BRAND_NAME` (and tagline) in
-`apps/web/src/lib/site.ts` — it flows through copy, metadata, JSON-LD, and OG
-images from there.
+Dog-Eared Guides, set in `apps/web/src/lib/site.ts` — the one place the
+name lives; it flows through copy, metadata, JSON-LD, and OG images.

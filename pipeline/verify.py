@@ -57,6 +57,14 @@ For `changed`: also output the FULL corrected file between ===FILE=== and
 verification.last_verified set to today. Only change what the sources
 support; do not invent facts.
 For `closed`: briefly state the evidence after the verdict marker.
+
+Tier note: if the file has verification.level: reported (visitor-reported,
+no official source), FIRST search for a newly published official policy. If
+one now exists, that's a `changed` verdict — upgrade the file to
+verification.level: official with the official source_url and adjust the
+body's evidential language. Otherwise re-check that the recorded mention
+links still stand; if the venue now officially disallows dogs, that's also
+`changed`.
 """
 
 

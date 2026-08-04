@@ -30,31 +30,24 @@ summary: The one legal off-leash spot in town — a fenced TCPUD field with a wa
 image: null
 ---
 
-Every leash law needs a release valve, and this is Tahoe City's. The Grove
-Street dog park is the single designated dog space in a town where Placer
-County's ordinance otherwise requires restraint everywhere off your own
-property — which makes this modest fenced field genuinely important
-infrastructure for a visiting dog.
+The Grove Street dog park is Tahoe City's single designated dog space.
+Placer County's ordinance requires dogs to be restrained everywhere off
+their own property, and this fenced field next to Conners Field is the
+exception the town built. The Tahoe City Public Utility District runs it,
+a short walk from downtown.
 
-It's run by the Tahoe City Public Utility District, sitting next to Conners
-Field a short walk from downtown. The amenities are exactly what you want
-and nothing you don't: a small open field, a water spigot (bring the bowl),
-free clean-up bag dispensers that the district keeps stocked, and somewhere
-to sit while your dog burns off the car ride. Hours are dawn to dusk,
-year-round.
+The amenities are modest and complete: a small open field, a water spigot
+rather than bowls, free clean-up bag dispensers the district keeps
+stocked, and somewhere to sit. Hours are dawn to dusk, year-round.
 
-Two honest caveats from our verification. First, TCPUD's own web page
-doesn't spell out "off-leash" or describe the fencing — that detail comes
-from the district's official social posts, which describe the park as fully
-fenced. It functions as the town's off-leash spot and is treated as such by
-the district; we're just precise about where each fact comes from. Second,
-there's no published parking guidance — Grove Street is residential-scale,
-so on busy summer mornings expect to walk a block or two.
+Two sourcing notes. TCPUD's own web page doesn't use the words "off-leash"
+and doesn't describe the fencing; the fully-fenced detail comes from the
+district's official social posts. The park functions as the town's
+off-leash spot, and the district treats it that way. And there's no
+published parking guidance — Grove Street is residential-scale, and on
+busy summer mornings the nearest open spot can sit a block or two off.
 
-Strategically, this park solves a specific problem: the no-unattended-pets
-policies at local lodging. If you're staying at Basecamp (where pets can
-never be left alone in the room), a hard session here before dinner is how
-everyone gets to relax. It also pairs naturally with the lakefront — you're
-a few minutes from the paved trail where the leash goes back on, and the
-Commons Beach area (dogs prohibited on the sand, remember) is just down the
-hill.
+The park lands close to the pieces around it. Basecamp, downtown, doesn't
+allow pets to be left alone in guest rooms at any time. The paved
+lakefront trail is a few minutes away, and leashes are required there.
+Commons Beach, just down the hill, prohibits dogs on the sand.

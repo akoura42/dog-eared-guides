@@ -12,6 +12,7 @@ import yaml
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 PROMPTS_DIR = REPO_ROOT / "pipeline" / "prompts"
+VOICE_FILE = REPO_ROOT / "docs" / "voice.md"
 CONTENT_DIR = REPO_ROOT / "apps" / "web" / "src" / "content"
 VENUES_DIR = CONTENT_DIR / "venues"
 GUIDES_DIR = CONTENT_DIR / "guides"

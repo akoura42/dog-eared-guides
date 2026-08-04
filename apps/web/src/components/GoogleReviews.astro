@@ -1,0 +1,233 @@
+---
+// Click-to-reveal Google rating & reviews. Renders nothing unless
+// PUBLIC_GMAPS_API_KEY is set, and bills nothing until a reader opens the
+// panel: the expensive Place Details call (rating/reviews fields,
+// Enterprise+Atmosphere SKU) fires once per venue per page load, only on
+// expand. Place-ID resolution uses the IDs-only text search (free SKU),
+// skipped entirely when the venue frontmatter carries google_place_id.
+import { GMAPS_API_KEY } from '~/lib/site';
+
+interface Props {
+  name: string;
+  address: string;
+  placeId?: string | null;
+  /** Fallback deep link if lookup fails. */
+  gmapsUrl: string;
+}
+
+const { name, address, placeId = null, gmapsUrl } = Astro.props;
+---
+
+{GMAPS_API_KEY && (
+  <details
+    class="greviews"
+    data-gr-key={GMAPS_API_KEY}
+    data-gr-name={name}
+    data-gr-address={address}
+    data-gr-place-id={placeId ?? ''}
+    data-gr-fallback={gmapsUrl}
+  >
+    <summary>
+      <span class="star" aria-hidden="true">★</span>
+      Google rating &amp; reviews
+      <span class="note">loads from Google</span>
+    </summary>
+    <div class="panel">
+      <p class="status">Loading from Google…</p>
+      <div class="content" hidden></div>
+    </div>
+  </details>
+)}
+
+<style>
+  .greviews {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    margin: 1.5rem 0;
+  }
+  summary {
+    cursor: pointer;
+    padding: 0.9rem 1.2rem;
+    font-weight: 650;
+    color: var(--pine-deep);
+    list-style: none;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  .star {
+    color: var(--sun);
+  }
+  .note {
+    font-size: 0.78rem;
+    font-weight: 450;
+    color: var(--ink-soft);
+    margin-left: auto;
+  }
+  .panel {
+    padding: 0 1.2rem 1.1rem;
+  }
+  .status {
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+  .content :global(.gr-head) {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    margin-bottom: 0.75rem;
+  }
+  .content :global(.gr-rating) {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 640;
+    color: var(--pine-deep);
+  }
+  .content :global(.gr-stars) {
+    color: var(--sun);
+    letter-spacing: 0.1em;
+  }
+  .content :global(.gr-count) {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+  .content :global(.gr-review) {
+    border-top: 1px dashed var(--line);
+    padding: 0.7rem 0;
+    font-size: 0.92rem;
+  }
+  .content :global(.gr-review .who) {
+    font-weight: 650;
+    font-size: 0.85rem;
+  }
+  .content :global(.gr-review .when) {
+    color: var(--ink-soft);
+    font-weight: 450;
+  }
+  .content :global(.gr-review p) {
+    margin: 0.3rem 0 0;
+  }
+  .content :global(.gr-foot) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid var(--line);
+    padding-top: 0.7rem;
+    margin-top: 0.3rem;
+    font-size: 0.85rem;
+  }
+  .content :global(.gr-powered) {
+    color: var(--ink-soft);
+    font-size: 0.75rem;
+  }
+</style>
+
+<script>
+  let mapsLoading: Promise<any> | null = null;
+
+  function loadGoogleMaps(key: string): Promise<any> {
+    const w = window as any;
+    if (w.google?.maps) return Promise.resolve(w.google.maps);
+    if (!mapsLoading) {
+      mapsLoading = new Promise((resolve, reject) => {
+        w.__grReady = () => resolve(w.google.maps);
+        const s = document.createElement('script');
+        s.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(key)}&v=weekly&loading=async&callback=__grReady`;
+        s.onerror = () => reject(new Error('Google Maps JS failed to load'));
+        document.head.appendChild(s);
+      });
+    }
+    return mapsLoading;
+  }
+
+  const esc = (s: string) =>
+    s.replace(/[&<>"']/g, (c) =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!
+    );
+
+  function stars(rating: number): string {
+    const full = Math.round(rating);
+    return '★'.repeat(full) + '☆'.repeat(5 - full);
+  }
+
+  async function reveal(el: HTMLDetailsElement) {
+    if (el.dataset.grState) return; // already loading/loaded
+    el.dataset.grState = 'loading';
+    const status = el.querySelector<HTMLElement>('.status')!;
+    const content = el.querySelector<HTMLElement>('.content')!;
+    const fallback = el.dataset.grFallback!;
+
+    try {
+      const maps = await loadGoogleMaps(el.dataset.grKey!);
+      const { Place } = await maps.importLibrary('places');
+
+      let place: any;
+      if (el.dataset.grPlaceId) {
+        place = new Place({ id: el.dataset.grPlaceId });
+      } else {
+        // IDs-only text search — free SKU.
+        const { places } = await Place.searchByText({
+          textQuery: `${el.dataset.grName} ${el.dataset.grAddress}`,
+          fields: ['id'],
+          maxResultCount: 1,
+        });
+        if (!places?.length) throw new Error('place not found');
+        place = places[0];
+      }
+
+      // The one billed call (rating/reviews fields).
+      await place.fetchFields({
+        fields: ['displayName', 'rating', 'userRatingCount', 'reviews', 'googleMapsURI'],
+      });
+
+      const rating = place.rating;
+      const count = place.userRatingCount ?? 0;
+      const gUrl = place.googleMapsURI ?? fallback;
+      const reviews = (place.reviews ?? []).slice(0, 4);
+
+      let html = '';
+      if (rating) {
+        html += `<div class="gr-head">
+          <span class="gr-rating">${rating.toFixed(1)}</span>
+          <span class="gr-stars" aria-hidden="true">${stars(rating)}</span>
+          <span class="gr-count">${count.toLocaleString()} Google reviews</span>
+        </div>`;
+      }
+      for (const r of reviews) {
+        const author = r.authorAttribution?.displayName ?? 'Google user';
+        const text = r.text ?? '';
+        if (!text) continue;
+        html += `<div class="gr-review">
+          <span class="who">${esc(author)}</span>
+          <span class="gr-stars" aria-hidden="true">${stars(r.rating ?? 0)}</span>
+          <span class="when">${esc(r.relativePublishTimeDescription ?? '')}</span>
+          <p>${esc(text)}</p>
+        </div>`;
+      }
+      html += `<div class="gr-foot">
+        <a href="${esc(gUrl)}" target="_blank" rel="noopener nofollow">See all reviews on Google Maps ↗</a>
+        <span class="gr-powered">Powered by Google</span>
+      </div>`;
+
+      content.innerHTML = html;
+      content.hidden = false;
+      status.remove();
+      el.dataset.grState = 'loaded';
+    } catch {
+      status.innerHTML = `Couldn't load reviews here — <a href="${esc(fallback)}" target="_blank" rel="noopener nofollow">open them on Google Maps ↗</a>`;
+      el.dataset.grState = 'error';
+    }
+  }
+
+  document.querySelectorAll<HTMLDetailsElement>('.greviews').forEach((el) => {
+    el.addEventListener('toggle', () => {
+      if (el.open) reveal(el);
+    });
+  });
+</script>

@@ -29,36 +29,31 @@ verification:
 affiliate: null
 tags:
   - winter-friendly
-summary: Eight kilometers of groomed, paw-marked ski trails where the dog is officially invited — the winter answer in Tahoe City.
+summary: Eight kilometers of groomed, paw-marked dog trails at Tahoe City's community-owned cross-country area; dogs ski on their own ticket.
 image: null
 ---
 
-Here's the problem Tahoe XC solves: from November through May, the state
-park ski trails behind Tahoe City ban dogs outright. If you want to
-actually *do winter* with your dog — not just walk the plowed bike path —
-this community-owned cross-country area is the sanctioned answer, and its
-enthusiasm is official: "Yes, bring the family dog!" is a direct quote from
-the FAQ.
+From November through May, the state park ski trails behind Tahoe City
+ban dogs. Tahoe XC doesn't. The community-owned cross-country area grooms
+eight kilometers of dog-friendly trail, marked on the trail map with a
+paw icon, and its FAQ says so plainly: "Yes, bring the family dog!"
 
-The deal: eight kilometers of groomed dog-friendly trails, marked with a
-paw icon on the trail map so there's no guessing. Dogs are permitted on
-those dog-specific trails only — the rest of the 60-ish kilometer network
-is dog-free, which keeps the peace with skate skiers. Leashes are required
-in the parking lot and at the trailhead; on the trails themselves the
-standard is close control and strict voice command. Poop bags and cans wait
-at the trailhead, and the honest-broker rules apply: aggressive or unruly
-dogs are asked to stay home, and no skijoring anywhere on the network.
+Dogs are permitted on those dog-specific trails only. The rest of the
+roughly sixty-kilometer network is dog-free, which keeps the peace with
+the skate skiers. Leashes are required in the parking lot and at the
+trailhead; out on the trails the standard is close control and strict
+voice command. Poop bags and cans wait at the trailhead. Aggressive or
+unruly dogs are asked to stay home, and skijoring isn't allowed anywhere
+on the network.
 
-Your dog needs a ticket. Tahoe XC sells dog day tickets and even dog season
-passes ("Many dogs get their own season pass!") — check current prices at
-the lodge or online, as they weren't published at verification time. Humans
-rent skis or snowshoes in the day lodge, where only certified service dogs
-are allowed inside; the Free Heel Cafe handles the post-ski hot drink.
+A dog skis on its own ticket here. Tahoe XC sells dog day tickets and dog
+season passes ("Many dogs get their own season pass!" is theirs too),
+though prices weren't published at verification time. Ski and snowshoe
+rentals live in the day lodge, where only certified service dogs are
+allowed inside. The Free Heel Cafe handles the hot drink afterward.
 
-Logistics matter here: the trailhead sits in a residential neighborhood at
-925 Country Club Blvd with limited parking and a 25 mph plea from the
-neighbors — the area itself recommends the TART Connect on-demand shuttle
-from town. In summer the same trails open free to hikers and bikers, making
-this a year-round venue, though winter is when the paw-icon system and its
-groomed corduroy really shine. For a snow-season trip, this plus the Winter
-Sports Park downtown is the whole dog-winter itinerary.
+The trailhead sits in a residential neighborhood at 925 Country Club
+Blvd, with limited parking and a 25 mph plea from the neighbors. The area
+itself recommends the TART Connect on-demand shuttle from town. In summer
+and fall the same trails open free to hikers and bikers; the paw-icon
+system and the groomed corduroy are winter operations.

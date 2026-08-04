@@ -66,6 +66,12 @@ const crumbs = [
         <p class="eyebrow">{city.name}, {city.state}</p>
         <h1>{city.hero.headline}</h1>
         <p class="lede">{city.intro}</p>
+        {venues.length > 0 && (
+          <p class="hero-cta">
+            <a class="btn btn--clay" href={`/${city.slug}/plan/`}>Build your itinerary</a>
+            <a class="btn btn--ghost" href="#venue-map-canvas">See the map</a>
+          </p>
+        )}
       </div>
       {city.hero_image && (
         <Photo
@@ -100,7 +106,7 @@ const crumbs = [
       <ul class="card-grid">
         {categoryHubs.map(({ category, venues: catVenues }) => (
           <li>
-            {catVenues.length >= MIN_HUB_VENUES ? (
+            {catVenues.length > 0 ? (
               <a class="cat-card" href={`/${city.slug}/${category.slug}/`}>
                 <span class="cat-name">{category.label}</span>
                 <span class="cat-blurb">{category.blurb}</span>
@@ -164,6 +170,12 @@ const crumbs = [
     <section class="band">
       <div class="wrap">
         <h2>Guides &amp; itineraries</h2>
+        {venues.length > 0 && (
+          <p class="plan-cta">
+            <a class="btn btn--clay" href={`/${city.slug}/plan/`}>Build your own itinerary</a>
+            <span>Pick from the verified venues, organize by day, share the link.</span>
+          </p>
+        )}
         <ul class="guide-list">
           {guides.map((guide) => (
             <li>
@@ -216,6 +228,12 @@ const crumbs = [
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
     gap: 2.5rem;
     align-items: center;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
   }
   @media (max-width: 860px) {
     .hero-split {
@@ -305,6 +323,17 @@ const crumbs = [
   }
   .map-head {
     margin-top: 2.5rem;
+  }
+  .plan-cta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 0 0 1.5rem;
+  }
+  .plan-cta span {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
   }
   .attr-links .pill {
     text-decoration: none;

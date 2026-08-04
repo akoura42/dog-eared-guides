@@ -16,8 +16,9 @@ dog_policy:
   fee: null
   notes: >-
     TCPUD's rule, verbatim: "Dogs are allowed on leash in the park but not
-    allowed on the beach." So the pines, meadow, woodland trails, and picnic
-    areas are all fair game with a leash — the sand and swim beach are not.
+    allowed on the beach." The pines, meadow, woodland trails, and picnic
+    areas are inside the leashed-dog boundary; the sand and swim beach are
+    not.
 seasonal:
   - "Posted hours 8:00am–10:00pm, May 1 – October 31, weather permitting."
 verification:
@@ -30,29 +31,26 @@ summary: Lakeside pine forest, meadow, and woodland trails where leashed dogs ar
 image: null
 ---
 
-Skylandia is Tahoe City's honest answer to "where can I actually take the dog
-near the water?" The rule, straight from the managing agency: leashed dogs
-are allowed throughout the park — the woodland trails, the meadow, the picnic
-areas under the pines — but not on the beach itself. That's a better deal
-than it sounds. Commons Beach downtown bans dogs entirely; here, you and the
-dog can spend a real afternoon fifty yards from the lake, legally.
+Skylandia sits in the Lake Forest neighborhood on the east side of town, off
+Lake Forest Road at the end of Aspen Street. TCPUD's rule, verbatim: "Dogs
+are allowed on leash in the park but not allowed on the beach." The woodland
+trails, the meadow, and the picnic areas under the pines are all inside the
+leashed-dog boundary. The sand and swim beach are not. Commons Beach
+downtown bans dogs entirely, so this park is where a leashed dog legally
+gets closest to the water in Tahoe City — fifty yards or so, through genuine
+pine forest running down to the shore.
 
-The park sits in the Lake Forest neighborhood on the east side of town, off
-Lake Forest Road at the end of Aspen Street. It's the quieter alternative to
-the downtown lakefront: a genuine pine forest running down to the shore, with
-a pier, three picnic areas, barbecues, restrooms, and — usefully for dog
-owners — running water at the group picnic area for topping up a bowl. There's
-kayak and SUP storage too, if your crew splits between paddlers and dog
-walkers.
+The park is the quieter counterpart to the downtown lakefront. There's a
+pier, three picnic areas with barbecues, and restrooms. The group picnic
+area has running water, which covers filling a dog bowl. Kayak and SUP
+storage is on site.
 
-The woodland trails are the main event with a dog: shaded, soft underfoot,
-and cool even in August, looping through the forest between the road and the
-water. Keep the leash on — it's both the TCPUD rule and Placer County law —
-and keep off the sand, where the swim crowd and the rule both work against
-you.
+The woodland trails loop through the forest between the road and the water,
+shaded and soft underfoot, cool even in August. The leash requirement is
+both the TCPUD rule and Placer County law.
 
-Posted hours are 8am to 10pm from May 1 through October 31, "weather
-permitting," so treat this as a three-season spot. TCPUD doesn't publish
-parking details for the park; arrive early on summer weekends. And if your
-dog is set on actually swimming, that's a different mission — see our guide
-to Tahoe City lake access for where dogs can legally get wet.
+Posted hours are 8am to 10pm, May 1 through October 31, "weather
+permitting" — a three-season park by its own signage. TCPUD doesn't publish
+parking details for the park. And the swim beach's dog ban means no legal
+swimming here; where dogs can legally get in the lake is covered in our
+guide to Tahoe City lake access.

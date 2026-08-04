@@ -31,32 +31,28 @@ summary: The one TCPUD-sanctioned spot where a dog can reach Lake Tahoe's water 
 image: null
 ---
 
-If you ask the Tahoe City Public Utility District — the agency that runs
-the town's beaches — whether there's a dog beach in Tahoe City, their FAQ
-gives you a straight answer: no, but "dogs are allowed next to the boat
-ramp in Lake Forest/Pomin Park." This unglamorous strip of shoreline is
-therefore something rare: the town's one agency-sanctioned spot where your
-dog can actually reach Lake Tahoe's water.
+The Tahoe City Public Utility District runs the town's beaches, and its
+FAQ answers the dog-beach question directly: there isn't one, but "dogs
+are allowed next to the boat ramp in Lake Forest/Pomin Park." That makes
+this strip of shoreline the town's one agency-sanctioned place where a
+dog can reach Lake Tahoe's water.
 
-Set expectations accordingly. This is a working boat ramp beside a
-neighborhood park, not a sandy crescent — the "beach" is the rocky
-shoreline flanking the ramp. But the water is the same impossibly clear
-Tahoe blue, the Lake Forest neighborhood keeps it low-key compared to the
-downtown lakefront, and on a summer evening a dog splashing next to the
-ramp draws zero attention because that's what this spot is for.
+It's a working boat ramp beside a neighborhood park, not a sandy
+crescent. The "beach" is the rocky shoreline flanking the ramp. The water
+is the same impossibly clear Tahoe blue, the Lake Forest neighborhood
+runs low-key compared to the downtown lakefront, and on a summer evening
+a dog splashing beside the ramp is what the spot is designated for.
 
-It's about two miles northeast of downtown off Highway 28, with Pomin
-Park's ballfield and picnic facilities behind you — note the FAQ's dog
-allowance is specifically the boat-ramp area for water access, so keep lake
-time to that zone. The leash question is genuinely unpublished for this
-spot; Placer County's leash law covers you regardless, so leash on is both
-the legal default and the smart play around boat trailers backing down a
-ramp. Skylandia Park and its dog-legal woodland trails are a few minutes
-away, making a natural pairing: forest walk first, ramp swim second, wet
-dog in the car last.
+The ramp sits about two miles northeast of downtown off Highway 28, with
+Pomin Park's ballfield and picnic facilities behind the shoreline. The
+FAQ's allowance covers the boat-ramp area specifically, not the rest of
+the park. No leash rule is published for this spot; Placer County's leash
+law applies everywhere in town regardless, and boat trailers back down
+the ramp through the same space. Skylandia Park and its dog-legal
+woodland trails are a few minutes away.
 
-Two water-safety notes that apply here as everywhere on the lake: the
-Forest Service warns that giardia is present in Tahoe's waters (carry
-drinking water rather than letting the dog tank up), and in late summer
-check California's harmful algal bloom map before swim time. Boat-ramp
-operations are seasonal; the shoreline itself doesn't close.
+Two water notes that apply here as everywhere on the lake: the Forest
+Service warns that giardia is present in Tahoe's waters, and California
+maintains a harmful algal bloom map covering the late-summer weeks when
+blooms appear. Boat-ramp operations are seasonal. The shoreline itself
+doesn't close.

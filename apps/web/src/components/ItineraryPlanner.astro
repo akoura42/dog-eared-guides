@@ -1,0 +1,532 @@
+---
+// Build-your-own itinerary. Fully client-side: selections persist in
+// localStorage per city, encode into a shareable ?p= URL, and print
+// cleanly. Catalog data is baked in at build time from verified venues.
+import type { Venue } from '~/lib/venues';
+import { venuePath, venueSlug, ALLOWED_LABELS } from '~/lib/venues';
+import { getCategoryByKey, type CityConfig } from '~/lib/config';
+
+interface Props {
+  city: CityConfig;
+  venues: Venue[];
+}
+
+const { city, venues } = Astro.props;
+
+const catalog = venues.map((v) => ({
+  slug: venueSlug(v),
+  name: v.data.name,
+  path: venuePath(v),
+  category: getCategoryByKey(v.data.category).label,
+  categoryKey: v.data.category,
+  policy: ALLOWED_LABELS[v.data.dog_policy.allowed],
+  summary: v.data.summary,
+  reported: v.data.verification.level === 'reported',
+  lat: v.data.lat,
+  lng: v.data.lng,
+}));
+
+const byCategory = new Map<string, typeof catalog>();
+for (const item of catalog) {
+  const list = byCategory.get(item.category) ?? [];
+  list.push(item);
+  byCategory.set(item.category, list);
+}
+---
+
+<div class="planner" data-city={city.slug} data-catalog={JSON.stringify(catalog)}>
+  <section class="plan-panel" id="plan-panel" aria-label="Your itinerary">
+    <div class="plan-head">
+      <h2>Your itinerary</h2>
+      <div class="plan-actions">
+        <button class="btn btn--ghost" id="plan-map-btn" hidden>See on map</button>
+        <button class="btn btn--ghost" id="plan-share" hidden>Copy link</button>
+        <button class="btn btn--ghost" id="plan-print" hidden>Print</button>
+        <button class="btn btn--ghost" id="plan-clear" hidden>Clear</button>
+      </div>
+    </div>
+    <p class="empty" id="plan-empty">
+      Nothing selected yet. Every venue below carries a verified (or
+      visitor-reported, where marked) dog policy — the plan you assemble here
+      stays in your browser and copies into a shareable link.
+    </p>
+    <div id="plan-days"></div>
+    <div id="plan-map" hidden></div>
+  </section>
+
+  <section class="catalog" aria-label="Verified venues">
+    {[...byCategory.entries()].map(([category, items]) => (
+      <div class="cat-block">
+        <h3>{category}</h3>
+        <ul>
+          {items.map((item) => (
+            <li class="cat-item" data-slug={item.slug}>
+              <div class="info">
+                <a href={item.path}>{item.name}</a>
+                {item.reported && <span class="rep">visitor-reported</span>}
+                <p class="policy">{item.policy}</p>
+                <p class="summary">{item.summary}</p>
+              </div>
+              <button class="btn add" data-add={item.slug}>Add</button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </section>
+</div>
+
+<style>
+  .planner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: 2rem;
+    align-items: start;
+    margin: 1.5rem 0;
+  }
+  .plan-panel {
+    order: 2;
+    position: sticky;
+    top: 4.5rem;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 1.2rem 1.4rem;
+  }
+  .catalog {
+    order: 1;
+  }
+  .plan-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .plan-head h2 {
+    font-size: 1.3rem;
+    margin: 0;
+  }
+  .plan-actions {
+    display: flex;
+    gap: 0.4rem;
+  }
+  .plan-actions .btn {
+    font-size: 0.78rem;
+    padding: 0.3rem 0.8rem;
+  }
+  .empty {
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+  }
+  #plan-days :global(h4) {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin: 1rem 0 0.4rem;
+  }
+  #plan-days :global(ol) {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.45rem;
+  }
+  #plan-days :global(.plan-item) {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 0.5rem 0.7rem;
+    background: var(--paper);
+  }
+  #plan-days :global(.plan-item .name) {
+    flex: 1;
+    min-width: 0;
+    font-weight: 600;
+    font-size: 0.92rem;
+  }
+  #plan-days :global(.plan-item .cat) {
+    display: block;
+    font-weight: 450;
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+  }
+  #plan-days :global(.plan-item button) {
+    border: none;
+    background: var(--clay-soft);
+    color: var(--ink);
+    border-radius: 6px;
+    width: 1.7rem;
+    height: 1.7rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    line-height: 1;
+  }
+  #plan-days :global(.plan-item button:hover) {
+    background: var(--sun);
+  }
+  #plan-days :global(.plan-item .day-btn) {
+    width: auto;
+    padding-inline: 0.5rem;
+    font-weight: 700;
+    font-size: 0.72rem;
+  }
+  .cat-block h3 {
+    font-size: 1.05rem;
+    margin: 1.5rem 0 0.5rem;
+  }
+  .cat-block ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.6rem;
+  }
+  .cat-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 0.8rem 1rem;
+  }
+  .cat-item.in-plan {
+    outline: 2px solid var(--moss);
+  }
+  .cat-item .info {
+    flex: 1;
+    min-width: 0;
+  }
+  .cat-item a {
+    font-weight: 650;
+    text-decoration: none;
+  }
+  .rep {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--warn);
+    margin-left: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .policy {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ok);
+    margin: 0.1rem 0;
+  }
+  .summary {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .add {
+    font-size: 0.85rem;
+    padding: 0.35rem 1rem;
+    flex-shrink: 0;
+  }
+  .cat-item.in-plan .add {
+    background: var(--moss);
+  }
+  @media (max-width: 860px) {
+    .planner {
+      grid-template-columns: 1fr;
+    }
+    .plan-panel {
+      order: 1;
+      position: static;
+    }
+    .catalog {
+      order: 2;
+    }
+  }
+  #plan-map {
+    height: 320px;
+    margin-top: 1rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    z-index: 1;
+  }
+  #plan-map :global(.pin-num) {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.78rem;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  }
+  @media print {
+    .catalog,
+    .plan-actions,
+    .empty,
+    #plan-map {
+      display: none !important;
+    }
+    .plan-panel {
+      border: none;
+      box-shadow: none;
+      padding: 0;
+    }
+    #plan-days :global(.plan-item button) {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  type PlanItem = { slug: string; day: number };
+
+  const root = document.querySelector<HTMLElement>('.planner');
+  if (root) {
+    const citySlug = root.dataset.city!;
+    const catalog = JSON.parse(root.dataset.catalog!) as {
+      slug: string;
+      name: string;
+      path: string;
+      category: string;
+    }[];
+    const bySlug = new Map(catalog.map((c) => [c.slug, c]));
+    const storeKey = `plan:${citySlug}`;
+    const MAX_DAY = 3;
+
+    const daysEl = document.getElementById('plan-days')!;
+    const emptyEl = document.getElementById('plan-empty')!;
+    const shareBtn = document.getElementById('plan-share') as HTMLButtonElement;
+    const printBtn = document.getElementById('plan-print') as HTMLButtonElement;
+    const clearBtn = document.getElementById('plan-clear') as HTMLButtonElement;
+    const mapBtn = document.getElementById('plan-map-btn') as HTMLButtonElement;
+    const mapEl = document.getElementById('plan-map')!;
+
+    function load(): PlanItem[] {
+      try {
+        const items = JSON.parse(localStorage.getItem(storeKey) ?? '[]') as PlanItem[];
+        return items.filter((i) => bySlug.has(i.slug));
+      } catch {
+        return [];
+      }
+    }
+
+    // ?p=1:slug,slug;2:slug — a shared link overrides the stored plan.
+    function fromUrl(): PlanItem[] | null {
+      const p = new URLSearchParams(location.search).get('p');
+      if (!p) return null;
+      const items: PlanItem[] = [];
+      for (const dayPart of p.split(';')) {
+        const [dayStr, slugs] = dayPart.split(':');
+        const day = Math.min(Math.max(parseInt(dayStr, 10) || 1, 1), MAX_DAY);
+        for (const slug of (slugs ?? '').split(',')) {
+          if (bySlug.has(slug) && !items.some((i) => i.slug === slug)) {
+            items.push({ slug, day });
+          }
+        }
+      }
+      return items.length ? items : null;
+    }
+
+    let plan: PlanItem[] = fromUrl() ?? load();
+
+    function save() {
+      localStorage.setItem(storeKey, JSON.stringify(plan));
+    }
+
+    function serialize(): string {
+      const groups = new Map<number, string[]>();
+      for (const item of plan) {
+        groups.set(item.day, [...(groups.get(item.day) ?? []), item.slug]);
+      }
+      return [...groups.entries()]
+        .sort(([a], [b]) => a - b)
+        .map(([day, slugs]) => `${day}:${slugs.join(',')}`)
+        .join(';');
+    }
+
+    const esc = (s: string) =>
+      s.replace(/[&<>"']/g, (c) =>
+        ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!
+      );
+
+    // --- Plan-on-map: initializes on first "See on map", re-renders on
+    // every plan change afterwards. One color per day, numbered stops,
+    // dashed route line in stop order.
+    const DAY_COLORS: Record<number, string> = { 1: '#c05f33', 2: '#1f4d3a', 3: '#e8a13c' };
+    let leaflet: any = null;
+    let planMap: any = null;
+    let mapLayer: any = null;
+
+    async function ensureMap() {
+      if (planMap) return;
+      const [{ default: L }] = await Promise.all([
+        import('leaflet'),
+        import('leaflet/dist/leaflet.css'),
+      ]);
+      leaflet = L;
+      mapEl.hidden = false;
+      planMap = L.map(mapEl, { scrollWheelZoom: false });
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(planMap);
+      mapLayer = L.layerGroup().addTo(planMap);
+    }
+
+    function renderMap() {
+      if (!planMap || !leaflet) return;
+      const L = leaflet;
+      mapLayer.clearLayers();
+      const bounds = L.latLngBounds([]);
+      const days = [...new Set(plan.map((i) => i.day))].sort((a, b) => a - b);
+      for (const day of days) {
+        const color = DAY_COLORS[day] ?? '#55645c';
+        const stops = plan.filter((i) => i.day === day);
+        const latlngs: [number, number][] = [];
+        stops.forEach((item, idx) => {
+          const c = bySlug.get(item.slug)! as any;
+          latlngs.push([c.lat, c.lng]);
+          bounds.extend([c.lat, c.lng]);
+          const marker = L.marker([c.lat, c.lng], {
+            icon: L.divIcon({
+              className: '',
+              html: `<span class="pin-num" style="background:${color}">${idx + 1}</span>`,
+              iconSize: [24, 24],
+              iconAnchor: [12, 12],
+            }),
+          }).addTo(mapLayer);
+          marker.bindTooltip(`Day ${day}, stop ${idx + 1}: ${c.name}`, {
+            direction: 'top',
+            offset: [0, -10],
+          });
+        });
+        if (latlngs.length > 1) {
+          L.polyline(latlngs, {
+            color,
+            weight: 2.5,
+            dashArray: '6 6',
+            opacity: 0.7,
+          }).addTo(mapLayer);
+        }
+      }
+      if (bounds.isValid()) planMap.fitBounds(bounds.pad(0.2));
+    }
+
+    function render() {
+      const hasItems = plan.length > 0;
+      emptyEl.hidden = hasItems;
+      shareBtn.hidden = !hasItems;
+      printBtn.hidden = !hasItems;
+      clearBtn.hidden = !hasItems;
+      mapBtn.hidden = !hasItems;
+      if (!hasItems && planMap) mapEl.hidden = true;
+      if (hasItems && planMap && !mapEl.hidden) renderMap();
+
+      const days = [...new Set(plan.map((i) => i.day))].sort((a, b) => a - b);
+      daysEl.innerHTML = days
+        .map((day) => {
+          const items = plan.filter((i) => i.day === day);
+          return `<h4>Day ${day}</h4><ol>${items
+            .map((item) => {
+              const c = bySlug.get(item.slug)!;
+              return `<li class="plan-item" data-slug="${c.slug}">
+                <span class="name"><a href="${c.path}">${esc(c.name)}</a><span class="cat">${esc(c.category)}</span></span>
+                <button class="day-btn" data-cycle="${c.slug}" title="Move to another day">D${item.day}</button>
+                <button data-up="${c.slug}" title="Move up">↑</button>
+                <button data-down="${c.slug}" title="Move down">↓</button>
+                <button data-remove="${c.slug}" title="Remove">✕</button>
+              </li>`;
+            })
+            .join('')}</ol>`;
+        })
+        .join('');
+
+      document.querySelectorAll<HTMLElement>('.cat-item').forEach((el) => {
+        const inPlan = plan.some((i) => i.slug === el.dataset.slug);
+        el.classList.toggle('in-plan', inPlan);
+        const btn = el.querySelector<HTMLButtonElement>('.add')!;
+        btn.textContent = inPlan ? 'Added ✓' : 'Add';
+      });
+    }
+
+    root.addEventListener('click', (e) => {
+      const t = e.target as HTMLElement;
+      const add = t.dataset.add;
+      if (add) {
+        const existing = plan.findIndex((i) => i.slug === add);
+        if (existing >= 0) plan.splice(existing, 1);
+        else plan.push({ slug: add, day: plan.at(-1)?.day ?? 1 });
+      } else if (t.dataset.remove) {
+        plan = plan.filter((i) => i.slug !== t.dataset.remove);
+      } else if (t.dataset.cycle) {
+        const item = plan.find((i) => i.slug === t.dataset.cycle)!;
+        item.day = (item.day % MAX_DAY) + 1;
+      } else if (t.dataset.up || t.dataset.down) {
+        const slug = t.dataset.up ?? t.dataset.down!;
+        const item = plan.find((i) => i.slug === slug)!;
+        const sameDay = plan.filter((i) => i.day === item.day);
+        const pos = sameDay.indexOf(item);
+        const swapWith = t.dataset.up ? sameDay[pos - 1] : sameDay[pos + 1];
+        if (swapWith) {
+          const a = plan.indexOf(item);
+          const b = plan.indexOf(swapWith);
+          [plan[a], plan[b]] = [plan[b], plan[a]];
+        }
+      } else {
+        return;
+      }
+      save();
+      render();
+    });
+
+    shareBtn.addEventListener('click', async () => {
+      const mapParam = planMap && !mapEl.hidden ? '&map=1' : '';
+      const url = `${location.origin}${location.pathname}?p=${serialize()}${mapParam}`;
+      try {
+        await navigator.clipboard.writeText(url);
+        shareBtn.textContent = 'Link copied ✓';
+        setTimeout(() => (shareBtn.textContent = 'Copy link'), 2000);
+      } catch {
+        prompt('Copy this link:', url);
+      }
+    });
+    printBtn.addEventListener('click', () => window.print());
+    mapBtn.addEventListener('click', async () => {
+      if (planMap && !mapEl.hidden) {
+        mapEl.hidden = true;
+        mapBtn.textContent = 'See on map';
+        return;
+      }
+      await ensureMap();
+      mapEl.hidden = false;
+      planMap.invalidateSize();
+      renderMap();
+      mapBtn.textContent = 'Hide map';
+      mapEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+    clearBtn.addEventListener('click', () => {
+      plan = [];
+      save();
+      render();
+    });
+
+    if (fromUrl()) save(); // imported plans persist
+    render();
+
+    // A shared link can open straight to the map view (&map=1).
+    if (plan.length && new URLSearchParams(location.search).get('map') === '1') {
+      ensureMap().then(() => {
+        planMap.invalidateSize();
+        renderMap();
+        mapBtn.textContent = 'Hide map';
+      });
+    }
+  }
+</script>

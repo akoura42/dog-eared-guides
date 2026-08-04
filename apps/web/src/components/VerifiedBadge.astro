@@ -5,6 +5,7 @@ interface Props {
   date: Date;
   method: string;
   sourceUrl?: string | null;
+  level?: 'official' | 'reported';
   compact?: boolean;
 }
 
@@ -15,20 +16,42 @@ const METHOD_LABELS: Record<string, string> = {
   other: '',
 };
 
-const { date, method, sourceUrl = null, compact = false } = Astro.props;
+const { date, method, sourceUrl = null, level = 'official', compact = false } = Astro.props;
 const methodLabel = METHOD_LABELS[method] ?? '';
+const isOfficial = level === 'official';
 ---
 
-<span class:list={['verified', { compact }]} title="Dog policy checked against an official source">
-  <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
-    <circle cx="8" cy="8" r="8" fill="var(--ok)" />
-    <path d="M4.5 8.2l2.3 2.3 4.7-5" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-  </svg>
+<span
+  class:list={['verified', { compact, reported: !isOfficial }]}
+  title={isOfficial
+    ? 'Dog policy checked against an official source'
+    : 'No official source — based on independent visitor reports, unconfirmed by the venue'}
+>
+  {isOfficial ? (
+    <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+      <circle cx="8" cy="8" r="8" fill="var(--ok)" />
+      <path d="M4.5 8.2l2.3 2.3 4.7-5" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  ) : (
+    <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+      <circle cx="8" cy="8" r="8" fill="var(--warn)" />
+      <path d="M8 4.2v4.6M8 11.4v.4" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" />
+    </svg>
+  )}
   <span>
-    Verified {formatVerifiedDate(date)}
-    {!compact && methodLabel && <span class="method">{methodLabel}</span>}
-    {!compact && sourceUrl && (
-      <a class="src" href={sourceUrl} rel="nofollow noopener" target="_blank">source</a>
+    {isOfficial ? (
+      <>
+        Verified {formatVerifiedDate(date)}
+        {!compact && methodLabel && <span class="method">{methodLabel}</span>}
+        {!compact && sourceUrl && (
+          <a class="src" href={sourceUrl} rel="nofollow noopener" target="_blank">source</a>
+        )}
+      </>
+    ) : (
+      <>
+        Visitor-reported
+        {!compact && <span class="method">checked {formatVerifiedDate(date)} · unconfirmed by the venue</span>}
+      </>
     )}
   </span>
 </span>
@@ -41,6 +64,9 @@ const methodLabel = METHOD_LABELS[method] ?? '';
     font-size: 0.85rem;
     font-weight: 600;
     color: var(--ok);
+  }
+  .verified.reported {
+    color: var(--warn);
   }
   .verified.compact {
     font-size: 0.78rem;

@@ -5,6 +5,7 @@
 import Base from '~/layouts/Base.astro';
 import Breadcrumbs from '~/components/Breadcrumbs.astro';
 import VenueCard from '~/components/VenueCard.astro';
+import DishSearch from '~/components/DishSearch.astro';
 import AdSlot from '~/components/AdSlot.astro';
 import { getCities, getCategories, getAttributes } from '~/lib/config';
 import { venuesForCity, matchesAttribute, MIN_HUB_VENUES, type Venue } from '~/lib/venues';
@@ -18,6 +19,8 @@ interface HubProps {
   blurb: string;
   isCategory: boolean;
   venues: Venue[];
+  /** Below the indexing bar: page renders but is noindexed + unsitemapped. */
+  thin: boolean;
 }
 
 export async function getStaticPaths() {
@@ -32,7 +35,7 @@ export async function getStaticPaths() {
       const category = categories.find((c) => c.key === key);
       if (!category) continue;
       const catVenues = venues.filter((v) => v.data.category === key);
-      if (catVenues.length < MIN_HUB_VENUES) continue;
+      if (catVenues.length === 0) continue;
       paths.push({
         params: { city: city.slug, hub: category.slug },
         props: {
@@ -41,6 +44,7 @@ export async function getStaticPaths() {
           blurb: category.blurb,
           isCategory: true,
           venues: catVenues,
+          thin: catVenues.length < MIN_HUB_VENUES,
         },
       });
     }
@@ -56,6 +60,7 @@ export async function getStaticPaths() {
           blurb: attr.blurb,
           isCategory: false,
           venues: matched,
+          thin: false,
         },
       });
     }
@@ -63,7 +68,7 @@ export async function getStaticPaths() {
   return paths;
 }
 
-const { city, label, blurb, isCategory, venues } = Astro.props;
+const { city, label, blurb, isCategory, venues, thin } = Astro.props;
 
 const crumbs = [
   { name: 'Home', url: '/' },
@@ -77,6 +82,7 @@ const crumbs = [
   description={`${blurb} ${venues.length} verified listings in ${city.name}.`}
   jsonld={[breadcrumbJsonLd(crumbs)]}
   ogImage={`/og/${city.slug}.png`}
+  noindex={thin}
 >
   <div class="wrap">
     <Breadcrumbs crumbs={crumbs} />
@@ -86,6 +92,8 @@ const crumbs = [
       <p class="lede">{blurb}</p>
       <p class="count">{venues.length} listings, each verified against an official source.</p>
     </header>
+
+    <DishSearch venues={venues} />
 
     <ul class="card-grid">
       {venues.map((venue) => (

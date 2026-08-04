@@ -5,7 +5,8 @@ not a filter**. Launch city: Tahoe City, CA. Verified accuracy of dog policies
 is the product: every policy claim carries an official source and a
 "Verified" date, and everything is automatically re-checked every 90 days.
 
-Brand name is TBD — `BRAND_NAME` placeholder lives in `apps/web/src/lib/site.ts`.
+The brand is **Dog-Eared Guides** — set in `apps/web/src/lib/site.ts`, the
+single source for the name across copy, metadata, and OG images.
 
 ## Layout
 

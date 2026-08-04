@@ -1,0 +1,107 @@
+---
+// "On the menu" — the venue's verified menu items, read from its own
+// published menu. Sections come through as "SECTION: Name" entries.
+import type { Venue } from '~/lib/venues';
+import { formatVerifiedDate } from '~/lib/venues';
+
+interface Props {
+  venue: Venue;
+}
+
+const { venue } = Astro.props;
+const menu = venue.data.menu;
+
+type Section = { name: string | null; items: string[] };
+const sections: Section[] = [];
+if (menu) {
+  let current: Section = { name: null, items: [] };
+  for (const raw of menu.items) {
+    if (raw.startsWith('SECTION:')) {
+      if (current.items.length) sections.push(current);
+      current = { name: raw.slice('SECTION:'.length).trim(), items: [] };
+    } else {
+      current.items.push(raw);
+    }
+  }
+  if (current.items.length) sections.push(current);
+}
+---
+
+{menu && (
+  <section class="venue-menu">
+    <div class="head">
+      <h2>On the menu</h2>
+      <p class="meta">
+        From the venue's own menu, checked {formatVerifiedDate(menu.last_verified)}
+        · <a href={menu.source_url} rel="noopener nofollow" target="_blank">source</a>
+      </p>
+    </div>
+    {sections.map((section) => (
+      <div class="section">
+        {section.name && <h3>{section.name}</h3>}
+        <ul>
+          {section.items.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    ))}
+    <p class="drift">
+      Menus change faster than dog policies. This list is what the kitchen
+      was serving when we checked; the venue's current menu is at
+      <a href={menu.current_url ?? menu.source_url} rel="noopener nofollow" target="_blank">
+        their menu page ↗</a>. Dish search on our category pages matches
+      against exactly this list.
+    </p>
+  </section>
+)}
+
+<style>
+  .venue-menu {
+    margin: 2.5rem 0 1rem;
+    border-top: 1px solid var(--line);
+    padding-top: 1.5rem;
+  }
+  .head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .head h2 {
+    font-size: 1.4rem;
+    margin: 0;
+  }
+  .meta {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .section h3 {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin: 1.1rem 0 0.4rem;
+  }
+  ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding: 0;
+    margin: 0.5rem 0 0;
+  }
+  li {
+    font-size: 0.88rem;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.2rem 0.75rem;
+  }
+  .drift {
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    margin-top: 1rem;
+  }
+</style>

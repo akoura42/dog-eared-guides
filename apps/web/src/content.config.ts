@@ -21,12 +21,44 @@ const dogPolicySchema = z.object({
   notes: z.string().nullable().default(null),
 });
 
-// Verification is required on every venue: the site shows "Verified <date>"
-// as a trust signal, and verify.py re-checks anything older than 90 days.
-const verificationSchema = z.object({
-  last_verified: z.coerce.date(),
-  method: z.enum(['official_website', 'phone', 'in_person', 'other']),
+// Verification is required on every venue and has three tiers:
+//   official  — the policy is confirmed by an official source (tier 1)
+//   reported  — no official source exists; ≥2 independent, linkable
+//               visitor/customer mentions back the claim (tier 2), and the
+//               page labels it unconfirmed by the venue
+//   (tier 3 — no evidence at all — is simply not published)
+// verify.py re-checks anything older than 90 days either way.
+const verificationSchema = z
+  .object({
+    last_verified: z.coerce.date(),
+    method: z.enum(['official_website', 'phone', 'in_person', 'other']),
+    // Tier 1: the official source. Tier 2: the strongest mention link.
+    source_url: z.string().url(),
+    level: z.enum(['official', 'reported']).default('official'),
+    mentions: z
+      .array(
+        z.object({
+          source_url: z.string().url(),
+          note: z.string(),
+          seen: z.coerce.date(),
+        })
+      )
+      .default([]),
+  })
+  .refine((v) => v.level !== 'reported' || v.mentions.length >= 2, {
+    message: 'reported-tier verification requires at least 2 mentions',
+  });
+
+// Verified menu: real items read from the venue's own published menu —
+// never inferred from cuisine. Powers dish search ("who has spaghetti?").
+const menuSchema = z.object({
+  // Where we read the menu (may be an archive capture when the live site
+  // blocks readers).
   source_url: z.string().url(),
+  // The venue's live menu page for readers — falls back to source_url.
+  current_url: z.string().url().nullable().default(null),
+  last_verified: z.coerce.date(),
+  items: z.array(z.string()).min(1),
 });
 
 const venues = defineCollection({
@@ -46,6 +78,11 @@ const venues = defineCollection({
     dog_policy: dogPolicySchema,
     seasonal: z.array(z.string()).default([]),
     verification: verificationSchema,
+    menu: menuSchema.nullable().default(null),
+    // First-person observations from an actual visit — human-editor-only
+    // (never pipeline-written). The one channel for claimed experience;
+    // presence earns the "Field-tested" badge. See docs/voice.md §6.
+    field_notes: z.string().nullable().default(null),
     affiliate: z
       .object({
         viator_product_code: z.string().nullable().default(null),
@@ -55,6 +92,10 @@ const venues = defineCollection({
       .nullable()
       .default(null),
     tags: z.array(z.string()).default([]),
+    // Google Place ID (ToS allows caching IDs, unlike other Places data).
+    // Optional — when absent the reviews panel resolves it at runtime via
+    // the free IDs-only text search.
+    google_place_id: z.string().nullable().default(null),
     summary: z.string(),
     // Path under src/assets/photos/, e.g. "tahoe-city/truckee-river.jpg".
     // Licensed/owner-supplied only — never hot-linked. Credit is required

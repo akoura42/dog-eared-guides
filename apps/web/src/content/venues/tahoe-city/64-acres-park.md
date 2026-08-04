@@ -32,32 +32,28 @@ summary: The big trailhead with actual parking — restrooms, picnic tables, riv
 image: null
 ---
 
-64-Acres is where a Tahoe City dog day usually starts, for one scarce
-reason: parking. It's the primary trailhead for the entire 23-mile paved
-multi-use network — the Truckee River, West Shore, and North Shore trails
-all radiate from here — with a genuinely large lot, restrooms, picnic
-tables, a rafting ramp, and even a bike repair station. Just south of the
-"Y" where highways 89 and 28 meet, next to the TART transit center.
+64-Acres is the primary trailhead for TCPUD's 23-mile paved multi-use
+network. The Truckee River, West Shore, and North Shore trails all radiate
+from here. The lot is genuinely large (scarce around Tahoe trailheads), and
+the park adds restrooms, picnic tables, a rafting ramp, and a bike repair
+station. It sits just south of the "Y" where highways 89 and 28 meet, next
+to the TART transit center.
 
-The rules are the trail network's rules: dogs on a short leash, shared
-pavement with bikes (15 mph limit, bikes yield to pedestrians — in theory),
-open dawn to dusk. One wrinkle our verification turned up: the park land is
-actually owned and operated by the US Forest Service's Lake Tahoe Basin
-unit, with TCPUD running the trail system through it. In practice the rules
-align — both agencies want your dog leashed — but it explains why you'll
-see two logos on the signage.
+The rules are the trail network's rules: dogs on a short leash, pavement
+shared with bikes under a 15 mph limit (bikes yield to pedestrians, in
+theory), open dawn to dusk. The land itself is owned and operated by the US
+Forest Service's Lake Tahoe Basin unit, with TCPUD running the trail system
+through it — which is why the signage carries two logos. Both agencies'
+rules call for leashed dogs, so nothing changes at the boundary.
 
-With a dog, the park works three ways. As a staging area: park, water up,
-leash on, pick a direction — the river leg toward Olympic Valley is the
-flattest and most scenic start. As a destination in itself: the picnic
-areas sit in open pine forest near the river, and on a hot afternoon the
-shade plus river proximity beats any patio. And as the connector to River
-Ranch: the riverside patio with a verified "leashed dogs welcome" policy is
-a walk or easy bike ride down the river trail from here, which turns lunch
-into an actual outing.
+The picnic areas sit in open pine forest near the river, shaded through hot
+afternoons. Of the three directions out of the lot, the river leg toward
+Olympic Valley is the flattest and most scenic. Down that same trail, a
+walk or easy bike ride away, River Ranch has a riverside patio with a
+verified "leashed dogs welcome" policy.
 
-The unpublished part: the Forest Service doesn't post per-parcel rules for
-the riverbank areas off the paved trail, so treat the water's edge as
-leash-on like everything else. In winter this lot stays useful — it's the
-access point for the plowed sections of trail that make up the town's most
-reliable snow-season dog walk.
+The Forest Service doesn't post per-parcel rules for the riverbank areas
+off the paved trail, and no posted rule relaxes the leash requirement at
+the water's edge. In winter the lot stays useful as the access point for
+the plowed sections of trail, 16 of the network's 23 miles, that make up
+the town's most reliable snow-season dog walk.

@@ -26,6 +26,7 @@ from common import (
     CONTENT_DIR,
     DEFAULT_MODEL,
     REPO_ROOT,
+    VOICE_FILE,
     WEB_TOOLS,
     GenerationResult,
     existing_venue_slugs,
@@ -44,6 +45,10 @@ MAX_PAUSE_TURN_CONTINUATIONS = 5
 
 def build_system_prompt() -> str:
     parts = [load_prompt("SYSTEM.md"), "\n\n# STYLE GUIDE\n\n" + load_prompt("STYLE_GUIDE.md")]
+    # House voice — injected into every generation prompt per docs/voice.md.
+    # It governs how copy sounds; it never overrides sourcing rules.
+    if VOICE_FILE.exists():
+        parts.append("\n\n# HOUSE VOICE (binding)\n\n" + VOICE_FILE.read_text())
     log = recent_editorial_log()
     if log:
         parts.append("\n\n# RECENT EDITORIAL CORRECTIONS (binding)\n\n" + log)

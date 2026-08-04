@@ -15,10 +15,11 @@ dog_policy:
   size_or_breed_restrictions: null
   fee: null
   notes: >-
-    A pet supply store where dogs come inside as a matter of course — the
-    chain's own services list includes a self-service dog wash, ID tag
-    engraving, obedience courses, and in-store vet clinics. Call ahead to
-    confirm which services run at the Tahoe City location specifically.
+    A pet supply store where dogs come inside as a matter of course. The
+    chain's services list includes a self-service dog wash, ID tag engraving,
+    obedience courses, and in-store vet clinics; the list is chain-wide, and
+    which services run at the Tahoe City location isn't published. The
+    store's number is (530) 581-4100.
 seasonal: []
 verification:
   last_verified: 2026-08-04
@@ -30,28 +31,25 @@ summary: The in-town pet supply stop — food, gear, and chain-wide services lik
 image: null
 ---
 
-Every dog trip has a forgotten-something moment — the food bag left on the
-kitchen counter, the leash that snapped, the trail day that ended in a dog
-coated in Truckee River mud. Pet Station is Tahoe City's answer. It's the
-local storefront of a Nevada/California chain with fifteen locations, sitting
-on West Lake Boulevard just south of the "Y" where highways 89 and 28 split.
+Pet Station is the only dedicated pet store in Tahoe City — the local
+storefront of a chain with fifteen locations across Nevada and California.
+It sits on West Lake Boulevard just south of the "Y" where highways 89 and
+28 split, about five minutes from the 64-Acres trailhead. Dogs come inside
+as a matter of course.
 
-Hours are simple: 10am to 6pm, daily, per the chain's own locations page.
-Stock is full-service pet supply — food (including the refrigerated and
-prescription-adjacent brands that grocery stores don't carry), leashes,
+Hours are 10am to 6pm daily, per the chain's own locations page. The stock
+is full-service pet supply: food, including the refrigerated and
+prescription-adjacent brands that grocery stores don't carry, plus leashes,
 booties, life jackets for lake days, and treats.
 
-The chain's published services list is where it gets useful for travelers: a
-self-service dog wash (the answer to the mud problem — wash the dog here
-instead of in the vacation rental's bathtub), ID tag engraving on the spot
-(smart if you're traveling with a dog whose tag still shows your home number
-and you'll be in the basin a while), year-round obedience classes, and
-periodic VIP Petcare community vet clinics for routine shots and checks
-without an appointment at a full vet hospital.
+The chain's published services list runs longer than the retail floor. A
+self-service dog wash, which handles a dog coated in Truckee River mud
+without involving a rental's bathtub. ID tag engraving done on the spot.
+Year-round obedience classes, and periodic VIP Petcare community vet
+clinics that cover routine shots and checks without an appointment at a
+full vet hospital.
 
-One caveat we'll be straight about: those services are listed chain-wide,
-and we haven't yet confirmed by phone exactly which ones run at the Tahoe
-City store. Call (530) 581-4100 before driving over specifically for the dog
-wash or a clinic. For basic resupply, just go — it's the only dedicated pet
-store in town, the location is five minutes from the 64-Acres trailhead, and
-dogs walk the aisles like they own the place.
+One caveat, stated plainly: that services list is published chain-wide, and
+we haven't confirmed by phone which of those services run at the Tahoe City
+store specifically. The caveat doesn't attach to the retail side. The
+store's number is (530) 581-4100.

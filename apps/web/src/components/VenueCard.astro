@@ -18,7 +18,12 @@ const category = getCategoryByKey(d.category);
 <article class="venue-card">
   <div class="top">
     {showCategory && <span class="pill">{category.label}</span>}
-    <VerifiedBadge date={d.verification.last_verified} method={d.verification.method} compact />
+    <VerifiedBadge
+      date={d.verification.last_verified}
+      method={d.verification.method}
+      level={d.verification.level}
+      compact
+    />
   </div>
   <h3><a href={venuePath(venue)}>{d.name}</a></h3>
   <p class="policy-line">{ALLOWED_LABELS[d.dog_policy.allowed]}{d.dog_policy.fee ? ` · ${d.dog_policy.fee}` : ''}</p>

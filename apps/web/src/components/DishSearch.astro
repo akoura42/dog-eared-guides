@@ -1,0 +1,183 @@
+---
+// Dish-level search: type "spaghetti", see the venues whose VERIFIED menus
+// actually list it — matched against real menu items read from each
+// venue's own published menu, never inferred from cuisine. Client-side
+// substring match over build-time data; no network requests.
+import type { Venue } from '~/lib/venues';
+import { venuePath, formatVerifiedDate } from '~/lib/venues';
+
+interface Props {
+  venues: Venue[];
+}
+
+const { venues } = Astro.props;
+
+const withMenus = venues.filter((v) => v.data.menu);
+const data = withMenus.map((v) => ({
+  name: v.data.name,
+  path: venuePath(v),
+  verified: formatVerifiedDate(v.data.menu!.last_verified),
+  items: v.data.menu!.items.filter((i) => !i.startsWith('SECTION:')),
+}));
+const totalItems = data.reduce((n, v) => n + v.items.length, 0);
+---
+
+{data.length > 0 && (
+  <div class="dish-search">
+    <label for="dish-input">
+      <strong>Search by dish.</strong> We index the venues' own published
+      menus — {totalItems} items across {data.length}
+      {data.length === 1 ? ' menu' : ' menus'} — so a match means it's
+      actually on the menu, not a cuisine guess.
+    </label>
+    <input
+      type="search"
+      id="dish-input"
+      placeholder="Try “spaghetti”, “burger”, “wings”…"
+      autocomplete="off"
+      data-dishes={JSON.stringify(data)}
+    />
+    <div id="dish-results" hidden></div>
+  </div>
+)}
+
+<style>
+  .dish-search {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 1.2rem 1.4rem;
+    margin: 1.5rem 0;
+  }
+  label {
+    display: block;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    margin-bottom: 0.7rem;
+  }
+  label strong {
+    color: var(--ink);
+  }
+  #dish-input {
+    font: inherit;
+    width: 100%;
+    padding: 0.65rem 1.1rem;
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    background: var(--paper);
+    color: var(--ink);
+  }
+  #dish-input:focus {
+    outline: 2px solid var(--moss);
+    outline-offset: 1px;
+  }
+  #dish-results {
+    margin-top: 1rem;
+    display: grid;
+    gap: 0.8rem;
+  }
+  #dish-results :global(.hit) {
+    border-top: 1px dashed var(--line);
+    padding-top: 0.8rem;
+  }
+  #dish-results :global(.hit a) {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-decoration: none;
+  }
+  #dish-results :global(.hit .verified) {
+    font-size: 0.78rem;
+    color: var(--ok);
+    font-weight: 600;
+    margin-left: 0.5rem;
+  }
+  #dish-results :global(.hit ul) {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding: 0;
+    margin: 0.45rem 0 0;
+  }
+  #dish-results :global(.hit li) {
+    font-size: 0.85rem;
+    background: var(--clay-soft);
+    color: var(--ink);
+    border-radius: 999px;
+    padding: 0.15rem 0.7rem;
+  }
+  #dish-results :global(.hit li mark) {
+    background: none;
+    color: var(--clay);
+    font-weight: 700;
+  }
+  #dish-results :global(.none) {
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    border-top: 1px dashed var(--line);
+    padding-top: 0.8rem;
+    margin: 0;
+  }
+</style>
+
+<script>
+  const input = document.getElementById('dish-input') as HTMLInputElement | null;
+  const results = document.getElementById('dish-results');
+
+  if (input && results) {
+    const data = JSON.parse(input.dataset.dishes!) as {
+      name: string;
+      path: string;
+      verified: string;
+      items: string[];
+    }[];
+
+    const esc = (s: string) =>
+      s.replace(/[&<>"']/g, (c) =>
+        ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!
+      );
+    const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+    function highlight(item: string, q: string): string {
+      const idx = norm(item).indexOf(q);
+      if (idx < 0) return esc(item);
+      return (
+        esc(item.slice(0, idx)) +
+        '<mark>' + esc(item.slice(idx, idx + q.length)) + '</mark>' +
+        esc(item.slice(idx + q.length))
+      );
+    }
+
+    input.addEventListener('input', () => {
+      const q = norm(input.value.trim());
+      if (q.length < 2) {
+        results.hidden = true;
+        results.innerHTML = '';
+        return;
+      }
+      const hits = data
+        .map((venue) => ({
+          venue,
+          matches: venue.items.filter((item) => norm(item).includes(q)),
+        }))
+        .filter((h) => h.matches.length > 0);
+
+      results.hidden = false;
+      if (!hits.length) {
+        results.innerHTML = `<p class="none">No verified menu here lists “${esc(input.value.trim())}”. We only match real menu items — if a spot serves it but we missed it, their menu may have changed since we last checked.</p>`;
+        return;
+      }
+      results.innerHTML = hits
+        .map(
+          ({ venue, matches }) => `<div class="hit">
+            <a href="${venue.path}">${esc(venue.name)}</a>
+            <span class="verified">menu verified ${esc(venue.verified)}</span>
+            <ul>${matches.slice(0, 8).map((m) => `<li>${highlight(m, q)}</li>`).join('')}</ul>
+          </div>`
+        )
+        .join('');
+    });
+  }
+</script>

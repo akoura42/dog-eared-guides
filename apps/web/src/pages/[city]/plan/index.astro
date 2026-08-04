@@ -1,0 +1,61 @@
+---
+import Base from '~/layouts/Base.astro';
+import Breadcrumbs from '~/components/Breadcrumbs.astro';
+import ItineraryPlanner from '~/components/ItineraryPlanner.astro';
+import { getCities } from '~/lib/config';
+import { venuesForCity } from '~/lib/venues';
+import { breadcrumbJsonLd } from '~/lib/jsonld';
+import { BRAND_NAME } from '~/lib/site';
+
+export async function getStaticPaths() {
+  const paths = [];
+  for (const city of getCities().filter((c) => c.launched)) {
+    const venues = await venuesForCity(city.slug);
+    if (venues.length === 0) continue; // no planner without venues
+    paths.push({ params: { city: city.slug }, props: { city, venues } });
+  }
+  return paths;
+}
+
+const { city, venues } = Astro.props;
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: city.name, url: `/${city.slug}/` },
+  { name: 'Itinerary planner', url: `/${city.slug}/plan/` },
+];
+---
+
+<Base
+  title={`Build Your Dog-Friendly ${city.name} Itinerary | ${BRAND_NAME}`}
+  description={`Assemble your own ${city.name} itinerary from ${venues.length} venues with verified dog policies — organized by day, shareable by link, printable.`}
+  jsonld={[breadcrumbJsonLd(crumbs)]}
+  ogImage={`/og/${city.slug}.png`}
+>
+  <div class="wrap">
+    <Breadcrumbs crumbs={crumbs} />
+    <header class="plan-header">
+      <p class="eyebrow">{city.name}, {city.state}</p>
+      <h1>Build your itinerary</h1>
+      <p class="lede">
+        Every venue below carries a dog policy verified against an official
+        source (or marked visitor-reported where none exists). Selections are
+        stored in this browser; the copy-link button turns a plan into a URL
+        that opens on any phone.
+      </p>
+    </header>
+
+    <ItineraryPlanner city={city} venues={venues} />
+  </div>
+</Base>
+
+<style>
+  .plan-header {
+    margin: 1.5rem 0 0.5rem;
+    max-width: 46rem;
+  }
+  .lede {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+  }
+</style>

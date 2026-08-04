@@ -36,7 +36,12 @@ export async function findVenue(city: string, slug: string): Promise<Venue | und
   return venues.find((v) => venueSlug(v) === slug);
 }
 
-/** Minimum venues before a category or attribute hub page is generated. */
+/**
+ * Minimum venues before a hub page is *indexable* (in sitemap, no
+ * noindex). Category hubs are generated and browsable from 1 venue up,
+ * but stay out of search engines until they reach this bar — the spec's
+ * no-thin-programmatic-pages rule, applied to indexing rather than UX.
+ */
 export const MIN_HUB_VENUES = 4;
 
 function getByPath(obj: unknown, dotted: string): unknown {
