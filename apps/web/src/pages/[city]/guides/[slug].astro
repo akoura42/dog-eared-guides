@@ -1,0 +1,126 @@
+---
+import { render } from 'astro:content';
+import { getCollection } from 'astro:content';
+import Base from '~/layouts/Base.astro';
+import Breadcrumbs from '~/components/Breadcrumbs.astro';
+import AdSlot from '~/components/AdSlot.astro';
+import AffiliateDisclosure from '~/components/AffiliateDisclosure.astro';
+import VenueEmbed from '~/components/VenueEmbed.astro';
+import Photo from '~/components/Photo.astro';
+import AffiliateCTA from '~/components/AffiliateCTA.astro';
+import { getCity } from '~/lib/config';
+import { guideSlug, formatVerifiedDate } from '~/lib/venues';
+import { guideJsonLd, breadcrumbJsonLd } from '~/lib/jsonld';
+import { BRAND_NAME } from '~/lib/site';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides');
+  return guides.map((guide) => ({
+    params: { city: guide.data.city, slug: guideSlug(guide) },
+    props: { guide },
+  }));
+}
+
+const { guide } = Astro.props;
+const d = guide.data;
+const city = getCity(d.city);
+const { Content } = await render(guide);
+const { article, faq } = guideJsonLd(guide, city);
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: city.name, url: `/${city.slug}/` },
+  { name: d.title, url: `/${d.city}/guides/${guideSlug(guide)}/` },
+];
+
+const jsonld = [article, breadcrumbJsonLd(crumbs), ...(faq ? [faq] : [])];
+---
+
+<Base
+  title={`${d.title} | ${BRAND_NAME}`}
+  description={d.description}
+  jsonld={jsonld}
+  ogImage={`/og/${d.city}-guide-${guideSlug(guide)}.png`}
+>
+  <div class="wrap">
+    <Breadcrumbs crumbs={crumbs} />
+    <article class="guide">
+      <header>
+        <p class="eyebrow">{city.name} guide</p>
+        <h1>{d.title}</h1>
+        <p class="lede">{d.description}</p>
+        <p class="dates">
+          Published {formatVerifiedDate(d.date)}
+          {d.updated && <> · Updated {formatVerifiedDate(d.updated)}</>}
+        </p>
+      </header>
+
+      <Photo
+        path={d.image}
+        alt={d.image_alt}
+        credit={d.image_credit}
+        creditUrl={d.image_credit_url}
+        loading="eager"
+      />
+
+      {d.has_affiliate_links && <AffiliateDisclosure />}
+      <AdSlot placement="below-hero" height={200} />
+
+      <div class="prose body">
+        <Content components={{ VenueEmbed, AffiliateCTA }} />
+      </div>
+
+      <AdSlot placement="mid-content" />
+
+      {d.faqs.length > 0 && (
+        <section class="faqs prose">
+          <h2>Frequently asked questions</h2>
+          {d.faqs.map((f) => (
+            <details>
+              <summary>{f.question}</summary>
+              <p>{f.answer}</p>
+            </details>
+          ))}
+        </section>
+      )}
+
+      <AdSlot placement="end-of-content" />
+    </article>
+  </div>
+</Base>
+
+<style>
+  .guide {
+    max-width: 46rem;
+    padding-bottom: 2rem;
+  }
+  header {
+    margin-top: 1rem;
+  }
+  .lede {
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+  }
+  .dates {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+  .faqs {
+    margin-top: 2.5rem;
+  }
+  details {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--paper-raised);
+    padding: 0.8rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  summary {
+    font-weight: 650;
+    cursor: pointer;
+    color: var(--pine-deep);
+  }
+  details p {
+    margin: 0.6rem 0 0;
+  }
+</style>

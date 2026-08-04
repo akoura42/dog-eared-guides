@@ -1,0 +1,57 @@
+---
+import { formatVerifiedDate } from '~/lib/venues';
+
+interface Props {
+  date: Date;
+  method: string;
+  sourceUrl?: string | null;
+  compact?: boolean;
+}
+
+const METHOD_LABELS: Record<string, string> = {
+  official_website: 'via official website',
+  phone: 'by phone',
+  in_person: 'in person',
+  other: '',
+};
+
+const { date, method, sourceUrl = null, compact = false } = Astro.props;
+const methodLabel = METHOD_LABELS[method] ?? '';
+---
+
+<span class:list={['verified', { compact }]} title="Dog policy checked against an official source">
+  <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+    <circle cx="8" cy="8" r="8" fill="var(--ok)" />
+    <path d="M4.5 8.2l2.3 2.3 4.7-5" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+  <span>
+    Verified {formatVerifiedDate(date)}
+    {!compact && methodLabel && <span class="method">{methodLabel}</span>}
+    {!compact && sourceUrl && (
+      <a class="src" href={sourceUrl} rel="nofollow noopener" target="_blank">source</a>
+    )}
+  </span>
+</span>
+
+<style>
+  .verified {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ok);
+  }
+  .verified.compact {
+    font-size: 0.78rem;
+  }
+  .method {
+    font-weight: 450;
+    color: var(--ink-soft);
+  }
+  .src {
+    font-weight: 450;
+    color: var(--ink-soft);
+    margin-left: 0.25rem;
+  }
+</style>

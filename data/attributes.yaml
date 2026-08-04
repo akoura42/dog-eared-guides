@@ -1,0 +1,31 @@
+# Attribute pages: /{city}/{slug}/ generated ONLY when >=4 venues match the rule.
+# `rule` is interpreted by apps/web/src/lib/venues.ts (matchesAttribute).
+attributes:
+  - key: off-leash
+    slug: off-leash
+    label: Off-Leash Spots
+    blurb: Places where dogs can legally be off leash (voice control still required).
+    rule:
+      field: dog_policy.leash_required
+      equals: false
+  - key: water-bowls
+    slug: water-bowls-provided
+    label: Water Bowls Provided
+    blurb: Venues that put out water for dogs — no packing a bowl.
+    rule:
+      field: dog_policy.water_bowls
+      equals: true
+  - key: dogs-inside
+    slug: dogs-allowed-inside
+    label: Dogs Allowed Inside
+    blurb: The rare places that welcome dogs indoors, not just on the patio.
+    rule:
+      field: dog_policy.allowed
+      equals: indoors
+  - key: winter-friendly
+    slug: winter-friendly
+    label: Winter-Friendly
+    blurb: Open and dog-friendly through the snow season.
+    rule:
+      field: tags
+      includes: winter-friendly

@@ -1,0 +1,55 @@
+---
+import Base from '~/layouts/Base.astro';
+import { BRAND_NAME } from '~/lib/site';
+import { getCities } from '~/lib/config';
+
+const cities = getCities().filter((c) => c.launched);
+---
+
+<Base
+  title={`About | ${BRAND_NAME}`}
+  description="Deep, verified dog-friendly city guides — built one city at a time, starting with Tahoe City, CA."
+>
+  <div class="wrap prose page">
+    <p class="eyebrow">About</p>
+    <h1>Dog-friendly is the brand, not a filter</h1>
+    <p class="lede">
+      {BRAND_NAME} builds deep visitor guides for people who travel with their
+      dogs. Not a checkbox on a hotel search — the whole guide, written from
+      the dog's-eye view.
+    </p>
+    <p>
+      Broad directories cover every city shallowly. We go the other way: one
+      city at a time, covered deeply — the patios, trails, beaches, lodging,
+      and local rules — with every dog policy verified against an official
+      source and re-checked on a schedule.
+    </p>
+    <h2>Where we are today</h2>
+    <ul>
+      {cities.map((city) => (
+        <li>
+          <a href={`/${city.slug}/`}>{city.name}, {city.state_code}</a> — our launch city
+        </li>
+      ))}
+    </ul>
+    <p>More cities are coming. Depth first, then breadth.</p>
+    <h2>How we keep the lights on</h2>
+    <p>
+      The site is free to read. We earn money from display ads and from
+      affiliate links on some bookings and activities — always disclosed,
+      never affecting what we say about a venue's dog policy. Read the
+      <a href="/editorial-policy/">editorial policy</a> and
+      <a href="/disclosure/">affiliate disclosure</a>.
+    </p>
+  </div>
+</Base>
+
+<style>
+  .page {
+    padding: 2.5rem 1.25rem 2rem;
+  }
+  .lede {
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+  }
+</style>

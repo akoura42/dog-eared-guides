@@ -1,0 +1,68 @@
+---
+import Base from '~/layouts/Base.astro';
+import { BRAND_NAME } from '~/lib/site';
+---
+
+<Base
+  title={`Privacy & Cookie Policy | ${BRAND_NAME}`}
+  description="What data this site collects, which cookies it sets, and how to opt out."
+>
+  <div class="wrap prose page">
+    <p class="eyebrow">Legal</p>
+    <h1>Privacy &amp; cookies</h1>
+    <p>
+      We collect as little as possible. This site is a static publication — it
+      has no accounts, no forms that store personal data, and no server-side
+      tracking of our own.
+    </p>
+
+    <h2>Cookies and consent</h2>
+    <p>
+      On your first visit we ask for consent before loading anything that sets
+      cookies. If you <strong>decline</strong>, no advertising or Google
+      Analytics cookies are set. If you <strong>accept</strong>, the following
+      third parties may set cookies:
+    </p>
+    <ul>
+      <li>
+        <strong>Google AdSense</strong> — serves display ads and may use
+        cookies to personalize them. See
+        <a href="https://policies.google.com/technologies/ads" rel="noopener" target="_blank">Google's advertising policies</a>.
+      </li>
+      <li>
+        <strong>Google Analytics 4</strong> — anonymized usage statistics
+        (which pages are read, roughly where from). IP anonymization is
+        enabled.
+      </li>
+    </ul>
+    <p>
+      <strong>Cloudflare Web Analytics</strong> runs regardless of consent —
+      it is cookieless and collects no personal data.
+    </p>
+
+    <h2>Changing your mind</h2>
+    <p>
+      Clear this site's data in your browser (localStorage and cookies) and
+      the consent banner will ask again on your next visit.
+    </p>
+
+    <h2>Ad personalization</h2>
+    <p>
+      You can opt out of Google ad personalization at
+      <a href="https://adssettings.google.com" rel="noopener" target="_blank">adssettings.google.com</a>.
+      Users in the EEA/UK are shown Google's consent flow as required.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Privacy questions: see the contact details on our
+      <a href="/about/">about page</a>.
+    </p>
+  </div>
+</Base>
+
+<style>
+  .page {
+    padding: 2.5rem 1.25rem 2rem;
+  }
+</style>

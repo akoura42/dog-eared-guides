@@ -1,0 +1,159 @@
+---
+// Build-time inline SVG map of the US with a dot per launched city.
+// No runtime map library, no tile requests — the whole thing is static
+// markup. Clicking a dot scrolls to (and flashes) that city's card.
+//
+// us-atlas ships geometry pre-projected with geoAlbersUsa()
+// .scale(1300).translate([487.5, 305]) into a 975x610 viewBox; we use the
+// same projection for city coordinates so dots land exactly.
+import { geoAlbersUsa } from 'd3-geo';
+import * as topojson from 'topojson-client';
+import statesAtlas from 'us-atlas/states-albers-10m.json';
+import type { CityConfig } from '~/lib/config';
+
+interface Props {
+  cities: CityConfig[];
+}
+
+const { cities } = Astro.props;
+
+const topo = statesAtlas as any;
+const projection = geoAlbersUsa().scale(1300).translate([487.5, 305]);
+
+// SVG path for all state borders (interior mesh) + nation outline.
+// Geometry is pre-projected, so paths are just the raw coordinates.
+function toPath(geom: any): string {
+  const polys =
+    geom.type === 'Polygon' ? [geom.coordinates] : geom.coordinates;
+  return polys
+    .map((rings: number[][][]) =>
+      rings
+        .map(
+          (ring) =>
+            'M' + ring.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join('L') + 'Z'
+        )
+        .join('')
+    )
+    .join('');
+}
+
+const nation = toPath(
+  (topojson.merge as any)(topo, topo.objects.states.geometries)
+);
+const borders = (() => {
+  const mesh = (topojson.mesh as any)(topo, topo.objects.states, (a: any, b: any) => a !== b);
+  return mesh.coordinates
+    .map(
+      (line: number[][]) =>
+        'M' + line.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join('L')
+    )
+    .join('');
+})();
+
+const dots = cities
+  .map((city) => {
+    const pt = projection([city.geo.lng, city.geo.lat]);
+    if (!pt) return null;
+    return { city, x: pt[0], y: pt[1] };
+  })
+  .filter((d): d is NonNullable<typeof d> => d !== null);
+---
+
+<div class="city-map" aria-label="Map of covered cities">
+  <svg viewBox="0 0 975 610" role="img">
+    <path class="nation" d={nation}></path>
+    <path class="borders" d={borders}></path>
+    {dots.map(({ city, x, y }) => (
+      <a
+        href={`#city-${city.slug}`}
+        class="dot"
+        data-map-city={city.slug}
+        aria-label={`${city.name}, ${city.state_code}`}
+      >
+        <circle cx={x} cy={y} r="14" class="halo"></circle>
+        <circle cx={x} cy={y} r="6.5" class="pin"></circle>
+        <text
+          x={x}
+          y={y - 14}
+          text-anchor="middle"
+          class="label"
+        >{city.name}, {city.state_code}</text>
+      </a>
+    ))}
+  </svg>
+</div>
+
+<style>
+  .city-map {
+    margin: 1.25rem 0 0.5rem;
+  }
+  svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .nation {
+    fill: color-mix(in srgb, var(--moss) 16%, var(--paper-raised));
+    stroke: none;
+  }
+  .borders {
+    fill: none;
+    stroke: color-mix(in srgb, var(--moss) 35%, var(--paper));
+    stroke-width: 1;
+  }
+  .dot {
+    cursor: pointer;
+  }
+  .halo {
+    fill: var(--clay);
+    opacity: 0.15;
+    transition: opacity 0.15s ease;
+  }
+  .pin {
+    fill: var(--clay);
+    stroke: var(--paper-raised);
+    stroke-width: 2;
+    transition: r 0.15s ease;
+  }
+  .label {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 650;
+    fill: var(--pine-deep);
+    paint-order: stroke;
+    stroke: var(--paper);
+    stroke-width: 4px;
+    stroke-linejoin: round;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+  }
+  .dot:hover .label,
+  .dot:focus .label {
+    opacity: 1;
+  }
+  .dot:hover .halo,
+  .dot:focus .halo {
+    opacity: 0.35;
+  }
+  @media (max-width: 640px) {
+    .label {
+      font-size: 19px;
+    }
+  }
+</style>
+
+<script>
+  // Scroll to the city card and flash it. Native anchor jump would hide the
+  // card under the sticky header, so intercept and smooth-scroll instead.
+  document.querySelectorAll<HTMLAnchorElement>('[data-map-city]').forEach((dot) => {
+    dot.addEventListener('click', (e) => {
+      const target = document.getElementById(`city-${dot.dataset.mapCity}`);
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      target.classList.remove('flash');
+      requestAnimationFrame(() => target.classList.add('flash'));
+    });
+  });
+</script>

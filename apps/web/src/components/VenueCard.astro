@@ -1,0 +1,84 @@
+---
+import type { Venue } from '~/lib/venues';
+import { venuePath, ALLOWED_LABELS } from '~/lib/venues';
+import { getCategoryByKey } from '~/lib/config';
+import VerifiedBadge from './VerifiedBadge.astro';
+
+interface Props {
+  venue: Venue;
+  /** Render the category pill (off on category hub pages where it's redundant). */
+  showCategory?: boolean;
+}
+
+const { venue, showCategory = true } = Astro.props;
+const d = venue.data;
+const category = getCategoryByKey(d.category);
+---
+
+<article class="venue-card">
+  <div class="top">
+    {showCategory && <span class="pill">{category.label}</span>}
+    <VerifiedBadge date={d.verification.last_verified} method={d.verification.method} compact />
+  </div>
+  <h3><a href={venuePath(venue)}>{d.name}</a></h3>
+  <p class="policy-line">{ALLOWED_LABELS[d.dog_policy.allowed]}{d.dog_policy.fee ? ` · ${d.dog_policy.fee}` : ''}</p>
+  <p class="summary">{d.summary}</p>
+  {d.neighborhood && <p class="hood">{d.neighborhood}</p>}
+</article>
+
+<style>
+  .venue-card {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 1.2rem 1.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    height: 100%;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .venue-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(36, 49, 42, 0.08), 0 8px 24px rgba(36, 49, 42, 0.1);
+  }
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  h3 {
+    font-size: 1.2rem;
+    margin: 0.2rem 0 0;
+  }
+  h3 a {
+    text-decoration: none;
+    color: var(--pine-deep);
+  }
+  h3 a:hover {
+    color: var(--clay);
+  }
+  .policy-line {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--ok);
+    margin: 0;
+  }
+  .summary {
+    font-size: 0.93rem;
+    color: var(--ink-soft);
+    margin: 0;
+    flex: 1;
+  }
+  .hood {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin: 0;
+  }
+</style>

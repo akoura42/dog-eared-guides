@@ -1,0 +1,61 @@
+name: Asheville
+slug: asheville
+state: North Carolina
+state_code: NC
+geo:
+  lat: 35.5951
+  lng: -82.5515
+hero:
+  headline: Asheville with a dog, done right.
+  subhead: Breweries, the Parkway, and mountain trails — one of America's great dog towns, with the rules verified.
+intro: >-
+  Asheville earns its dog-town reputation: the Blue Ridge Parkway allows
+  leashed dogs on its trails (a rarity for NPS land), the brewery patios are
+  legion, and the city's 8-foot leash allowance is looser than most. The
+  post-Helene park situation is still shifting — the riverside dog parks are
+  being rebuilt with temporary off-leash parks standing in — so we verify
+  against the city's current pages, not pre-storm blog posts.
+seasonal_notes:
+  - "Post-Hurricane Helene: the permanent dog parks at French Broad River Park and Azalea Park remain closed for repairs; the city operates temporary off-leash parks at Aston Park (300 Hilliard Ave.) and Riverbend Park (100 Bleachery Blvd.) in the meantime."
+regulations:
+  - summary: Off your own property, dogs go on a leash of 8 feet or less, held in hand.
+    detail: >-
+      Asheville city code (Sec. 3-27) requires animals off the owner's
+      property to be physically restrained by a chain, leash, or harness no
+      longer than eight feet, held by a competent person. Trained service
+      animals under direct voice control are exempt.
+    jurisdiction: City of Asheville
+    source_url: https://codelibrary.amlegal.com/codes/ashevillenc/latest/asheville_nc/0-0-0-1489
+  - summary: Off-leash only inside fenced city dog parks — currently the temporary parks at Aston and Riverbend.
+    detail: >-
+      The city's rule: unless you're inside the fenced area of a dog park,
+      dogs must be leashed on all public property. With the riverside parks
+      closed for Helene repairs, the fenced temporary parks at Aston Park and
+      Riverbend Park are the legal off-leash options.
+    jurisdiction: City of Asheville Parks & Recreation
+    source_url: https://www.ashevillenc.gov/news/off-the-bench-ruff-n-roll/
+  - summary: Blue Ridge Parkway trails allow dogs — max 6-foot leash.
+    detail: >-
+      Unusually for national park land, pets are allowed on Parkway trails
+      and overlooks on a leash no longer than six feet and under physical
+      control. They're not allowed inside visitor centers or other federal
+      buildings.
+    jurisdiction: National Park Service (Blue Ridge Parkway)
+    source_url: https://www.nps.gov/blri/faqs.htm
+  - summary: "NC state parks (Mount Mitchell and others): dogs welcome on a 6-foot leash."
+    detail: >-
+      North Carolina state park rules permit pets on an attended leash no
+      longer than 6 feet under constant control; they must stay on trails
+      and out of swim areas and buildings, and waste must be picked up.
+    jurisdiction: NC Division of Parks and Recreation
+    source_url: https://www.ncparks.gov/about-us/guidelines-park-rules-and-regulations
+categories:
+  - eat
+  - drink
+  - stay
+  - trail
+  - beach
+  - activity
+  - shop
+  - services
+launched: true

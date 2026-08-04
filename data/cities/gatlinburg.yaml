@@ -1,0 +1,60 @@
+name: Gatlinburg
+slug: gatlinburg
+state: Tennessee
+state_code: TN
+geo:
+  lat: 35.7143
+  lng: -83.5102
+hero:
+  headline: Gatlinburg with a dog, done right.
+  subhead: The one Smokies trail dogs can walk starts here — plus the downtown rules that carry a $500 fine.
+intro: >-
+  Gatlinburg is the best-positioned Smokies town for dog owners, for one
+  reason: the Gatlinburg Trail — one of only two trails in the entire
+  national park that allows dogs — runs right out of town to Sugarlands
+  Visitor Center. Downtown has its own rules worth knowing (there's a real
+  fine attached to dog mess on the Parkway strip), and the city runs an
+  off-leash dog park at Mills Park. All verified at the source.
+seasonal_notes:
+  - "Bear country, year-round: the NPS warns dogs are involved in most bear-related incidents — keep dogs leashed and never unattended, including in vehicles."
+regulations:
+  - summary: No dogs at large in city limits.
+    detail: >-
+      Gatlinburg municipal code (§ 10-203) makes it unlawful to let a dog run
+      at large within the corporate limits. No leash length is specified;
+      keep the dog leashed and under control off your own property.
+    jurisdiction: City of Gatlinburg
+    source_url: https://www.mtas.tennessee.edu/system/files/codes/combined/Gatlinburg-code.pdf
+  - summary: Dog mess on streets, sidewalks, or parks carries a civil penalty up to $500.
+    detail: >-
+      City code § 10-209 makes it unlawful for dogs to defecate on public
+      streets, sidewalks, and parks, with the owner liable; § 10-208 sets a
+      civil penalty of up to $500 per offense. Carry bags on the Parkway
+      strip — this one is enforced against visitors.
+    jurisdiction: City of Gatlinburg
+    source_url: https://www.mtas.tennessee.edu/system/files/codes/combined/Gatlinburg-code.pdf
+  - summary: The Gatlinburg Trail is one of only two national-park trails that allow dogs.
+    detail: >-
+      In Great Smoky Mountains National Park, pets are limited to
+      campgrounds, picnic areas, and roadsides on a max 6-foot leash — plus
+      the Gatlinburg Trail (running between town and Sugarlands Visitor
+      Center) and the Oconaluftee River Trail. Everything else is off-limits.
+    jurisdiction: National Park Service (Great Smoky Mountains NP)
+    source_url: https://www.nps.gov/grsm/planyourvisit/pets.htm
+  - summary: The city runs an off-leash dog park at Mills Park.
+    detail: >-
+      Gatlinburg's dog park (Mills Park Road, off US-321) has separate
+      fenced small- and large-dog areas. Posted hours and rules are on the
+      city's dog park page — confirm details there before visiting.
+    jurisdiction: City of Gatlinburg Recreation Department
+    source_url: https://www.gatlinburgtn.gov/page/dog-park
+categories:
+  - eat
+  - drink
+  - stay
+  - trail
+  - beach
+  - activity
+  - shop
+  - services
+launched: true

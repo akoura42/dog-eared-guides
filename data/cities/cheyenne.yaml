@@ -1,0 +1,60 @@
+name: Cheyenne
+slug: cheyenne
+state: Wyoming
+state_code: WY
+geo:
+  lat: 41.14
+  lng: -104.8202
+hero:
+  headline: Cheyenne with a dog, done right.
+  subhead: High-plains trails, Curt Gowdy's granite country, and a strict restraint ordinance — verified at the source.
+intro: >-
+  Cheyenne is a high-plains dog town with one big caveat right now: its only
+  off-leash dog park is closed indefinitely, which changes the playbook. The
+  wins are the Greater Cheyenne Greenway on a leash and Curt Gowdy State
+  Park's trail system a half hour west. The city's restraint ordinance is
+  written tighter than most — voice control explicitly doesn't count — so we
+  pulled the actual code sections rather than paraphrasing.
+seasonal_notes:
+  - "Status check: the Nancy Mockler Community Dog Park — Cheyenne's only off-leash park — is listed by its operator as closed indefinitely due to insurance issues. Verify before planning around it."
+regulations:
+  - summary: No animals at large — restraint required everywhere off your own property.
+    detail: >-
+      Cheyenne Municipal Code 6.08.030 requires animals under restraint at
+      all times off the owner's property, with fines starting at $50 and
+      escalating on repeat offenses (including mandatory microchipping on a
+      second offense within 12 months).
+    jurisdiction: City of Cheyenne
+    source_url: https://library.municode.com/wy/cheyenne/codes/code_of_ordinances?nodeId=TIT6AN_CH6.08ANCACOREGE_6.08.030ANRULAPR
+  - summary: '"Restraint" means a tether or enclosure — voice control does not qualify.'
+    detail: >-
+      The code's definitions (6.04.020) are explicit: "at large" is any
+      animal not under restraint, and restraint means physical control by
+      tether or confinement in a fence or enclosure. Off-leash-but-obedient
+      is still a violation in Cheyenne.
+    jurisdiction: City of Cheyenne
+    source_url: https://library.municode.com/wy/cheyenne/codes/code_of_ordinances?nodeId=TIT6AN_CH6.04DEADEN_6.04.020DE
+  - summary: Pick up after your dog on any public or others' private property.
+    detail: >-
+      Code 6.08.140 requires prompt, sanitary removal and disposal of feces
+      left anywhere that isn't the keeper's own property.
+    jurisdiction: City of Cheyenne
+    source_url: https://library.municode.com/wy/cheyenne/codes/code_of_ordinances?nodeId=TIT6AN_CH6.08ANCACOREGE_6.08.140ANWA
+  - summary: "Wyoming state parks (Curt Gowdy): leash up to 10 feet; no pets in reservoirs or on beaches."
+    detail: >-
+      State park rules require pets outside a vehicle on a leash of 10 feet
+      or less under physical control, ban them from buildings and designated
+      beaches, prohibit leaving them unattended over an hour — and
+      specifically bar pets from the reservoirs at Curt Gowdy State Park.
+    jurisdiction: Wyoming State Parks, Historic Sites & Trails
+    source_url: https://wyoparks.wyo.gov/index.php/learn/rules-regulations
+categories:
+  - eat
+  - drink
+  - stay
+  - trail
+  - beach
+  - activity
+  - shop
+  - services
+launched: true

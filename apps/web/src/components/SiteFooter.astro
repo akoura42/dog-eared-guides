@@ -1,0 +1,103 @@
+---
+import { BRAND_NAME } from '~/lib/site';
+import { getCities } from '~/lib/config';
+
+const cities = getCities().filter((c) => c.launched);
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap cols">
+    <div>
+      <p class="brand">{BRAND_NAME}</p>
+      <p class="tag">
+        Deep, verified dog-friendly city guides. Every policy checked against an
+        official source — and re-checked every 90 days.
+      </p>
+    </div>
+    <div>
+      <p class="head">Cities</p>
+      {cities.slice(0, 6).map((city) => (
+        <a href={`/${city.slug}/`}>{city.name}, {city.state_code}</a>
+      ))}
+      {cities.length > 6 && <a href="/#cities">All {cities.length} cities →</a>}
+    </div>
+    <div>
+      <p class="head">Trust</p>
+      <a href="/how-we-verify/">How we verify</a>
+      <a href="/editorial-policy/">Editorial policy</a>
+      <a href="/about/">About</a>
+    </div>
+    <div>
+      <p class="head">Legal</p>
+      <a href="/disclosure/">Affiliate disclosure</a>
+      <a href="/privacy/">Privacy &amp; cookies</a>
+    </div>
+  </div>
+  <div class="wrap fine">
+    <p>
+      © {year} {BRAND_NAME}. Policies change — always confirm with the venue
+      before making a trip. Some links may earn us a commission at no cost to
+      you. <a href="/disclosure/">Details</a>.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--pine-deep);
+    color: #e7efe9;
+    margin-top: 4rem;
+    padding: 3rem 0 1.5rem;
+  }
+  .cols {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 2rem;
+  }
+  .brand {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 640;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+  .tag {
+    font-size: 0.9rem;
+    color: #b9cbc0;
+    max-width: 26rem;
+  }
+  .head {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sun);
+    margin-bottom: 0.6rem;
+  }
+  .cols a {
+    display: block;
+    color: #e7efe9;
+    text-decoration: none;
+    font-size: 0.95rem;
+    margin-bottom: 0.45rem;
+  }
+  .cols a:hover {
+    color: var(--sun);
+  }
+  .fine {
+    margin-top: 2.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 0.82rem;
+    color: #9fb5a8;
+  }
+  .fine a {
+    color: #cfe0d5;
+  }
+  @media (max-width: 760px) {
+    .cols {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

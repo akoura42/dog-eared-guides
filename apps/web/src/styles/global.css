@@ -1,0 +1,209 @@
+/* Design tokens — warm, outdoorsy, trustworthy. Modern trail guide. */
+:root {
+  --paper: #faf6ee;
+  --paper-raised: #ffffff;
+  --ink: #24312a;
+  --ink-soft: #55645c;
+  --pine: #1f4d3a;
+  --pine-deep: #143427;
+  --moss: #6d8b74;
+  --clay: #c05f33;
+  --clay-soft: #f3e2d6;
+  --sun: #e8a13c;
+  --line: #e3dccc;
+  --ok: #2c7a4b;
+  --warn: #b3541e;
+  --no: #a63c2e;
+
+  --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --radius: 10px;
+  --radius-lg: 16px;
+  --shadow: 0 1px 2px rgba(36, 49, 42, 0.06), 0 4px 16px rgba(36, 49, 42, 0.07);
+  --maxw: 72rem;
+  --maxw-prose: 44rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 560;
+  line-height: 1.15;
+  color: var(--pine-deep);
+  margin: 0 0 0.5em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.1rem);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+a {
+  color: var(--pine);
+  text-decoration-color: color-mix(in srgb, var(--pine) 40%, transparent);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--clay);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.prose {
+  max-width: var(--maxw-prose);
+}
+
+.prose h2 {
+  margin-top: 2em;
+}
+
+.prose h3 {
+  margin-top: 1.6em;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.4rem;
+  margin: 0 0 1em;
+}
+
+.prose li {
+  margin-bottom: 0.35em;
+}
+
+.prose blockquote {
+  margin: 1.5em 0;
+  padding: 0.25em 0 0.25em 1.1em;
+  border-left: 3px solid var(--sun);
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--clay);
+  margin-bottom: 0.75rem;
+}
+
+.card-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  padding: 0;
+  margin: 1.5rem 0;
+  list-style: none;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--pine);
+  color: #fff;
+  font-weight: 600;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.15s ease;
+}
+
+.btn:hover {
+  background: var(--pine-deep);
+  color: #fff;
+}
+
+.btn--clay {
+  background: var(--clay);
+}
+
+.btn--clay:hover {
+  background: #a24d27;
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--pine);
+  border: 1.5px solid var(--pine);
+}
+
+.btn--ghost:hover {
+  background: var(--pine);
+  color: #fff;
+}
+
+.pill {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  background: var(--clay-soft);
+  color: var(--clay);
+}
+
+section.band {
+  padding: 3.5rem 0;
+}
+
+section.band--tint {
+  background: color-mix(in srgb, var(--moss) 10%, var(--paper));
+  border-block: 1px solid var(--line);
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 1rem;
+  }
+  section.band {
+    padding: 2.25rem 0;
+  }
+}

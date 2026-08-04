@@ -1,0 +1,150 @@
+---
+import type { Venue } from '~/lib/venues';
+import { ALLOWED_LABELS } from '~/lib/venues';
+import VerifiedBadge from './VerifiedBadge.astro';
+
+interface Props {
+  venue: Venue;
+}
+
+const { venue } = Astro.props;
+const p = venue.data.dog_policy;
+const v = venue.data.verification;
+
+const rows: { label: string; value: string; tone?: 'ok' | 'warn' | 'no' }[] = [];
+
+rows.push({
+  label: 'Dogs',
+  value: ALLOWED_LABELS[p.allowed],
+  tone: p.allowed === 'no' ? 'no' : 'ok',
+});
+if (p.leash_required !== null) {
+  rows.push({
+    label: 'Leash',
+    value: p.leash_required ? 'Required' : 'Not required (voice control)',
+    tone: p.leash_required ? 'warn' : 'ok',
+  });
+}
+if (p.water_bowls !== null) {
+  rows.push({ label: 'Water bowls', value: p.water_bowls ? 'Provided' : 'Bring your own' });
+}
+if (p.size_or_breed_restrictions) {
+  rows.push({ label: 'Restrictions', value: p.size_or_breed_restrictions, tone: 'warn' });
+}
+if (p.fee) {
+  rows.push({ label: 'Pet fee', value: p.fee });
+}
+---
+
+<aside class="policy" aria-label="Dog policy">
+  <div class="head">
+    <h2>Dog policy</h2>
+    <VerifiedBadge date={v.last_verified} method={v.method} sourceUrl={v.source_url} />
+  </div>
+  <dl>
+    {rows.map((row) => (
+      <div class="row">
+        <dt>{row.label}</dt>
+        <dd class:list={[row.tone]}>{row.value}</dd>
+      </div>
+    ))}
+  </dl>
+  {p.notes && <p class="notes">{p.notes}</p>}
+  {venue.data.seasonal.length > 0 && (
+    <div class="seasonal">
+      <p class="seasonal-head">Seasonal</p>
+      <ul>
+        {venue.data.seasonal.map((note) => <li>{note}</li>)}
+      </ul>
+    </div>
+  )}
+</aside>
+
+<style>
+  .policy {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 1.4rem 1.5rem;
+    margin: 1.5rem 0 2rem;
+  }
+  .head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+  }
+  .head h2 {
+    font-size: 1.15rem;
+    margin: 0;
+  }
+  dl {
+    margin: 0;
+    display: grid;
+    gap: 0.45rem;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr;
+    gap: 0.75rem;
+    align-items: baseline;
+    padding-bottom: 0.45rem;
+    border-bottom: 1px dashed var(--line);
+  }
+  .row:last-child {
+    border-bottom: none;
+  }
+  dt {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  dd {
+    margin: 0;
+    font-weight: 550;
+  }
+  dd.ok {
+    color: var(--ok);
+  }
+  dd.warn {
+    color: var(--warn);
+  }
+  dd.no {
+    color: var(--no);
+  }
+  .notes {
+    margin: 0.9rem 0 0;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+  .seasonal {
+    margin-top: 1rem;
+    background: var(--clay-soft);
+    border-radius: var(--radius);
+    padding: 0.8rem 1rem;
+  }
+  .seasonal-head {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin: 0 0 0.35rem;
+  }
+  .seasonal ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: 0.92rem;
+  }
+  @media (max-width: 480px) {
+    .row {
+      grid-template-columns: 1fr;
+      gap: 0.1rem;
+    }
+  }
+</style>

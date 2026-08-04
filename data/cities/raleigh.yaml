@@ -1,0 +1,60 @@
+name: Raleigh
+slug: raleigh
+state: North Carolina
+state_code: NC
+geo:
+  lat: 35.7796
+  lng: -78.6382
+hero:
+  headline: Raleigh with a dog, done right.
+  subhead: Ten city dog parks, a hundred-plus miles of greenway, and Umstead's forest trails — with the rules verified.
+intro: >-
+  Raleigh may be the best-equipped dog city on our list: ten official
+  off-leash dog parks and dog runs, the sprawling Capital Area Greenway
+  network open to leashed dogs end to end, and William B. Umstead State Park
+  sitting right against the Beltline. The rules are straightforward — leash
+  law citywide, 6 feet on the greenways — and we verified each one on the
+  city's own pages.
+seasonal_notes: []
+regulations:
+  - summary: Citywide leash law — no dogs at large; tethering is capped at 3 hours a day.
+    detail: >-
+      Raleigh City Code § 12-3007 prohibits domesticated animals running
+      unrestrained anywhere in city limits. A separate ordinance (§ 12-3013)
+      limits unattended tethering to 3 hours per 24 and sets equipment
+      requirements, with misdemeanor and civil penalties.
+    jurisdiction: City of Raleigh
+    source_url: https://raleighnc.gov/police/services/animal-control/dog-tethering-ordinance-and-leash-law
+  - summary: Ten official off-leash dog parks and dog runs across the city.
+    detail: >-
+      Baileywick, Buffaloe Road, Carolina Pines, Dorothea Dix, Jaycee,
+      Kiwanis, Millbrook Exchange, Oakwood, the Municipal Building downtown,
+      and Roberts Park. City rules: dogs stay leashed until inside the
+      double-gated holding area, and re-leash before exiting.
+    jurisdiction: City of Raleigh Parks, Recreation and Cultural Resources
+    source_url: https://raleighnc.gov/services/parks/dog-park
+  - summary: On the greenways — 6-foot leash max, keep right, pick up waste.
+    detail: >-
+      The Capital Area Greenway rules require pets on a leash no greater
+      than 6 feet, waste removed by owners, and all users keeping right
+      except to pass — across the entire citywide network.
+    jurisdiction: City of Raleigh Parks, Recreation and Cultural Resources
+    source_url: https://raleighnc.gov/parks-and-recreation/services/all-about-raleighs-greenways/greenway-safety-and-rules
+  - summary: State parks nearby (Umstead and others) — dogs on a 6-foot attended leash.
+    detail: >-
+      NC State Parks permit pets on an attended leash no longer than 6 feet
+      under constant control; barred from buildings, swim areas, and
+      bathhouses, and confined to a tent or vehicle during campground quiet
+      hours (10pm–7am).
+    jurisdiction: NC State Parks
+    source_url: https://www.ncparks.gov/about-us/guidelines-park-rules-and-regulations
+categories:
+  - eat
+  - drink
+  - stay
+  - trail
+  - beach
+  - activity
+  - shop
+  - services
+launched: true

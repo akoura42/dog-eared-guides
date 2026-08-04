@@ -1,0 +1,52 @@
+name: Columbia
+slug: columbia-mo
+state: Missouri
+state_code: MO
+geo:
+  lat: 38.9517
+  lng: -92.3341
+hero:
+  headline: Columbia with a dog, done right.
+  subhead: Three fenced dog parks, two leash-free nature areas, and a real trail town — with the rules verified.
+intro: >-
+  Columbia is quietly one of the better dog towns in the Midwest: a college
+  town threaded with trails, backed by city-run leash-free nature areas that
+  most cities its size don't have. The catch is that the rules flip depending
+  on where you're standing — leash-free in the meadow, four-foot leash on the
+  trail through it. We verified the details with the city so you don't guess.
+seasonal_notes:
+  - "Winter (roughly December – February): the lakeside dog parks at Twin Lakes close and the dedicated Off-Season Dog Park opens instead — the city created it after repeated rescues of dogs that fell through lake ice."
+regulations:
+  - summary: Leashes are the default; leash-free only in designated areas.
+    detail: >-
+      City code (Sec. 5-58) requires dogs under control — on established
+      trails and outside designated leash-free areas, that means a leash.
+      Households are limited to four dogs in the parks (Ord. 5-60), and
+      prong and choke collars are prohibited in leash-free areas.
+    jurisdiction: City of Columbia
+    source_url: https://www.como.gov/dog-parks-leash-free-areas/
+  - summary: Three fenced dog parks plus two large leash-free nature areas.
+    detail: >-
+      Fenced parks at Garth Nature Area (3 acres), Indian Hills Park
+      (1.5 acres), and Twin Lakes Recreation Area. Leash-free areas at Cosmo
+      Park (about 70 acres) and Grindstone Nature Area — Grindstone is
+      leash-free except on its established trails.
+    jurisdiction: City of Columbia Parks & Recreation
+    source_url: https://www.como.gov/dog-parks-leash-free-areas/
+  - summary: On any established trail, dogs go on a leash reined to within four feet.
+    detail: >-
+      The citywide rule — even inside leash-free areas like Grindstone —
+      is that dogs on an established trail must be leashed and reined in to
+      within four feet. That's the standard on Columbia's trail network.
+    jurisdiction: City of Columbia Parks & Recreation
+    source_url: https://www.como.gov/dog-parks-leash-free-areas/
+categories:
+  - eat
+  - drink
+  - stay
+  - trail
+  - beach
+  - activity
+  - shop
+  - services
+launched: true

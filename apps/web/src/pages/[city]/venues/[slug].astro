@@ -1,0 +1,136 @@
+---
+import { render } from 'astro:content';
+import Base from '~/layouts/Base.astro';
+import Breadcrumbs from '~/components/Breadcrumbs.astro';
+import DogPolicyBlock from '~/components/DogPolicyBlock.astro';
+import Photo from '~/components/Photo.astro';
+import AdSlot from '~/components/AdSlot.astro';
+import AffiliateCTA from '~/components/AffiliateCTA.astro';
+import AffiliateDisclosure from '~/components/AffiliateDisclosure.astro';
+import { getCollection } from 'astro:content';
+import { getCity, getCategoryByKey } from '~/lib/config';
+import { venueSlug, MIN_HUB_VENUES } from '~/lib/venues';
+import { venueJsonLd, breadcrumbJsonLd } from '~/lib/jsonld';
+import { BRAND_NAME } from '~/lib/site';
+
+export async function getStaticPaths() {
+  const venues = await getCollection('venues');
+  return venues.map((venue) => ({
+    params: { city: venue.data.city, slug: venueSlug(venue) },
+    props: { venue },
+  }));
+}
+
+const { venue } = Astro.props;
+const d = venue.data;
+const city = getCity(d.city);
+const category = getCategoryByKey(d.category);
+const { Content } = await render(venue);
+
+// Link back to the category hub only if that hub actually exists (>=4 venues)
+const cityVenues = await getCollection('venues', (v) => v.data.city === d.city);
+const categoryCount = cityVenues.filter((v) => v.data.category === d.category).length;
+const categoryHubUrl = categoryCount >= MIN_HUB_VENUES ? `/${d.city}/${category.slug}/` : null;
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: city.name, url: `/${city.slug}/` },
+  ...(categoryHubUrl ? [{ name: category.label, url: categoryHubUrl }] : []),
+  { name: d.name, url: `/${d.city}/venues/${venueSlug(venue)}/` },
+];
+
+const affiliate = d.affiliate;
+const affiliateUrl = affiliate?.viator_url ?? affiliate?.booking_url ?? null;
+const hasAffiliate = Boolean(affiliateUrl);
+
+const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  `${d.name} ${d.address}`
+)}`;
+---
+
+<Base
+  title={`${d.name} — Dog-Friendly ${category.singular[0].toUpperCase() + category.singular.slice(1)} in ${city.name} | ${BRAND_NAME}`}
+  description={`${d.summary} Dog policy verified ${d.verification.last_verified.toISOString().slice(0, 10)}.`}
+  jsonld={[venueJsonLd(venue, city), breadcrumbJsonLd(crumbs)]}
+  ogImage={`/og/${d.city}-${venueSlug(venue)}.png`}
+>
+  <div class="wrap">
+    <Breadcrumbs crumbs={crumbs} />
+
+    <article class="venue">
+      <header>
+        <p class="eyebrow">{category.label} · {city.name}, {city.state_code}</p>
+        <h1>{d.name}</h1>
+        <p class="summary">{d.summary}</p>
+        <p class="meta">
+          <a href={mapsUrl} rel="noopener" target="_blank">{d.address}</a>
+          {d.phone && <> · <a href={`tel:${d.phone.replace(/[^+\d]/g, '')}`}>{d.phone}</a></>}
+          {d.website && <> · <a href={d.website} rel="noopener nofollow" target="_blank">Website</a></>}
+          {' '}· <a href={mapsUrl} rel="noopener nofollow" target="_blank">Google reviews</a>
+        </p>
+      </header>
+
+      <Photo
+        path={d.image}
+        alt={d.image_alt}
+        credit={d.image_credit}
+        creditUrl={d.image_credit_url}
+        loading="eager"
+      />
+
+      <DogPolicyBlock venue={venue} />
+
+      {hasAffiliate && <AffiliateDisclosure />}
+      {affiliateUrl && (
+        <AffiliateCTA
+          kind={affiliate?.viator_url ? 'viator' : 'lodging'}
+          href={affiliateUrl}
+          note={affiliate?.viator_url ? 'Booking through this link supports the site.' : 'Rates shown by our booking partner; booking through this link supports the site.'}
+        />
+      )}
+
+      <div class="prose body">
+        <Content />
+      </div>
+
+      <AdSlot placement="end-of-content" />
+
+      <footer class="verify-note">
+        <p>
+          <strong>Spotted a change?</strong> Policies move fast in
+          {city.name}. If this doesn't match what you found on the ground,
+          <a href="/how-we-verify/">let us know</a> — we re-verify every
+          listing at least every 90 days.
+        </p>
+      </footer>
+    </article>
+  </div>
+</Base>
+
+<style>
+  .venue {
+    max-width: 46rem;
+    padding-bottom: 2rem;
+  }
+  header {
+    margin-top: 1rem;
+  }
+  .summary {
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+  }
+  .meta {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+  .body {
+    margin-top: 1rem;
+  }
+  .verify-note {
+    margin-top: 2.5rem;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--line);
+    padding-top: 1.25rem;
+  }
+</style>

@@ -1,0 +1,114 @@
+---
+// Category hubs (/tahoe-city/dog-friendly-restaurants/) and attribute hubs
+// (/tahoe-city/off-leash/). A hub page is generated ONLY when >=4 venues
+// qualify — no thin programmatic pages.
+import Base from '~/layouts/Base.astro';
+import Breadcrumbs from '~/components/Breadcrumbs.astro';
+import VenueCard from '~/components/VenueCard.astro';
+import AdSlot from '~/components/AdSlot.astro';
+import { getCities, getCategories, getAttributes } from '~/lib/config';
+import { venuesForCity, matchesAttribute, MIN_HUB_VENUES, type Venue } from '~/lib/venues';
+import { breadcrumbJsonLd } from '~/lib/jsonld';
+import { BRAND_NAME } from '~/lib/site';
+import type { CityConfig } from '~/lib/config';
+
+interface HubProps {
+  city: CityConfig;
+  label: string;
+  blurb: string;
+  isCategory: boolean;
+  venues: Venue[];
+}
+
+export async function getStaticPaths() {
+  const paths: { params: { city: string; hub: string }; props: HubProps }[] = [];
+  const categories = getCategories();
+  const attributes = getAttributes();
+
+  for (const city of getCities().filter((c) => c.launched)) {
+    const venues = await venuesForCity(city.slug);
+
+    for (const key of city.categories) {
+      const category = categories.find((c) => c.key === key);
+      if (!category) continue;
+      const catVenues = venues.filter((v) => v.data.category === key);
+      if (catVenues.length < MIN_HUB_VENUES) continue;
+      paths.push({
+        params: { city: city.slug, hub: category.slug },
+        props: {
+          city,
+          label: category.label,
+          blurb: category.blurb,
+          isCategory: true,
+          venues: catVenues,
+        },
+      });
+    }
+
+    for (const attr of attributes) {
+      const matched = venues.filter((v) => matchesAttribute(v, attr));
+      if (matched.length < MIN_HUB_VENUES) continue;
+      paths.push({
+        params: { city: city.slug, hub: attr.slug },
+        props: {
+          city,
+          label: attr.label,
+          blurb: attr.blurb,
+          isCategory: false,
+          venues: matched,
+        },
+      });
+    }
+  }
+  return paths;
+}
+
+const { city, label, blurb, isCategory, venues } = Astro.props;
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: city.name, url: `/${city.slug}/` },
+  { name: label, url: Astro.url.pathname },
+];
+---
+
+<Base
+  title={`${label} in ${city.name}, ${city.state_code} — Verified Dog Policies | ${BRAND_NAME}`}
+  description={`${blurb} ${venues.length} verified listings in ${city.name}.`}
+  jsonld={[breadcrumbJsonLd(crumbs)]}
+  ogImage={`/og/${city.slug}.png`}
+>
+  <div class="wrap">
+    <Breadcrumbs crumbs={crumbs} />
+    <header class="hub-head">
+      <p class="eyebrow">{city.name}, {city.state}</p>
+      <h1>{label}</h1>
+      <p class="lede">{blurb}</p>
+      <p class="count">{venues.length} listings, each verified against an official source.</p>
+    </header>
+
+    <ul class="card-grid">
+      {venues.map((venue) => (
+        <li><VenueCard venue={venue} showCategory={!isCategory} /></li>
+      ))}
+    </ul>
+
+    <AdSlot placement="end-of-content" />
+  </div>
+</Base>
+
+<style>
+  .hub-head {
+    margin: 1.5rem 0 0.5rem;
+    max-width: 44rem;
+  }
+  .lede {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+  }
+  .count {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ok);
+  }
+</style>

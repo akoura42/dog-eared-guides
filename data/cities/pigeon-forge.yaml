@@ -1,0 +1,54 @@
+name: Pigeon Forge
+slug: pigeon-forge
+state: Tennessee
+state_code: TN
+geo:
+  lat: 35.7884
+  lng: -83.5543
+hero:
+  headline: Pigeon Forge with a dog, done right.
+  subhead: What to actually do with a dog when the Smokies ban them from nearly every trail — verified rules, no guesswork.
+intro: >-
+  Here's the fact every dog owner learns the hard way in Pigeon Forge: the
+  national park next door bans dogs from almost all of its 800+ miles of
+  trails. That makes planning a dog trip here different from anywhere else —
+  the wins are in town, on the two legal park trails, and at the parks one
+  town over. We verified the rules with the city, the NPS, and neighboring
+  Sevierville so your trip is built on what's actually allowed.
+seasonal_notes:
+  - "Bear country, year-round: the NPS warns dogs are involved in most bear-related incidents — a dog that confronts a bear faces roughly 50% odds of injury or death. Leash on, never unattended, including in vehicles."
+regulations:
+  - summary: No dogs at large in city limits — keep the leash on off your own property.
+    detail: >-
+      Pigeon Forge municipal code (§ 10-203) makes it unlawful to let a dog
+      run at large within the corporate limits. No leash length is specified;
+      under-control on a leash is the practical standard. At-large dogs can
+      be seized and held at the shelter (§ 10-107).
+    jurisdiction: City of Pigeon Forge
+    source_url: https://www.mtas.tennessee.edu/system/files/codes/combined/PigeonForge-code.pdf
+  - summary: Great Smoky Mountains National Park bans dogs from nearly all trails.
+    detail: >-
+      In the park, pets are allowed only in campgrounds, picnic areas, and
+      along roads — on a leash no longer than 6 feet — plus exactly two
+      trails: the Gatlinburg Trail and the Oconaluftee River Trail. Every
+      other trail, including the famous ones, is off-limits to dogs.
+    jurisdiction: National Park Service (Great Smoky Mountains NP)
+    source_url: https://www.nps.gov/grsm/planyourvisit/pets.htm
+  - summary: The nearest official off-leash park is in Sevierville, about 6 miles away.
+    detail: >-
+      Pigeon Forge has no city dog park. Sevierville's PetSafe Unleashed Dog
+      Park (200 Gary Wade Blvd.) is fully fenced with separate large/small
+      areas, agility equipment, water, and shade; 8am–9pm April–October,
+      8am–8pm November–March, current vaccinations required.
+    jurisdiction: City of Sevierville
+    source_url: https://www.seviervilletn.org/259/PetSafe-Unleashed-Dog-Park
+categories:
+  - eat
+  - drink
+  - stay
+  - trail
+  - beach
+  - activity
+  - shop
+  - services
+launched: true

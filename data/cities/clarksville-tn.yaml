@@ -1,0 +1,58 @@
+name: Clarksville
+slug: clarksville-tn
+state: Tennessee
+state_code: TN
+geo:
+  lat: 36.5298
+  lng: -87.3595
+hero:
+  headline: Clarksville with a dog, done right.
+  subhead: The Greenway, the riverwalk, and the Bark Park — with the leash rules verified at the source.
+intro: >-
+  Clarksville's dog life runs along its water: the Cumberland riverfront at
+  McGregor Park and the Greenway corridor cutting across town, both open to
+  leashed dogs. The rules are city-simple — leash everywhere, stay off the
+  playgrounds and event lawns — and we verified each one against the city's
+  own pages rather than repeating what other sites guess.
+seasonal_notes: []
+regulations:
+  - summary: No dogs at large — off your property, a dog must be restrained and under control.
+    detail: >-
+      City code (Sec. 3-102) requires animals off the owner's premises to be
+      under the control of a competent person and restrained by chain, leash,
+      or other visible means. Owners must also remove waste from public areas,
+      including sidewalks, greenways, and parks.
+    jurisdiction: City of Clarksville
+    source_url: https://library.municode.com/tn/clarksville/codes/code_of_ordinances?nodeId=TIT3AN_CH1ANCO_S3-102ANLA
+  - summary: In city parks — leash on, and stay clear of playgrounds, sports complexes, and event areas.
+    detail: >-
+      Parks & Recreation's posted rules: all pets on a leash, waste picked
+      up, and pets are not permitted on playgrounds, sports complexes, or
+      concert/event areas.
+    jurisdiction: City of Clarksville Parks & Recreation
+    source_url: https://www.clarksvilletn.gov/376/Rules-Regulations
+  - summary: The Clarksville Greenway welcomes leashed dogs along the whole corridor.
+    detail: >-
+      The city's Greenway rules ask users to keep pets leashed and clean up
+      after them (playground excepted). Trailheads at Heritage Park, Pollard
+      Road, Mary's Oak, Red River, and McGregor Park on the riverfront.
+    jurisdiction: City of Clarksville Parks & Recreation
+    source_url: https://www.clarksvilletn.gov/463/Clarksville-Greenway
+  - summary: The Bark Park at Heritage Park is the dedicated dog space.
+    detail: >-
+      The Heritage Park Complex at 1241 Peachers Mill Road includes a dog
+      park with waste stations, benches, shade, and dog drinking fountains
+      for all sizes — while pets are otherwise restricted in most of the
+      complex.
+    jurisdiction: City of Clarksville Parks & Recreation
+    source_url: https://www.clarksvilletn.gov/Facilities/Facility/Details/Heritage-Park-Complex-24
+categories:
+  - eat
+  - drink
+  - stay
+  - trail
+  - beach
+  - activity
+  - shop
+  - services
+launched: true

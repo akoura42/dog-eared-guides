@@ -1,0 +1,27 @@
+---
+// Embeds a venue card inside guide MDX by slug, so venue data stays
+// single-sourced. Usage in a guide: <VenueEmbed city="tahoe-city" slug="bridgetender-tavern" />
+import { findVenue } from '~/lib/venues';
+import VenueCard from './VenueCard.astro';
+
+interface Props {
+  city: string;
+  slug: string;
+}
+
+const { city, slug } = Astro.props;
+const venue = await findVenue(city, slug);
+if (!venue) {
+  throw new Error(`VenueEmbed: no venue "${slug}" in city "${city}"`);
+}
+---
+
+<div class="venue-embed">
+  <VenueCard venue={venue} />
+</div>
+
+<style>
+  .venue-embed {
+    margin: 1.5rem 0;
+  }
+</style>

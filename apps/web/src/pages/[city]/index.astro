@@ -1,0 +1,364 @@
+---
+import Base from '~/layouts/Base.astro';
+import Breadcrumbs from '~/components/Breadcrumbs.astro';
+import VenueCard from '~/components/VenueCard.astro';
+import Photo from '~/components/Photo.astro';
+import CityVenueMap from '~/components/CityVenueMap.astro';
+import AdSlot from '~/components/AdSlot.astro';
+import { getCities, getCategoryByKey, getAttributes } from '~/lib/config';
+import {
+  venuesForCity,
+  guidesForCity,
+  guidePath,
+  matchesAttribute,
+  MIN_HUB_VENUES,
+} from '~/lib/venues';
+import { breadcrumbJsonLd } from '~/lib/jsonld';
+import { BRAND_NAME } from '~/lib/site';
+
+export async function getStaticPaths() {
+  return getCities()
+    .filter((c) => c.launched)
+    .map((city) => ({ params: { city: city.slug }, props: { city } }));
+}
+
+const { city } = Astro.props;
+const venues = await venuesForCity(city.slug);
+const guides = await guidesForCity(city.slug);
+
+const categoryHubs = city.categories
+  .map((key) => ({
+    category: getCategoryByKey(key),
+    venues: venues.filter((v) => v.data.category === key),
+  }))
+  .filter((c) => c.venues.length > 0);
+
+const attributeHubs = getAttributes()
+  .map((attr) => ({ attr, count: venues.filter((v) => matchesAttribute(v, attr)).length }))
+  .filter((a) => a.count >= MIN_HUB_VENUES);
+
+const recentVenues = [...venues]
+  .sort(
+    (a, b) =>
+      b.data.verification.last_verified.getTime() - a.data.verification.last_verified.getTime()
+  )
+  .slice(0, 6);
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: `${city.name}, ${city.state_code}`, url: `/${city.slug}/` },
+];
+---
+
+<Base
+  title={`Dog-Friendly ${city.name}, ${city.state_code} — Verified Guide | ${BRAND_NAME}`}
+  description={`${city.hero.subhead} Every dog policy verified against an official source.`}
+  jsonld={[breadcrumbJsonLd(crumbs)]}
+  ogImage={`/og/${city.slug}.png`}
+>
+  <div class="wrap">
+    <Breadcrumbs crumbs={crumbs} />
+  </div>
+
+  <section class="hero">
+    <div class:list={['wrap', { 'hero-split': city.hero_image }]}>
+      <div>
+        <p class="eyebrow">{city.name}, {city.state}</p>
+        <h1>{city.hero.headline}</h1>
+        <p class="lede">{city.intro}</p>
+      </div>
+      {city.hero_image && (
+        <Photo
+          path={city.hero_image}
+          alt={city.hero_image_alt}
+          credit={city.hero_image_credit}
+          creditUrl={city.hero_image_credit_url}
+          width={720}
+          loading="eager"
+        />
+      )}
+    </div>
+  </section>
+
+  {categoryHubs.length === 0 && (
+    <section class="band">
+      <div class="wrap">
+        <p class="building">
+          <strong>Verified listings are in progress for {city.name}.</strong>
+          Every venue we publish gets its dog policy checked against an
+          official source first — the local rules below are already verified,
+          and listings land here as they clear that bar.
+        </p>
+      </div>
+    </section>
+  )}
+
+  {categoryHubs.length > 0 && (
+  <section class="band">
+    <div class="wrap">
+      <h2>Browse by category</h2>
+      <ul class="card-grid">
+        {categoryHubs.map(({ category, venues: catVenues }) => (
+          <li>
+            {catVenues.length >= MIN_HUB_VENUES ? (
+              <a class="cat-card" href={`/${city.slug}/${category.slug}/`}>
+                <span class="cat-name">{category.label}</span>
+                <span class="cat-blurb">{category.blurb}</span>
+                <span class="cat-count">{catVenues.length} verified {catVenues.length === 1 ? 'listing' : 'listings'} →</span>
+              </a>
+            ) : (
+              <div class="cat-card cat-card--flat">
+                <span class="cat-name">{category.label}</span>
+                <span class="cat-blurb">{category.blurb}</span>
+                <span class="cat-count">{catVenues.length} verified {catVenues.length === 1 ? 'listing' : 'listings'} so far</span>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+      {attributeHubs.length > 0 && (
+        <p class="attr-links">
+          Special lists:
+          {attributeHubs.map(({ attr }) => (
+            <a class="pill" href={`/${city.slug}/${attr.slug}/`}>{attr.label}</a>
+          ))}
+        </p>
+      )}
+
+      <h2 class="map-head">On the map</h2>
+      <CityVenueMap city={city} venues={venues} />
+    </div>
+  </section>
+  )}
+
+  <AdSlot placement="below-hero" />
+
+  {city.regulations.length > 0 && (
+    <section class="band band--tint">
+      <div class="wrap">
+        <h2>Local dog rules, in plain English</h2>
+        <ul class="reg-list">
+          {city.regulations.map((reg) => (
+            <li>
+              <p class="reg-summary">{reg.summary}</p>
+              <p class="reg-detail">
+                {reg.detail}
+                {' '}<a href={reg.source_url} rel="nofollow noopener" target="_blank">Official source ({reg.jurisdiction})</a>
+              </p>
+            </li>
+          ))}
+        </ul>
+        {city.seasonal_notes.length > 0 && (
+          <div class="seasonal">
+            <h3>Right now / seasonal</h3>
+            <ul>
+              {city.seasonal_notes.map((note) => <li>{note}</li>)}
+            </ul>
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  {guides.length > 0 && (
+    <section class="band">
+      <div class="wrap">
+        <h2>Guides &amp; itineraries</h2>
+        <ul class="guide-list">
+          {guides.map((guide) => (
+            <li>
+              <a href={guidePath(guide)}>{guide.data.title}</a>
+              <p>{guide.data.description}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {recentVenues.length > 0 && (
+    <section class="band">
+      <div class="wrap">
+        <h2>Recently verified</h2>
+        <ul class="card-grid">
+          {recentVenues.map((venue) => (
+            <li><VenueCard venue={venue} /></li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {city.resources.length > 0 && (
+    <section class="band band--tint">
+      <div class="wrap">
+        <h2>Official resources</h2>
+        <p class="res-lede">The primary sources we verify against — useful for checking current conditions yourself.</p>
+        <ul class="res-list">
+          {city.resources.map((res) => (
+            <li>
+              <a href={res.url} rel="noopener nofollow" target="_blank">{res.label}</a>
+              <span>{res.note}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+</Base>
+
+<style>
+  .hero {
+    padding: 3rem 0 1rem;
+  }
+  .hero-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 2.5rem;
+    align-items: center;
+  }
+  @media (max-width: 860px) {
+    .hero-split {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+  }
+  .res-lede {
+    color: var(--ink-soft);
+    max-width: 44rem;
+  }
+  .res-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    display: grid;
+    gap: 0.7rem;
+    max-width: 48rem;
+  }
+  .res-list a {
+    font-weight: 650;
+  }
+  .res-list span {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+  }
+  .building {
+    max-width: 44rem;
+    background: var(--clay-soft);
+    border-radius: var(--radius-lg);
+    padding: 1.1rem 1.3rem;
+    color: var(--ink-soft);
+  }
+  .building strong {
+    color: var(--ink);
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+  .lede {
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    max-width: 42rem;
+  }
+  .cat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    height: 100%;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 1.2rem 1.3rem;
+    text-decoration: none;
+  }
+  a.cat-card:hover {
+    transform: translateY(-2px);
+  }
+  .cat-card--flat {
+    opacity: 0.75;
+    box-shadow: none;
+  }
+  .cat-name {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--pine-deep);
+  }
+  .cat-blurb {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    flex: 1;
+  }
+  .cat-count {
+    font-size: 0.85rem;
+    font-weight: 650;
+    color: var(--clay);
+  }
+  .attr-links {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+  }
+  .map-head {
+    margin-top: 2.5rem;
+  }
+  .attr-links .pill {
+    text-decoration: none;
+  }
+  .reg-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1.1rem;
+    max-width: 48rem;
+  }
+  .reg-summary {
+    font-weight: 650;
+    margin: 0 0 0.2rem;
+  }
+  .reg-detail {
+    font-size: 0.93rem;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .seasonal {
+    margin-top: 1.75rem;
+    background: var(--clay-soft);
+    border-radius: var(--radius-lg);
+    padding: 1.1rem 1.3rem;
+    max-width: 48rem;
+  }
+  .seasonal h3 {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+  .seasonal ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    font-size: 0.95rem;
+  }
+  .guide-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+    max-width: 44rem;
+  }
+  .guide-list a {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .guide-list p {
+    font-size: 0.93rem;
+    color: var(--ink-soft);
+    margin: 0.15rem 0 0;
+  }
+</style>

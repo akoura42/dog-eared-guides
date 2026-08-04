@@ -1,0 +1,60 @@
+name: Lincoln
+slug: lincoln
+state: Nebraska
+state_code: NE
+geo:
+  lat: 40.8137
+  lng: -96.7026
+hero:
+  headline: Lincoln with a dog, done right.
+  subhead: Five city dog runs, a huge trail network, and one rule people miss — dogs can't enter park lakes. Verified.
+intro: >-
+  Lincoln quietly runs one of the better municipal dog programs in the
+  Plains: five official off-leash dog runs, including the ~22-acre Rickman's
+  Run at Holmes Lake. The rule that surprises visitors is in the parks code
+  itself — dogs aren't allowed in park lakes, ponds, fountains, or streams,
+  anywhere in the city. We cite the ordinances directly so you know where
+  the lines actually are.
+seasonal_notes: []
+regulations:
+  - summary: No animals loose or at large anywhere in the city.
+    detail: >-
+      Lincoln Municipal Code 6.04.120 prohibits permitting any animal
+      (pigeons excepted) to go loose or run at large in the city.
+    jurisdiction: City of Lincoln
+    source_url: https://online.encodeplus.com/regs/lincoln-ne/doc-viewer.aspx?secid=7898
+  - summary: In parks — leash required, and dogs may not enter lakes, ponds, fountains, or streams.
+    detail: >-
+      The parks title (LMC 12.08.180) requires dogs under control by leash,
+      cord, chain, or confinement in every park, and specifically bars them
+      from entering park waters. Off-leash play is legal only in areas the
+      Parks Director designates — the city's dog runs.
+    jurisdiction: City of Lincoln
+    source_url: https://online.encodeplus.com/regs/lincoln-ne/doc-viewer.aspx?secid=9454
+  - summary: Five official off-leash dog runs across the city.
+    detail: >-
+      Rickman's Run at Holmes Lake (~22 acres plus a small-dog area),
+      Mahoney Park (84th & Adams), Bowling Lake Park (NW 44th & W.
+      Cummings), Roper Park East (7th & Adams), and Stransky Dog Run at
+      Peterson Park. Posted rules: dogs in view and under control, waste
+      picked up immediately.
+    jurisdiction: Lincoln Parks & Recreation
+    source_url: https://www.lincoln.ne.gov/City/Departments/Parks-and-Recreation/Parks-Facilities/Dog-Runs
+  - summary: State recreation areas around Lincoln — 6-foot leash max, no pets on swim beaches.
+    detail: >-
+      The statewide Game & Parks regulation applies at Branched Oak, Pawnee,
+      Stagecoach, and the other SRAs: pets crated, caged, or on a leash no
+      longer than six feet, and banned from buildings and designated
+      swimming beaches.
+    jurisdiction: Nebraska Game & Parks Commission
+    source_url: http://govdocs.nebraska.gov/epubs/G1000/R163.0005-2016.pdf
+categories:
+  - eat
+  - drink
+  - stay
+  - trail
+  - beach
+  - activity
+  - shop
+  - services
+launched: true

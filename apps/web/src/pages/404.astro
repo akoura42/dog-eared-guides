@@ -1,0 +1,23 @@
+---
+import Base from '~/layouts/Base.astro';
+import { BRAND_NAME } from '~/lib/site';
+---
+
+<Base title={`Page Not Found | ${BRAND_NAME}`} description="That page has wandered off." noindex>
+  <div class="wrap page">
+    <h1>404 — this trail doesn't go anywhere</h1>
+    <p>The page you're after has moved, closed for the season, or never existed.</p>
+    <a class="btn" href="/">Back to the trailhead</a>
+  </div>
+</Base>
+
+<style>
+  .page {
+    padding: 5rem 1.25rem;
+    text-align: center;
+  }
+  .page p {
+    color: var(--ink-soft);
+    margin-bottom: 1.5rem;
+  }
+</style>

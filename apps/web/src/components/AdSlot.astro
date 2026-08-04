@@ -1,0 +1,108 @@
+---
+// Display ad slot: reserved height (zero CLS), lazy-loaded, consent-gated,
+// network-agnostic. AdSense-ready via PUBLIC_ADSENSE_CLIENT; a premium
+// network can be swapped in by replacing the loader in the script below.
+import { ADSENSE_CLIENT } from '~/lib/site';
+
+interface Props {
+  /** Placement id for reporting: below-hero | mid-content | end-of-content */
+  placement: string;
+  /** Reserved height in px — prevents layout shift when the ad loads. */
+  height?: number;
+}
+
+const { placement, height = 280 } = Astro.props;
+---
+
+{ADSENSE_CLIENT && (
+  <div
+    class="ad-slot"
+    data-placement={placement}
+    data-ad-client={ADSENSE_CLIENT}
+    style={`min-height:${height}px`}
+    aria-label="Advertisement"
+  >
+    <span class="ad-label">Advertisement</span>
+  </div>
+)}
+
+<style>
+  .ad-slot {
+    position: relative;
+    margin: 2rem auto;
+    max-width: 100%;
+    background: color-mix(in srgb, var(--line) 35%, var(--paper));
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ad-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    position: absolute;
+    top: 0.4rem;
+    left: 0.6rem;
+  }
+</style>
+
+<script>
+  // Ads load only after (1) the user grants consent and (2) the slot nears
+  // the viewport. Network-agnostic: swap loadNetwork() to change providers.
+  function hasConsent(): boolean {
+    return localStorage.getItem('cookie-consent') === 'granted';
+  }
+
+  let networkLoaded = false;
+  function loadNetwork(client: string) {
+    if (networkLoaded) return;
+    networkLoaded = true;
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${client}`;
+    s.crossOrigin = 'anonymous';
+    document.head.appendChild(s);
+  }
+
+  function fillSlot(slot: HTMLElement) {
+    if (slot.dataset.filled) return;
+    slot.dataset.filled = 'true';
+    const client = slot.dataset.adClient!;
+    loadNetwork(client);
+    const ins = document.createElement('ins');
+    ins.className = 'adsbygoogle';
+    ins.style.display = 'block';
+    ins.style.width = '100%';
+    ins.setAttribute('data-ad-client', client);
+    ins.setAttribute('data-ad-format', 'auto');
+    ins.setAttribute('data-full-width-responsive', 'true');
+    slot.appendChild(ins);
+    // @ts-expect-error adsbygoogle global from the network script
+    (window.adsbygoogle = window.adsbygoogle || []).push({});
+  }
+
+  function arm() {
+    const slots = document.querySelectorAll<HTMLElement>('.ad-slot');
+    if (!slots.length) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            fillSlot(entry.target as HTMLElement);
+            io.unobserve(entry.target);
+          }
+        }
+      },
+      { rootMargin: '400px' }
+    );
+    slots.forEach((s) => io.observe(s));
+  }
+
+  if (hasConsent()) {
+    arm();
+  } else {
+    window.addEventListener('consent:granted', arm, { once: true });
+  }
+</script>

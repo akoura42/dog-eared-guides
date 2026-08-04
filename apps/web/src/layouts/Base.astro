@@ -1,0 +1,56 @@
+---
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/inter';
+import '~/styles/global.css';
+import SiteHeader from '~/components/SiteHeader.astro';
+import SiteFooter from '~/components/SiteFooter.astro';
+import CookieConsent from '~/components/CookieConsent.astro';
+import Analytics from '~/components/Analytics.astro';
+import { BRAND_NAME, SITE_URL } from '~/lib/site';
+
+interface Props {
+  title: string;
+  description: string;
+  /** JSON-LD objects to embed (already-built plain objects). */
+  jsonld?: object[];
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const { title, description, jsonld = [], ogImage, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, SITE_URL).href;
+const ogImageUrl = ogImage ? new URL(ogImage, SITE_URL).href : new URL('/og/home.png', SITE_URL).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={BRAND_NAME} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {jsonld.map((obj) => (
+      <script type="application/ld+json" set:html={JSON.stringify(obj)} />
+    ))}
+    <Analytics />
+  </head>
+  <body>
+    <SiteHeader />
+    <main id="main">
+      <slot />
+    </main>
+    <SiteFooter />
+    <CookieConsent />
+  </body>
+</html>

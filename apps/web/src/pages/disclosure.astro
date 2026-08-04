@@ -1,0 +1,42 @@
+---
+import Base from '~/layouts/Base.astro';
+import { BRAND_NAME } from '~/lib/site';
+---
+
+<Base
+  title={`Affiliate Disclosure | ${BRAND_NAME}`}
+  description="How affiliate links work on this site, per FTC guidelines."
+>
+  <div class="wrap prose page">
+    <p class="eyebrow">Legal</p>
+    <h1>Affiliate disclosure</h1>
+    <p>
+      Some pages on this site contain affiliate links — for example, links to
+      book dog-friendly lodging, reserve activities through Viator, or buy
+      gear we recommend. If you click one of these links and make a purchase,
+      we may earn a commission. <strong>It costs you nothing extra.</strong>
+    </p>
+    <p>
+      In line with the FTC's endorsement guidelines (16 CFR Part 255), every
+      page that contains affiliate links displays a disclosure notice near the
+      links themselves, and affiliate links are tagged so search engines treat
+      them as sponsored.
+    </p>
+    <h2>What affiliate money does and doesn't do</h2>
+    <ul>
+      <li>It helps pay for the ongoing re-verification of every listing.</li>
+      <li>It does <strong>not</strong> decide which venues we cover.</li>
+      <li>It does <strong>not</strong> change what we report about any venue's dog policy.</li>
+      <li>Venues cannot pay for placement or favorable coverage — see our <a href="/editorial-policy/">editorial policy</a>.</li>
+    </ul>
+    <p>
+      Questions? Reach out via the contact details on our <a href="/about/">about page</a>.
+    </p>
+  </div>
+</Base>
+
+<style>
+  .page {
+    padding: 2.5rem 1.25rem 2rem;
+  }
+</style>

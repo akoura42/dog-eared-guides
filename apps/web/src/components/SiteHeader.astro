@@ -1,0 +1,165 @@
+---
+import { BRAND_NAME } from '~/lib/site';
+import { getCities } from '~/lib/config';
+
+const cities = getCities().filter((c) => c.launched);
+
+// Group by state for the dropdown; scales to hundreds of cities.
+const byState = new Map<string, typeof cities>();
+for (const city of cities) {
+  const list = byState.get(city.state) ?? [];
+  list.push(city);
+  byState.set(city.state, list);
+}
+const states = [...byState.entries()].sort(([a], [b]) => a.localeCompare(b));
+---
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">
+      <svg class="mark" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true">
+        <path d="M16 4l10 12h-5v8h-4v-6h-2v6H11v-8H6z" fill="var(--pine)" />
+        <circle cx="24.5" cy="7" r="2.4" fill="var(--clay)" />
+      </svg>
+      <span>{BRAND_NAME}</span>
+    </a>
+    <nav aria-label="Main">
+      <details class="cities-menu" id="cities-menu">
+        <summary>Cities <span class="caret" aria-hidden="true">▾</span></summary>
+        <div class="panel">
+          {states.map(([state, stateCities]) => (
+            <div class="state-group">
+              <p class="state-name">{state}</p>
+              {stateCities.map((city) => (
+                <a href={`/${city.slug}/`}>{city.name}</a>
+              ))}
+            </div>
+          ))}
+        </div>
+      </details>
+      <a href="/how-we-verify/">How we verify</a>
+      <a href="/about/">About</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 0.7rem;
+    flex-wrap: wrap;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-display);
+    font-weight: 640;
+    font-size: 1.25rem;
+    color: var(--pine-deep);
+    text-decoration: none;
+  }
+  nav {
+    display: flex;
+    gap: 1.1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  nav > a,
+  .cities-menu summary {
+    font-size: 0.95rem;
+    font-weight: 550;
+    text-decoration: none;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  nav > a:hover,
+  .cities-menu summary:hover {
+    color: var(--clay);
+  }
+  .cities-menu {
+    position: relative;
+  }
+  .cities-menu summary {
+    list-style: none;
+    user-select: none;
+  }
+  .cities-menu summary::-webkit-details-marker {
+    display: none;
+  }
+  .caret {
+    font-size: 0.7rem;
+  }
+  .panel {
+    position: absolute;
+    top: calc(100% + 0.75rem);
+    right: 0;
+    min-width: 16rem;
+    max-width: min(80vw, 40rem);
+    max-height: 70vh;
+    overflow-y: auto;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 12px 40px rgba(20, 52, 39, 0.18);
+    padding: 1rem 1.2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: 0.9rem 1.4rem;
+    z-index: 60;
+  }
+  .state-group {
+    min-width: 0;
+  }
+  .state-name {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin: 0 0 0.3rem;
+  }
+  .state-group a {
+    display: block;
+    font-size: 0.93rem;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 0.15rem 0;
+    white-space: nowrap;
+  }
+  .state-group a:hover {
+    color: var(--clay);
+  }
+  @media (max-width: 640px) {
+    .panel {
+      position: fixed;
+      inset-inline: 0.75rem;
+      top: 3.6rem;
+      right: 0.75rem;
+      max-width: none;
+    }
+  }
+</style>
+
+<script>
+  // Close the cities dropdown on outside click / Escape.
+  const menu = document.getElementById('cities-menu') as HTMLDetailsElement | null;
+  if (menu) {
+    document.addEventListener('click', (e) => {
+      if (menu.open && !menu.contains(e.target as Node)) menu.open = false;
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') menu.open = false;
+    });
+  }
+</script>

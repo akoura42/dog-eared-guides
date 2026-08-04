@@ -1,0 +1,216 @@
+---
+// Interactive venue map for a city hub. Leaflet + OpenStreetMap tiles (no
+// API key). Each marker links to our venue page and deep-links to the
+// venue's Google Maps place page — that's where Google reviews live.
+// The map initializes lazily when scrolled near the viewport so tiles
+// never block first paint.
+import type { Venue } from '~/lib/venues';
+import { venuePath } from '~/lib/venues';
+import { getCategoryByKey, type CityConfig } from '~/lib/config';
+
+interface Props {
+  city: CityConfig;
+  venues: Venue[];
+}
+
+const { city, venues } = Astro.props;
+
+const CATEGORY_COLORS: Record<string, string> = {
+  eat: '#c05f33',
+  drink: '#a24d27',
+  stay: '#1f4d3a',
+  trail: '#6d8b74',
+  beach: '#2c6e8a',
+  activity: '#e8a13c',
+  shop: '#7d5ba6',
+  services: '#55645c',
+};
+
+const markers = venues.map((venue) => ({
+  name: venue.data.name,
+  lat: venue.data.lat,
+  lng: venue.data.lng,
+  category: getCategoryByKey(venue.data.category).label,
+  color: CATEGORY_COLORS[venue.data.category] ?? '#1f4d3a',
+  path: venuePath(venue),
+  gmaps: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    `${venue.data.name} ${venue.data.address}`
+  )}`,
+}));
+
+const center = { lat: city.geo.lat, lng: city.geo.lng };
+const legend = [...new Map(venues.map((v) => {
+  const key = v.data.category;
+  return [key, { label: getCategoryByKey(key).label, color: CATEGORY_COLORS[key] ?? '#1f4d3a' }];
+})).values()];
+---
+
+<div class="venue-map">
+  <div
+    id="venue-map-canvas"
+    data-center={JSON.stringify(center)}
+    data-markers={JSON.stringify(markers)}
+    aria-label={`Map of verified dog-friendly places in ${city.name}`}
+  >
+    <p class="placeholder">Map loading…</p>
+  </div>
+  <div class="legend">
+    {legend.map((item) => (
+      <span class="key"><i style={`background:${item.color}`}></i>{item.label}</span>
+    ))}
+  </div>
+  <p class="hint">
+    Tap a marker for our verified dog policy — or jump to Google Maps for
+    directions and Google reviews.
+  </p>
+</div>
+
+<style>
+  .venue-map {
+    margin: 1.5rem 0;
+  }
+  #venue-map-canvas {
+    height: 460px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    background: color-mix(in srgb, var(--moss) 12%, var(--paper-raised));
+    z-index: 1;
+    position: relative;
+  }
+  .placeholder {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+    margin-top: 0.6rem;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+  }
+  .key {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .key i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .hint {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    margin: 0.35rem 0 0;
+  }
+  /* Popup styling to match the site */
+  :global(.leaflet-popup-content-wrapper) {
+    border-radius: 10px;
+    font-family: var(--font-body);
+  }
+  :global(.venue-popup h4) {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    margin: 0 0 0.15rem;
+    color: var(--pine-deep);
+  }
+  :global(.venue-popup .cat) {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin: 0 0 0.4rem;
+  }
+  :global(.venue-popup .links) {
+    display: flex;
+    gap: 0.9rem;
+    font-size: 0.88rem;
+  }
+  @media (max-width: 640px) {
+    #venue-map-canvas {
+      height: 380px;
+    }
+  }
+</style>
+
+<script>
+  async function initMap(el: HTMLElement) {
+    const [{ default: L }] = await Promise.all([
+      import('leaflet'),
+      import('leaflet/dist/leaflet.css'),
+    ]);
+
+    const center = JSON.parse(el.dataset.center!);
+    const markers = JSON.parse(el.dataset.markers!) as {
+      name: string;
+      lat: number;
+      lng: number;
+      category: string;
+      color: string;
+      path: string;
+      gmaps: string;
+    }[];
+
+    el.querySelector('.placeholder')?.remove();
+    const map = L.map(el, { scrollWheelZoom: false }).setView(
+      [center.lat, center.lng],
+      13
+    );
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    const esc = (s: string) =>
+      s.replace(/[&<>"']/g, (c) =>
+        ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!
+      );
+
+    const bounds = L.latLngBounds([]);
+    for (const m of markers) {
+      const marker = L.circleMarker([m.lat, m.lng], {
+        radius: 9,
+        color: '#ffffff',
+        weight: 2,
+        fillColor: m.color,
+        fillOpacity: 0.95,
+      }).addTo(map);
+      marker.bindPopup(
+        `<div class="venue-popup">
+          <h4>${esc(m.name)}</h4>
+          <p class="cat">${esc(m.category)}</p>
+          <div class="links">
+            <a href="${m.path}">Our verified policy</a>
+            <a href="${m.gmaps}" target="_blank" rel="noopener nofollow">Google reviews ↗</a>
+          </div>
+        </div>`
+      );
+      marker.bindTooltip(m.name, { direction: 'top', offset: [0, -8] });
+      bounds.extend([m.lat, m.lng]);
+    }
+    if (bounds.isValid()) map.fitBounds(bounds.pad(0.15));
+  }
+
+  const el = document.getElementById('venue-map-canvas');
+  if (el) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          io.disconnect();
+          initMap(el);
+        }
+      },
+      { rootMargin: '600px' }
+    );
+    io.observe(el);
+  }
+</script>

@@ -1,0 +1,70 @@
+---
+import Base from '~/layouts/Base.astro';
+import { BRAND_NAME } from '~/lib/site';
+---
+
+<Base
+  title={`How We Verify Dog Policies | ${BRAND_NAME}`}
+  description="Every dog policy on this site is checked against an official source, dated, and re-checked every 90 days. Here's exactly how."
+>
+  <div class="wrap prose page">
+    <p class="eyebrow">Trust</p>
+    <h1>How we verify</h1>
+    <p class="lede">
+      Dog policies are the least stable facts in travel. Patio rules change
+      with managers, beach access changes with seasons, and county ordinances
+      change with board votes. Most directories publish once and never look
+      back. We built this site around not doing that.
+    </p>
+
+    <h2>Every fact needs a source</h2>
+    <p>
+      No dog-policy claim is published here without a recorded source — the
+      venue's official website or social page, the managing agency's rules
+      page, the county code, or a direct phone confirmation. If we can't
+      verify a claim officially, we either leave it out or label it an open
+      question. We never copy policies from other directories.
+    </p>
+
+    <h2>The "Verified" badge</h2>
+    <p>
+      Every venue page shows a <strong>Verified</strong> date: the last day a
+      human-reviewed check confirmed the dog policy against its source. We also
+      record <em>how</em> it was verified — official website, phone call, or
+      in person — and link the source where one exists.
+    </p>
+
+    <h2>The 90-day rule</h2>
+    <p>
+      Any listing whose verification is older than 90 days is automatically
+      queued for re-checking. If a policy changed, the page changes. If a
+      venue closed, the listing comes down. This runs on a schedule — it
+      doesn't depend on anyone remembering.
+    </p>
+
+    <h2>Seasonal rules are first-class</h2>
+    <p>
+      In mountain and lake towns, "dog-friendly" often means "dog-friendly
+      from May to October." We record seasonal restrictions — winter trail
+      closures, summer-only patios, ski-season Nordic trail bans — as part of
+      the policy itself, not as a footnote.
+    </p>
+
+    <h2>Found something wrong?</h2>
+    <p>
+      If a listing doesn't match what you found on the ground, we want to know.
+      Flag it and we'll re-verify. A guide like this is only worth
+      anything if it's right.
+    </p>
+  </div>
+</Base>
+
+<style>
+  .page {
+    padding: 2.5rem 1.25rem 2rem;
+  }
+  .lede {
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+  }
+</style>

@@ -1,0 +1,57 @@
+---
+// Optimized photo with mandatory credit line. Renders nothing if no path.
+import { Image } from 'astro:assets';
+import { resolvePhoto } from '~/lib/photos';
+
+interface Props {
+  path: string | null;
+  alt: string | null;
+  credit?: string | null;
+  creditUrl?: string | null;
+  /** Rendered width hint for the largest breakpoint. */
+  width?: number;
+  loading?: 'eager' | 'lazy';
+}
+
+const { path, alt, credit = null, creditUrl = null, width = 1100, loading = 'lazy' } = Astro.props;
+const meta = resolvePhoto(path);
+---
+
+{meta && (
+  <figure class="photo">
+    <Image
+      src={meta}
+      alt={alt ?? ''}
+      widths={[480, 800, width]}
+      sizes={`(max-width: 800px) 100vw, ${width}px`}
+      loading={loading}
+    />
+    {credit && (
+      <figcaption>
+        Photo:{' '}
+        {creditUrl ? <a href={creditUrl} rel="noopener nofollow" target="_blank">{credit}</a> : credit}
+      </figcaption>
+    )}
+  </figure>
+)}
+
+<style>
+  .photo {
+    margin: 1.5rem 0;
+  }
+  .photo :global(img) {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+  }
+  figcaption {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    margin-top: 0.4rem;
+    text-align: right;
+  }
+  figcaption a {
+    color: var(--ink-soft);
+  }
+</style>

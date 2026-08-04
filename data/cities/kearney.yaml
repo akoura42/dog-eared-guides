@@ -1,0 +1,66 @@
+name: Kearney
+slug: kearney
+state: Nebraska
+state_code: NE
+geo:
+  lat: 40.6993
+  lng: -99.0817
+hero:
+  headline: Kearney with a dog, done right.
+  subhead: The Platte River crossroads town — dog park rules, visitor-dog exemptions, and state-park leash law, verified.
+intro: >-
+  Kearney sits on I-80 at the Platte River, which makes it a natural overnight
+  for anyone crossing the country with a dog — and its code actually
+  anticipates you: visiting dogs are exempt from city licensing for up to 30
+  days, provided they stay restrained. Add a proper fenced dog park on the
+  north side and Fort Kearny's trails minutes away, and it's a better dog
+  stop than most towns its size.
+seasonal_notes: []
+regulations:
+  - summary: Dogs must be under restraint at all times off the owner's property.
+    detail: >-
+      Kearney City Code § 8-1401 requires all dogs kept under restraint and
+      not at large off the owner's premises unless under the control of a
+      competent person.
+    jurisdiction: City of Kearney
+    source_url: https://library.municode.com/ne/kearney/codes/code_of_ordinances?nodeId=CH8PO_ART14HOPE_8-1401REDO
+  - summary: Visiting dogs are license-exempt for 30 days — but must stay restrained or enclosed.
+    detail: >-
+      § 8-1306(B) exempts nonresident dogs in the city 30 days or less from
+      licensing, provided they're kept in a building, enclosure, or vehicle,
+      or under restraint by the owner, at all times. Good news for road
+      trippers, with a condition attached.
+    jurisdiction: City of Kearney
+    source_url: https://library.municode.com/ne/kearney/codes/code_of_ordinances?nodeId=CH8PO_ART13ANGE_8-1306EXCH
+  - summary: Immediate waste pickup required — public walks, rec areas, and private property alike.
+    detail: >-
+      § 8-1312 makes the owner responsible for immediate removal and proper
+      disposal of waste anywhere it lands.
+    jurisdiction: City of Kearney
+    source_url: https://library.municode.com/ne/kearney/codes/code_of_ordinances?nodeId=CH8PO_ART13ANGE_8-1312ANWA
+  - summary: Meadowlark North Dog Park is the official off-leash spot — 7am–10pm, two dogs per handler.
+    detail: >-
+      The city's fenced dog park at 3803 30th Avenue requires dogs leashed
+      entering and leaving, handlers 16 or older with leashes in hand, max
+      two dogs per handler, current vaccinations, no puppies under 4 months
+      or females in heat, and no pinch or spike collars.
+    jurisdiction: City of Kearney Park & Recreation
+    source_url: https://www.cityofkearney.org/DocumentCenter/View/3273/Meadowlark-North-Dog-Park
+  - summary: "Nebraska state park areas (Fort Kearny): 6-foot leash max, no pets on swim beaches."
+    detail: >-
+      Statewide Game & Parks regulation (163 NAC ch. 5 § 001.07): pets must
+      be crated, caged, or on a leash no longer than six feet, and are
+      prohibited from public buildings, eating places, and designated
+      swimming beaches.
+    jurisdiction: Nebraska Game & Parks Commission
+    source_url: http://govdocs.nebraska.gov/epubs/G1000/R163.0005-2016.pdf
+categories:
+  - eat
+  - drink
+  - stay
+  - trail
+  - beach
+  - activity
+  - shop
+  - services
+launched: true

@@ -1,0 +1,44 @@
+# Master category definitions. Cities opt into a subset via their city config.
+# `slug` is the URL segment for the category hub: /{city}/{slug}/
+# Category hub pages are only generated when >=4 venues qualify (no thin pages).
+categories:
+  - key: eat
+    slug: dog-friendly-restaurants
+    label: Restaurants & Patios
+    singular: restaurant
+    blurb: Where you and your dog can actually eat together — patio policies verified, not guessed.
+  - key: drink
+    slug: dog-friendly-bars-breweries
+    label: Bars & Breweries
+    singular: bar
+    blurb: Breweries, bars, and taprooms that welcome dogs.
+  - key: stay
+    slug: dog-friendly-lodging
+    label: Places to Stay
+    singular: lodging
+    blurb: Hotels, cabins, and inns with real pet policies — fees, size limits, and all.
+  - key: trail
+    slug: dog-friendly-trails
+    label: Trails & Hikes
+    singular: trail
+    blurb: Leash rules, seasonal closures, water access, and what the trail is really like with a dog.
+  - key: beach
+    slug: dog-beaches
+    label: Beaches & Lake Access
+    singular: beach
+    blurb: Where dogs can legally get in the water — and where they can't.
+  - key: activity
+    slug: dog-friendly-activities
+    label: Activities
+    singular: activity
+    blurb: Tours, rentals, and outings that let the dog come along.
+  - key: shop
+    slug: dog-friendly-shops
+    label: Shops
+    singular: shop
+    blurb: Pet stores and dog-welcoming retail.
+  - key: services
+    slug: dog-services
+    label: Services
+    singular: service
+    blurb: Vets, groomers, daycare, and sitters for when you need a hand.

@@ -1,0 +1,234 @@
+---
+import Base from '~/layouts/Base.astro';
+import CityMap from '~/components/CityMap.astro';
+import { BRAND_NAME, BRAND_TAGLINE } from '~/lib/site';
+import { getCities } from '~/lib/config';
+import { getCollection } from 'astro:content';
+import { guidePath } from '~/lib/venues';
+import AdSlot from '~/components/AdSlot.astro';
+
+const cities = getCities().filter((c) => c.launched);
+
+// Group by state so the picker scales to hundreds of cities.
+const byState = new Map<string, typeof cities>();
+for (const city of cities) {
+  const list = byState.get(city.state) ?? [];
+  list.push(city);
+  byState.set(city.state, list);
+}
+const states = [...byState.entries()].sort(([a], [b]) => a.localeCompare(b));
+
+const guides = (await getCollection('guides'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 6);
+---
+
+<Base
+  title={`${BRAND_NAME} — Dog-Friendly City Guides You Can Trust`}
+  description={`${BRAND_TAGLINE} Every dog policy verified against an official source and re-checked every 90 days.`}
+>
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Verified dog-friendly guides</p>
+      <h1>Take the dog. We checked.</h1>
+      <p class="lede">
+        Deep city guides where dog-friendly isn't a filter — it's the whole
+        point. Every patio policy, leash rule, and beach closure verified
+        against an official source, with the date we checked it shown on every
+        page.
+      </p>
+    </div>
+  </section>
+
+  <section class="band" id="cities">
+    <div class="wrap">
+      <div class="pick-head">
+        <h2>Pick your city</h2>
+        <input
+          type="search"
+          id="city-filter"
+          placeholder={`Search ${cities.length} cities…`}
+          aria-label="Search cities"
+          autocomplete="off"
+        />
+      </div>
+      <CityMap cities={cities} />
+      {states.map(([state, stateCities]) => (
+        <div class="state-block" data-state>
+          <h3 class="state-head">{state}</h3>
+          <ul class="card-grid">
+            {stateCities.map((city) => (
+              <li
+                id={`city-${city.slug}`}
+                data-city={`${city.name} ${city.state} ${city.state_code}`.toLowerCase()}
+              >
+                <a class="city-card" href={`/${city.slug}/`}>
+                  <span class="city-name">{city.name}, {city.state_code}</span>
+                  <span class="city-sub">{city.hero.subhead}</span>
+                  <span class="go">Explore the guide →</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+      <p class="no-match" id="no-match" hidden>No city matches — more are on the way.</p>
+    </div>
+  </section>
+
+  <script>
+    const input = document.getElementById('city-filter') as HTMLInputElement | null;
+    if (input) {
+      input.addEventListener('input', () => {
+        const q = input.value.trim().toLowerCase();
+        let any = false;
+        document.querySelectorAll<HTMLElement>('[data-city]').forEach((li) => {
+          const hit = !q || li.dataset.city!.includes(q);
+          li.hidden = !hit;
+          if (hit) any = true;
+        });
+        document.querySelectorAll<HTMLElement>('[data-state]').forEach((block) => {
+          block.hidden = !Array.from(
+            block.querySelectorAll<HTMLElement>('[data-city]')
+          ).some((li) => !li.hidden);
+        });
+        document.getElementById('no-match')!.hidden = any;
+      });
+    }
+  </script>
+
+  <AdSlot placement="below-hero" />
+
+  {guides.length > 0 && (
+    <section class="band band--tint">
+      <div class="wrap">
+        <h2>Flagship guides</h2>
+        <ul class="card-grid">
+          {guides.map((guide) => (
+            <li>
+              <a class="guide-card" href={guidePath(guide)}>
+                <span class="guide-title">{guide.data.title}</span>
+                <span class="guide-desc">{guide.data.description}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <section class="band">
+    <div class="wrap prose">
+      <h2>Why trust us?</h2>
+      <p>
+        Dog policies change constantly — seasonal beach rules, new patio
+        managers, updated county ordinances. Most directories never notice. We
+        verify every policy against the venue's official website (or by phone),
+        record the source, and automatically re-check anything older than 90
+        days. When something changes, the page changes.
+      </p>
+      <a class="btn" href="/how-we-verify/">How verification works</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding: 4.5rem 0 3rem;
+    background:
+      radial-gradient(60rem 30rem at 85% -10%, color-mix(in srgb, var(--sun) 18%, transparent), transparent),
+      radial-gradient(50rem 25rem at 0% 110%, color-mix(in srgb, var(--moss) 20%, transparent), transparent);
+  }
+  .lede {
+    font-size: 1.2rem;
+    max-width: 38rem;
+    color: var(--ink-soft);
+  }
+  .pick-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+  }
+  #city-filter {
+    font: inherit;
+    font-size: 0.95rem;
+    padding: 0.55rem 1rem;
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    background: var(--paper-raised);
+    color: var(--ink);
+    min-width: 16rem;
+  }
+  #city-filter:focus {
+    outline: 2px solid var(--moss);
+    outline-offset: 1px;
+  }
+  .state-head {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin: 1.5rem 0 0;
+  }
+  .state-block .card-grid {
+    margin-top: 0.75rem;
+  }
+  .no-match {
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+  li.flash .city-card {
+    animation: card-flash 1.6s ease;
+  }
+  @keyframes card-flash {
+    0%,
+    35% {
+      outline: 3px solid var(--clay);
+      outline-offset: 3px;
+    }
+    100% {
+      outline: 3px solid transparent;
+      outline-offset: 3px;
+    }
+  }
+  .city-card,
+  .guide-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    height: 100%;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 1.3rem 1.4rem;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+  .city-card:hover,
+  .guide-card:hover {
+    transform: translateY(-2px);
+  }
+  .city-name,
+  .guide-title {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--pine-deep);
+  }
+  .city-sub,
+  .guide-desc {
+    font-size: 0.93rem;
+    color: var(--ink-soft);
+  }
+  .go {
+    margin-top: auto;
+    font-size: 0.9rem;
+    font-weight: 650;
+    color: var(--clay);
+  }
+</style>

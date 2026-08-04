@@ -1,0 +1,61 @@
+---
+// Minimal consent banner (required for AdSense / GA4). Stores the choice in
+// localStorage and fires `consent:granted` so ads/analytics can start.
+---
+
+<div class="consent" id="cookie-consent" hidden>
+  <p>
+    We use cookies for ads and analytics to keep this site free.
+    <a href="/privacy/">Privacy &amp; cookie policy</a>
+  </p>
+  <div class="actions">
+    <button class="btn" data-consent="granted">Accept</button>
+    <button class="btn btn--ghost" data-consent="denied">Decline</button>
+  </div>
+</div>
+
+<style>
+  .consent {
+    position: fixed;
+    inset-inline: 1rem;
+    bottom: 1rem;
+    z-index: 100;
+    max-width: 30rem;
+    margin-inline: auto;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 32px rgba(20, 52, 39, 0.25);
+    padding: 1rem 1.2rem;
+  }
+  .consent p {
+    font-size: 0.9rem;
+    margin: 0 0 0.75rem;
+  }
+  .actions {
+    display: flex;
+    gap: 0.6rem;
+  }
+  .actions .btn {
+    font-size: 0.9rem;
+    padding: 0.45rem 1.1rem;
+  }
+</style>
+
+<script>
+  const KEY = 'cookie-consent';
+  const banner = document.getElementById('cookie-consent')!;
+  if (!localStorage.getItem(KEY)) {
+    banner.hidden = false;
+  }
+  banner.querySelectorAll<HTMLButtonElement>('[data-consent]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const value = btn.dataset.consent!;
+      localStorage.setItem(KEY, value);
+      banner.hidden = true;
+      if (value === 'granted') {
+        window.dispatchEvent(new Event('consent:granted'));
+      }
+    });
+  });
+</script>

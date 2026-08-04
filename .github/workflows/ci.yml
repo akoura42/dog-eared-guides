@@ -1,0 +1,23 @@
+name: Build check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: apps/web/package-lock.json
+      - run: npm ci
+        working-directory: apps/web
+      # The Astro build runs the strict Zod schemas over all content —
+      # this is the machine gate for pipeline-generated PRs.
+      - run: npm run build
+        working-directory: apps/web

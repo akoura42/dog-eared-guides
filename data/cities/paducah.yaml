@@ -1,0 +1,53 @@
+name: Paducah
+slug: paducah
+state: Kentucky
+state_code: KY
+geo:
+  lat: 37.0834
+  lng: -88.6
+hero:
+  headline: Paducah with a dog, done right.
+  subhead: The river town's parks, the Noble Park dog runs, and a stricter-than-usual leash rule — verified.
+intro: >-
+  Paducah packs a lot into a small river town — a walkable historic downtown,
+  a long greenway, and a proper double dog park at Noble Park. Its quirk:
+  the leash rule in city parks is three feet, shorter than almost anywhere,
+  so that six-foot flexi lead you packed doesn't cut it here. We verified the
+  rules with the city so you're not learning them from a ranger.
+seasonal_notes:
+  - "Noble Park Dog Parks hours shift with the season: 6am–9pm April through October, 6am–8pm November through March."
+  - "Stuart Nelson Park (and its former dog areas) is closed for Sports Park construction — use Noble Park instead; the Greenway Trail remains open."
+regulations:
+  - summary: In city parks, the leash limit is three feet — shorter than you're used to.
+    detail: >-
+      Paducah Parks & Recreation requires dogs on a leash of 3 feet or less
+      at all times in parks unless inside a dog park enclosure, and owners
+      must pick up and properly dispose of waste.
+    jurisdiction: City of Paducah Parks & Recreation
+    source_url: https://paducahky.gov/node/2801
+  - summary: At city events, dogs must be licensed and on a lead of three feet or less.
+    detail: >-
+      The city's dog ordinances (Code Chapter 14) require dogs at
+      city-sponsored community events to be licensed and restrained on a
+      short lead, and owners must immediately remove feces from public
+      property — parks, sidewalks, and school grounds included.
+    jurisdiction: City of Paducah
+    source_url: https://paducahky.gov/departments/administration/dog-ordinances
+  - summary: Noble Park has the town's off-leash runs — separate large-dog and small-dog enclosures.
+    detail: >-
+      The Noble Park Dog Parks at 2801 Park Avenue split at a 35-pound
+      threshold, with vestibule entries, water fountains, shelters, and
+      lighting. Current vaccinations required; dogs stay leashed until
+      inside the enclosure.
+    jurisdiction: City of Paducah Parks & Recreation
+    source_url: https://www.paducahky.gov/departments/parks-recreation/noble-park
+categories:
+  - eat
+  - drink
+  - stay
+  - trail
+  - beach
+  - activity
+  - shop
+  - services
+launched: true

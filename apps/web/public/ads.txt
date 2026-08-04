@@ -1,0 +1,5 @@
+# ads.txt — authorized digital sellers (https://iabtechlab.com/ads-txt/)
+# Once an AdSense account is approved, replace pub-0000000000000000 with the
+# real publisher ID. A premium network (Ezoic/Mediavine-class) will supply its
+# own lines to append here when the site qualifies.
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0

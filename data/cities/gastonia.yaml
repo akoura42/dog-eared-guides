@@ -1,0 +1,61 @@
+name: Gastonia
+slug: gastonia
+state: North Carolina
+state_code: NC
+geo:
+  lat: 35.2621
+  lng: -81.1873
+hero:
+  headline: Gastonia with a dog, done right.
+  subhead: Crowders Mountain trails, a five-acre dog park, and county rules that actually get enforced — verified.
+intro: >-
+  Gastonia's dog scene is bigger than the city limits: Crowders Mountain
+  State Park is twenty minutes west with dog-legal trails, and the county
+  runs a genuinely large five-acre off-leash park at George Poston Park.
+  Animal rules here are county business — Gaston County Animal Care &
+  Enforcement covers the city — and the leash ordinance is stricter than
+  most people assume: hand-held leash, no voice-control exception.
+seasonal_notes: []
+regulations:
+  - summary: Countywide leash law — hand-held leash required; voice control doesn't count.
+    detail: >-
+      Gaston County code (Sec. 3-8) requires any dog off its owner's
+      property to be under direct control and physically restrained by a
+      chain, leash, or harness held in hand. The county enforces this inside
+      Gastonia city limits too.
+    jurisdiction: Gaston County
+    source_url: https://library.municode.com/nc/gaston_county/codes/code_of_ordinances?nodeId=COOR_CH3AN
+  - summary: In county parks — 6-foot leash max, waste picked up, dogs only (no other pets).
+    detail: >-
+      The parks ordinance (Sec. 12-3) allows only dogs on a leash no longer
+      than six feet into county parks, requires waste removal, and exempts
+      designated animal areas like the dog park. Parks are open
+      6am–11pm unless posted otherwise.
+    jurisdiction: Gaston County
+    source_url: https://library.municode.com/nc/gaston_county/codes/code_of_ordinances?nodeId=COOR_CH12PARE
+  - summary: Poston Dog Park — five fenced acres, split small/large, open 7am to sunset.
+    detail: >-
+      The county's official off-leash park at George Poston Park (1101
+      Lowell Spencer Mountain Rd) has a 1-acre small-dog section (25 lbs and
+      under) and 4.5 acres for large dogs. Leash on until inside the first
+      gate; max three dogs per person; current rabies and DHLPP vaccinations
+      with visible tags required.
+    jurisdiction: Gaston County Parks & Recreation
+    source_url: https://www.gastongov.com/facilities/facility/details/Poston-Dog-Park-2
+  - summary: Crowders Mountain State Park welcomes leashed dogs on its trails.
+    detail: >-
+      Pets are permitted on the park's trails on an attended leash no longer
+      than 6 feet, barred from buildings, and waste must be packed out.
+      Standard NC State Parks rules apply.
+    jurisdiction: NC State Parks
+    source_url: https://www.ncparks.gov/state-parks/crowders-mountain-state-park/activities
+categories:
+  - eat
+  - drink
+  - stay
+  - trail
+  - beach
+  - activity
+  - shop
+  - services
+launched: true

@@ -1,0 +1,42 @@
+---
+// Affiliate call-to-action. Rendering one of these on a page means the page
+// must also render <AffiliateDisclosure /> (venue/guide templates handle this).
+interface Props {
+  kind: 'viator' | 'lodging' | 'gear';
+  href: string;
+  label?: string;
+  note?: string;
+}
+
+const DEFAULT_LABELS: Record<Props['kind'], string> = {
+  viator: 'Check availability on Viator',
+  lodging: 'Check rates & book',
+  gear: 'See it',
+};
+
+const { kind, href, label = DEFAULT_LABELS[kind], note } = Astro.props;
+---
+
+<div class="cta" data-affiliate={kind}>
+  <a class="btn btn--clay" href={href} rel="sponsored nofollow noopener" target="_blank">
+    {label}
+    <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M6 3h7v7M13 3L3 13" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+  </a>
+  {note && <p class="note">{note}</p>}
+</div>
+
+<style>
+  .cta {
+    margin: 1.5rem 0;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .note {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    margin: 0.5rem 0 0;
+  }
+</style>
