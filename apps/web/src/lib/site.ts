@@ -4,7 +4,7 @@ export const BRAND_NAME = 'Dog-Eared Guides';
 export const BRAND_TAGLINE = 'City guides where dog-friendly is the whole point.';
 
 export const SITE_URL =
-  import.meta.env.SITE_URL ?? 'https://brand-name-placeholder.pages.dev';
+  import.meta.env.SITE_URL ?? 'https://dogearedguides.com';
 
 // Monetization / analytics wiring. All optional; components no-op when unset.
 export const ADSENSE_CLIENT = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '';

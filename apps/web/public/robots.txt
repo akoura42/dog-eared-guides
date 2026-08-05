@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /og/
 
-Sitemap: /sitemap-index.xml
+Sitemap: https://dogearedguides.com/sitemap-index.xml

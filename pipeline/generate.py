@@ -19,7 +19,6 @@ import os
 import sys
 from pathlib import Path
 
-import anthropic
 import yaml
 
 from common import (
@@ -27,11 +26,12 @@ from common import (
     DEFAULT_MODEL,
     REPO_ROOT,
     VOICE_FILE,
-    WEB_TOOLS,
     GenerationResult,
+    call_model,
     existing_venue_slugs,
     few_shot_examples,
     load_prompt,
+    model_engine,
     open_pr,
     parse_generation_output,
     recent_editorial_log,
@@ -40,7 +40,6 @@ from common import (
 )
 
 QUEUE_FILE = REPO_ROOT / "pipeline" / "queue.yaml"
-MAX_PAUSE_TURN_CONTINUATIONS = 5
 
 
 def build_system_prompt() -> str:
@@ -87,30 +86,8 @@ def build_user_prompt(item: dict) -> str:
     )
 
 
-def generate_item(client: anthropic.Anthropic, model: str, item: dict) -> GenerationResult:
-    system = build_system_prompt()
-    messages: list[dict] = [{"role": "user", "content": build_user_prompt(item)}]
-
-    for _ in range(MAX_PAUSE_TURN_CONTINUATIONS + 1):
-        with client.messages.stream(
-            model=model,
-            max_tokens=32000,
-            system=system,
-            tools=WEB_TOOLS,
-            messages=messages,
-        ) as stream:
-            response = stream.get_final_message()
-        if response.stop_reason == "refusal":
-            raise RuntimeError(f"model refused work item: {item}")
-        if response.stop_reason == "pause_turn":
-            # Server-side tool loop paused; re-send to resume.
-            messages = [messages[0], {"role": "assistant", "content": response.content}]
-            continue
-        break
-    else:
-        raise RuntimeError("still paused after max continuations")
-
-    text = "".join(b.text for b in response.content if b.type == "text")
+def generate_item(model: str, item: dict) -> GenerationResult:
+    text = call_model(build_system_prompt(), build_user_prompt(item), model)
     return parse_generation_output(text)
 
 
@@ -129,7 +106,7 @@ def main() -> int:
         print("Queue is empty — nothing to generate.")
         return 0
 
-    client = anthropic.Anthropic()
+    print(f"Engine: {model_engine()}")
     written: list[Path] = []
     all_questions: list[str] = []
     titles: list[str] = []
@@ -137,7 +114,7 @@ def main() -> int:
     for item in items:
         label = item.get("name") or item.get("topic")
         print(f"\n=== Generating: {label} ===")
-        result = generate_item(client, args.model, item)
+        result = generate_item(args.model, item)
         all_questions.extend(result.open_questions)
 
         for gen in result.files:

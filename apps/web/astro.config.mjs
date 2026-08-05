@@ -10,7 +10,7 @@ import yaml from 'js-yaml';
 // Cloudflare Pages static deployment. Set SITE_URL in the Pages project
 // (or in .env) once the production domain exists — it drives canonical
 // URLs, the sitemap, and OG image URLs.
-const SITE_URL = process.env.SITE_URL ?? 'https://brand-name-placeholder.pages.dev';
+const SITE_URL = process.env.SITE_URL ?? 'https://dogearedguides.com';
 
 // Category hub pages exist from 1 venue up so browsing works, but hubs
 // below the indexing bar (4 venues — the spec's no-thin-pages rule) are

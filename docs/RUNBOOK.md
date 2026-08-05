@@ -22,8 +22,14 @@ cd apps/web && npm install
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r pipeline/requirements.txt
 
-# Auth: the pipeline uses the Anthropic SDK and the GitHub CLI
-export ANTHROPIC_API_KEY=sk-ant-...   # or `ant auth login`
+# Auth — two engines, chosen automatically:
+#   Claude subscription (default): the pipeline shells out to the Claude
+#   Code CLI, using the login you already have on this machine. Nothing to
+#   configure. For CI, run `claude setup-token` once and store the result
+#   as the CLAUDE_CODE_OAUTH_TOKEN repo secret.
+#   API billing (alternative): export ANTHROPIC_API_KEY=sk-ant-... and the
+#   pipeline switches to direct SDK calls. Force either with
+#   PIPELINE_ENGINE=claude-code|api.
 gh auth login
 ```
 

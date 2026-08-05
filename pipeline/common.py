@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import datetime as dt
+import os
 import re
 import subprocess
 from dataclasses import dataclass, field
@@ -24,6 +25,81 @@ WEB_TOOLS = [
     {"type": "web_search_20260209", "name": "web_search"},
     {"type": "web_fetch_20260209", "name": "web_fetch", "max_uses": 20},
 ]
+
+# ---------------------------------------------------------------------------
+# Model engines
+#
+# claude-code (default): shells out to the Claude Code CLI, which
+#   authenticates with the operator's Claude subscription (local login, or
+#   CLAUDE_CODE_OAUTH_TOKEN from `claude setup-token` in CI). No API key,
+#   no per-token billing — usage draws on the subscription.
+# api: direct Anthropic SDK calls; requires ANTHROPIC_API_KEY (or an
+#   `ant auth login` profile) with API billing.
+#
+# Selection: PIPELINE_ENGINE=claude-code|api wins; otherwise claude-code
+# when no ANTHROPIC_API_KEY is set, api when one is.
+# ---------------------------------------------------------------------------
+
+
+def model_engine() -> str:
+    engine = os.environ.get("PIPELINE_ENGINE")
+    if engine in ("claude-code", "api"):
+        return engine
+    return "api" if os.environ.get("ANTHROPIC_API_KEY") else "claude-code"
+
+
+def _call_claude_code(system: str, prompt: str, model: str) -> str:
+    cmd = [
+        "claude",
+        "-p",
+        prompt,
+        "--append-system-prompt",
+        system,
+        "--model",
+        model,
+        "--allowedTools",
+        "WebSearch,WebFetch",
+        "--max-turns",
+        "50",
+    ]
+    proc = subprocess.run(cmd, capture_output=True, text=True, timeout=3600)
+    if proc.returncode != 0:
+        raise RuntimeError(
+            f"claude CLI failed (exit {proc.returncode}): {proc.stderr.strip()[:2000]}"
+        )
+    return proc.stdout
+
+
+def _call_api(system: str, prompt: str, model: str, max_tokens: int) -> str:
+    import anthropic  # imported lazily so the claude-code engine needs no SDK
+
+    client = anthropic.Anthropic()
+    messages: list[dict] = [{"role": "user", "content": prompt}]
+    for _ in range(6):
+        with client.messages.stream(
+            model=model,
+            max_tokens=max_tokens,
+            system=system,
+            tools=WEB_TOOLS,
+            messages=messages,
+        ) as stream:
+            response = stream.get_final_message()
+        if response.stop_reason == "refusal":
+            raise RuntimeError("model refused the request")
+        if response.stop_reason == "pause_turn":
+            messages = [messages[0], {"role": "assistant", "content": response.content}]
+            continue
+        break
+    else:
+        raise RuntimeError("still paused after max continuations")
+    return "".join(b.text for b in response.content if b.type == "text")
+
+
+def call_model(system: str, prompt: str, model: str = DEFAULT_MODEL, max_tokens: int = 32000) -> str:
+    """Run one research-and-write task; returns the model's final text."""
+    if model_engine() == "claude-code":
+        return _call_claude_code(system, prompt, model)
+    return _call_api(system, prompt, model, max_tokens)
 
 FILE_RE = re.compile(
     r"===FILE:\s*(?P<path>[^=\n]+?)\s*===\n(?P<body>.*?)\n===END FILE===",

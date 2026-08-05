@@ -23,13 +23,12 @@ import re
 import sys
 from pathlib import Path
 
-import anthropic
-
 from common import (
     DEFAULT_MODEL,
     REPO_ROOT,
     VENUES_DIR,
-    WEB_TOOLS,
+    call_model,
+    model_engine,
     open_pr,
     split_frontmatter,
     today,
@@ -78,28 +77,14 @@ def is_stale(path: Path, max_age_days: int) -> tuple[bool, dict]:
     return (dt.date.today() - last).days > max_age_days, data
 
 
-def reverify(client: anthropic.Anthropic, model: str, path: Path) -> tuple[str, str | None, str]:
+def reverify(model: str, path: Path) -> tuple[str, str | None, str]:
     """Returns (verdict, new_content|None, raw_text)."""
     prompt = (
         f"Today's date: {today()}\n\n"
         f"Current published file ({path.relative_to(REPO_ROOT)}):\n\n"
         f"{path.read_text()}"
     )
-    messages: list[dict] = [{"role": "user", "content": prompt}]
-    for _ in range(4):
-        with client.messages.stream(
-            model=model,
-            max_tokens=16000,
-            system=SYSTEM,
-            tools=WEB_TOOLS,
-            messages=messages,
-        ) as stream:
-            response = stream.get_final_message()
-        if response.stop_reason == "pause_turn":
-            messages = [messages[0], {"role": "assistant", "content": response.content}]
-            continue
-        break
-    text = "".join(b.text for b in response.content if b.type == "text")
+    text = call_model(SYSTEM, prompt, model, max_tokens=16000)
     vm = VERDICT_RE.search(text)
     verdict = vm.group("verdict") if vm else "changed"  # unclear -> human review
     fm = FILE_RE.search(text)
@@ -144,14 +129,14 @@ def main() -> int:
             print(f"  stale: {p.relative_to(REPO_ROOT)}")
         return 0
 
-    client = anthropic.Anthropic()
+    print(f"Engine: {model_engine()}")
     touched: list[Path] = []
     report: list[str] = []
 
     for path in stale:
         rel = path.relative_to(REPO_ROOT)
         print(f"\n=== Re-verifying {rel} ===")
-        verdict, new_content, raw = reverify(client, args.model, path)
+        verdict, new_content, raw = reverify(args.model, path)
         print(f"  verdict: {verdict}")
         if verdict == "unchanged":
             bump_verified_date(path)
