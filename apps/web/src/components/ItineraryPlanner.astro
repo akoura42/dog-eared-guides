@@ -5,6 +5,7 @@
 import type { Venue } from '~/lib/venues';
 import { venuePath, venueSlug, ALLOWED_LABELS } from '~/lib/venues';
 import { getCategoryByKey, type CityConfig } from '~/lib/config';
+import { GMAPS_API_KEY } from '~/lib/site';
 
 interface Props {
   city: CityConfig;
@@ -34,7 +35,12 @@ for (const item of catalog) {
 }
 ---
 
-<div class="planner" data-city={city.slug} data-catalog={JSON.stringify(catalog)}>
+<div
+  class="planner"
+  data-city={city.slug}
+  data-catalog={JSON.stringify(catalog)}
+  data-gmaps-key={GMAPS_API_KEY}
+>
   <section class="plan-panel" id="plan-panel" aria-label="Your itinerary">
     <div class="plan-head">
       <h2>Your itinerary</h2>
@@ -359,12 +365,35 @@ for (const item of catalog) {
     // every plan change afterwards. One color per day, numbered stops,
     // dashed route line in stop order.
     const DAY_COLORS: Record<number, string> = { 1: '#c05f33', 2: '#1f4d3a', 3: '#e8a13c' };
+    const gmapsKey = root.dataset.gmapsKey || '';
     let leaflet: any = null;
     let planMap: any = null;
     let mapLayer: any = null;
+    // Google mode state
+    let gmaps: any = null;
+    let gPlanMap: any = null;
+    let gOverlays: any[] = [];
 
     async function ensureMap() {
-      if (planMap) return;
+      if (planMap || gPlanMap) return;
+      if (gmapsKey) {
+        try {
+          const { ensureGoogleMaps, QUIET_MAP_STYLES } = await import('~/lib/gmaps-loader');
+          gmaps = await ensureGoogleMaps(gmapsKey);
+          mapEl.hidden = false;
+          gPlanMap = new gmaps.Map(mapEl, {
+            zoom: 13,
+            center: { lat: 0, lng: 0 },
+            styles: QUIET_MAP_STYLES,
+            mapTypeControl: false,
+            streetViewControl: false,
+            gestureHandling: 'cooperative',
+          });
+          return;
+        } catch {
+          // fall through to the OSM stack if Google fails to load
+        }
+      }
       const [{ default: L }] = await Promise.all([
         import('leaflet'),
         import('leaflet/dist/leaflet.css'),
@@ -380,7 +409,61 @@ for (const item of catalog) {
       mapLayer = L.layerGroup().addTo(planMap);
     }
 
+    function renderGoogleMap() {
+      gOverlays.forEach((o) => o.setMap(null));
+      gOverlays = [];
+      const bounds = new gmaps.LatLngBounds();
+      const days = [...new Set(plan.map((i) => i.day))].sort((a, b) => a - b);
+      for (const day of days) {
+        const color = DAY_COLORS[day] ?? '#55645c';
+        const stops = plan.filter((i) => i.day === day);
+        const path: { lat: number; lng: number }[] = [];
+        stops.forEach((item, idx) => {
+          const c = bySlug.get(item.slug)! as any;
+          const pos = { lat: c.lat, lng: c.lng };
+          path.push(pos);
+          bounds.extend(pos);
+          const marker = new gmaps.Marker({
+            map: gPlanMap,
+            position: pos,
+            title: `Day ${day}, stop ${idx + 1}: ${c.name}`,
+            label: { text: String(idx + 1), color: '#ffffff', fontWeight: '700', fontSize: '12px' },
+            icon: {
+              path: gmaps.SymbolPath.CIRCLE,
+              scale: 12,
+              fillColor: color,
+              fillOpacity: 0.95,
+              strokeColor: '#ffffff',
+              strokeWeight: 2,
+            },
+          });
+          gOverlays.push(marker);
+        });
+        if (path.length > 1) {
+          const line = new gmaps.Polyline({
+            map: gPlanMap,
+            path,
+            strokeColor: color,
+            strokeOpacity: 0,
+            icons: [
+              {
+                icon: { path: 'M 0,-1 0,1', strokeOpacity: 0.7, strokeWeight: 2.5, strokeColor: color },
+                offset: '0',
+                repeat: '12px',
+              },
+            ],
+          });
+          gOverlays.push(line);
+        }
+      }
+      if (!bounds.isEmpty()) gPlanMap.fitBounds(bounds, 40);
+    }
+
     function renderMap() {
+      if (gPlanMap) {
+        renderGoogleMap();
+        return;
+      }
       if (!planMap || !leaflet) return;
       const L = leaflet;
       mapLayer.clearLayers();

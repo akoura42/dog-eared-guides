@@ -9,13 +9,16 @@
 import { geoAlbersUsa } from 'd3-geo';
 import * as topojson from 'topojson-client';
 import statesAtlas from 'us-atlas/states-albers-10m.json';
-import type { CityConfig } from '~/lib/config';
+import type { CityConfig, UpcomingTown } from '~/lib/config';
+import { GMAPS_API_KEY } from '~/lib/site';
 
 interface Props {
   cities: CityConfig[];
+  /** "Coming soon" towns — small muted dots, no links. */
+  upcoming?: UpcomingTown[];
 }
 
-const { cities } = Astro.props;
+const { cities, upcoming = [] } = Astro.props;
 
 const topo = statesAtlas as any;
 const projection = geoAlbersUsa().scale(1300).translate([487.5, 305]);
@@ -57,12 +60,43 @@ const dots = cities
     return { city, x: pt[0], y: pt[1] };
   })
   .filter((d): d is NonNullable<typeof d> => d !== null);
+
+const upcomingDots = upcoming
+  .map((town) => {
+    const pt = projection([town.lng, town.lat]);
+    if (!pt) return null;
+    return { town, x: pt[0], y: pt[1] };
+  })
+  .filter((d): d is NonNullable<typeof d> => d !== null);
 ---
 
 <div class="city-map" aria-label="Map of covered cities">
+  {GMAPS_API_KEY && (
+    <div
+      id="us-gmap"
+      data-gmaps-key={GMAPS_API_KEY}
+      data-cities={JSON.stringify(
+        cities.map((c) => ({ name: c.name, code: c.state_code, slug: c.slug, lat: c.geo.lat, lng: c.geo.lng }))
+      )}
+      data-upcoming={JSON.stringify(
+        upcoming.map((t) => ({ name: t.name, code: t.state_code, lat: t.lat, lng: t.lng, tier: t.tier }))
+      )}
+    ></div>
+  )}
+  {!GMAPS_API_KEY && (
   <svg viewBox="0 0 975 610" role="img">
     <path class="nation" d={nation}></path>
     <path class="borders" d={borders}></path>
+    {upcomingDots.map(({ town, x, y }) => (
+      <circle
+        cx={x}
+        cy={y}
+        r={town.tier === 1 ? 3 : 2}
+        class="upcoming"
+      >
+        <title>{town.name}, {town.state_code} — coming soon</title>
+      </circle>
+    ))}
     {dots.map(({ city, x, y }) => (
       <a
         href={`#city-${city.slug}`}
@@ -81,11 +115,24 @@ const dots = cities
       </a>
     ))}
   </svg>
+  )}
 </div>
 
 <style>
   .city-map {
     margin: 1.25rem 0 0.5rem;
+  }
+  #us-gmap {
+    height: 520px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    background: color-mix(in srgb, var(--moss) 12%, var(--paper-raised));
+  }
+  @media (max-width: 640px) {
+    #us-gmap {
+      height: 400px;
+    }
   }
   svg {
     width: 100%;
@@ -100,6 +147,13 @@ const dots = cities
     fill: none;
     stroke: color-mix(in srgb, var(--moss) 35%, var(--paper));
     stroke-width: 1;
+  }
+  .upcoming {
+    fill: var(--moss);
+    opacity: 0.4;
+  }
+  .upcoming:hover {
+    opacity: 0.9;
   }
   .dot {
     cursor: pointer;
@@ -144,16 +198,78 @@ const dots = cities
 </style>
 
 <script>
+  import { ensureGoogleMaps } from '~/lib/gmaps-loader';
+
+  function flashCity(slug: string) {
+    const target = document.getElementById(`city-${slug}`);
+    if (!target) return;
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    target.classList.remove('flash');
+    requestAnimationFrame(() => target.classList.add('flash'));
+  }
+
   // Scroll to the city card and flash it. Native anchor jump would hide the
   // card under the sticky header, so intercept and smooth-scroll instead.
   document.querySelectorAll<HTMLAnchorElement>('[data-map-city]').forEach((dot) => {
     dot.addEventListener('click', (e) => {
-      const target = document.getElementById(`city-${dot.dataset.mapCity}`);
-      if (!target) return;
       e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      target.classList.remove('flash');
-      requestAnimationFrame(() => target.classList.add('flash'));
+      flashCity(dot.dataset.mapCity!);
     });
   });
+
+  // Google Maps mode (PUBLIC_GMAPS_API_KEY set): live-guide pins are
+  // clickable; upcoming towns render as small muted dots with tooltips.
+  const gmapEl = document.getElementById('us-gmap') as HTMLElement | null;
+  if (gmapEl) {
+    (async () => {
+      const maps = await ensureGoogleMaps(gmapEl.dataset.gmapsKey!);
+      const map = new maps.Map(gmapEl, {
+        center: { lat: 39.5, lng: -95.5 },
+        zoom: 4,
+        mapTypeControl: false,
+        streetViewControl: false,
+        gestureHandling: 'cooperative',
+      });
+      const upcoming = JSON.parse(gmapEl.dataset.upcoming!) as {
+        name: string; code: string; lat: number; lng: number; tier: number;
+      }[];
+      for (const t of upcoming) {
+        new maps.Marker({
+          map,
+          position: { lat: t.lat, lng: t.lng },
+          title: `${t.name}, ${t.code} — coming soon`,
+          clickable: false,
+          optimized: true,
+          icon: {
+            path: maps.SymbolPath.CIRCLE,
+            scale: t.tier === 1 ? 3.2 : 2.4,
+            fillColor: '#6d8b74',
+            fillOpacity: 0.45,
+            strokeWeight: 0,
+          },
+        });
+      }
+      const cities = JSON.parse(gmapEl.dataset.cities!) as {
+        name: string; code: string; slug: string; lat: number; lng: number;
+      }[];
+      for (const c of cities) {
+        const marker = new maps.Marker({
+          map,
+          position: { lat: c.lat, lng: c.lng },
+          title: `${c.name}, ${c.code}`,
+          icon: {
+            path: maps.SymbolPath.CIRCLE,
+            scale: 8,
+            fillColor: '#c05f33',
+            fillOpacity: 0.95,
+            strokeColor: '#ffffff',
+            strokeWeight: 2,
+          },
+        });
+        marker.addListener('click', () => flashCity(c.slug));
+      }
+    })().catch(() => {
+      gmapEl.textContent = 'Map failed to load — the city list below has every guide.';
+    });
+  }
 </script>

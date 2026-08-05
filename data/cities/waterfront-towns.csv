@@ -1,0 +1,1251 @@
+state,rank,town,water_body,waterfront_type,tier
+Maine,1,Bar Harbor,Atlantic Ocean,ocean,1
+Maine,2,Kennebunkport,Atlantic Ocean,ocean,1
+Maine,3,Camden,Penobscot Bay,bay,1
+Maine,4,Portland,Casco Bay,bay,1
+Maine,5,Boothbay Harbor,Atlantic Ocean,ocean,1
+Maine,6,Ogunquit,Atlantic Ocean,ocean,1
+Maine,7,York,Atlantic Ocean,ocean,1
+Maine,8,Old Orchard Beach,Atlantic Ocean,ocean,1
+Maine,9,Rockland,Penobscot Bay,bay,2
+Maine,10,Belfast,Penobscot Bay,bay,2
+Maine,11,Castine,Penobscot Bay,bay,2
+Maine,12,Stonington,Atlantic Ocean,ocean,2
+Maine,13,Southwest Harbor,Atlantic Ocean,ocean,2
+Maine,14,Northeast Harbor,Atlantic Ocean,ocean,2
+Maine,15,Damariscotta,Damariscotta River,river,2
+Maine,16,Wiscasset,Sheepscot River,river,2
+Maine,17,Bath,Kennebec River,river,2
+Maine,18,Freeport,Casco Bay,bay,2
+Maine,19,Wells,Atlantic Ocean,ocean,2
+Maine,20,Lubec,Atlantic Ocean,ocean,2
+Maine,21,Eastport,Passamaquoddy Bay,bay,2
+Maine,22,Rangeley,Rangeley Lake,lake,2
+Maine,23,Greenville,Moosehead Lake,lake,2
+Maine,24,Naples,Long Lake,lake,2
+Maine,25,Millinocket,Penobscot River,river,3
+New Hampshire,1,Portsmouth,Piscataqua River,river,1
+New Hampshire,2,Wolfeboro,Lake Winnipesaukee,lake,1
+New Hampshire,3,Meredith,Lake Winnipesaukee,lake,1
+New Hampshire,4,Laconia,Lake Winnipesaukee,lake,1
+New Hampshire,5,Hampton,Atlantic Ocean,ocean,1
+New Hampshire,6,Holderness,Squam Lake,lake,2
+New Hampshire,7,Sunapee,Lake Sunapee,lake,2
+New Hampshire,8,Rye,Atlantic Ocean,ocean,2
+New Hampshire,9,New Castle,Atlantic Ocean,ocean,2
+New Hampshire,10,Alton Bay,Lake Winnipesaukee,lake,2
+New Hampshire,11,Gilford,Lake Winnipesaukee,lake,2
+New Hampshire,12,Center Harbor,Lake Winnipesaukee,lake,2
+New Hampshire,13,Moultonborough,Lake Winnipesaukee,lake,2
+New Hampshire,14,Bristol,Newfound Lake,lake,2
+New Hampshire,15,Newbury,Lake Sunapee,lake,2
+New Hampshire,16,Ashland,Little Squam Lake,lake,3
+New Hampshire,17,Tuftonboro,Lake Winnipesaukee,lake,3
+New Hampshire,18,Hebron,Newfound Lake,lake,3
+New Hampshire,19,New London,Pleasant Lake,lake,3
+New Hampshire,20,Wakefield,Province Lake,lake,3
+New Hampshire,21,Ossipee,Ossipee Lake,lake,3
+New Hampshire,22,Lincoln,Pemigewasset River,river,3
+New Hampshire,23,Littleton,Ammonoosuc River,river,3
+New Hampshire,24,Exeter,Squamscott River,river,3
+New Hampshire,25,Dover,Cochecho River,river,3
+Vermont,1,Burlington,Lake Champlain,lake,1
+Vermont,2,Newport,Lake Memphremagog,lake,2
+Vermont,3,Stowe,Little River,river,2
+Vermont,4,Woodstock,Ottauquechee River,river,2
+Vermont,5,Middlebury,Otter Creek,river,2
+Vermont,6,Vergennes,Otter Creek,river,2
+Vermont,7,Shelburne,Lake Champlain,lake,2
+Vermont,8,North Hero,Lake Champlain,lake,2
+Vermont,9,Grand Isle,Lake Champlain,lake,2
+Vermont,10,St. Albans,Lake Champlain,lake,2
+Vermont,11,Colchester,Lake Champlain,lake,2
+Vermont,12,Brattleboro,Connecticut River,river,2
+Vermont,13,Wilmington,Harriman Reservoir,reservoir,2
+Vermont,14,Fairlee,Lake Morey,lake,2
+Vermont,15,Castleton,Lake Bomoseen,lake,2
+Vermont,16,Island Pond,Island Pond,lake,2
+Vermont,17,Greensboro,Caspian Lake,lake,3
+Vermont,18,Barton,Crystal Lake,lake,3
+Vermont,19,Poultney,Lake St. Catherine,lake,3
+Vermont,20,Waterbury,Waterbury Reservoir,reservoir,3
+Vermont,21,Groton,Lake Groton,lake,3
+Vermont,22,Bellows Falls,Connecticut River,river,3
+Vermont,23,Windsor,Connecticut River,river,3
+Vermont,24,White River Junction,White River,river,3
+Vermont,25,Bristol,New Haven River,river,3
+Massachusetts,1,Provincetown,Cape Cod Bay,bay,1
+Massachusetts,2,Nantucket,Atlantic Ocean,ocean,1
+Massachusetts,3,Edgartown,Atlantic Ocean,ocean,1
+Massachusetts,4,Oak Bluffs,Nantucket Sound,sound,1
+Massachusetts,5,Chatham,Atlantic Ocean,ocean,1
+Massachusetts,6,Wellfleet,Cape Cod Bay,bay,1
+Massachusetts,7,Rockport,Atlantic Ocean,ocean,1
+Massachusetts,8,Gloucester,Atlantic Ocean,ocean,1
+Massachusetts,9,Newburyport,Merrimack River,river,1
+Massachusetts,10,Marblehead,Atlantic Ocean,ocean,1
+Massachusetts,11,Salem,Atlantic Ocean,ocean,1
+Massachusetts,12,Plymouth,Cape Cod Bay,bay,1
+Massachusetts,13,Falmouth,Vineyard Sound,sound,1
+Massachusetts,14,Hyannis,Nantucket Sound,sound,1
+Massachusetts,15,Sandwich,Cape Cod Bay,bay,2
+Massachusetts,16,Orleans,Cape Cod Bay,bay,2
+Massachusetts,17,Truro,Cape Cod Bay,bay,2
+Massachusetts,18,Vineyard Haven,Vineyard Sound,sound,2
+Massachusetts,19,Scituate,Atlantic Ocean,ocean,2
+Massachusetts,20,Cohasset,Atlantic Ocean,ocean,2
+Massachusetts,21,Duxbury,Cape Cod Bay,bay,2
+Massachusetts,22,Onset,Buzzards Bay,bay,2
+Massachusetts,23,Mattapoisett,Buzzards Bay,bay,2
+Massachusetts,24,Essex,Essex River,river,2
+Massachusetts,25,Ipswich,Ipswich River,river,2
+Rhode Island,1,Newport,Narragansett Bay,bay,1
+Rhode Island,2,Narragansett,Atlantic Ocean,ocean,1
+Rhode Island,3,New Shoreham,Atlantic Ocean,ocean,1
+Rhode Island,4,Westerly,Atlantic Ocean,ocean,1
+Rhode Island,5,Bristol,Narragansett Bay,bay,1
+Rhode Island,6,Jamestown,Narragansett Bay,bay,2
+Rhode Island,7,North Kingstown,Narragansett Bay,bay,2
+Rhode Island,8,Warren,Warren River,river,2
+Rhode Island,9,East Greenwich,Greenwich Bay,bay,2
+Rhode Island,10,Providence,Providence River,river,2
+Rhode Island,11,Tiverton,Sakonnet River,river,2
+Rhode Island,12,Little Compton,Atlantic Ocean,ocean,2
+Rhode Island,13,Charlestown,Atlantic Ocean,ocean,2
+Rhode Island,14,South Kingstown,Atlantic Ocean,ocean,2
+Rhode Island,15,Portsmouth,Narragansett Bay,bay,2
+Rhode Island,16,Middletown,Atlantic Ocean,ocean,2
+Rhode Island,17,Barrington,Narragansett Bay,bay,3
+Rhode Island,18,Warwick,Narragansett Bay,bay,3
+Rhode Island,19,Cranston,Pawtuxet River,river,3
+Rhode Island,20,East Providence,Providence River,river,3
+Rhode Island,21,Pawtucket,Blackstone River,river,3
+Rhode Island,22,Woonsocket,Blackstone River,river,3
+Rhode Island,23,Lincoln,Blackstone River,river,3
+Rhode Island,24,Burrillville,Pascoag Reservoir,reservoir,3
+Rhode Island,25,Richmond,Wood River,river,3
+Connecticut,1,Mystic,Mystic River,river,1
+Connecticut,2,Essex,Connecticut River,river,1
+Connecticut,3,Westport,Long Island Sound,sound,1
+Connecticut,4,Greenwich,Long Island Sound,sound,1
+Connecticut,5,Stonington,Long Island Sound,sound,1
+Connecticut,6,Old Saybrook,Long Island Sound,sound,1
+Connecticut,7,Madison,Long Island Sound,sound,2
+Connecticut,8,Guilford,Long Island Sound,sound,2
+Connecticut,9,Chester,Connecticut River,river,2
+Connecticut,10,East Haddam,Connecticut River,river,2
+Connecticut,11,Old Lyme,Connecticut River,river,2
+Connecticut,12,East Lyme,Long Island Sound,sound,2
+Connecticut,13,New London,Thames River,river,2
+Connecticut,14,Groton,Thames River,river,2
+Connecticut,15,Clinton,Long Island Sound,sound,2
+Connecticut,16,Westbrook,Long Island Sound,sound,2
+Connecticut,17,Branford,Long Island Sound,sound,2
+Connecticut,18,Milford,Long Island Sound,sound,2
+Connecticut,19,Fairfield,Long Island Sound,sound,2
+Connecticut,20,Norwalk,Long Island Sound,sound,2
+Connecticut,21,Stamford,Long Island Sound,sound,2
+Connecticut,22,Washington,Lake Waramaug,lake,2
+Connecticut,23,Litchfield,Bantam Lake,lake,2
+Connecticut,24,Kent,Housatonic River,river,2
+Connecticut,25,Putnam,Quinebaug River,river,3
+New York,1,Lake Placid,Mirror Lake,lake,1
+New York,2,Lake George,Lake George,lake,1
+New York,3,Montauk,Atlantic Ocean,ocean,1
+New York,4,Sag Harbor,Gardiners Bay,bay,1
+New York,5,Cooperstown,Otsego Lake,lake,1
+New York,6,Skaneateles,Skaneateles Lake,lake,1
+New York,7,Alexandria Bay,St. Lawrence River,river,1
+New York,8,Ithaca,Cayuga Lake,lake,1
+New York,9,Watkins Glen,Seneca Lake,lake,1
+New York,10,Canandaigua,Canandaigua Lake,lake,1
+New York,11,Saranac Lake,Lake Flower,lake,1
+New York,12,Bolton Landing,Lake George,lake,1
+New York,13,Old Forge,Fulton Chain Lakes,lake,1
+New York,14,Niagara Falls,Niagara River,river,1
+New York,15,Greenport,Peconic Bay,bay,1
+New York,16,Cold Spring,Hudson River,river,1
+New York,17,Hudson,Hudson River,river,2
+New York,18,Geneva,Seneca Lake,lake,2
+New York,19,Hammondsport,Keuka Lake,lake,2
+New York,20,Sackets Harbor,Lake Ontario,great_lake,2
+New York,21,Clayton,St. Lawrence River,river,2
+New York,22,Saugerties,Hudson River,river,2
+New York,23,Kingston,Hudson River,river,2
+New York,24,Nyack,Hudson River,river,2
+New York,25,Essex,Lake Champlain,lake,2
+New Jersey,1,Cape May,Atlantic Ocean,ocean,1
+New Jersey,2,Ocean City,Atlantic Ocean,ocean,1
+New Jersey,3,Asbury Park,Atlantic Ocean,ocean,1
+New Jersey,4,Spring Lake,Atlantic Ocean,ocean,1
+New Jersey,5,Stone Harbor,Atlantic Ocean,ocean,1
+New Jersey,6,Avalon,Atlantic Ocean,ocean,1
+New Jersey,7,Wildwood,Atlantic Ocean,ocean,1
+New Jersey,8,Atlantic City,Atlantic Ocean,ocean,1
+New Jersey,9,Beach Haven,Atlantic Ocean,ocean,1
+New Jersey,10,Point Pleasant Beach,Atlantic Ocean,ocean,1
+New Jersey,11,Lambertville,Delaware River,river,1
+New Jersey,12,Sea Isle City,Atlantic Ocean,ocean,2
+New Jersey,13,Ocean Grove,Atlantic Ocean,ocean,2
+New Jersey,14,Bay Head,Atlantic Ocean,ocean,2
+New Jersey,15,Manasquan,Atlantic Ocean,ocean,2
+New Jersey,16,Belmar,Atlantic Ocean,ocean,2
+New Jersey,17,Highlands,Sandy Hook Bay,bay,2
+New Jersey,18,Atlantic Highlands,Sandy Hook Bay,bay,2
+New Jersey,19,Red Bank,Navesink River,river,2
+New Jersey,20,Frenchtown,Delaware River,river,2
+New Jersey,21,Barnegat Light,Atlantic Ocean,ocean,2
+New Jersey,22,Margate City,Atlantic Ocean,ocean,2
+New Jersey,23,Hopatcong,Lake Hopatcong,lake,2
+New Jersey,24,Milford,Delaware River,river,3
+New Jersey,25,Somers Point,Great Egg Harbor Bay,bay,3
+Pennsylvania,1,Erie,Lake Erie,great_lake,1
+Pennsylvania,2,Jim Thorpe,Lehigh River,river,1
+Pennsylvania,3,New Hope,Delaware River,river,1
+Pennsylvania,4,Ohiopyle,Youghiogheny River,river,1
+Pennsylvania,5,Pittsburgh,Allegheny River,river,1
+Pennsylvania,6,Hawley,Lake Wallenpaupack,reservoir,2
+Pennsylvania,7,Milford,Delaware River,river,2
+Pennsylvania,8,North East,Lake Erie,great_lake,2
+Pennsylvania,9,Warren,Allegheny River,river,2
+Pennsylvania,10,Confluence,Youghiogheny River,river,2
+Pennsylvania,11,Wellsboro,Pine Creek,river,2
+Pennsylvania,12,Williamsport,Susquehanna River,river,2
+Pennsylvania,13,Harrisburg,Susquehanna River,river,2
+Pennsylvania,14,Easton,Delaware River,river,2
+Pennsylvania,15,Huntingdon,Raystown Lake,reservoir,2
+Pennsylvania,16,Conneaut Lake,Conneaut Lake,lake,2
+Pennsylvania,17,Harveys Lake,Harveys Lake,lake,2
+Pennsylvania,18,Lake Harmony,Lake Harmony,lake,2
+Pennsylvania,19,Tionesta,Allegheny River,river,3
+Pennsylvania,20,Franklin,Allegheny River,river,3
+Pennsylvania,21,Edinboro,Edinboro Lake,lake,3
+Pennsylvania,22,Wrightsville,Susquehanna River,river,3
+Pennsylvania,23,Columbia,Susquehanna River,river,3
+Pennsylvania,24,Marietta,Susquehanna River,river,3
+Pennsylvania,25,Lewisburg,Susquehanna River,river,3
+Delaware,1,Rehoboth Beach,Atlantic Ocean,ocean,1
+Delaware,2,Lewes,Delaware Bay,bay,1
+Delaware,3,Bethany Beach,Atlantic Ocean,ocean,1
+Delaware,4,Dewey Beach,Atlantic Ocean,ocean,1
+Delaware,5,Fenwick Island,Atlantic Ocean,ocean,1
+Delaware,6,Milton,Broadkill River,river,2
+Delaware,7,Milford,Mispillion River,river,2
+Delaware,8,New Castle,Delaware River,river,2
+Delaware,9,Delaware City,Delaware River,river,2
+Delaware,10,Wilmington,Christina River,river,2
+Delaware,11,Millsboro,Indian River,river,2
+Delaware,12,Long Neck,Rehoboth Bay,bay,2
+Delaware,13,Ocean View,Assawoman Bay,bay,2
+Delaware,14,Bowers Beach,Delaware Bay,bay,2
+Delaware,15,Slaughter Beach,Delaware Bay,bay,2
+Delaware,16,Seaford,Nanticoke River,river,3
+Delaware,17,Laurel,Broad Creek,river,3
+Delaware,18,Bethel,Broad Creek,river,3
+Delaware,19,Odessa,Appoquinimink River,river,3
+Delaware,20,Smyrna,Lake Como,lake,3
+Delaware,21,Frederica,Murderkill River,river,3
+Delaware,22,Little Creek,Little Creek,river,3
+Delaware,23,Port Penn,Delaware River,river,3
+Delaware,24,Dagsboro,Pepper Creek,river,3
+Delaware,25,Oak Orchard,Indian River Bay,bay,3
+Maryland,1,Annapolis,Chesapeake Bay,bay,1
+Maryland,2,St. Michaels,Miles River,river,1
+Maryland,3,Ocean City,Atlantic Ocean,ocean,1
+Maryland,4,Baltimore,Patapsco River,river,1
+Maryland,5,Solomons,Patuxent River,river,2
+Maryland,6,Havre de Grace,Susquehanna River,river,2
+Maryland,7,Cambridge,Choptank River,river,2
+Maryland,8,Chestertown,Chester River,river,2
+Maryland,9,Rock Hall,Chesapeake Bay,bay,2
+Maryland,10,Oxford,Tred Avon River,river,2
+Maryland,11,McHenry,Deep Creek Lake,reservoir,2
+Maryland,12,Chesapeake City,Chesapeake & Delaware Canal,river,2
+Maryland,13,Tilghman Island,Chesapeake Bay,bay,2
+Maryland,14,Grasonville,Kent Narrows,bay,2
+Maryland,15,Chesapeake Beach,Chesapeake Bay,bay,2
+Maryland,16,North Beach,Chesapeake Bay,bay,2
+Maryland,17,Crisfield,Tangier Sound,sound,2
+Maryland,18,Ewell,Chesapeake Bay,bay,2
+Maryland,19,Leonardtown,Breton Bay,bay,2
+Maryland,20,St. Mary's City,St. Mary's River,river,2
+Maryland,21,Snow Hill,Pocomoke River,river,2
+Maryland,22,North East,North East River,river,2
+Maryland,23,Betterton,Chesapeake Bay,bay,3
+Maryland,24,Deale,Chesapeake Bay,bay,3
+Maryland,25,Galesville,West River,river,3
+Virginia,1,Virginia Beach,Atlantic Ocean,ocean,1
+Virginia,2,Chincoteague,Chincoteague Bay,bay,1
+Virginia,3,Cape Charles,Chesapeake Bay,bay,1
+Virginia,4,Alexandria,Potomac River,river,1
+Virginia,5,Yorktown,York River,river,1
+Virginia,6,Norfolk,Elizabeth River,river,2
+Virginia,7,Onancock,Onancock Creek,river,2
+Virginia,8,Irvington,Rappahannock River,river,2
+Virginia,9,Urbanna,Rappahannock River,river,2
+Virginia,10,Colonial Beach,Potomac River,river,2
+Virginia,11,Tangier,Chesapeake Bay,bay,2
+Virginia,12,Reedville,Great Wicomico River,river,2
+Virginia,13,Smithfield,Pagan River,river,2
+Virginia,14,Deltaville,Chesapeake Bay,bay,2
+Virginia,15,Occoquan,Occoquan River,river,2
+Virginia,16,Hampton,Hampton Roads,bay,2
+Virginia,17,Portsmouth,Elizabeth River,river,2
+Virginia,18,Richmond,James River,river,2
+Virginia,19,Fredericksburg,Rappahannock River,river,2
+Virginia,20,Front Royal,Shenandoah River,river,2
+Virginia,21,Moneta,Smith Mountain Lake,reservoir,2
+Virginia,22,Radford,New River,river,2
+Virginia,23,Damascus,Laurel Creek,river,3
+Virginia,24,Scottsville,James River,river,3
+Virginia,25,Mathews,Mobjack Bay,bay,3
+West Virginia,1,Harpers Ferry,Potomac River,river,1
+West Virginia,2,Fayetteville,New River,river,1
+West Virginia,3,Shepherdstown,Potomac River,river,2
+West Virginia,4,Hinton,New River,river,2
+West Virginia,5,Summersville,Summersville Lake,reservoir,2
+West Virginia,6,Marlinton,Greenbrier River,river,2
+West Virginia,7,Cass,Greenbrier River,river,2
+West Virginia,8,Morgantown,Cheat Lake,reservoir,2
+West Virginia,9,Weston,Stonewall Jackson Lake,reservoir,2
+West Virginia,10,Petersburg,South Branch Potomac River,river,2
+West Virginia,11,Seneca Rocks,North Fork South Branch Potomac,river,2
+West Virginia,12,Ansted,New River,river,2
+West Virginia,13,Point Pleasant,Ohio River,river,2
+West Virginia,14,Parkersburg,Ohio River,river,2
+West Virginia,15,Wheeling,Ohio River,river,2
+West Virginia,16,Charleston,Kanawha River,river,2
+West Virginia,17,Grafton,Tygart Lake,reservoir,3
+West Virginia,18,Philippi,Tygart Valley River,river,3
+West Virginia,19,Sutton,Sutton Lake,reservoir,3
+West Virginia,20,Parsons,Cheat River,river,3
+West Virginia,21,Rowlesburg,Cheat River,river,3
+West Virginia,22,Alderson,Greenbrier River,river,3
+West Virginia,23,Ronceverte,Greenbrier River,river,3
+West Virginia,24,Webster Springs,Elk River,river,3
+West Virginia,25,Sistersville,Ohio River,river,3
+North Carolina,1,Ocracoke,Atlantic Ocean,ocean,1
+North Carolina,2,Manteo,Roanoke Sound,sound,1
+North Carolina,3,Duck,Atlantic Ocean,ocean,1
+North Carolina,4,Corolla,Atlantic Ocean,ocean,1
+North Carolina,5,Nags Head,Atlantic Ocean,ocean,1
+North Carolina,6,Hatteras,Atlantic Ocean,ocean,1
+North Carolina,7,Kill Devil Hills,Atlantic Ocean,ocean,1
+North Carolina,8,Beaufort,Taylor Creek,river,1
+North Carolina,9,Wilmington,Cape Fear River,river,1
+North Carolina,10,Wrightsville Beach,Atlantic Ocean,ocean,1
+North Carolina,11,Southport,Cape Fear River,river,1
+North Carolina,12,New Bern,Neuse River,river,1
+North Carolina,13,Lake Lure,Lake Lure,reservoir,1
+North Carolina,14,Edenton,Albemarle Sound,sound,2
+North Carolina,15,Oriental,Neuse River,river,2
+North Carolina,16,Chimney Rock,Broad River,river,2
+North Carolina,17,Bryson City,Tuckasegee River,river,2
+North Carolina,18,Carolina Beach,Atlantic Ocean,ocean,2
+North Carolina,19,Emerald Isle,Atlantic Ocean,ocean,2
+North Carolina,20,Atlantic Beach,Atlantic Ocean,ocean,2
+North Carolina,21,Swansboro,White Oak River,river,2
+North Carolina,22,Washington,Pamlico River,river,2
+North Carolina,23,Elizabeth City,Pasquotank River,river,2
+North Carolina,24,Ocean Isle Beach,Atlantic Ocean,ocean,2
+North Carolina,25,Bath,Pamlico River,river,2
+South Carolina,1,Charleston,Charleston Harbor,bay,1
+South Carolina,2,Beaufort,Beaufort River,river,1
+South Carolina,3,Hilton Head Island,Atlantic Ocean,ocean,1
+South Carolina,4,Folly Beach,Atlantic Ocean,ocean,1
+South Carolina,5,Isle of Palms,Atlantic Ocean,ocean,1
+South Carolina,6,Sullivan's Island,Atlantic Ocean,ocean,1
+South Carolina,7,Kiawah Island,Atlantic Ocean,ocean,1
+South Carolina,8,Pawleys Island,Atlantic Ocean,ocean,1
+South Carolina,9,Murrells Inlet,Atlantic Ocean,ocean,1
+South Carolina,10,Myrtle Beach,Atlantic Ocean,ocean,1
+South Carolina,11,North Myrtle Beach,Atlantic Ocean,ocean,1
+South Carolina,12,Edisto Beach,Atlantic Ocean,ocean,2
+South Carolina,13,Bluffton,May River,river,2
+South Carolina,14,Mount Pleasant,Charleston Harbor,bay,2
+South Carolina,15,Port Royal,Battery Creek,river,2
+South Carolina,16,Georgetown,Winyah Bay,bay,2
+South Carolina,17,Seabrook Island,Atlantic Ocean,ocean,2
+South Carolina,18,Surfside Beach,Atlantic Ocean,ocean,2
+South Carolina,19,Garden City,Atlantic Ocean,ocean,2
+South Carolina,20,Little River,Intracoastal Waterway,river,2
+South Carolina,21,Conway,Waccamaw River,river,2
+South Carolina,22,Clemson,Lake Hartwell,reservoir,2
+South Carolina,23,Seneca,Lake Keowee,reservoir,2
+South Carolina,24,Santee,Lake Marion,reservoir,2
+South Carolina,25,Chapin,Lake Murray,reservoir,2
+Georgia,1,Savannah,Savannah River,river,1
+Georgia,2,Tybee Island,Atlantic Ocean,ocean,1
+Georgia,3,St. Simons Island,Atlantic Ocean,ocean,1
+Georgia,4,Jekyll Island,Atlantic Ocean,ocean,1
+Georgia,5,Helen,Chattahoochee River,river,1
+Georgia,6,Blue Ridge,Toccoa River,river,2
+Georgia,7,St. Marys,St. Marys River,river,2
+Georgia,8,Darien,Darien River,river,2
+Georgia,9,Brunswick,Brunswick River,river,2
+Georgia,10,Sea Island,Atlantic Ocean,ocean,2
+Georgia,11,Tallulah Falls,Tallulah River,river,2
+Georgia,12,Lakemont,Lake Rabun,reservoir,2
+Georgia,13,Hiawassee,Lake Chatuge,reservoir,2
+Georgia,14,Blairsville,Lake Nottely,reservoir,2
+Georgia,15,McCaysville,Toccoa River,river,2
+Georgia,16,Ellijay,Coosawattee River,river,2
+Georgia,17,Gainesville,Lake Lanier,reservoir,2
+Georgia,18,Buford,Lake Lanier,reservoir,2
+Georgia,19,Eatonton,Lake Oconee,reservoir,2
+Georgia,20,Greensboro,Lake Oconee,reservoir,2
+Georgia,21,Milledgeville,Lake Sinclair,reservoir,2
+Georgia,22,Columbus,Chattahoochee River,river,2
+Georgia,23,Augusta,Savannah River,river,2
+Georgia,24,Bainbridge,Flint River,river,3
+Georgia,25,Cumming,Lake Lanier,reservoir,3
+Florida,1,Key West,Gulf of Mexico,gulf,1
+Florida,2,St. Augustine,Matanzas River,river,1
+Florida,3,Naples,Gulf of Mexico,gulf,1
+Florida,4,Sanibel,Gulf of Mexico,gulf,1
+Florida,5,Islamorada,Atlantic Ocean,ocean,1
+Florida,6,Destin,Gulf of Mexico,gulf,1
+Florida,7,Apalachicola,Apalachicola Bay,bay,1
+Florida,8,Cedar Key,Gulf of Mexico,gulf,1
+Florida,9,Anna Maria,Gulf of Mexico,gulf,1
+Florida,10,Dunedin,St. Joseph Sound,sound,1
+Florida,11,Tarpon Springs,Anclote River,river,1
+Florida,12,Fernandina Beach,Atlantic Ocean,ocean,1
+Florida,13,Mount Dora,Lake Dora,lake,1
+Florida,14,Crystal River,Crystal River,river,1
+Florida,15,Seaside,Gulf of Mexico,gulf,1
+Florida,16,Pensacola,Pensacola Bay,bay,1
+Florida,17,St. Pete Beach,Gulf of Mexico,gulf,1
+Florida,18,Clearwater Beach,Gulf of Mexico,gulf,1
+Florida,19,Sarasota,Sarasota Bay,bay,1
+Florida,20,Boca Grande,Gulf of Mexico,gulf,1
+Florida,21,Key Largo,Atlantic Ocean,ocean,1
+Florida,22,New Smyrna Beach,Atlantic Ocean,ocean,1
+Florida,23,Delray Beach,Atlantic Ocean,ocean,1
+Florida,24,Stuart,St. Lucie River,river,2
+Florida,25,Marathon,Atlantic Ocean,ocean,2
+Alabama,1,Gulf Shores,Gulf of Mexico,gulf,1
+Alabama,2,Orange Beach,Gulf of Mexico,gulf,1
+Alabama,3,Fairhope,Mobile Bay,bay,1
+Alabama,4,Dauphin Island,Gulf of Mexico,gulf,2
+Alabama,5,Point Clear,Mobile Bay,bay,2
+Alabama,6,Daphne,Mobile Bay,bay,2
+Alabama,7,Mobile,Mobile River,river,2
+Alabama,8,Magnolia Springs,Magnolia River,river,2
+Alabama,9,Guntersville,Lake Guntersville,reservoir,2
+Alabama,10,Florence,Tennessee River,river,2
+Alabama,11,Eufaula,Lake Eufaula,reservoir,2
+Alabama,12,Alexander City,Lake Martin,reservoir,2
+Alabama,13,Dadeville,Lake Martin,reservoir,2
+Alabama,14,Wetumpka,Coosa River,river,2
+Alabama,15,Centre,Weiss Lake,reservoir,3
+Alabama,16,Scottsboro,Lake Guntersville,reservoir,3
+Alabama,17,Decatur,Wheeler Lake,reservoir,3
+Alabama,18,Muscle Shoals,Tennessee River,river,3
+Alabama,19,Sheffield,Tennessee River,river,3
+Alabama,20,Rogersville,Wheeler Lake,reservoir,3
+Alabama,21,Jasper,Lewis Smith Lake,reservoir,3
+Alabama,22,Cullman,Lewis Smith Lake,reservoir,3
+Alabama,23,Demopolis,Tombigbee River,river,3
+Alabama,24,Montgomery,Alabama River,river,3
+Alabama,25,Bayou La Batre,Mississippi Sound,sound,3
+Mississippi,1,Bay St. Louis,Mississippi Sound,sound,1
+Mississippi,2,Ocean Springs,Mississippi Sound,sound,1
+Mississippi,3,Natchez,Mississippi River,river,1
+Mississippi,4,Biloxi,Mississippi Sound,sound,1
+Mississippi,5,Vicksburg,Mississippi River,river,2
+Mississippi,6,Gulfport,Mississippi Sound,sound,2
+Mississippi,7,Pass Christian,Mississippi Sound,sound,2
+Mississippi,8,Iuka,Pickwick Lake,reservoir,2
+Mississippi,9,Ridgeland,Ross Barnett Reservoir,reservoir,2
+Mississippi,10,Long Beach,Mississippi Sound,sound,3
+Mississippi,11,Waveland,Mississippi Sound,sound,3
+Mississippi,12,Pascagoula,Pascagoula River,river,3
+Mississippi,13,Gautier,Mississippi Sound,sound,3
+Mississippi,14,D'Iberville,Back Bay of Biloxi,bay,3
+Mississippi,15,Greenville,Lake Ferguson,lake,3
+Mississippi,16,Rosedale,Mississippi River,river,3
+Mississippi,17,Tunica,Mississippi River,river,3
+Mississippi,18,Grenada,Grenada Lake,reservoir,3
+Mississippi,19,Sardis,Sardis Lake,reservoir,3
+Mississippi,20,Enid,Enid Lake,reservoir,3
+Mississippi,21,Hernando,Arkabutla Lake,reservoir,3
+Mississippi,22,Columbus,Tennessee-Tombigbee Waterway,river,3
+Mississippi,23,Aberdeen,Tennessee-Tombigbee Waterway,river,3
+Mississippi,24,Madison,Ross Barnett Reservoir,reservoir,3
+Mississippi,25,Meridian,Okatibbee Lake,reservoir,3
+Louisiana,1,New Orleans,Mississippi River,river,1
+Louisiana,2,Natchitoches,Cane River Lake,lake,1
+Louisiana,3,Mandeville,Lake Pontchartrain,lake,2
+Louisiana,4,Madisonville,Tchefuncte River,river,2
+Louisiana,5,Breaux Bridge,Bayou Teche,river,2
+Louisiana,6,St. Martinville,Bayou Teche,river,2
+Louisiana,7,New Iberia,Bayou Teche,river,2
+Louisiana,8,Henderson,Atchafalaya Basin,river,2
+Louisiana,9,Grand Isle,Gulf of Mexico,gulf,2
+Louisiana,10,St. Francisville,Mississippi River,river,2
+Louisiana,11,Lake Charles,Lake Charles,lake,2
+Louisiana,12,Covington,Bogue Falaya River,river,2
+Louisiana,13,Slidell,Lake Pontchartrain,lake,2
+Louisiana,14,Baton Rouge,Mississippi River,river,2
+Louisiana,15,Many,Toledo Bend Reservoir,reservoir,2
+Louisiana,16,Venice,Mississippi River,river,2
+Louisiana,17,Lafitte,Bayou Barataria,river,2
+Louisiana,18,Morgan City,Atchafalaya River,river,3
+Louisiana,19,Houma,Bayou Terrebonne,river,3
+Louisiana,20,Thibodaux,Bayou Lafourche,river,3
+Louisiana,21,Abbeville,Vermilion River,river,3
+Louisiana,22,Monroe,Ouachita River,river,3
+Louisiana,23,Shreveport,Red River,river,3
+Louisiana,24,Lake Providence,Lake Providence,lake,3
+Louisiana,25,Delcambre,Bayou Carlin,river,3
+Texas,1,Galveston,Gulf of Mexico,gulf,1
+Texas,2,Port Aransas,Gulf of Mexico,gulf,1
+Texas,3,South Padre Island,Gulf of Mexico,gulf,1
+Texas,4,Rockport,Aransas Bay,bay,1
+Texas,5,New Braunfels,Comal River,river,1
+Texas,6,Austin,Lady Bird Lake,reservoir,1
+Texas,7,Kemah,Galveston Bay,bay,1
+Texas,8,Corpus Christi,Corpus Christi Bay,bay,1
+Texas,9,Granbury,Lake Granbury,reservoir,2
+Texas,10,Wimberley,Blanco River,river,2
+Texas,11,Marble Falls,Lake Marble Falls,reservoir,2
+Texas,12,Uncertain,Caddo Lake,lake,2
+Texas,13,Jefferson,Big Cypress Bayou,river,2
+Texas,14,Concan,Frio River,river,2
+Texas,15,San Marcos,San Marcos River,river,2
+Texas,16,Kerrville,Guadalupe River,river,2
+Texas,17,Canyon Lake,Canyon Lake,reservoir,2
+Texas,18,Graford,Possum Kingdom Lake,reservoir,2
+Texas,19,Horseshoe Bay,Lake LBJ,reservoir,2
+Texas,20,Port Isabel,Laguna Madre,bay,2
+Texas,21,Fulton,Aransas Bay,bay,2
+Texas,22,Denison,Lake Texoma,reservoir,2
+Texas,23,Crystal Beach,Gulf of Mexico,gulf,2
+Texas,24,Port O'Connor,Matagorda Bay,bay,2
+Texas,25,Bandera,Medina River,river,2
+Oklahoma,1,Hochatown,Broken Bow Lake,reservoir,1
+Oklahoma,2,Broken Bow,Mountain Fork River,river,2
+Oklahoma,3,Medicine Park,Medicine Creek,river,2
+Oklahoma,4,Grove,Grand Lake o' the Cherokees,reservoir,2
+Oklahoma,5,Tahlequah,Illinois River,river,2
+Oklahoma,6,Sulphur,Lake of the Arbuckles,reservoir,2
+Oklahoma,7,Davis,Honey Creek,river,2
+Oklahoma,8,Ardmore,Lake Murray,reservoir,2
+Oklahoma,9,Kingston,Lake Texoma,reservoir,2
+Oklahoma,10,Eufaula,Lake Eufaula,reservoir,2
+Oklahoma,11,Tulsa,Arkansas River,river,2
+Oklahoma,12,Oklahoma City,Oklahoma River,river,2
+Oklahoma,13,Jenks,Arkansas River,river,2
+Oklahoma,14,Langley,Grand Lake o' the Cherokees,reservoir,3
+Oklahoma,15,Disney,Grand Lake o' the Cherokees,reservoir,3
+Oklahoma,16,Gore,Lake Tenkiller,reservoir,3
+Oklahoma,17,Durant,Lake Texoma,reservoir,3
+Oklahoma,18,Lawton,Lake Lawtonka,reservoir,3
+Oklahoma,19,Mannford,Keystone Lake,reservoir,3
+Oklahoma,20,Sand Springs,Keystone Lake,reservoir,3
+Oklahoma,21,Ponca City,Kaw Lake,reservoir,3
+Oklahoma,22,Fort Gibson,Fort Gibson Lake,reservoir,3
+Oklahoma,23,Wagoner,Fort Gibson Lake,reservoir,3
+Oklahoma,24,Norman,Lake Thunderbird,reservoir,3
+Oklahoma,25,Watonga,Roman Nose State Park Lakes,lake,3
+Arkansas,1,Hot Springs,Lake Hamilton,reservoir,1
+Arkansas,2,Eureka Springs,Beaver Lake,reservoir,2
+Arkansas,3,Mountain Home,Norfork Lake,reservoir,2
+Arkansas,4,Heber Springs,Greers Ferry Lake,reservoir,2
+Arkansas,5,Bull Shoals,Bull Shoals Lake,reservoir,2
+Arkansas,6,Cotter,White River,river,2
+Arkansas,7,Calico Rock,White River,river,2
+Arkansas,8,Mountain View,White River,river,2
+Arkansas,9,Jasper,Buffalo National River,river,2
+Arkansas,10,Ponca,Buffalo National River,river,2
+Arkansas,11,Mount Ida,Lake Ouachita,reservoir,2
+Arkansas,12,Hot Springs Village,Lake Balboa,reservoir,2
+Arkansas,13,Rogers,Beaver Lake,reservoir,2
+Arkansas,14,Siloam Springs,Illinois River,river,2
+Arkansas,15,Little Rock,Arkansas River,river,2
+Arkansas,16,Fairfield Bay,Greers Ferry Lake,reservoir,3
+Arkansas,17,Greers Ferry,Greers Ferry Lake,reservoir,3
+Arkansas,18,Norfork,North Fork River,river,3
+Arkansas,19,Flippin,White River,river,3
+Arkansas,20,Lakeview,Bull Shoals Lake,reservoir,3
+Arkansas,21,Gilbert,Buffalo National River,river,3
+Arkansas,22,Batesville,White River,river,3
+Arkansas,23,Russellville,Lake Dardanelle,reservoir,3
+Arkansas,24,Arkadelphia,DeGray Lake,reservoir,3
+Arkansas,25,Lake Village,Lake Chicot,lake,3
+Tennessee,1,Chattanooga,Tennessee River,river,1
+Tennessee,2,Gatlinburg,Little Pigeon River,river,1
+Tennessee,3,Townsend,Little River,river,1
+Tennessee,4,Dandridge,Douglas Lake,reservoir,2
+Tennessee,5,Knoxville,Tennessee River,river,2
+Tennessee,6,Pigeon Forge,Little Pigeon River,river,2
+Tennessee,7,Paris,Kentucky Lake,reservoir,2
+Tennessee,8,Dover,Lake Barkley,reservoir,2
+Tennessee,9,Smithville,Center Hill Lake,reservoir,2
+Tennessee,10,Winchester,Tims Ford Lake,reservoir,2
+Tennessee,11,Celina,Dale Hollow Lake,reservoir,2
+Tennessee,12,Butler,Watauga Lake,reservoir,2
+Tennessee,13,Rock Island,Caney Fork River,river,2
+Tennessee,14,Hartford,Pigeon River,river,2
+Tennessee,15,Nashville,Cumberland River,river,2
+Tennessee,16,Memphis,Mississippi River,river,2
+Tennessee,17,Clarksville,Cumberland River,river,3
+Tennessee,18,Camden,Kentucky Lake,reservoir,3
+Tennessee,19,Kingston,Watts Bar Lake,reservoir,3
+Tennessee,20,Loudon,Tennessee River,river,3
+Tennessee,21,Hendersonville,Old Hickory Lake,reservoir,3
+Tennessee,22,Granville,Cordell Hull Lake,reservoir,3
+Tennessee,23,Byrdstown,Dale Hollow Lake,reservoir,3
+Tennessee,24,Elizabethton,Watauga River,river,3
+Tennessee,25,Erwin,Nolichucky River,river,3
+Kentucky,1,Paducah,Ohio River,river,1
+Kentucky,2,Grand Rivers,Kentucky Lake,reservoir,2
+Kentucky,3,Cadiz,Lake Barkley,reservoir,2
+Kentucky,4,Jamestown,Lake Cumberland,reservoir,2
+Kentucky,5,Somerset,Lake Cumberland,reservoir,2
+Kentucky,6,Burnside,Lake Cumberland,reservoir,2
+Kentucky,7,Gilbertsville,Kentucky Lake,reservoir,2
+Kentucky,8,Morehead,Cave Run Lake,reservoir,2
+Kentucky,9,Brownsville,Green River,river,2
+Kentucky,10,Frankfort,Kentucky River,river,2
+Kentucky,11,Carrollton,Ohio River,river,2
+Kentucky,12,Augusta,Ohio River,river,2
+Kentucky,13,Maysville,Ohio River,river,2
+Kentucky,14,Covington,Ohio River,river,2
+Kentucky,15,Louisville,Ohio River,river,2
+Kentucky,16,Owensboro,Ohio River,river,2
+Kentucky,17,Kuttawa,Lake Barkley,reservoir,3
+Kentucky,18,Eddyville,Lake Barkley,reservoir,3
+Kentucky,19,Aurora,Kentucky Lake,reservoir,3
+Kentucky,20,Monticello,Lake Cumberland,reservoir,3
+Kentucky,21,Albany,Dale Hollow Lake,reservoir,3
+Kentucky,22,Campbellsville,Green River Lake,reservoir,3
+Kentucky,23,Glasgow,Barren River Lake,reservoir,3
+Kentucky,24,Leitchfield,Rough River Lake,reservoir,3
+Kentucky,25,Harrodsburg,Herrington Lake,reservoir,3
+Missouri,1,Branson,Table Rock Lake,reservoir,1
+Missouri,2,Osage Beach,Lake of the Ozarks,reservoir,1
+Missouri,3,Lake Ozark,Lake of the Ozarks,reservoir,1
+Missouri,4,Hannibal,Mississippi River,river,1
+Missouri,5,St. Charles,Missouri River,river,2
+Missouri,6,Camdenton,Lake of the Ozarks,reservoir,2
+Missouri,7,Kimberling City,Table Rock Lake,reservoir,2
+Missouri,8,Ste. Genevieve,Mississippi River,river,2
+Missouri,9,Hermann,Missouri River,river,2
+Missouri,10,Rocheport,Missouri River,river,2
+Missouri,11,Weston,Missouri River,river,2
+Missouri,12,Cape Girardeau,Mississippi River,river,2
+Missouri,13,Van Buren,Current River,river,2
+Missouri,14,Eminence,Jacks Fork River,river,2
+Missouri,15,Steelville,Meramec River,river,2
+Missouri,16,Lebanon,Niangua River,river,2
+Missouri,17,Warsaw,Truman Lake,reservoir,2
+Missouri,18,Sunrise Beach,Lake of the Ozarks,reservoir,3
+Missouri,19,Hollister,Lake Taneycomo,reservoir,3
+Missouri,20,Rockaway Beach,Lake Taneycomo,reservoir,3
+Missouri,21,Shell Knob,Table Rock Lake,reservoir,3
+Missouri,22,Stockton,Stockton Lake,reservoir,3
+Missouri,23,Clarksville,Mississippi River,river,3
+Missouri,24,Parkville,Missouri River,river,3
+Missouri,25,Washington,Missouri River,river,3
+Kansas,1,Lawrence,Kansas River,river,2
+Kansas,2,Manhattan,Tuttle Creek Lake,reservoir,2
+Kansas,3,Wichita,Arkansas River,river,2
+Kansas,4,Council Grove,Council Grove Lake,reservoir,2
+Kansas,5,Atchison,Missouri River,river,2
+Kansas,6,Wilson,Wilson Lake,reservoir,2
+Kansas,7,Junction City,Milford Lake,reservoir,3
+Kansas,8,Milford,Milford Lake,reservoir,3
+Kansas,9,Wamego,Kansas River,river,3
+Kansas,10,Marion,Marion Reservoir,reservoir,3
+Kansas,11,Hillsboro,Marion Reservoir,reservoir,3
+Kansas,12,El Dorado,El Dorado Lake,reservoir,3
+Kansas,13,Winfield,Walnut River,river,3
+Kansas,14,Arkansas City,Arkansas River,river,3
+Kansas,15,Independence,Elk City Lake,reservoir,3
+Kansas,16,Toronto,Toronto Lake,reservoir,3
+Kansas,17,Fall River,Fall River Lake,reservoir,3
+Kansas,18,Burlington,John Redmond Reservoir,reservoir,3
+Kansas,19,Emporia,Neosho River,river,3
+Kansas,20,Melvern,Melvern Lake,reservoir,3
+Kansas,21,Pomona,Pomona Lake,reservoir,3
+Kansas,22,Ottawa,Marais des Cygnes River,river,3
+Kansas,23,Perry,Perry Lake,reservoir,3
+Kansas,24,Leavenworth,Missouri River,river,3
+Kansas,25,Great Bend,Arkansas River,river,3
+Nebraska,1,Ogallala,Lake McConaughy,reservoir,2
+Nebraska,2,Valentine,Niobrara River,river,2
+Nebraska,3,Omaha,Missouri River,river,2
+Nebraska,4,Nebraska City,Missouri River,river,2
+Nebraska,5,Brownville,Missouri River,river,2
+Nebraska,6,Ashland,Platte River,river,2
+Nebraska,7,Lewellen,Lake McConaughy,reservoir,3
+Nebraska,8,Niobrara,Missouri River,river,3
+Nebraska,9,Crofton,Lewis and Clark Lake,reservoir,3
+Nebraska,10,South Sioux City,Missouri River,river,3
+Nebraska,11,Ponca,Missouri River,river,3
+Nebraska,12,Bellevue,Missouri River,river,3
+Nebraska,13,Plattsmouth,Missouri River,river,3
+Nebraska,14,Louisville,Platte River,river,3
+Nebraska,15,Fremont,Fremont Lakes,lake,3
+Nebraska,16,Columbus,Loup River,river,3
+Nebraska,17,North Platte,North Platte River,river,3
+Nebraska,18,Kearney,Platte River,river,3
+Nebraska,19,Grand Island,Platte River,river,3
+Nebraska,20,Burwell,Calamus Reservoir,reservoir,3
+Nebraska,21,Elwood,Johnson Lake,reservoir,3
+Nebraska,22,Gothenburg,Platte River,river,3
+Nebraska,23,Crawford,White River,river,3
+Nebraska,24,Blair,Missouri River,river,3
+Nebraska,25,Valley,Platte River,river,3
+Iowa,1,Arnolds Park,West Lake Okoboji,lake,1
+Iowa,2,Okoboji,East Lake Okoboji,lake,1
+Iowa,3,Spirit Lake,Big Spirit Lake,lake,2
+Iowa,4,Clear Lake,Clear Lake,lake,2
+Iowa,5,Dubuque,Mississippi River,river,2
+Iowa,6,Le Claire,Mississippi River,river,2
+Iowa,7,McGregor,Mississippi River,river,2
+Iowa,8,Guttenberg,Mississippi River,river,2
+Iowa,9,Bellevue,Mississippi River,river,2
+Iowa,10,Lansing,Mississippi River,river,2
+Iowa,11,Marquette,Mississippi River,river,2
+Iowa,12,Davenport,Mississippi River,river,2
+Iowa,13,Pella,Lake Red Rock,reservoir,2
+Iowa,14,West Okoboji,West Lake Okoboji,lake,2
+Iowa,15,Storm Lake,Storm Lake,lake,3
+Iowa,16,Clinton,Mississippi River,river,3
+Iowa,17,Muscatine,Mississippi River,river,3
+Iowa,18,Burlington,Mississippi River,river,3
+Iowa,19,Fort Madison,Mississippi River,river,3
+Iowa,20,Keokuk,Mississippi River,river,3
+Iowa,21,Coralville,Coralville Lake,reservoir,3
+Iowa,22,Polk City,Saylorville Lake,reservoir,3
+Iowa,23,Sioux City,Missouri River,river,3
+Iowa,24,Council Bluffs,Missouri River,river,3
+Iowa,25,Lake View,Black Hawk Lake,lake,3
+Illinois,1,Chicago,Lake Michigan,great_lake,1
+Illinois,2,Galena,Galena River,river,1
+Illinois,3,Grafton,Mississippi River,river,2
+Illinois,4,Ottawa,Illinois River,river,2
+Illinois,5,Utica,Illinois River,river,2
+Illinois,6,Alton,Mississippi River,river,2
+Illinois,7,Nauvoo,Mississippi River,river,2
+Illinois,8,Quincy,Mississippi River,river,2
+Illinois,9,Evanston,Lake Michigan,great_lake,2
+Illinois,10,Lake Forest,Lake Michigan,great_lake,2
+Illinois,11,McHenry,Fox River,river,2
+Illinois,12,Antioch,Chain O'Lakes,lake,2
+Illinois,13,Fox Lake,Chain O'Lakes,lake,2
+Illinois,14,Moline,Mississippi River,river,2
+Illinois,15,Rock Island,Mississippi River,river,2
+Illinois,16,Peoria,Illinois River,river,2
+Illinois,17,Elsah,Mississippi River,river,3
+Illinois,18,Savanna,Mississippi River,river,3
+Illinois,19,Fulton,Mississippi River,river,3
+Illinois,20,Havana,Illinois River,river,3
+Illinois,21,Hardin,Illinois River,river,3
+Illinois,22,Morris,Illinois River,river,3
+Illinois,23,Wilmette,Lake Michigan,great_lake,3
+Illinois,24,Winnetka,Lake Michigan,great_lake,3
+Illinois,25,Crystal Lake,Crystal Lake,lake,3
+Indiana,1,Madison,Ohio River,river,1
+Indiana,2,Michigan City,Lake Michigan,great_lake,2
+Indiana,3,Chesterton,Lake Michigan,great_lake,2
+Indiana,4,Syracuse,Lake Wawasee,lake,2
+Indiana,5,Culver,Lake Maxinkuckee,lake,2
+Indiana,6,Monticello,Lake Shafer,reservoir,2
+Indiana,7,Bloomington,Lake Monroe,reservoir,2
+Indiana,8,Angola,Lake James,lake,2
+Indiana,9,Winona Lake,Winona Lake,lake,2
+Indiana,10,Newburgh,Ohio River,river,2
+Indiana,11,Jeffersonville,Ohio River,river,2
+Indiana,12,Aurora,Ohio River,river,3
+Indiana,13,Rising Sun,Ohio River,river,3
+Indiana,14,Vevay,Ohio River,river,3
+Indiana,15,New Albany,Ohio River,river,3
+Indiana,16,Evansville,Ohio River,river,3
+Indiana,17,Porter,Lake Michigan,great_lake,3
+Indiana,18,Beverly Shores,Lake Michigan,great_lake,3
+Indiana,19,Whiting,Lake Michigan,great_lake,3
+Indiana,20,North Webster,Webster Lake,lake,3
+Indiana,21,Rome City,Sylvan Lake,lake,3
+Indiana,22,Cicero,Morse Reservoir,reservoir,3
+Indiana,23,Lafayette,Wabash River,river,3
+Indiana,24,Logansport,Wabash River,river,3
+Indiana,25,Wabash,Wabash River,river,3
+Ohio,1,Put-in-Bay,Lake Erie,great_lake,1
+Ohio,2,Kelleys Island,Lake Erie,great_lake,1
+Ohio,3,Sandusky,Lake Erie,great_lake,1
+Ohio,4,Geneva-on-the-Lake,Lake Erie,great_lake,2
+Ohio,5,Marblehead,Lake Erie,great_lake,2
+Ohio,6,Lakeside,Lake Erie,great_lake,2
+Ohio,7,Port Clinton,Lake Erie,great_lake,2
+Ohio,8,Vermilion,Lake Erie,great_lake,2
+Ohio,9,Marietta,Ohio River,river,2
+Ohio,10,Cleveland,Lake Erie,great_lake,2
+Ohio,11,Cincinnati,Ohio River,river,2
+Ohio,12,Loudonville,Mohican River,river,2
+Ohio,13,Ashtabula,Lake Erie,great_lake,2
+Ohio,14,Buckeye Lake,Buckeye Lake,reservoir,2
+Ohio,15,Russells Point,Indian Lake,reservoir,2
+Ohio,16,Huron,Lake Erie,great_lake,3
+Ohio,17,Conneaut,Lake Erie,great_lake,3
+Ohio,18,Lakewood,Lake Erie,great_lake,3
+Ohio,19,Rocky River,Lake Erie,great_lake,3
+Ohio,20,Toledo,Maumee River,river,3
+Ohio,21,Celina,Grand Lake St. Marys,reservoir,3
+Ohio,22,Gallipolis,Ohio River,river,3
+Ohio,23,Portsmouth,Ohio River,river,3
+Ohio,24,Ripley,Ohio River,river,3
+Ohio,25,New Richmond,Ohio River,river,3
+Michigan,1,Mackinac Island,Lake Huron,great_lake,1
+Michigan,2,Traverse City,Grand Traverse Bay,great_lake,1
+Michigan,3,Petoskey,Little Traverse Bay,great_lake,1
+Michigan,4,Charlevoix,Lake Charlevoix,lake,1
+Michigan,5,Harbor Springs,Little Traverse Bay,great_lake,1
+Michigan,6,Grand Haven,Lake Michigan,great_lake,1
+Michigan,7,Saugatuck,Kalamazoo Lake,lake,1
+Michigan,8,Holland,Lake Macatawa,lake,1
+Michigan,9,South Haven,Lake Michigan,great_lake,1
+Michigan,10,St. Joseph,Lake Michigan,great_lake,1
+Michigan,11,Leland,Lake Michigan,great_lake,1
+Michigan,12,Glen Arbor,Lake Michigan,great_lake,1
+Michigan,13,Ludington,Lake Michigan,great_lake,1
+Michigan,14,Marquette,Lake Superior,great_lake,1
+Michigan,15,Munising,Lake Superior,great_lake,1
+Michigan,16,Copper Harbor,Lake Superior,great_lake,1
+Michigan,17,Frankfort,Lake Michigan,great_lake,2
+Michigan,18,Suttons Bay,Grand Traverse Bay,great_lake,2
+Michigan,19,Elk Rapids,Grand Traverse Bay,great_lake,2
+Michigan,20,Mackinaw City,Straits of Mackinac,great_lake,2
+Michigan,21,St. Ignace,Straits of Mackinac,great_lake,2
+Michigan,22,Alpena,Lake Huron,great_lake,2
+Michigan,23,Port Austin,Lake Huron,great_lake,2
+Michigan,24,Pentwater,Lake Michigan,great_lake,2
+Michigan,25,New Buffalo,Lake Michigan,great_lake,2
+Wisconsin,1,Fish Creek,Green Bay,great_lake,1
+Wisconsin,2,Sister Bay,Green Bay,great_lake,1
+Wisconsin,3,Ephraim,Green Bay,great_lake,1
+Wisconsin,4,Egg Harbor,Green Bay,great_lake,1
+Wisconsin,5,Sturgeon Bay,Sturgeon Bay,great_lake,1
+Wisconsin,6,Bayfield,Lake Superior,great_lake,1
+Wisconsin,7,Lake Geneva,Geneva Lake,lake,1
+Wisconsin,8,Wisconsin Dells,Wisconsin River,river,1
+Wisconsin,9,Minocqua,Lake Minocqua,lake,1
+Wisconsin,10,Eagle River,Eagle River Chain of Lakes,lake,1
+Wisconsin,11,Hayward,Lake Hayward,lake,2
+Wisconsin,12,Elkhart Lake,Elkhart Lake,lake,2
+Wisconsin,13,Baileys Harbor,Lake Michigan,great_lake,2
+Wisconsin,14,La Pointe,Lake Superior,great_lake,2
+Wisconsin,15,Green Lake,Green Lake,lake,2
+Wisconsin,16,Washington Island,Lake Michigan,great_lake,2
+Wisconsin,17,Ellison Bay,Green Bay,great_lake,2
+Wisconsin,18,Port Washington,Lake Michigan,great_lake,2
+Wisconsin,19,Sheboygan,Lake Michigan,great_lake,2
+Wisconsin,20,Milwaukee,Lake Michigan,great_lake,2
+Wisconsin,21,La Crosse,Mississippi River,river,2
+Wisconsin,22,Pepin,Lake Pepin,lake,2
+Wisconsin,23,Prairie du Chien,Mississippi River,river,2
+Wisconsin,24,Oshkosh,Lake Winnebago,lake,2
+Wisconsin,25,Williams Bay,Geneva Lake,lake,2
+Minnesota,1,Duluth,Lake Superior,great_lake,1
+Minnesota,2,Grand Marais,Lake Superior,great_lake,1
+Minnesota,3,Ely,Shagawa Lake,lake,1
+Minnesota,4,Stillwater,St. Croix River,river,1
+Minnesota,5,Nisswa,Gull Lake,lake,2
+Minnesota,6,Walker,Leech Lake,lake,2
+Minnesota,7,Brainerd,Mississippi River,river,2
+Minnesota,8,Two Harbors,Lake Superior,great_lake,2
+Minnesota,9,Lutsen,Lake Superior,great_lake,2
+Minnesota,10,Tofte,Lake Superior,great_lake,2
+Minnesota,11,Ranier,Rainy Lake,lake,2
+Minnesota,12,International Falls,Rainy Lake,lake,2
+Minnesota,13,Crane Lake,Crane Lake,lake,2
+Minnesota,14,Crosslake,Whitefish Chain of Lakes,lake,2
+Minnesota,15,Detroit Lakes,Detroit Lake,lake,2
+Minnesota,16,Alexandria,Lake Darling,lake,2
+Minnesota,17,Park Rapids,Fish Hook River,river,2
+Minnesota,18,Bemidji,Lake Bemidji,lake,2
+Minnesota,19,Red Wing,Mississippi River,river,2
+Minnesota,20,Wabasha,Mississippi River,river,2
+Minnesota,21,Lake City,Lake Pepin,lake,2
+Minnesota,22,Winona,Mississippi River,river,2
+Minnesota,23,Excelsior,Lake Minnetonka,lake,2
+Minnesota,24,Wayzata,Lake Minnetonka,lake,2
+Minnesota,25,Grand Portage,Lake Superior,great_lake,2
+North Dakota,1,Medora,Little Missouri River,river,1
+North Dakota,2,Devils Lake,Devils Lake,lake,2
+North Dakota,3,Garrison,Lake Sakakawea,reservoir,2
+North Dakota,4,Bismarck,Missouri River,river,2
+North Dakota,5,Bottineau,Lake Metigoshe,lake,2
+North Dakota,6,Fargo,Red River of the North,river,2
+North Dakota,7,Grand Forks,Red River of the North,river,2
+North Dakota,8,Fort Ransom,Sheyenne River,river,3
+North Dakota,9,Valley City,Sheyenne River,river,3
+North Dakota,10,Mandan,Missouri River,river,3
+North Dakota,11,Washburn,Missouri River,river,3
+North Dakota,12,Stanton,Knife River,river,3
+North Dakota,13,Pick City,Lake Sakakawea,reservoir,3
+North Dakota,14,Riverdale,Lake Sakakawea,reservoir,3
+North Dakota,15,New Town,Lake Sakakawea,reservoir,3
+North Dakota,16,Williston,Missouri River,river,3
+North Dakota,17,Watford City,Little Missouri River,river,3
+North Dakota,18,Jamestown,Jamestown Reservoir,reservoir,3
+North Dakota,19,Wahpeton,Red River of the North,river,3
+North Dakota,20,Walhalla,Pembina River,river,3
+North Dakota,21,Pembina,Red River of the North,river,3
+North Dakota,22,Cavalier,Lake Renwick,reservoir,3
+North Dakota,23,Fort Totten,Devils Lake,lake,3
+North Dakota,24,Minnewaukan,Devils Lake,lake,3
+North Dakota,25,Beulah,Lake Sakakawea,reservoir,3
+South Dakota,1,Pierre,Missouri River,river,2
+South Dakota,2,Chamberlain,Lake Francis Case,reservoir,2
+South Dakota,3,Yankton,Lewis and Clark Lake,reservoir,2
+South Dakota,4,Mobridge,Lake Oahe,reservoir,2
+South Dakota,5,Spearfish,Spearfish Creek,river,2
+South Dakota,6,Hot Springs,Fall River,river,2
+South Dakota,7,Watertown,Lake Kampeska,lake,2
+South Dakota,8,Sioux Falls,Big Sioux River,river,2
+South Dakota,9,Fort Pierre,Missouri River,river,3
+South Dakota,10,Oacoma,Lake Francis Case,reservoir,3
+South Dakota,11,Vermillion,Missouri River,river,3
+South Dakota,12,Springfield,Lewis and Clark Lake,reservoir,3
+South Dakota,13,Pickstown,Lake Francis Case,reservoir,3
+South Dakota,14,Platte,Lake Francis Case,reservoir,3
+South Dakota,15,Akaska,Lake Oahe,reservoir,3
+South Dakota,16,Gettysburg,Lake Oahe,reservoir,3
+South Dakota,17,Rapid City,Rapid Creek,river,3
+South Dakota,18,Belle Fourche,Belle Fourche River,river,3
+South Dakota,19,Madison,Lake Madison,lake,3
+South Dakota,20,Big Stone City,Big Stone Lake,lake,3
+South Dakota,21,Milbank,Big Stone Lake,lake,3
+South Dakota,22,Webster,Waubay Lakes,lake,3
+South Dakota,23,Waubay,Waubay Lake,lake,3
+South Dakota,24,Huron,James River,river,3
+South Dakota,25,De Smet,Lake Thompson,lake,3
+Montana,1,Whitefish,Whitefish Lake,lake,1
+Montana,2,Bigfork,Flathead Lake,lake,1
+Montana,3,Polson,Flathead Lake,lake,2
+Montana,4,Lakeside,Flathead Lake,lake,2
+Montana,5,Seeley Lake,Seeley Lake,lake,2
+Montana,6,Missoula,Clark Fork River,river,2
+Montana,7,Ennis,Madison River,river,2
+Montana,8,Livingston,Yellowstone River,river,2
+Montana,9,Gardiner,Yellowstone River,river,2
+Montana,10,West Yellowstone,Hebgen Lake,reservoir,2
+Montana,11,Big Sky,Gallatin River,river,2
+Montana,12,Red Lodge,Rock Creek,river,2
+Montana,13,Fort Benton,Missouri River,river,2
+Montana,14,Fort Smith,Bighorn River,river,2
+Montana,15,Somers,Flathead Lake,lake,3
+Montana,16,Kalispell,Flathead River,river,3
+Montana,17,Twin Bridges,Beaverhead River,river,3
+Montana,18,Big Timber,Yellowstone River,river,3
+Montana,19,Three Forks,Missouri River,river,3
+Montana,20,Townsend,Canyon Ferry Lake,reservoir,3
+Montana,21,Helena,Hauser Lake,reservoir,3
+Montana,22,Great Falls,Missouri River,river,3
+Montana,23,Fort Peck,Fort Peck Lake,reservoir,3
+Montana,24,Thompson Falls,Clark Fork River,river,3
+Montana,25,Libby,Lake Koocanusa,reservoir,3
+Wyoming,1,Jackson,Snake River,river,1
+Wyoming,2,Cody,Shoshone River,river,1
+Wyoming,3,Dubois,Wind River,river,2
+Wyoming,4,Thermopolis,Bighorn River,river,2
+Wyoming,5,Saratoga,North Platte River,river,2
+Wyoming,6,Lander,Popo Agie River,river,2
+Wyoming,7,Pinedale,Fremont Lake,lake,2
+Wyoming,8,Alpine,Palisades Reservoir,reservoir,2
+Wyoming,9,Green River,Green River,river,2
+Wyoming,10,Lovell,Bighorn Lake,reservoir,2
+Wyoming,11,Alcova,Alcova Reservoir,reservoir,3
+Wyoming,12,Casper,North Platte River,river,3
+Wyoming,13,Buffalo,Clear Creek,river,3
+Wyoming,14,Sheridan,Big Goose Creek,river,3
+Wyoming,15,Guernsey,Guernsey Reservoir,reservoir,3
+Wyoming,16,Glendo,Glendo Reservoir,reservoir,3
+Wyoming,17,Kemmerer,Hams Fork River,river,3
+Wyoming,18,Afton,Salt River,river,3
+Wyoming,19,Laramie,Laramie River,river,3
+Wyoming,20,Encampment,Encampment River,river,3
+Wyoming,21,Greybull,Bighorn River,river,3
+Wyoming,22,Worland,Bighorn River,river,3
+Wyoming,23,Riverton,Wind River,river,3
+Wyoming,24,Ten Sleep,Ten Sleep Creek,river,3
+Wyoming,25,Basin,Bighorn River,river,3
+Colorado,1,Grand Lake,Grand Lake,lake,1
+Colorado,2,Steamboat Springs,Yampa River,river,1
+Colorado,3,Glenwood Springs,Colorado River,river,1
+Colorado,4,Durango,Animas River,river,1
+Colorado,5,Buena Vista,Arkansas River,river,1
+Colorado,6,Salida,Arkansas River,river,1
+Colorado,7,Pagosa Springs,San Juan River,river,1
+Colorado,8,Frisco,Dillon Reservoir,reservoir,2
+Colorado,9,Dillon,Dillon Reservoir,reservoir,2
+Colorado,10,Estes Park,Lake Estes,reservoir,2
+Colorado,11,Granby,Lake Granby,reservoir,2
+Colorado,12,Palisade,Colorado River,river,2
+Colorado,13,Gunnison,Gunnison River,river,2
+Colorado,14,Golden,Clear Creek,river,2
+Colorado,15,Ridgway,Uncompahgre River,river,2
+Colorado,16,Canon City,Arkansas River,river,2
+Colorado,17,Grand Junction,Colorado River,river,3
+Colorado,18,Fruita,Colorado River,river,3
+Colorado,19,Almont,Taylor River,river,3
+Colorado,20,Crested Butte,Slate River,river,3
+Colorado,21,Fort Collins,Horsetooth Reservoir,reservoir,3
+Colorado,22,Loveland,Lake Loveland,reservoir,3
+Colorado,23,Boulder,Boulder Creek,river,3
+Colorado,24,Pueblo,Arkansas River,river,3
+Colorado,25,Kremmling,Colorado River,river,3
+New Mexico,1,Elephant Butte,Elephant Butte Reservoir,reservoir,2
+New Mexico,2,Truth or Consequences,Rio Grande,river,2
+New Mexico,3,Taos,Rio Grande,river,2
+New Mexico,4,Red River,Red River,river,2
+New Mexico,5,Eagle Nest,Eagle Nest Lake,lake,2
+New Mexico,6,Abiquiu,Abiquiu Reservoir,reservoir,2
+New Mexico,7,Navajo Dam,Navajo Lake,reservoir,2
+New Mexico,8,Santa Rosa,Pecos River,river,2
+New Mexico,9,Jemez Springs,Jemez River,river,2
+New Mexico,10,Ruidoso,Rio Ruidoso,river,2
+New Mexico,11,Carlsbad,Pecos River,river,2
+New Mexico,12,Logan,Ute Lake,reservoir,2
+New Mexico,13,Albuquerque,Rio Grande,river,2
+New Mexico,14,Española,Rio Grande,river,3
+New Mexico,15,Farmington,San Juan River,river,3
+New Mexico,16,Aztec,Animas River,river,3
+New Mexico,17,Conchas Dam,Conchas Lake,reservoir,3
+New Mexico,18,Tucumcari,Tucumcari Lake,lake,3
+New Mexico,19,Alto,Alto Lake,reservoir,3
+New Mexico,20,Roswell,Bottomless Lakes,lake,3
+New Mexico,21,Raton,Lake Maloya,reservoir,3
+New Mexico,22,Cimarron,Cimarron River,river,3
+New Mexico,23,Las Cruces,Rio Grande,river,3
+New Mexico,24,Bernalillo,Rio Grande,river,3
+New Mexico,25,Bloomfield,San Juan River,river,3
+Arizona,1,Lake Havasu City,Lake Havasu,reservoir,1
+Arizona,2,Page,Lake Powell,reservoir,1
+Arizona,3,Sedona,Oak Creek,river,1
+Arizona,4,Bullhead City,Colorado River,river,2
+Arizona,5,Parker,Colorado River,river,2
+Arizona,6,Yuma,Colorado River,river,2
+Arizona,7,Tempe,Tempe Town Lake,reservoir,2
+Arizona,8,Prescott,Watson Lake,reservoir,2
+Arizona,9,Cottonwood,Verde River,river,2
+Arizona,10,Pinetop-Lakeside,Rainbow Lake,lake,2
+Arizona,11,Show Low,Fool Hollow Lake,reservoir,2
+Arizona,12,Greer,Little Colorado River,river,2
+Arizona,13,Payson,East Verde River,river,2
+Arizona,14,Camp Verde,Verde River,river,3
+Arizona,15,Clarkdale,Verde River,river,3
+Arizona,16,Alpine,San Francisco River,river,3
+Arizona,17,Roosevelt,Theodore Roosevelt Lake,reservoir,3
+Arizona,18,Tortilla Flat,Canyon Lake,reservoir,3
+Arizona,19,Apache Junction,Canyon Lake,reservoir,3
+Arizona,20,San Carlos,San Carlos Lake,reservoir,3
+Arizona,21,Willow Beach,Colorado River,river,3
+Arizona,22,Martinez Lake,Colorado River,river,3
+Arizona,23,Ehrenberg,Colorado River,river,3
+Arizona,24,Topock,Colorado River,river,3
+Arizona,25,St. Johns,Lyman Lake,reservoir,3
+Utah,1,Garden City,Bear Lake,lake,1
+Utah,2,Moab,Colorado River,river,1
+Utah,3,Springdale,Virgin River,river,2
+Utah,4,Midway,Deer Creek Reservoir,reservoir,2
+Utah,5,Heber City,Jordanelle Reservoir,reservoir,2
+Utah,6,Huntsville,Pineview Reservoir,reservoir,2
+Utah,7,Eden,Pineview Reservoir,reservoir,2
+Utah,8,Dutch John,Flaming Gorge Reservoir,reservoir,2
+Utah,9,Manila,Flaming Gorge Reservoir,reservoir,2
+Utah,10,Bullfrog,Lake Powell,reservoir,2
+Utah,11,Bluff,San Juan River,river,2
+Utah,12,St. George,Virgin River,river,2
+Utah,13,Torrey,Fremont River,river,3
+Utah,14,Provo,Utah Lake,lake,3
+Utah,15,Saratoga Springs,Utah Lake,lake,3
+Utah,16,Vineyard,Utah Lake,lake,3
+Utah,17,Logan,Logan River,river,3
+Utah,18,Green River,Green River,river,3
+Utah,19,Mexican Hat,San Juan River,river,3
+Utah,20,Ticaboo,Lake Powell,reservoir,3
+Utah,21,Duchesne,Starvation Reservoir,reservoir,3
+Utah,22,Vernal,Steinaker Reservoir,reservoir,3
+Utah,23,Laketown,Bear Lake,lake,3
+Utah,24,Magna,Great Salt Lake,lake,3
+Utah,25,Syracuse,Great Salt Lake,lake,3
+Nevada,1,Incline Village,Lake Tahoe,lake,1
+Nevada,2,Zephyr Cove,Lake Tahoe,lake,2
+Nevada,3,Stateline,Lake Tahoe,lake,2
+Nevada,4,Crystal Bay,Lake Tahoe,lake,2
+Nevada,5,Glenbrook,Lake Tahoe,lake,2
+Nevada,6,Boulder City,Lake Mead,reservoir,2
+Nevada,7,Laughlin,Colorado River,river,2
+Nevada,8,Henderson,Lake Las Vegas,reservoir,2
+Nevada,9,Reno,Truckee River,river,2
+Nevada,10,Overton,Lake Mead,reservoir,3
+Nevada,11,Sparks,Sparks Marina,lake,3
+Nevada,12,Carson City,Carson River,river,3
+Nevada,13,Fallon,Carson River,river,3
+Nevada,14,Silver Springs,Lahontan Reservoir,reservoir,3
+Nevada,15,Hawthorne,Walker Lake,lake,3
+Nevada,16,Sutcliffe,Pyramid Lake,lake,3
+Nevada,17,Nixon,Pyramid Lake,lake,3
+Nevada,18,Topaz Lake,Topaz Lake,reservoir,3
+Nevada,19,Gardnerville,Carson River,river,3
+Nevada,20,Yerington,Walker River,river,3
+Nevada,21,Ely,Cave Lake,reservoir,3
+Nevada,22,Elko,Humboldt River,river,3
+Nevada,23,Winnemucca,Humboldt River,river,3
+Nevada,24,Lovelock,Rye Patch Reservoir,reservoir,3
+Nevada,25,Mesquite,Virgin River,river,3
+Idaho,1,Coeur d'Alene,Lake Coeur d'Alene,lake,1
+Idaho,2,Sandpoint,Lake Pend Oreille,lake,1
+Idaho,3,McCall,Payette Lake,lake,1
+Idaho,4,Stanley,Salmon River,river,1
+Idaho,5,Ketchum,Big Wood River,river,2
+Idaho,6,Riggins,Salmon River,river,2
+Idaho,7,Salmon,Salmon River,river,2
+Idaho,8,Lewiston,Snake River,river,2
+Idaho,9,Harrison,Lake Coeur d'Alene,lake,2
+Idaho,10,Coolin,Priest Lake,lake,2
+Idaho,11,Hope,Lake Pend Oreille,lake,2
+Idaho,12,Bayview,Lake Pend Oreille,lake,2
+Idaho,13,Priest River,Pend Oreille River,river,2
+Idaho,14,Post Falls,Spokane River,river,2
+Idaho,15,Boise,Boise River,river,2
+Idaho,16,Cascade,Lake Cascade,reservoir,2
+Idaho,17,Donnelly,Lake Cascade,reservoir,2
+Idaho,18,Garden Valley,South Fork Payette River,river,2
+Idaho,19,Idaho Falls,Snake River,river,2
+Idaho,20,Island Park,Henrys Fork,river,2
+Idaho,21,Ashton,Henrys Fork,river,3
+Idaho,22,Twin Falls,Snake River,river,2
+Idaho,23,Hagerman,Snake River,river,2
+Idaho,24,Burley,Snake River,river,3
+Idaho,25,American Falls,American Falls Reservoir,reservoir,3
+Washington,1,Friday Harbor,Puget Sound,sound,1
+Washington,2,Port Townsend,Puget Sound,sound,1
+Washington,3,Gig Harbor,Puget Sound,sound,1
+Washington,4,Poulsbo,Liberty Bay,bay,1
+Washington,5,Coupeville,Penn Cove,bay,1
+Washington,6,Langley,Saratoga Passage,sound,1
+Washington,7,Eastsound,East Sound,sound,1
+Washington,8,La Conner,Swinomish Channel,river,1
+Washington,9,Chelan,Lake Chelan,lake,1
+Washington,10,Seattle,Puget Sound,sound,1
+Washington,11,Bainbridge Island,Puget Sound,sound,1
+Washington,12,Anacortes,Puget Sound,sound,2
+Washington,13,Bellingham,Bellingham Bay,bay,2
+Washington,14,Edmonds,Puget Sound,sound,2
+Washington,15,Kirkland,Lake Washington,lake,2
+Washington,16,Port Angeles,Strait of Juan de Fuca,sound,2
+Washington,17,Sequim,Sequim Bay,bay,2
+Washington,18,Westport,Pacific Ocean,ocean,2
+Washington,19,Ocean Shores,Pacific Ocean,ocean,2
+Washington,20,Long Beach,Pacific Ocean,ocean,2
+Washington,21,Ilwaco,Columbia River,river,2
+Washington,22,Manson,Lake Chelan,lake,2
+Washington,23,Leavenworth,Wenatchee River,river,2
+Washington,24,Winthrop,Methow River,river,2
+Washington,25,Stevenson,Columbia River,river,2
+Oregon,1,Cannon Beach,Pacific Ocean,ocean,1
+Oregon,2,Newport,Pacific Ocean,ocean,1
+Oregon,3,Astoria,Columbia River,river,1
+Oregon,4,Bend,Deschutes River,river,1
+Oregon,5,Hood River,Columbia River,river,1
+Oregon,6,Joseph,Wallowa Lake,lake,1
+Oregon,7,Manzanita,Pacific Ocean,ocean,1
+Oregon,8,Seaside,Pacific Ocean,ocean,1
+Oregon,9,Pacific City,Pacific Ocean,ocean,1
+Oregon,10,Yachats,Pacific Ocean,ocean,1
+Oregon,11,Bandon,Pacific Ocean,ocean,1
+Oregon,12,Lincoln City,Pacific Ocean,ocean,2
+Oregon,13,Depoe Bay,Pacific Ocean,ocean,2
+Oregon,14,Florence,Siuslaw River,river,2
+Oregon,15,Port Orford,Pacific Ocean,ocean,2
+Oregon,16,Gold Beach,Rogue River,river,2
+Oregon,17,Brookings,Pacific Ocean,ocean,2
+Oregon,18,Sunriver,Deschutes River,river,2
+Oregon,19,Cascade Locks,Columbia River,river,2
+Oregon,20,Rockaway Beach,Pacific Ocean,ocean,2
+Oregon,21,Garibaldi,Tillamook Bay,bay,3
+Oregon,22,Wheeler,Nehalem Bay,bay,3
+Oregon,23,Nehalem,Nehalem River,river,3
+Oregon,24,Waldport,Alsea Bay,bay,3
+Oregon,25,Detroit,Detroit Lake,reservoir,3
+California,1,Carmel-by-the-Sea,Pacific Ocean,ocean,1
+California,2,Monterey,Monterey Bay,bay,1
+California,3,Santa Barbara,Pacific Ocean,ocean,1
+California,4,Sausalito,San Francisco Bay,bay,1
+California,5,Tahoe City,Lake Tahoe,lake,1
+California,6,South Lake Tahoe,Lake Tahoe,lake,1
+California,7,Laguna Beach,Pacific Ocean,ocean,1
+California,8,Coronado,Pacific Ocean,ocean,1
+California,9,Mendocino,Pacific Ocean,ocean,1
+California,10,Avalon,Pacific Ocean,ocean,1
+California,11,Morro Bay,Morro Bay,bay,1
+California,12,Capitola,Monterey Bay,bay,1
+California,13,Half Moon Bay,Pacific Ocean,ocean,1
+California,14,Cambria,Pacific Ocean,ocean,1
+California,15,Pismo Beach,Pacific Ocean,ocean,1
+California,16,Encinitas,Pacific Ocean,ocean,1
+California,17,Del Mar,Pacific Ocean,ocean,1
+California,18,Bodega Bay,Bodega Bay,bay,1
+California,19,Avila Beach,Pacific Ocean,ocean,2
+California,20,Big Bear Lake,Big Bear Lake,reservoir,1
+California,21,Mammoth Lakes,Twin Lakes,lake,1
+California,22,Truckee,Donner Lake,lake,2
+California,23,June Lake,June Lake,lake,2
+California,24,Guerneville,Russian River,river,2
+California,25,Pacific Grove,Monterey Bay,bay,2
+Alaska,1,Homer,Kachemak Bay,bay,1
+Alaska,2,Seward,Resurrection Bay,bay,1
+Alaska,3,Sitka,Sitka Sound,sound,1
+Alaska,4,Juneau,Gastineau Channel,sound,1
+Alaska,5,Ketchikan,Tongass Narrows,sound,1
+Alaska,6,Skagway,Taiya Inlet,sound,1
+Alaska,7,Haines,Chilkat Inlet,sound,2
+Alaska,8,Girdwood,Turnagain Arm,bay,2
+Alaska,9,Whittier,Prince William Sound,sound,2
+Alaska,10,Valdez,Prince William Sound,sound,2
+Alaska,11,Cordova,Prince William Sound,sound,2
+Alaska,12,Kodiak,Gulf of Alaska,ocean,2
+Alaska,13,Petersburg,Wrangell Narrows,sound,2
+Alaska,14,Wrangell,Zimovia Strait,sound,2
+Alaska,15,Gustavus,Icy Passage,sound,2
+Alaska,16,Hoonah,Icy Strait,sound,2
+Alaska,17,Seldovia,Kachemak Bay,bay,2
+Alaska,18,Talkeetna,Susitna River,river,2
+Alaska,19,Kenai,Kenai River,river,2
+Alaska,20,Soldotna,Kenai River,river,2
+Alaska,21,Cooper Landing,Kenai River,river,2
+Alaska,22,Hope,Turnagain Arm,bay,3
+Alaska,23,Craig,Bucareli Bay,bay,3
+Alaska,24,Nome,Bering Sea,ocean,3
+Alaska,25,Unalaska,Bering Sea,ocean,3
+Hawaii,1,Kailua-Kona,Pacific Ocean,ocean,1
+Hawaii,2,Hilo,Hilo Bay,bay,1
+Hawaii,3,Honolulu,Pacific Ocean,ocean,1
+Hawaii,4,Kailua,Kailua Bay,bay,1
+Hawaii,5,Haleiwa,Pacific Ocean,ocean,1
+Hawaii,6,Paia,Pacific Ocean,ocean,1
+Hawaii,7,Hana,Hana Bay,bay,1
+Hawaii,8,Kihei,Pacific Ocean,ocean,1
+Hawaii,9,Kapaa,Pacific Ocean,ocean,1
+Hawaii,10,Hanalei,Hanalei Bay,bay,1
+Hawaii,11,Princeville,Pacific Ocean,ocean,2
+Hawaii,12,Koloa,Pacific Ocean,ocean,2
+Hawaii,13,Lihue,Nawiliwili Bay,bay,2
+Hawaii,14,Waimea,Pacific Ocean,ocean,2
+Hawaii,15,Wailea,Pacific Ocean,ocean,2
+Hawaii,16,Kaunakakai,Pacific Ocean,ocean,2
+Hawaii,17,Captain Cook,Kealakekua Bay,bay,2
+Hawaii,18,Kaneohe,Kaneohe Bay,bay,2
+Hawaii,19,Waimanalo,Waimanalo Bay,bay,2
+Hawaii,20,Honokaa,Pacific Ocean,ocean,3
+Hawaii,21,Laupahoehoe,Pacific Ocean,ocean,3
+Hawaii,22,Kawaihae,Pacific Ocean,ocean,3
+Hawaii,23,Puako,Pacific Ocean,ocean,3
+Hawaii,24,Kekaha,Pacific Ocean,ocean,3
+Hawaii,25,Waianae,Pacific Ocean,ocean,3

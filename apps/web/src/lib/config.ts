@@ -97,6 +97,33 @@ export function getCategoryByKey(key: string): CategoryDef {
   return cat;
 }
 
+export interface UpcomingTown {
+  name: string;
+  state: string;
+  state_code: string;
+  tier: number;
+  water_body: string;
+  lat: number;
+  lng: number;
+}
+
+/**
+ * Waterfront towns queued for future coverage (tiers 1-2 from the CSV,
+ * geocoded by pipeline/geocode_towns.py). Shown on the homepage map as
+ * "coming soon" dots; excludes towns that already have a launched city.
+ */
+export function getUpcomingTowns(): UpcomingTown[] {
+  const file = path.join(DATA_DIR, 'cities', 'waterfront-towns-geo.json');
+  if (!fs.existsSync(file)) return [];
+  const towns = JSON.parse(fs.readFileSync(file, 'utf8')) as UpcomingTown[];
+  const launched = new Set(
+    getCities().map((c) => `${c.name.toLowerCase()}|${c.state_code}`)
+  );
+  return towns.filter(
+    (t) => !launched.has(`${t.name.toLowerCase()}|${t.state_code}`)
+  );
+}
+
 export function getAttributes(): AttributeDef[] {
   const raw = readYaml(path.join(DATA_DIR, 'attributes.yaml')) as {
     attributes: unknown[];

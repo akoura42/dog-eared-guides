@@ -1,0 +1,7904 @@
+[
+ {
+  "name": "Alexander City",
+  "state": "Alabama",
+  "state_code": "AL",
+  "tier": 2,
+  "water_body": "Lake Martin",
+  "lat": 32.9167,
+  "lng": -85.9406
+ },
+ {
+  "name": "Dadeville",
+  "state": "Alabama",
+  "state_code": "AL",
+  "tier": 2,
+  "water_body": "Lake Martin",
+  "lat": 32.8261,
+  "lng": -85.7762
+ },
+ {
+  "name": "Daphne",
+  "state": "Alabama",
+  "state_code": "AL",
+  "tier": 2,
+  "water_body": "Mobile Bay",
+  "lat": 30.6261,
+  "lng": -87.8818
+ },
+ {
+  "name": "Dauphin Island",
+  "state": "Alabama",
+  "state_code": "AL",
+  "tier": 2,
+  "water_body": "Gulf of Mexico",
+  "lat": 30.2509,
+  "lng": -88.1713
+ },
+ {
+  "name": "Eufaula",
+  "state": "Alabama",
+  "state_code": "AL",
+  "tier": 2,
+  "water_body": "Lake Eufaula",
+  "lat": 31.9099,
+  "lng": -85.1527
+ },
+ {
+  "name": "Fairhope",
+  "state": "Alabama",
+  "state_code": "AL",
+  "tier": 1,
+  "water_body": "Mobile Bay",
+  "lat": 30.5209,
+  "lng": -87.8791
+ },
+ {
+  "name": "Florence",
+  "state": "Alabama",
+  "state_code": "AL",
+  "tier": 2,
+  "water_body": "Tennessee River",
+  "lat": 34.8303,
+  "lng": -87.6661
+ },
+ {
+  "name": "Gulf Shores",
+  "state": "Alabama",
+  "state_code": "AL",
+  "tier": 1,
+  "water_body": "Gulf of Mexico",
+  "lat": 30.2758,
+  "lng": -87.7013
+ },
+ {
+  "name": "Guntersville",
+  "state": "Alabama",
+  "state_code": "AL",
+  "tier": 2,
+  "water_body": "Lake Guntersville",
+  "lat": 34.3679,
+  "lng": -86.2523
+ },
+ {
+  "name": "Magnolia Springs",
+  "state": "Alabama",
+  "state_code": "AL",
+  "tier": 2,
+  "water_body": "Magnolia River",
+  "lat": 30.4034,
+  "lng": -87.7759
+ },
+ {
+  "name": "Mobile",
+  "state": "Alabama",
+  "state_code": "AL",
+  "tier": 2,
+  "water_body": "Mobile River",
+  "lat": 30.6684,
+  "lng": -88.1002
+ },
+ {
+  "name": "Orange Beach",
+  "state": "Alabama",
+  "state_code": "AL",
+  "tier": 1,
+  "water_body": "Gulf of Mexico",
+  "lat": 30.294,
+  "lng": -87.5954
+ },
+ {
+  "name": "Point Clear",
+  "state": "Alabama",
+  "state_code": "AL",
+  "tier": 2,
+  "water_body": "Mobile Bay",
+  "lat": 30.4861,
+  "lng": -87.9111
+ },
+ {
+  "name": "Wetumpka",
+  "state": "Alabama",
+  "state_code": "AL",
+  "tier": 2,
+  "water_body": "Coosa River",
+  "lat": 32.5404,
+  "lng": -86.207
+ },
+ {
+  "name": "Cooper Landing",
+  "state": "Alaska",
+  "state_code": "AK",
+  "tier": 2,
+  "water_body": "Kenai River",
+  "lat": 60.4946,
+  "lng": -149.8439
+ },
+ {
+  "name": "Cordova",
+  "state": "Alaska",
+  "state_code": "AK",
+  "tier": 2,
+  "water_body": "Prince William Sound",
+  "lat": 60.5301,
+  "lng": -145.6421
+ },
+ {
+  "name": "Girdwood",
+  "state": "Alaska",
+  "state_code": "AK",
+  "tier": 2,
+  "water_body": "Turnagain Arm",
+  "lat": 60.9632,
+  "lng": -149.1337
+ },
+ {
+  "name": "Gustavus",
+  "state": "Alaska",
+  "state_code": "AK",
+  "tier": 2,
+  "water_body": "Icy Passage",
+  "lat": 58.4347,
+  "lng": -135.7282
+ },
+ {
+  "name": "Haines",
+  "state": "Alaska",
+  "state_code": "AK",
+  "tier": 2,
+  "water_body": "Chilkat Inlet",
+  "lat": 59.2604,
+  "lng": -135.4722
+ },
+ {
+  "name": "Homer",
+  "state": "Alaska",
+  "state_code": "AK",
+  "tier": 1,
+  "water_body": "Kachemak Bay",
+  "lat": 59.6475,
+  "lng": -151.5131
+ },
+ {
+  "name": "Hoonah",
+  "state": "Alaska",
+  "state_code": "AK",
+  "tier": 2,
+  "water_body": "Icy Strait",
+  "lat": 58.122,
+  "lng": -135.4315
+ },
+ {
+  "name": "Juneau",
+  "state": "Alaska",
+  "state_code": "AK",
+  "tier": 1,
+  "water_body": "Gastineau Channel",
+  "lat": 58.3729,
+  "lng": -134.1784
+ },
+ {
+  "name": "Kenai",
+  "state": "Alaska",
+  "state_code": "AK",
+  "tier": 2,
+  "water_body": "Kenai River",
+  "lat": 60.5622,
+  "lng": -151.2081
+ },
+ {
+  "name": "Ketchikan",
+  "state": "Alaska",
+  "state_code": "AK",
+  "tier": 1,
+  "water_body": "Tongass Narrows",
+  "lat": 55.3571,
+  "lng": -131.6746
+ },
+ {
+  "name": "Kodiak",
+  "state": "Alaska",
+  "state_code": "AK",
+  "tier": 2,
+  "water_body": "Gulf of Alaska",
+  "lat": 57.7912,
+  "lng": -152.4197
+ },
+ {
+  "name": "Petersburg",
+  "state": "Alaska",
+  "state_code": "AK",
+  "tier": 2,
+  "water_body": "Wrangell Narrows",
+  "lat": 56.7569,
+  "lng": -132.8749
+ },
+ {
+  "name": "Seldovia",
+  "state": "Alaska",
+  "state_code": "AK",
+  "tier": 2,
+  "water_body": "Kachemak Bay",
+  "lat": 59.4395,
+  "lng": -151.7104
+ },
+ {
+  "name": "Seward",
+  "state": "Alaska",
+  "state_code": "AK",
+  "tier": 1,
+  "water_body": "Resurrection Bay",
+  "lat": 60.1248,
+  "lng": -149.3916
+ },
+ {
+  "name": "Sitka",
+  "state": "Alaska",
+  "state_code": "AK",
+  "tier": 1,
+  "water_body": "Sitka Sound",
+  "lat": 57.1932,
+  "lng": -135.3674
+ },
+ {
+  "name": "Skagway",
+  "state": "Alaska",
+  "state_code": "AK",
+  "tier": 1,
+  "water_body": "Taiya Inlet",
+  "lat": 59.4644,
+  "lng": -135.2757
+ },
+ {
+  "name": "Soldotna",
+  "state": "Alaska",
+  "state_code": "AK",
+  "tier": 2,
+  "water_body": "Kenai River",
+  "lat": 60.4853,
+  "lng": -151.069
+ },
+ {
+  "name": "Talkeetna",
+  "state": "Alaska",
+  "state_code": "AK",
+  "tier": 2,
+  "water_body": "Susitna River",
+  "lat": 62.3095,
+  "lng": -149.9239
+ },
+ {
+  "name": "Valdez",
+  "state": "Alaska",
+  "state_code": "AK",
+  "tier": 2,
+  "water_body": "Prince William Sound",
+  "lat": 61.0836,
+  "lng": -146.3172
+ },
+ {
+  "name": "Whittier",
+  "state": "Alaska",
+  "state_code": "AK",
+  "tier": 2,
+  "water_body": "Prince William Sound",
+  "lat": 60.7773,
+  "lng": -148.6637
+ },
+ {
+  "name": "Wrangell",
+  "state": "Alaska",
+  "state_code": "AK",
+  "tier": 2,
+  "water_body": "Zimovia Strait",
+  "lat": 56.1808,
+  "lng": -132.0268
+ },
+ {
+  "name": "Bullhead City",
+  "state": "Arizona",
+  "state_code": "AZ",
+  "tier": 2,
+  "water_body": "Colorado River",
+  "lat": 35.1274,
+  "lng": -114.556
+ },
+ {
+  "name": "Cottonwood",
+  "state": "Arizona",
+  "state_code": "AZ",
+  "tier": 2,
+  "water_body": "Verde River",
+  "lat": 34.7508,
+  "lng": -111.984
+ },
+ {
+  "name": "Greer",
+  "state": "Arizona",
+  "state_code": "AZ",
+  "tier": 2,
+  "water_body": "Little Colorado River",
+  "lat": 34.0058,
+  "lng": -109.4606
+ },
+ {
+  "name": "Lake Havasu City",
+  "state": "Arizona",
+  "state_code": "AZ",
+  "tier": 1,
+  "water_body": "Lake Havasu",
+  "lat": 34.4998,
+  "lng": -114.3109
+ },
+ {
+  "name": "Page",
+  "state": "Arizona",
+  "state_code": "AZ",
+  "tier": 1,
+  "water_body": "Lake Powell",
+  "lat": 36.9418,
+  "lng": -111.5133
+ },
+ {
+  "name": "Parker",
+  "state": "Arizona",
+  "state_code": "AZ",
+  "tier": 2,
+  "water_body": "Colorado River",
+  "lat": 34.034,
+  "lng": -114.2281
+ },
+ {
+  "name": "Payson",
+  "state": "Arizona",
+  "state_code": "AZ",
+  "tier": 2,
+  "water_body": "East Verde River",
+  "lat": 34.2438,
+  "lng": -111.319
+ },
+ {
+  "name": "Pinetop-Lakeside",
+  "state": "Arizona",
+  "state_code": "AZ",
+  "tier": 2,
+  "water_body": "Rainbow Lake",
+  "lat": 34.1484,
+  "lng": -109.966
+ },
+ {
+  "name": "Prescott",
+  "state": "Arizona",
+  "state_code": "AZ",
+  "tier": 2,
+  "water_body": "Watson Lake",
+  "lat": 34.5922,
+  "lng": -112.4467
+ },
+ {
+  "name": "Sedona",
+  "state": "Arizona",
+  "state_code": "AZ",
+  "tier": 1,
+  "water_body": "Oak Creek",
+  "lat": 34.8585,
+  "lng": -111.7931
+ },
+ {
+  "name": "Show Low",
+  "state": "Arizona",
+  "state_code": "AZ",
+  "tier": 2,
+  "water_body": "Fool Hollow Lake",
+  "lat": 34.2651,
+  "lng": -110.0383
+ },
+ {
+  "name": "Tempe",
+  "state": "Arizona",
+  "state_code": "AZ",
+  "tier": 2,
+  "water_body": "Tempe Town Lake",
+  "lat": 33.3884,
+  "lng": -111.9318
+ },
+ {
+  "name": "Yuma",
+  "state": "Arizona",
+  "state_code": "AZ",
+  "tier": 2,
+  "water_body": "Colorado River",
+  "lat": 32.5163,
+  "lng": -114.5218
+ },
+ {
+  "name": "Bull Shoals",
+  "state": "Arkansas",
+  "state_code": "AR",
+  "tier": 2,
+  "water_body": "Bull Shoals Lake",
+  "lat": 36.3736,
+  "lng": -92.5915
+ },
+ {
+  "name": "Calico Rock",
+  "state": "Arkansas",
+  "state_code": "AR",
+  "tier": 2,
+  "water_body": "White River",
+  "lat": 36.122,
+  "lng": -92.1259
+ },
+ {
+  "name": "Cotter",
+  "state": "Arkansas",
+  "state_code": "AR",
+  "tier": 2,
+  "water_body": "White River",
+  "lat": 36.2819,
+  "lng": -92.5208
+ },
+ {
+  "name": "Eureka Springs",
+  "state": "Arkansas",
+  "state_code": "AR",
+  "tier": 2,
+  "water_body": "Beaver Lake",
+  "lat": 36.4108,
+  "lng": -93.7449
+ },
+ {
+  "name": "Heber Springs",
+  "state": "Arkansas",
+  "state_code": "AR",
+  "tier": 2,
+  "water_body": "Greers Ferry Lake",
+  "lat": 35.4996,
+  "lng": -92.0293
+ },
+ {
+  "name": "Hot Springs",
+  "state": "Arkansas",
+  "state_code": "AR",
+  "tier": 1,
+  "water_body": "Lake Hamilton",
+  "lat": 34.4894,
+  "lng": -93.0503
+ },
+ {
+  "name": "Hot Springs Village",
+  "state": "Arkansas",
+  "state_code": "AR",
+  "tier": 2,
+  "water_body": "Lake Balboa",
+  "lat": 34.6581,
+  "lng": -92.9686
+ },
+ {
+  "name": "Jasper",
+  "state": "Arkansas",
+  "state_code": "AR",
+  "tier": 2,
+  "water_body": "Buffalo National River",
+  "lat": 36.0121,
+  "lng": -93.1875
+ },
+ {
+  "name": "Little Rock",
+  "state": "Arkansas",
+  "state_code": "AR",
+  "tier": 2,
+  "water_body": "Arkansas River",
+  "lat": 34.7254,
+  "lng": -92.3586
+ },
+ {
+  "name": "Mount Ida",
+  "state": "Arkansas",
+  "state_code": "AR",
+  "tier": 2,
+  "water_body": "Lake Ouachita",
+  "lat": 34.5492,
+  "lng": -93.6299
+ },
+ {
+  "name": "Mountain Home",
+  "state": "Arkansas",
+  "state_code": "AR",
+  "tier": 2,
+  "water_body": "Norfork Lake",
+  "lat": 36.3351,
+  "lng": -92.384
+ },
+ {
+  "name": "Mountain View",
+  "state": "Arkansas",
+  "state_code": "AR",
+  "tier": 2,
+  "water_body": "White River",
+  "lat": 35.8616,
+  "lng": -92.1097
+ },
+ {
+  "name": "Ponca",
+  "state": "Arkansas",
+  "state_code": "AR",
+  "tier": 2,
+  "water_body": "Buffalo National River",
+  "lat": 36.0293,
+  "lng": -93.3624
+ },
+ {
+  "name": "Rogers",
+  "state": "Arkansas",
+  "state_code": "AR",
+  "tier": 2,
+  "water_body": "Beaver Lake",
+  "lat": 36.3181,
+  "lng": -94.1523
+ },
+ {
+  "name": "Siloam Springs",
+  "state": "Arkansas",
+  "state_code": "AR",
+  "tier": 2,
+  "water_body": "Illinois River",
+  "lat": 36.1846,
+  "lng": -94.5315
+ },
+ {
+  "name": "Avalon",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 33.3433,
+  "lng": -118.3176
+ },
+ {
+  "name": "Avila Beach",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 2,
+  "water_body": "Pacific Ocean",
+  "lat": 35.1994,
+  "lng": -120.7208
+ },
+ {
+  "name": "Big Bear Lake",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 1,
+  "water_body": "Big Bear Lake",
+  "lat": 34.2429,
+  "lng": -116.8939
+ },
+ {
+  "name": "Bodega Bay",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 1,
+  "water_body": "Bodega Bay",
+  "lat": 38.3275,
+  "lng": -123.0299
+ },
+ {
+  "name": "Cambria",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 35.5521,
+  "lng": -121.0841
+ },
+ {
+  "name": "Capitola",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 1,
+  "water_body": "Monterey Bay",
+  "lat": 36.9761,
+  "lng": -121.954
+ },
+ {
+  "name": "Carmel-by-the-Sea",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 36.5529,
+  "lng": -121.9219
+ },
+ {
+  "name": "Coronado",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 32.6576,
+  "lng": -117.1565
+ },
+ {
+  "name": "Del Mar",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 32.9639,
+  "lng": -117.2598
+ },
+ {
+  "name": "Encinitas",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 33.0506,
+  "lng": -117.2636
+ },
+ {
+  "name": "Guerneville",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 2,
+  "water_body": "Russian River",
+  "lat": 38.5172,
+  "lng": -122.9899
+ },
+ {
+  "name": "Half Moon Bay",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 37.4673,
+  "lng": -122.4405
+ },
+ {
+  "name": "June Lake",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 2,
+  "water_body": "June Lake",
+  "lat": 37.7618,
+  "lng": -119.1147
+ },
+ {
+  "name": "Laguna Beach",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 33.5434,
+  "lng": -117.7618
+ },
+ {
+  "name": "Mammoth Lakes",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 1,
+  "water_body": "Twin Lakes",
+  "lat": 37.6244,
+  "lng": -118.9884
+ },
+ {
+  "name": "Mendocino",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 39.3125,
+  "lng": -123.7924
+ },
+ {
+  "name": "Monterey",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 1,
+  "water_body": "Monterey Bay",
+  "lat": 36.6012,
+  "lng": -121.8831
+ },
+ {
+  "name": "Morro Bay",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 1,
+  "water_body": "Morro Bay",
+  "lat": 35.3668,
+  "lng": -120.8683
+ },
+ {
+  "name": "Pacific Grove",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 2,
+  "water_body": "Monterey Bay",
+  "lat": 36.6226,
+  "lng": -121.9264
+ },
+ {
+  "name": "Pismo Beach",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 35.1532,
+  "lng": -120.6739
+ },
+ {
+  "name": "Santa Barbara",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 34.4036,
+  "lng": -119.7137
+ },
+ {
+  "name": "Sausalito",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 1,
+  "water_body": "San Francisco Bay",
+  "lat": 37.8584,
+  "lng": -122.4918
+ },
+ {
+  "name": "South Lake Tahoe",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 1,
+  "water_body": "Lake Tahoe",
+  "lat": 38.9282,
+  "lng": -119.981
+ },
+ {
+  "name": "Tahoe City",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 1,
+  "water_body": "Lake Tahoe",
+  "lat": 39.1689,
+  "lng": -120.1435
+ },
+ {
+  "name": "Truckee",
+  "state": "California",
+  "state_code": "CA",
+  "tier": 2,
+  "water_body": "Donner Lake",
+  "lat": 39.3505,
+  "lng": -120.1939
+ },
+ {
+  "name": "Buena Vista",
+  "state": "Colorado",
+  "state_code": "CO",
+  "tier": 1,
+  "water_body": "Arkansas River",
+  "lat": 38.832,
+  "lng": -106.1387
+ },
+ {
+  "name": "Canon City",
+  "state": "Colorado",
+  "state_code": "CO",
+  "tier": 2,
+  "water_body": "Arkansas River",
+  "lat": 38.4423,
+  "lng": -105.2349
+ },
+ {
+  "name": "Dillon",
+  "state": "Colorado",
+  "state_code": "CO",
+  "tier": 2,
+  "water_body": "Dillon Reservoir",
+  "lat": 39.6259,
+  "lng": -106.0437
+ },
+ {
+  "name": "Durango",
+  "state": "Colorado",
+  "state_code": "CO",
+  "tier": 1,
+  "water_body": "Animas River",
+  "lat": 37.2654,
+  "lng": -107.8782
+ },
+ {
+  "name": "Estes Park",
+  "state": "Colorado",
+  "state_code": "CO",
+  "tier": 2,
+  "water_body": "Lake Estes",
+  "lat": 40.367,
+  "lng": -105.5339
+ },
+ {
+  "name": "Frisco",
+  "state": "Colorado",
+  "state_code": "CO",
+  "tier": 2,
+  "water_body": "Dillon Reservoir",
+  "lat": 39.5785,
+  "lng": -106.091
+ },
+ {
+  "name": "Glenwood Springs",
+  "state": "Colorado",
+  "state_code": "CO",
+  "tier": 1,
+  "water_body": "Colorado River",
+  "lat": 39.5471,
+  "lng": -107.3426
+ },
+ {
+  "name": "Golden",
+  "state": "Colorado",
+  "state_code": "CO",
+  "tier": 2,
+  "water_body": "Clear Creek",
+  "lat": 39.7425,
+  "lng": -105.2106
+ },
+ {
+  "name": "Granby",
+  "state": "Colorado",
+  "state_code": "CO",
+  "tier": 2,
+  "water_body": "Lake Granby",
+  "lat": 40.0648,
+  "lng": -105.9194
+ },
+ {
+  "name": "Grand Lake",
+  "state": "Colorado",
+  "state_code": "CO",
+  "tier": 1,
+  "water_body": "Grand Lake",
+  "lat": 40.2559,
+  "lng": -105.8289
+ },
+ {
+  "name": "Gunnison",
+  "state": "Colorado",
+  "state_code": "CO",
+  "tier": 2,
+  "water_body": "Gunnison River",
+  "lat": 38.548,
+  "lng": -106.9246
+ },
+ {
+  "name": "Pagosa Springs",
+  "state": "Colorado",
+  "state_code": "CO",
+  "tier": 1,
+  "water_body": "San Juan River",
+  "lat": 37.2634,
+  "lng": -107.0036
+ },
+ {
+  "name": "Palisade",
+  "state": "Colorado",
+  "state_code": "CO",
+  "tier": 2,
+  "water_body": "Colorado River",
+  "lat": 39.1079,
+  "lng": -108.3573
+ },
+ {
+  "name": "Ridgway",
+  "state": "Colorado",
+  "state_code": "CO",
+  "tier": 2,
+  "water_body": "Uncompahgre River",
+  "lat": 38.1572,
+  "lng": -107.7546
+ },
+ {
+  "name": "Salida",
+  "state": "Colorado",
+  "state_code": "CO",
+  "tier": 1,
+  "water_body": "Arkansas River",
+  "lat": 38.5299,
+  "lng": -105.9979
+ },
+ {
+  "name": "Steamboat Springs",
+  "state": "Colorado",
+  "state_code": "CO",
+  "tier": 1,
+  "water_body": "Yampa River",
+  "lat": 40.4756,
+  "lng": -106.8229
+ },
+ {
+  "name": "Branford",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 2,
+  "water_body": "Long Island Sound",
+  "lat": 41.2795,
+  "lng": -72.8151
+ },
+ {
+  "name": "Chester",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 2,
+  "water_body": "Connecticut River",
+  "lat": 41.4032,
+  "lng": -72.4509
+ },
+ {
+  "name": "Clinton",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 2,
+  "water_body": "Long Island Sound",
+  "lat": 41.2764,
+  "lng": -72.529
+ },
+ {
+  "name": "East Haddam",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 2,
+  "water_body": "Connecticut River",
+  "lat": 41.4529,
+  "lng": -72.4613
+ },
+ {
+  "name": "East Lyme",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 2,
+  "water_body": "Long Island Sound",
+  "lat": 41.3482,
+  "lng": -72.2093
+ },
+ {
+  "name": "Essex",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 1,
+  "water_body": "Connecticut River",
+  "lat": 41.3534,
+  "lng": -72.3906
+ },
+ {
+  "name": "Fairfield",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 2,
+  "water_body": "Long Island Sound",
+  "lat": 41.1412,
+  "lng": -73.2637
+ },
+ {
+  "name": "Greenwich",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 1,
+  "water_body": "Long Island Sound",
+  "lat": 41.0278,
+  "lng": -73.6269
+ },
+ {
+  "name": "Groton",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 2,
+  "water_body": "Thames River",
+  "lat": 41.3251,
+  "lng": -72.0669
+ },
+ {
+  "name": "Guilford",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 2,
+  "water_body": "Long Island Sound",
+  "lat": 41.2828,
+  "lng": -72.6816
+ },
+ {
+  "name": "Kent",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 2,
+  "water_body": "Housatonic River",
+  "lat": 41.7247,
+  "lng": -73.4769
+ },
+ {
+  "name": "Litchfield",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 2,
+  "water_body": "Bantam Lake",
+  "lat": 41.7457,
+  "lng": -73.1892
+ },
+ {
+  "name": "Madison",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 2,
+  "water_body": "Long Island Sound",
+  "lat": 41.2794,
+  "lng": -72.5983
+ },
+ {
+  "name": "Milford",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 2,
+  "water_body": "Long Island Sound",
+  "lat": 41.2236,
+  "lng": -73.0646
+ },
+ {
+  "name": "Mystic",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 1,
+  "water_body": "Mystic River",
+  "lat": 41.356,
+  "lng": -71.9559
+ },
+ {
+  "name": "New London",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 2,
+  "water_body": "Thames River",
+  "lat": 41.333,
+  "lng": -72.0962
+ },
+ {
+  "name": "Norwalk",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 2,
+  "water_body": "Long Island Sound",
+  "lat": 41.0927,
+  "lng": -73.4198
+ },
+ {
+  "name": "Old Lyme",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 2,
+  "water_body": "Connecticut River",
+  "lat": 41.3163,
+  "lng": -72.3296
+ },
+ {
+  "name": "Old Saybrook",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 1,
+  "water_body": "Long Island Sound",
+  "lat": 41.2918,
+  "lng": -72.3762
+ },
+ {
+  "name": "Stamford",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 2,
+  "water_body": "Long Island Sound",
+  "lat": 41.0796,
+  "lng": -73.5461
+ },
+ {
+  "name": "Stonington",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 1,
+  "water_body": "Long Island Sound",
+  "lat": 41.3348,
+  "lng": -71.8995
+ },
+ {
+  "name": "Washington",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 2,
+  "water_body": "Lake Waramaug",
+  "lat": 41.6306,
+  "lng": -73.3113
+ },
+ {
+  "name": "Westbrook",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 2,
+  "water_body": "Long Island Sound",
+  "lat": 41.286,
+  "lng": -72.4488
+ },
+ {
+  "name": "Westport",
+  "state": "Connecticut",
+  "state_code": "CT",
+  "tier": 1,
+  "water_body": "Long Island Sound",
+  "lat": 41.1415,
+  "lng": -73.3579
+ },
+ {
+  "name": "Bethany Beach",
+  "state": "Delaware",
+  "state_code": "DE",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 38.5376,
+  "lng": -75.0643
+ },
+ {
+  "name": "Bowers Beach",
+  "state": "Delaware",
+  "state_code": "DE",
+  "tier": 2,
+  "water_body": "Delaware Bay",
+  "lat": 39.0599,
+  "lng": -75.4014
+ },
+ {
+  "name": "Delaware City",
+  "state": "Delaware",
+  "state_code": "DE",
+  "tier": 2,
+  "water_body": "Delaware River",
+  "lat": 39.5738,
+  "lng": -75.5946
+ },
+ {
+  "name": "Dewey Beach",
+  "state": "Delaware",
+  "state_code": "DE",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 38.6957,
+  "lng": -75.0752
+ },
+ {
+  "name": "Fenwick Island",
+  "state": "Delaware",
+  "state_code": "DE",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 38.4603,
+  "lng": -75.0533
+ },
+ {
+  "name": "Lewes",
+  "state": "Delaware",
+  "state_code": "DE",
+  "tier": 1,
+  "water_body": "Delaware Bay",
+  "lat": 38.7786,
+  "lng": -75.1437
+ },
+ {
+  "name": "Long Neck",
+  "state": "Delaware",
+  "state_code": "DE",
+  "tier": 2,
+  "water_body": "Rehoboth Bay",
+  "lat": 38.622,
+  "lng": -75.1621
+ },
+ {
+  "name": "Milford",
+  "state": "Delaware",
+  "state_code": "DE",
+  "tier": 2,
+  "water_body": "Mispillion River",
+  "lat": 38.9098,
+  "lng": -75.4223
+ },
+ {
+  "name": "Millsboro",
+  "state": "Delaware",
+  "state_code": "DE",
+  "tier": 2,
+  "water_body": "Indian River",
+  "lat": 38.5887,
+  "lng": -75.3096
+ },
+ {
+  "name": "Milton",
+  "state": "Delaware",
+  "state_code": "DE",
+  "tier": 2,
+  "water_body": "Broadkill River",
+  "lat": 38.7751,
+  "lng": -75.3099
+ },
+ {
+  "name": "New Castle",
+  "state": "Delaware",
+  "state_code": "DE",
+  "tier": 2,
+  "water_body": "Delaware River",
+  "lat": 39.67,
+  "lng": -75.5665
+ },
+ {
+  "name": "Ocean View",
+  "state": "Delaware",
+  "state_code": "DE",
+  "tier": 2,
+  "water_body": "Assawoman Bay",
+  "lat": 38.5265,
+  "lng": -75.1097
+ },
+ {
+  "name": "Rehoboth Beach",
+  "state": "Delaware",
+  "state_code": "DE",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 38.7174,
+  "lng": -75.0806
+ },
+ {
+  "name": "Slaughter Beach",
+  "state": "Delaware",
+  "state_code": "DE",
+  "tier": 2,
+  "water_body": "Delaware Bay",
+  "lat": 38.9183,
+  "lng": -75.3133
+ },
+ {
+  "name": "Wilmington",
+  "state": "Delaware",
+  "state_code": "DE",
+  "tier": 2,
+  "water_body": "Christina River",
+  "lat": 39.7357,
+  "lng": -75.5321
+ },
+ {
+  "name": "Anna Maria",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 1,
+  "water_body": "Gulf of Mexico",
+  "lat": 27.5298,
+  "lng": -82.7337
+ },
+ {
+  "name": "Apalachicola",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 1,
+  "water_body": "Apalachicola Bay",
+  "lat": 29.7274,
+  "lng": -84.994
+ },
+ {
+  "name": "Boca Grande",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 1,
+  "water_body": "Gulf of Mexico",
+  "lat": 26.749,
+  "lng": -82.262
+ },
+ {
+  "name": "Cedar Key",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 1,
+  "water_body": "Gulf of Mexico",
+  "lat": 29.1503,
+  "lng": -83.0374
+ },
+ {
+  "name": "Clearwater Beach",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 1,
+  "water_body": "Gulf of Mexico",
+  "lat": 27.9775,
+  "lng": -82.8279
+ },
+ {
+  "name": "Crystal River",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 1,
+  "water_body": "Crystal River",
+  "lat": 28.8955,
+  "lng": -82.6019
+ },
+ {
+  "name": "Delray Beach",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 26.4559,
+  "lng": -80.0904
+ },
+ {
+  "name": "Destin",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 1,
+  "water_body": "Gulf of Mexico",
+  "lat": 30.4044,
+  "lng": -86.4714
+ },
+ {
+  "name": "Dunedin",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 1,
+  "water_body": "St. Joseph Sound",
+  "lat": 28.0257,
+  "lng": -82.8154
+ },
+ {
+  "name": "Fernandina Beach",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 30.6581,
+  "lng": -81.4515
+ },
+ {
+  "name": "Islamorada",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 24.9237,
+  "lng": -80.6291
+ },
+ {
+  "name": "Key Largo",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 25.1226,
+  "lng": -80.4116
+ },
+ {
+  "name": "Key West",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 1,
+  "water_body": "Gulf of Mexico",
+  "lat": 24.5651,
+  "lng": -81.7755
+ },
+ {
+  "name": "Marathon",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 24.7323,
+  "lng": -81.0251
+ },
+ {
+  "name": "Mount Dora",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 1,
+  "water_body": "Lake Dora",
+  "lat": 28.8133,
+  "lng": -81.6334
+ },
+ {
+  "name": "Naples",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 1,
+  "water_body": "Gulf of Mexico",
+  "lat": 26.1505,
+  "lng": -81.7953
+ },
+ {
+  "name": "New Smyrna Beach",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 29.0294,
+  "lng": -80.9549
+ },
+ {
+  "name": "Pensacola",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 1,
+  "water_body": "Pensacola Bay",
+  "lat": 30.441,
+  "lng": -87.1912
+ },
+ {
+  "name": "Sanibel",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 1,
+  "water_body": "Gulf of Mexico",
+  "lat": 26.451,
+  "lng": -82.1057
+ },
+ {
+  "name": "Sarasota",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 1,
+  "water_body": "Sarasota Bay",
+  "lat": 27.3383,
+  "lng": -82.5437
+ },
+ {
+  "name": "Seaside",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 1,
+  "water_body": "Gulf of Mexico",
+  "lat": 30.3202,
+  "lng": -86.1377
+ },
+ {
+  "name": "St. Augustine",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 1,
+  "water_body": "Matanzas River",
+  "lat": 29.8962,
+  "lng": -81.3111
+ },
+ {
+  "name": "St. Pete Beach",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 1,
+  "water_body": "Gulf of Mexico",
+  "lat": 27.7168,
+  "lng": -82.7396
+ },
+ {
+  "name": "Stuart",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 2,
+  "water_body": "St. Lucie River",
+  "lat": 27.1953,
+  "lng": -80.2441
+ },
+ {
+  "name": "Tarpon Springs",
+  "state": "Florida",
+  "state_code": "FL",
+  "tier": 1,
+  "water_body": "Anclote River",
+  "lat": 28.1491,
+  "lng": -82.7794
+ },
+ {
+  "name": "Augusta",
+  "state": "Georgia",
+  "state_code": "GA",
+  "tier": 2,
+  "water_body": "Savannah River",
+  "lat": 33.471,
+  "lng": -81.9748
+ },
+ {
+  "name": "Blairsville",
+  "state": "Georgia",
+  "state_code": "GA",
+  "tier": 2,
+  "water_body": "Lake Nottely",
+  "lat": 34.8757,
+  "lng": -83.9547
+ },
+ {
+  "name": "Blue Ridge",
+  "state": "Georgia",
+  "state_code": "GA",
+  "tier": 2,
+  "water_body": "Toccoa River",
+  "lat": 34.8665,
+  "lng": -84.3219
+ },
+ {
+  "name": "Brunswick",
+  "state": "Georgia",
+  "state_code": "GA",
+  "tier": 2,
+  "water_body": "Brunswick River",
+  "lat": 31.1361,
+  "lng": -81.4669
+ },
+ {
+  "name": "Buford",
+  "state": "Georgia",
+  "state_code": "GA",
+  "tier": 2,
+  "water_body": "Lake Lanier",
+  "lat": 34.1186,
+  "lng": -83.9886
+ },
+ {
+  "name": "Columbus",
+  "state": "Georgia",
+  "state_code": "GA",
+  "tier": 2,
+  "water_body": "Chattahoochee River",
+  "lat": 32.5102,
+  "lng": -84.8749
+ },
+ {
+  "name": "Darien",
+  "state": "Georgia",
+  "state_code": "GA",
+  "tier": 2,
+  "water_body": "Darien River",
+  "lat": 31.3435,
+  "lng": -81.4241
+ },
+ {
+  "name": "Eatonton",
+  "state": "Georgia",
+  "state_code": "GA",
+  "tier": 2,
+  "water_body": "Lake Oconee",
+  "lat": 33.3258,
+  "lng": -83.3889
+ },
+ {
+  "name": "Ellijay",
+  "state": "Georgia",
+  "state_code": "GA",
+  "tier": 2,
+  "water_body": "Coosawattee River",
+  "lat": 34.6913,
+  "lng": -84.4839
+ },
+ {
+  "name": "Gainesville",
+  "state": "Georgia",
+  "state_code": "GA",
+  "tier": 2,
+  "water_body": "Lake Lanier",
+  "lat": 34.2901,
+  "lng": -83.8291
+ },
+ {
+  "name": "Greensboro",
+  "state": "Georgia",
+  "state_code": "GA",
+  "tier": 2,
+  "water_body": "Lake Oconee",
+  "lat": 33.5636,
+  "lng": -83.1891
+ },
+ {
+  "name": "Helen",
+  "state": "Georgia",
+  "state_code": "GA",
+  "tier": 1,
+  "water_body": "Chattahoochee River",
+  "lat": 34.7084,
+  "lng": -83.7276
+ },
+ {
+  "name": "Hiawassee",
+  "state": "Georgia",
+  "state_code": "GA",
+  "tier": 2,
+  "water_body": "Lake Chatuge",
+  "lat": 34.9462,
+  "lng": -83.7463
+ },
+ {
+  "name": "Jekyll Island",
+  "state": "Georgia",
+  "state_code": "GA",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 31.0637,
+  "lng": -81.4187
+ },
+ {
+  "name": "Lakemont",
+  "state": "Georgia",
+  "state_code": "GA",
+  "tier": 2,
+  "water_body": "Lake Rabun",
+  "lat": 34.782,
+  "lng": -83.4163
+ },
+ {
+  "name": "McCaysville",
+  "state": "Georgia",
+  "state_code": "GA",
+  "tier": 2,
+  "water_body": "Toccoa River",
+  "lat": 34.982,
+  "lng": -84.3712
+ },
+ {
+  "name": "Milledgeville",
+  "state": "Georgia",
+  "state_code": "GA",
+  "tier": 2,
+  "water_body": "Lake Sinclair",
+  "lat": 33.0879,
+  "lng": -83.2406
+ },
+ {
+  "name": "Savannah",
+  "state": "Georgia",
+  "state_code": "GA",
+  "tier": 1,
+  "water_body": "Savannah River",
+  "lat": 32.018,
+  "lng": -81.1965
+ },
+ {
+  "name": "Sea Island",
+  "state": "Georgia",
+  "state_code": "GA",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 31.2002,
+  "lng": -81.3332
+ },
+ {
+  "name": "St. Marys",
+  "state": "Georgia",
+  "state_code": "GA",
+  "tier": 2,
+  "water_body": "St. Marys River",
+  "lat": 30.7542,
+  "lng": -81.5726
+ },
+ {
+  "name": "St. Simons Island",
+  "state": "Georgia",
+  "state_code": "GA",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 31.2183,
+  "lng": -81.3612
+ },
+ {
+  "name": "Tallulah Falls",
+  "state": "Georgia",
+  "state_code": "GA",
+  "tier": 2,
+  "water_body": "Tallulah River",
+  "lat": 34.7258,
+  "lng": -83.3875
+ },
+ {
+  "name": "Tybee Island",
+  "state": "Georgia",
+  "state_code": "GA",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 32.0102,
+  "lng": -80.8559
+ },
+ {
+  "name": "Captain Cook",
+  "state": "Hawaii",
+  "state_code": "HI",
+  "tier": 2,
+  "water_body": "Kealakekua Bay",
+  "lat": 19.4995,
+  "lng": -155.8937
+ },
+ {
+  "name": "Haleiwa",
+  "state": "Hawaii",
+  "state_code": "HI",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 21.6024,
+  "lng": -158.0956
+ },
+ {
+  "name": "Hana",
+  "state": "Hawaii",
+  "state_code": "HI",
+  "tier": 1,
+  "water_body": "Hana Bay",
+  "lat": 20.774,
+  "lng": -156.0143
+ },
+ {
+  "name": "Hanalei",
+  "state": "Hawaii",
+  "state_code": "HI",
+  "tier": 1,
+  "water_body": "Hanalei Bay",
+  "lat": 22.2038,
+  "lng": -159.4977
+ },
+ {
+  "name": "Hilo",
+  "state": "Hawaii",
+  "state_code": "HI",
+  "tier": 1,
+  "water_body": "Hilo Bay",
+  "lat": 19.6887,
+  "lng": -155.0829
+ },
+ {
+  "name": "Honolulu",
+  "state": "Hawaii",
+  "state_code": "HI",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 21.3045,
+  "lng": -157.8557
+ },
+ {
+  "name": "Kailua",
+  "state": "Hawaii",
+  "state_code": "HI",
+  "tier": 1,
+  "water_body": "Kailua Bay",
+  "lat": 19.6456,
+  "lng": -155.9977
+ },
+ {
+  "name": "Kailua-Kona",
+  "state": "Hawaii",
+  "state_code": "HI",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 19.6419,
+  "lng": -155.9969
+ },
+ {
+  "name": "Kaneohe",
+  "state": "Hawaii",
+  "state_code": "HI",
+  "tier": 2,
+  "water_body": "Kaneohe Bay",
+  "lat": 21.4093,
+  "lng": -157.7896
+ },
+ {
+  "name": "Kapaa",
+  "state": "Hawaii",
+  "state_code": "HI",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 22.0882,
+  "lng": -159.3519
+ },
+ {
+  "name": "Kaunakakai",
+  "state": "Hawaii",
+  "state_code": "HI",
+  "tier": 2,
+  "water_body": "Pacific Ocean",
+  "lat": 21.0942,
+  "lng": -157.0009
+ },
+ {
+  "name": "Kihei",
+  "state": "Hawaii",
+  "state_code": "HI",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 20.7661,
+  "lng": -156.4352
+ },
+ {
+  "name": "Koloa",
+  "state": "Hawaii",
+  "state_code": "HI",
+  "tier": 2,
+  "water_body": "Pacific Ocean",
+  "lat": 21.903,
+  "lng": -159.4611
+ },
+ {
+  "name": "Lihue",
+  "state": "Hawaii",
+  "state_code": "HI",
+  "tier": 2,
+  "water_body": "Nawiliwili Bay",
+  "lat": 21.9726,
+  "lng": -159.3558
+ },
+ {
+  "name": "Paia",
+  "state": "Hawaii",
+  "state_code": "HI",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 20.9093,
+  "lng": -156.3693
+ },
+ {
+  "name": "Princeville",
+  "state": "Hawaii",
+  "state_code": "HI",
+  "tier": 2,
+  "water_body": "Pacific Ocean",
+  "lat": 22.2197,
+  "lng": -159.4814
+ },
+ {
+  "name": "Wailea",
+  "state": "Hawaii",
+  "state_code": "HI",
+  "tier": 2,
+  "water_body": "Pacific Ocean",
+  "lat": 20.6824,
+  "lng": -156.4353
+ },
+ {
+  "name": "Waimanalo",
+  "state": "Hawaii",
+  "state_code": "HI",
+  "tier": 2,
+  "water_body": "Waimanalo Bay",
+  "lat": 21.3421,
+  "lng": -157.7302
+ },
+ {
+  "name": "Waimea",
+  "state": "Hawaii",
+  "state_code": "HI",
+  "tier": 2,
+  "water_body": "Pacific Ocean",
+  "lat": 20.0103,
+  "lng": -155.6255
+ },
+ {
+  "name": "Bayview",
+  "state": "Idaho",
+  "state_code": "ID",
+  "tier": 2,
+  "water_body": "Lake Pend Oreille",
+  "lat": 47.9803,
+  "lng": -116.5604
+ },
+ {
+  "name": "Boise",
+  "state": "Idaho",
+  "state_code": "ID",
+  "tier": 2,
+  "water_body": "Boise River",
+  "lat": 43.6166,
+  "lng": -116.2009
+ },
+ {
+  "name": "Cascade",
+  "state": "Idaho",
+  "state_code": "ID",
+  "tier": 2,
+  "water_body": "Lake Cascade",
+  "lat": 44.5088,
+  "lng": -116.0436
+ },
+ {
+  "name": "Coeur d'Alene",
+  "state": "Idaho",
+  "state_code": "ID",
+  "tier": 1,
+  "water_body": "Lake Coeur d'Alene",
+  "lat": 47.7035,
+  "lng": -116.7939
+ },
+ {
+  "name": "Coolin",
+  "state": "Idaho",
+  "state_code": "ID",
+  "tier": 2,
+  "water_body": "Priest Lake",
+  "lat": 48.476,
+  "lng": -116.844
+ },
+ {
+  "name": "Donnelly",
+  "state": "Idaho",
+  "state_code": "ID",
+  "tier": 2,
+  "water_body": "Lake Cascade",
+  "lat": 44.7334,
+  "lng": -116.0868
+ },
+ {
+  "name": "Garden Valley",
+  "state": "Idaho",
+  "state_code": "ID",
+  "tier": 2,
+  "water_body": "South Fork Payette River",
+  "lat": 44.0834,
+  "lng": -115.9585
+ },
+ {
+  "name": "Hagerman",
+  "state": "Idaho",
+  "state_code": "ID",
+  "tier": 2,
+  "water_body": "Snake River",
+  "lat": 42.816,
+  "lng": -114.8977
+ },
+ {
+  "name": "Harrison",
+  "state": "Idaho",
+  "state_code": "ID",
+  "tier": 2,
+  "water_body": "Lake Coeur d'Alene",
+  "lat": 47.4695,
+  "lng": -116.8086
+ },
+ {
+  "name": "Hope",
+  "state": "Idaho",
+  "state_code": "ID",
+  "tier": 2,
+  "water_body": "Lake Pend Oreille",
+  "lat": 48.2504,
+  "lng": -116.3046
+ },
+ {
+  "name": "Idaho Falls",
+  "state": "Idaho",
+  "state_code": "ID",
+  "tier": 2,
+  "water_body": "Snake River",
+  "lat": 43.4889,
+  "lng": -112.0363
+ },
+ {
+  "name": "Island Park",
+  "state": "Idaho",
+  "state_code": "ID",
+  "tier": 2,
+  "water_body": "Henrys Fork",
+  "lat": 44.5342,
+  "lng": -111.3378
+ },
+ {
+  "name": "Ketchum",
+  "state": "Idaho",
+  "state_code": "ID",
+  "tier": 2,
+  "water_body": "Big Wood River",
+  "lat": 43.6877,
+  "lng": -114.3801
+ },
+ {
+  "name": "Lewiston",
+  "state": "Idaho",
+  "state_code": "ID",
+  "tier": 2,
+  "water_body": "Snake River",
+  "lat": 46.3931,
+  "lng": -116.9935
+ },
+ {
+  "name": "McCall",
+  "state": "Idaho",
+  "state_code": "ID",
+  "tier": 1,
+  "water_body": "Payette Lake",
+  "lat": 44.9084,
+  "lng": -116.1125
+ },
+ {
+  "name": "Post Falls",
+  "state": "Idaho",
+  "state_code": "ID",
+  "tier": 2,
+  "water_body": "Spokane River",
+  "lat": 47.7256,
+  "lng": -116.9442
+ },
+ {
+  "name": "Priest River",
+  "state": "Idaho",
+  "state_code": "ID",
+  "tier": 2,
+  "water_body": "Pend Oreille River",
+  "lat": 48.1843,
+  "lng": -116.9054
+ },
+ {
+  "name": "Riggins",
+  "state": "Idaho",
+  "state_code": "ID",
+  "tier": 2,
+  "water_body": "Salmon River",
+  "lat": 45.4206,
+  "lng": -116.3176
+ },
+ {
+  "name": "Salmon",
+  "state": "Idaho",
+  "state_code": "ID",
+  "tier": 2,
+  "water_body": "Salmon River",
+  "lat": 45.1744,
+  "lng": -113.8948
+ },
+ {
+  "name": "Sandpoint",
+  "state": "Idaho",
+  "state_code": "ID",
+  "tier": 1,
+  "water_body": "Lake Pend Oreille",
+  "lat": 48.2817,
+  "lng": -116.56
+ },
+ {
+  "name": "Stanley",
+  "state": "Idaho",
+  "state_code": "ID",
+  "tier": 1,
+  "water_body": "Salmon River",
+  "lat": 44.2118,
+  "lng": -114.9341
+ },
+ {
+  "name": "Twin Falls",
+  "state": "Idaho",
+  "state_code": "ID",
+  "tier": 2,
+  "water_body": "Snake River",
+  "lat": 42.5647,
+  "lng": -114.4606
+ },
+ {
+  "name": "Alton",
+  "state": "Illinois",
+  "state_code": "IL",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 38.9039,
+  "lng": -90.1512
+ },
+ {
+  "name": "Antioch",
+  "state": "Illinois",
+  "state_code": "IL",
+  "tier": 2,
+  "water_body": "Chain O'Lakes",
+  "lat": 42.4772,
+  "lng": -88.0671
+ },
+ {
+  "name": "Chicago",
+  "state": "Illinois",
+  "state_code": "IL",
+  "tier": 1,
+  "water_body": "Lake Michigan",
+  "lat": 41.837,
+  "lng": -87.6849
+ },
+ {
+  "name": "Evanston",
+  "state": "Illinois",
+  "state_code": "IL",
+  "tier": 2,
+  "water_body": "Lake Michigan",
+  "lat": 42.0464,
+  "lng": -87.6944
+ },
+ {
+  "name": "Fox Lake",
+  "state": "Illinois",
+  "state_code": "IL",
+  "tier": 2,
+  "water_body": "Chain O'Lakes",
+  "lat": 42.4282,
+  "lng": -88.1839
+ },
+ {
+  "name": "Galena",
+  "state": "Illinois",
+  "state_code": "IL",
+  "tier": 1,
+  "water_body": "Galena River",
+  "lat": 42.4221,
+  "lng": -90.4278
+ },
+ {
+  "name": "Grafton",
+  "state": "Illinois",
+  "state_code": "IL",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 38.9765,
+  "lng": -90.4257
+ },
+ {
+  "name": "Lake Forest",
+  "state": "Illinois",
+  "state_code": "IL",
+  "tier": 2,
+  "water_body": "Lake Michigan",
+  "lat": 42.2353,
+  "lng": -87.8573
+ },
+ {
+  "name": "McHenry",
+  "state": "Illinois",
+  "state_code": "IL",
+  "tier": 2,
+  "water_body": "Fox River",
+  "lat": 42.3362,
+  "lng": -88.2917
+ },
+ {
+  "name": "Moline",
+  "state": "Illinois",
+  "state_code": "IL",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 41.4823,
+  "lng": -90.4934
+ },
+ {
+  "name": "Nauvoo",
+  "state": "Illinois",
+  "state_code": "IL",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 40.5445,
+  "lng": -91.3828
+ },
+ {
+  "name": "Ottawa",
+  "state": "Illinois",
+  "state_code": "IL",
+  "tier": 2,
+  "water_body": "Illinois River",
+  "lat": 41.354,
+  "lng": -88.8234
+ },
+ {
+  "name": "Peoria",
+  "state": "Illinois",
+  "state_code": "IL",
+  "tier": 2,
+  "water_body": "Illinois River",
+  "lat": 40.7516,
+  "lng": -89.6172
+ },
+ {
+  "name": "Quincy",
+  "state": "Illinois",
+  "state_code": "IL",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 39.9337,
+  "lng": -91.3793
+ },
+ {
+  "name": "Rock Island",
+  "state": "Illinois",
+  "state_code": "IL",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 41.4702,
+  "lng": -90.5831
+ },
+ {
+  "name": "Utica",
+  "state": "Illinois",
+  "state_code": "IL",
+  "tier": 2,
+  "water_body": "Illinois River",
+  "lat": 41.3406,
+  "lng": -89.0101
+ },
+ {
+  "name": "Angola",
+  "state": "Indiana",
+  "state_code": "IN",
+  "tier": 2,
+  "water_body": "Lake James",
+  "lat": 41.6411,
+  "lng": -85.011
+ },
+ {
+  "name": "Bloomington",
+  "state": "Indiana",
+  "state_code": "IN",
+  "tier": 2,
+  "water_body": "Lake Monroe",
+  "lat": 39.1637,
+  "lng": -86.5243
+ },
+ {
+  "name": "Chesterton",
+  "state": "Indiana",
+  "state_code": "IN",
+  "tier": 2,
+  "water_body": "Lake Michigan",
+  "lat": 41.5998,
+  "lng": -87.055
+ },
+ {
+  "name": "Culver",
+  "state": "Indiana",
+  "state_code": "IN",
+  "tier": 2,
+  "water_body": "Lake Maxinkuckee",
+  "lat": 41.2166,
+  "lng": -86.4243
+ },
+ {
+  "name": "Jeffersonville",
+  "state": "Indiana",
+  "state_code": "IN",
+  "tier": 2,
+  "water_body": "Ohio River",
+  "lat": 38.3324,
+  "lng": -85.6961
+ },
+ {
+  "name": "Madison",
+  "state": "Indiana",
+  "state_code": "IN",
+  "tier": 1,
+  "water_body": "Ohio River",
+  "lat": 38.7588,
+  "lng": -85.3971
+ },
+ {
+  "name": "Michigan City",
+  "state": "Indiana",
+  "state_code": "IN",
+  "tier": 2,
+  "water_body": "Lake Michigan",
+  "lat": 41.7088,
+  "lng": -86.8669
+ },
+ {
+  "name": "Monticello",
+  "state": "Indiana",
+  "state_code": "IN",
+  "tier": 2,
+  "water_body": "Lake Shafer",
+  "lat": 40.7452,
+  "lng": -86.7673
+ },
+ {
+  "name": "Newburgh",
+  "state": "Indiana",
+  "state_code": "IN",
+  "tier": 2,
+  "water_body": "Ohio River",
+  "lat": 37.9493,
+  "lng": -87.4055
+ },
+ {
+  "name": "Syracuse",
+  "state": "Indiana",
+  "state_code": "IN",
+  "tier": 2,
+  "water_body": "Lake Wawasee",
+  "lat": 41.4219,
+  "lng": -85.7498
+ },
+ {
+  "name": "Winona Lake",
+  "state": "Indiana",
+  "state_code": "IN",
+  "tier": 2,
+  "water_body": "Winona Lake",
+  "lat": 41.2171,
+  "lng": -85.8131
+ },
+ {
+  "name": "Arnolds Park",
+  "state": "Iowa",
+  "state_code": "IA",
+  "tier": 1,
+  "water_body": "West Lake Okoboji",
+  "lat": 43.3604,
+  "lng": -95.1292
+ },
+ {
+  "name": "Bellevue",
+  "state": "Iowa",
+  "state_code": "IA",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 42.2627,
+  "lng": -90.4315
+ },
+ {
+  "name": "Clear Lake",
+  "state": "Iowa",
+  "state_code": "IA",
+  "tier": 2,
+  "water_body": "Clear Lake",
+  "lat": 43.1351,
+  "lng": -93.3737
+ },
+ {
+  "name": "Davenport",
+  "state": "Iowa",
+  "state_code": "IA",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 41.5568,
+  "lng": -90.6039
+ },
+ {
+  "name": "Dubuque",
+  "state": "Iowa",
+  "state_code": "IA",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 42.4989,
+  "lng": -90.7073
+ },
+ {
+  "name": "Guttenberg",
+  "state": "Iowa",
+  "state_code": "IA",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 42.7886,
+  "lng": -91.1088
+ },
+ {
+  "name": "Lansing",
+  "state": "Iowa",
+  "state_code": "IA",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 43.3598,
+  "lng": -91.2229
+ },
+ {
+  "name": "Le Claire",
+  "state": "Iowa",
+  "state_code": "IA",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 41.5956,
+  "lng": -90.377
+ },
+ {
+  "name": "Marquette",
+  "state": "Iowa",
+  "state_code": "IA",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 43.0431,
+  "lng": -91.1925
+ },
+ {
+  "name": "McGregor",
+  "state": "Iowa",
+  "state_code": "IA",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 43.0283,
+  "lng": -91.1857
+ },
+ {
+  "name": "Okoboji",
+  "state": "Iowa",
+  "state_code": "IA",
+  "tier": 1,
+  "water_body": "East Lake Okoboji",
+  "lat": 43.3881,
+  "lng": -95.1332
+ },
+ {
+  "name": "Pella",
+  "state": "Iowa",
+  "state_code": "IA",
+  "tier": 2,
+  "water_body": "Lake Red Rock",
+  "lat": 41.4047,
+  "lng": -92.9174
+ },
+ {
+  "name": "Spirit Lake",
+  "state": "Iowa",
+  "state_code": "IA",
+  "tier": 2,
+  "water_body": "Big Spirit Lake",
+  "lat": 43.4167,
+  "lng": -95.1131
+ },
+ {
+  "name": "West Okoboji",
+  "state": "Iowa",
+  "state_code": "IA",
+  "tier": 2,
+  "water_body": "West Lake Okoboji",
+  "lat": 43.3477,
+  "lng": -95.1664
+ },
+ {
+  "name": "Atchison",
+  "state": "Kansas",
+  "state_code": "KS",
+  "tier": 2,
+  "water_body": "Missouri River",
+  "lat": 39.5626,
+  "lng": -95.1366
+ },
+ {
+  "name": "Council Grove",
+  "state": "Kansas",
+  "state_code": "KS",
+  "tier": 2,
+  "water_body": "Council Grove Lake",
+  "lat": 38.6631,
+  "lng": -96.4918
+ },
+ {
+  "name": "Lawrence",
+  "state": "Kansas",
+  "state_code": "KS",
+  "tier": 2,
+  "water_body": "Kansas River",
+  "lat": 38.96,
+  "lng": -95.2629
+ },
+ {
+  "name": "Manhattan",
+  "state": "Kansas",
+  "state_code": "KS",
+  "tier": 2,
+  "water_body": "Tuttle Creek Lake",
+  "lat": 39.1883,
+  "lng": -96.6059
+ },
+ {
+  "name": "Wichita",
+  "state": "Kansas",
+  "state_code": "KS",
+  "tier": 2,
+  "water_body": "Arkansas River",
+  "lat": 37.6906,
+  "lng": -97.3458
+ },
+ {
+  "name": "Wilson",
+  "state": "Kansas",
+  "state_code": "KS",
+  "tier": 2,
+  "water_body": "Wilson Lake",
+  "lat": 38.8253,
+  "lng": -98.4749
+ },
+ {
+  "name": "Augusta",
+  "state": "Kentucky",
+  "state_code": "KY",
+  "tier": 2,
+  "water_body": "Ohio River",
+  "lat": 38.7726,
+  "lng": -84.0002
+ },
+ {
+  "name": "Brownsville",
+  "state": "Kentucky",
+  "state_code": "KY",
+  "tier": 2,
+  "water_body": "Green River",
+  "lat": 37.1949,
+  "lng": -86.2653
+ },
+ {
+  "name": "Burnside",
+  "state": "Kentucky",
+  "state_code": "KY",
+  "tier": 2,
+  "water_body": "Lake Cumberland",
+  "lat": 37.0043,
+  "lng": -84.6437
+ },
+ {
+  "name": "Cadiz",
+  "state": "Kentucky",
+  "state_code": "KY",
+  "tier": 2,
+  "water_body": "Lake Barkley",
+  "lat": 36.8615,
+  "lng": -87.8172
+ },
+ {
+  "name": "Carrollton",
+  "state": "Kentucky",
+  "state_code": "KY",
+  "tier": 2,
+  "water_body": "Ohio River",
+  "lat": 38.6796,
+  "lng": -85.1658
+ },
+ {
+  "name": "Covington",
+  "state": "Kentucky",
+  "state_code": "KY",
+  "tier": 2,
+  "water_body": "Ohio River",
+  "lat": 39.0351,
+  "lng": -84.5196
+ },
+ {
+  "name": "Frankfort",
+  "state": "Kentucky",
+  "state_code": "KY",
+  "tier": 2,
+  "water_body": "Kentucky River",
+  "lat": 38.195,
+  "lng": -84.8659
+ },
+ {
+  "name": "Gilbertsville",
+  "state": "Kentucky",
+  "state_code": "KY",
+  "tier": 2,
+  "water_body": "Kentucky Lake",
+  "lat": 37.0248,
+  "lng": -88.311
+ },
+ {
+  "name": "Grand Rivers",
+  "state": "Kentucky",
+  "state_code": "KY",
+  "tier": 2,
+  "water_body": "Kentucky Lake",
+  "lat": 37.0047,
+  "lng": -88.2318
+ },
+ {
+  "name": "Jamestown",
+  "state": "Kentucky",
+  "state_code": "KY",
+  "tier": 2,
+  "water_body": "Lake Cumberland",
+  "lat": 36.9906,
+  "lng": -85.0644
+ },
+ {
+  "name": "Louisville",
+  "state": "Kentucky",
+  "state_code": "KY",
+  "tier": 2,
+  "water_body": "Ohio River",
+  "lat": 38.2247,
+  "lng": -85.7406
+ },
+ {
+  "name": "Maysville",
+  "state": "Kentucky",
+  "state_code": "KY",
+  "tier": 2,
+  "water_body": "Ohio River",
+  "lat": 38.65,
+  "lng": -83.793
+ },
+ {
+  "name": "Morehead",
+  "state": "Kentucky",
+  "state_code": "KY",
+  "tier": 2,
+  "water_body": "Cave Run Lake",
+  "lat": 38.19,
+  "lng": -83.4491
+ },
+ {
+  "name": "Owensboro",
+  "state": "Kentucky",
+  "state_code": "KY",
+  "tier": 2,
+  "water_body": "Ohio River",
+  "lat": 37.7571,
+  "lng": -87.1167
+ },
+ {
+  "name": "Paducah",
+  "state": "Kentucky",
+  "state_code": "KY",
+  "tier": 1,
+  "water_body": "Ohio River",
+  "lat": 37.0709,
+  "lng": -88.6445
+ },
+ {
+  "name": "Somerset",
+  "state": "Kentucky",
+  "state_code": "KY",
+  "tier": 2,
+  "water_body": "Lake Cumberland",
+  "lat": 37.0865,
+  "lng": -84.6054
+ },
+ {
+  "name": "Baton Rouge",
+  "state": "Louisiana",
+  "state_code": "LA",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 30.4404,
+  "lng": -91.1332
+ },
+ {
+  "name": "Breaux Bridge",
+  "state": "Louisiana",
+  "state_code": "LA",
+  "tier": 2,
+  "water_body": "Bayou Teche",
+  "lat": 30.2831,
+  "lng": -91.9059
+ },
+ {
+  "name": "Covington",
+  "state": "Louisiana",
+  "state_code": "LA",
+  "tier": 2,
+  "water_body": "Bogue Falaya River",
+  "lat": 30.4802,
+  "lng": -90.1118
+ },
+ {
+  "name": "Grand Isle",
+  "state": "Louisiana",
+  "state_code": "LA",
+  "tier": 2,
+  "water_body": "Gulf of Mexico",
+  "lat": 29.2129,
+  "lng": -90.0291
+ },
+ {
+  "name": "Henderson",
+  "state": "Louisiana",
+  "state_code": "LA",
+  "tier": 2,
+  "water_body": "Atchafalaya Basin",
+  "lat": 30.3178,
+  "lng": -91.8037
+ },
+ {
+  "name": "Lafitte",
+  "state": "Louisiana",
+  "state_code": "LA",
+  "tier": 2,
+  "water_body": "Bayou Barataria",
+  "lat": 29.7109,
+  "lng": -90.0968
+ },
+ {
+  "name": "Lake Charles",
+  "state": "Louisiana",
+  "state_code": "LA",
+  "tier": 2,
+  "water_body": "Lake Charles",
+  "lat": 30.199,
+  "lng": -93.2108
+ },
+ {
+  "name": "Madisonville",
+  "state": "Louisiana",
+  "state_code": "LA",
+  "tier": 2,
+  "water_body": "Tchefuncte River",
+  "lat": 30.3985,
+  "lng": -90.166
+ },
+ {
+  "name": "Mandeville",
+  "state": "Louisiana",
+  "state_code": "LA",
+  "tier": 2,
+  "water_body": "Lake Pontchartrain",
+  "lat": 30.3767,
+  "lng": -90.1011
+ },
+ {
+  "name": "Many",
+  "state": "Louisiana",
+  "state_code": "LA",
+  "tier": 2,
+  "water_body": "Toledo Bend Reservoir",
+  "lat": 31.5661,
+  "lng": -93.4772
+ },
+ {
+  "name": "Natchitoches",
+  "state": "Louisiana",
+  "state_code": "LA",
+  "tier": 1,
+  "water_body": "Cane River Lake",
+  "lat": 31.7348,
+  "lng": -93.1009
+ },
+ {
+  "name": "New Iberia",
+  "state": "Louisiana",
+  "state_code": "LA",
+  "tier": 2,
+  "water_body": "Bayou Teche",
+  "lat": 30.0055,
+  "lng": -91.8203
+ },
+ {
+  "name": "New Orleans",
+  "state": "Louisiana",
+  "state_code": "LA",
+  "tier": 1,
+  "water_body": "Mississippi River",
+  "lat": 30.0534,
+  "lng": -89.9345
+ },
+ {
+  "name": "Slidell",
+  "state": "Louisiana",
+  "state_code": "LA",
+  "tier": 2,
+  "water_body": "Lake Pontchartrain",
+  "lat": 30.2889,
+  "lng": -89.7829
+ },
+ {
+  "name": "St. Francisville",
+  "state": "Louisiana",
+  "state_code": "LA",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 30.7842,
+  "lng": -91.3764
+ },
+ {
+  "name": "St. Martinville",
+  "state": "Louisiana",
+  "state_code": "LA",
+  "tier": 2,
+  "water_body": "Bayou Teche",
+  "lat": 30.127,
+  "lng": -91.8311
+ },
+ {
+  "name": "Venice",
+  "state": "Louisiana",
+  "state_code": "LA",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 29.2876,
+  "lng": -89.3644
+ },
+ {
+  "name": "Bar Harbor",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 44.3813,
+  "lng": -68.2111
+ },
+ {
+  "name": "Bath",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 2,
+  "water_body": "Kennebec River",
+  "lat": 43.9325,
+  "lng": -69.8472
+ },
+ {
+  "name": "Belfast",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 2,
+  "water_body": "Penobscot Bay",
+  "lat": 44.4259,
+  "lng": -69.0264
+ },
+ {
+  "name": "Boothbay Harbor",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 43.8556,
+  "lng": -69.6233
+ },
+ {
+  "name": "Camden",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 1,
+  "water_body": "Penobscot Bay",
+  "lat": 44.2138,
+  "lng": -69.0685
+ },
+ {
+  "name": "Castine",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 2,
+  "water_body": "Penobscot Bay",
+  "lat": 44.394,
+  "lng": -68.806
+ },
+ {
+  "name": "Damariscotta",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 2,
+  "water_body": "Damariscotta River",
+  "lat": 44.0172,
+  "lng": -69.5202
+ },
+ {
+  "name": "Eastport",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 2,
+  "water_body": "Passamaquoddy Bay",
+  "lat": 44.9109,
+  "lng": -67.0092
+ },
+ {
+  "name": "Freeport",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 2,
+  "water_body": "Casco Bay",
+  "lat": 43.8571,
+  "lng": -70.1026
+ },
+ {
+  "name": "Greenville",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 2,
+  "water_body": "Moosehead Lake",
+  "lat": 45.4661,
+  "lng": -69.5779
+ },
+ {
+  "name": "Kennebunkport",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 43.3632,
+  "lng": -70.4603
+ },
+ {
+  "name": "Lubec",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 44.8551,
+  "lng": -66.9899
+ },
+ {
+  "name": "Naples",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 2,
+  "water_body": "Long Lake",
+  "lat": 43.9606,
+  "lng": -70.6023
+ },
+ {
+  "name": "Northeast Harbor",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 44.2902,
+  "lng": -68.2909
+ },
+ {
+  "name": "Ogunquit",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 43.249,
+  "lng": -70.5992
+ },
+ {
+  "name": "Old Orchard Beach",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 43.5338,
+  "lng": -70.3568
+ },
+ {
+  "name": "Portland",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 1,
+  "water_body": "Casco Bay",
+  "lat": 43.6332,
+  "lng": -70.1853
+ },
+ {
+  "name": "Rangeley",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 2,
+  "water_body": "Rangeley Lake",
+  "lat": 44.9659,
+  "lng": -70.6521
+ },
+ {
+  "name": "Rockland",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 2,
+  "water_body": "Penobscot Bay",
+  "lat": 44.1239,
+  "lng": -69.1305
+ },
+ {
+  "name": "Southwest Harbor",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 44.2784,
+  "lng": -68.3286
+ },
+ {
+  "name": "Stonington",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 44.1566,
+  "lng": -68.6673
+ },
+ {
+  "name": "Wells",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 43.322,
+  "lng": -70.5807
+ },
+ {
+  "name": "Wiscasset",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 2,
+  "water_body": "Sheepscot River",
+  "lat": 44.0108,
+  "lng": -69.678
+ },
+ {
+  "name": "York",
+  "state": "Maine",
+  "state_code": "ME",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 43.4229,
+  "lng": -70.6547
+ },
+ {
+  "name": "Annapolis",
+  "state": "Maryland",
+  "state_code": "MD",
+  "tier": 1,
+  "water_body": "Chesapeake Bay",
+  "lat": 38.9722,
+  "lng": -76.5053
+ },
+ {
+  "name": "Baltimore",
+  "state": "Maryland",
+  "state_code": "MD",
+  "tier": 1,
+  "water_body": "Patapsco River",
+  "lat": 39.3,
+  "lng": -76.6105
+ },
+ {
+  "name": "Cambridge",
+  "state": "Maryland",
+  "state_code": "MD",
+  "tier": 2,
+  "water_body": "Choptank River",
+  "lat": 38.5541,
+  "lng": -76.0771
+ },
+ {
+  "name": "Chesapeake Beach",
+  "state": "Maryland",
+  "state_code": "MD",
+  "tier": 2,
+  "water_body": "Chesapeake Bay",
+  "lat": 38.6895,
+  "lng": -76.5544
+ },
+ {
+  "name": "Chesapeake City",
+  "state": "Maryland",
+  "state_code": "MD",
+  "tier": 2,
+  "water_body": "Chesapeake & Delaware Canal",
+  "lat": 39.5272,
+  "lng": -75.8117
+ },
+ {
+  "name": "Chestertown",
+  "state": "Maryland",
+  "state_code": "MD",
+  "tier": 2,
+  "water_body": "Chester River",
+  "lat": 39.2204,
+  "lng": -76.0705
+ },
+ {
+  "name": "Crisfield",
+  "state": "Maryland",
+  "state_code": "MD",
+  "tier": 2,
+  "water_body": "Tangier Sound",
+  "lat": 37.9755,
+  "lng": -75.8545
+ },
+ {
+  "name": "Ewell",
+  "state": "Maryland",
+  "state_code": "MD",
+  "tier": 2,
+  "water_body": "Chesapeake Bay",
+  "lat": 37.9957,
+  "lng": -76.0333
+ },
+ {
+  "name": "Grasonville",
+  "state": "Maryland",
+  "state_code": "MD",
+  "tier": 2,
+  "water_body": "Kent Narrows",
+  "lat": 38.9575,
+  "lng": -76.1978
+ },
+ {
+  "name": "Havre de Grace",
+  "state": "Maryland",
+  "state_code": "MD",
+  "tier": 2,
+  "water_body": "Susquehanna River",
+  "lat": 39.5466,
+  "lng": -76.1136
+ },
+ {
+  "name": "Leonardtown",
+  "state": "Maryland",
+  "state_code": "MD",
+  "tier": 2,
+  "water_body": "Breton Bay",
+  "lat": 38.3039,
+  "lng": -76.6397
+ },
+ {
+  "name": "McHenry",
+  "state": "Maryland",
+  "state_code": "MD",
+  "tier": 2,
+  "water_body": "Deep Creek Lake",
+  "lat": 39.5584,
+  "lng": -79.3528
+ },
+ {
+  "name": "North Beach",
+  "state": "Maryland",
+  "state_code": "MD",
+  "tier": 2,
+  "water_body": "Chesapeake Bay",
+  "lat": 38.7077,
+  "lng": -76.5345
+ },
+ {
+  "name": "North East",
+  "state": "Maryland",
+  "state_code": "MD",
+  "tier": 2,
+  "water_body": "North East River",
+  "lat": 39.608,
+  "lng": -75.9417
+ },
+ {
+  "name": "Ocean City",
+  "state": "Maryland",
+  "state_code": "MD",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 38.3931,
+  "lng": -75.0712
+ },
+ {
+  "name": "Oxford",
+  "state": "Maryland",
+  "state_code": "MD",
+  "tier": 2,
+  "water_body": "Tred Avon River",
+  "lat": 38.6874,
+  "lng": -76.1682
+ },
+ {
+  "name": "Rock Hall",
+  "state": "Maryland",
+  "state_code": "MD",
+  "tier": 2,
+  "water_body": "Chesapeake Bay",
+  "lat": 39.1379,
+  "lng": -76.2395
+ },
+ {
+  "name": "Snow Hill",
+  "state": "Maryland",
+  "state_code": "MD",
+  "tier": 2,
+  "water_body": "Pocomoke River",
+  "lat": 38.1725,
+  "lng": -75.3904
+ },
+ {
+  "name": "Solomons",
+  "state": "Maryland",
+  "state_code": "MD",
+  "tier": 2,
+  "water_body": "Patuxent River",
+  "lat": 38.3391,
+  "lng": -76.4619
+ },
+ {
+  "name": "St. Mary's City",
+  "state": "Maryland",
+  "state_code": "MD",
+  "tier": 2,
+  "water_body": "St. Mary's River",
+  "lat": 38.1865,
+  "lng": -76.4301
+ },
+ {
+  "name": "St. Michaels",
+  "state": "Maryland",
+  "state_code": "MD",
+  "tier": 1,
+  "water_body": "Miles River",
+  "lat": 38.7885,
+  "lng": -76.2226
+ },
+ {
+  "name": "Tilghman Island",
+  "state": "Maryland",
+  "state_code": "MD",
+  "tier": 2,
+  "water_body": "Chesapeake Bay",
+  "lat": 38.7032,
+  "lng": -76.3363
+ },
+ {
+  "name": "Chatham",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 41.6739,
+  "lng": -69.963
+ },
+ {
+  "name": "Cohasset",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 42.241,
+  "lng": -70.8036
+ },
+ {
+  "name": "Duxbury",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 2,
+  "water_body": "Cape Cod Bay",
+  "lat": 42.0444,
+  "lng": -70.6792
+ },
+ {
+  "name": "Edgartown",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 41.3899,
+  "lng": -70.5197
+ },
+ {
+  "name": "Essex",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 2,
+  "water_body": "Essex River",
+  "lat": 42.6405,
+  "lng": -70.7712
+ },
+ {
+  "name": "Falmouth",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 1,
+  "water_body": "Vineyard Sound",
+  "lat": 41.5514,
+  "lng": -70.6088
+ },
+ {
+  "name": "Gloucester",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 42.6288,
+  "lng": -70.6859
+ },
+ {
+  "name": "Hyannis",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 1,
+  "water_body": "Nantucket Sound",
+  "lat": 41.6535,
+  "lng": -70.2823
+ },
+ {
+  "name": "Ipswich",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 2,
+  "water_body": "Ipswich River",
+  "lat": 42.6757,
+  "lng": -70.822
+ },
+ {
+  "name": "Marblehead",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 42.4956,
+  "lng": -70.8358
+ },
+ {
+  "name": "Mattapoisett",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 2,
+  "water_body": "Buzzards Bay",
+  "lat": 41.658,
+  "lng": -70.8135
+ },
+ {
+  "name": "Nantucket",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 41.2714,
+  "lng": -70.0959
+ },
+ {
+  "name": "Newburyport",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 1,
+  "water_body": "Merrimack River",
+  "lat": 42.8121,
+  "lng": -70.8866
+ },
+ {
+  "name": "Oak Bluffs",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 1,
+  "water_body": "Nantucket Sound",
+  "lat": 41.4538,
+  "lng": -70.5649
+ },
+ {
+  "name": "Onset",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 2,
+  "water_body": "Buzzards Bay",
+  "lat": 41.746,
+  "lng": -70.6683
+ },
+ {
+  "name": "Orleans",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 2,
+  "water_body": "Cape Cod Bay",
+  "lat": 41.7878,
+  "lng": -70.0015
+ },
+ {
+  "name": "Plymouth",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 1,
+  "water_body": "Cape Cod Bay",
+  "lat": 41.9583,
+  "lng": -70.6638
+ },
+ {
+  "name": "Provincetown",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 1,
+  "water_body": "Cape Cod Bay",
+  "lat": 42.0565,
+  "lng": -70.1785
+ },
+ {
+  "name": "Rockport",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 42.6407,
+  "lng": -70.6202
+ },
+ {
+  "name": "Salem",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 42.4992,
+  "lng": -70.8982
+ },
+ {
+  "name": "Sandwich",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 2,
+  "water_body": "Cape Cod Bay",
+  "lat": 41.7571,
+  "lng": -70.498
+ },
+ {
+  "name": "Scituate",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 42.1803,
+  "lng": -70.7344
+ },
+ {
+  "name": "Truro",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 2,
+  "water_body": "Cape Cod Bay",
+  "lat": 41.9934,
+  "lng": -70.0497
+ },
+ {
+  "name": "Vineyard Haven",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 2,
+  "water_body": "Vineyard Sound",
+  "lat": 41.4572,
+  "lng": -70.6075
+ },
+ {
+  "name": "Wellfleet",
+  "state": "Massachusetts",
+  "state_code": "MA",
+  "tier": 1,
+  "water_body": "Cape Cod Bay",
+  "lat": 41.9376,
+  "lng": -70.0328
+ },
+ {
+  "name": "Alpena",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 2,
+  "water_body": "Lake Huron",
+  "lat": 45.0745,
+  "lng": -83.4436
+ },
+ {
+  "name": "Charlevoix",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 1,
+  "water_body": "Lake Charlevoix",
+  "lat": 45.3138,
+  "lng": -85.2556
+ },
+ {
+  "name": "Copper Harbor",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 1,
+  "water_body": "Lake Superior",
+  "lat": 47.4679,
+  "lng": -87.8699
+ },
+ {
+  "name": "Elk Rapids",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 2,
+  "water_body": "Grand Traverse Bay",
+  "lat": 44.898,
+  "lng": -85.4045
+ },
+ {
+  "name": "Frankfort",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 2,
+  "water_body": "Lake Michigan",
+  "lat": 44.6368,
+  "lng": -86.232
+ },
+ {
+  "name": "Glen Arbor",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 1,
+  "water_body": "Lake Michigan",
+  "lat": 44.8943,
+  "lng": -85.9891
+ },
+ {
+  "name": "Grand Haven",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 1,
+  "water_body": "Lake Michigan",
+  "lat": 43.055,
+  "lng": -86.2193
+ },
+ {
+  "name": "Harbor Springs",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 1,
+  "water_body": "Little Traverse Bay",
+  "lat": 45.4325,
+  "lng": -84.9891
+ },
+ {
+  "name": "Holland",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 1,
+  "water_body": "Lake Macatawa",
+  "lat": 42.7681,
+  "lng": -86.0986
+ },
+ {
+  "name": "Leland",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 1,
+  "water_body": "Lake Michigan",
+  "lat": 45.0214,
+  "lng": -85.7571
+ },
+ {
+  "name": "Ludington",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 1,
+  "water_body": "Lake Michigan",
+  "lat": 43.9572,
+  "lng": -86.4429
+ },
+ {
+  "name": "Mackinac Island",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 1,
+  "water_body": "Lake Huron",
+  "lat": 45.8602,
+  "lng": -84.6258
+ },
+ {
+  "name": "Mackinaw City",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 2,
+  "water_body": "Straits of Mackinac",
+  "lat": 45.7839,
+  "lng": -84.7566
+ },
+ {
+  "name": "Marquette",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 1,
+  "water_body": "Lake Superior",
+  "lat": 46.5507,
+  "lng": -87.3958
+ },
+ {
+  "name": "Munising",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 1,
+  "water_body": "Lake Superior",
+  "lat": 46.4309,
+  "lng": -86.6194
+ },
+ {
+  "name": "New Buffalo",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 2,
+  "water_body": "Lake Michigan",
+  "lat": 41.7914,
+  "lng": -86.7425
+ },
+ {
+  "name": "Pentwater",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 2,
+  "water_body": "Lake Michigan",
+  "lat": 43.7796,
+  "lng": -86.4299
+ },
+ {
+  "name": "Petoskey",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 1,
+  "water_body": "Little Traverse Bay",
+  "lat": 45.3648,
+  "lng": -85.0107
+ },
+ {
+  "name": "Port Austin",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 2,
+  "water_body": "Lake Huron",
+  "lat": 44.0426,
+  "lng": -82.9951
+ },
+ {
+  "name": "Saugatuck",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 1,
+  "water_body": "Kalamazoo Lake",
+  "lat": 42.6614,
+  "lng": -86.2046
+ },
+ {
+  "name": "South Haven",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 1,
+  "water_body": "Lake Michigan",
+  "lat": 42.4013,
+  "lng": -86.2684
+ },
+ {
+  "name": "St. Ignace",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 2,
+  "water_body": "Straits of Mackinac",
+  "lat": 45.8872,
+  "lng": -84.7317
+ },
+ {
+  "name": "St. Joseph",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 1,
+  "water_body": "Lake Michigan",
+  "lat": 42.0997,
+  "lng": -86.4888
+ },
+ {
+  "name": "Suttons Bay",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 2,
+  "water_body": "Grand Traverse Bay",
+  "lat": 44.9796,
+  "lng": -85.6507
+ },
+ {
+  "name": "Traverse City",
+  "state": "Michigan",
+  "state_code": "MI",
+  "tier": 1,
+  "water_body": "Grand Traverse Bay",
+  "lat": 44.7543,
+  "lng": -85.603
+ },
+ {
+  "name": "Alexandria",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 2,
+  "water_body": "Lake Darling",
+  "lat": 45.8772,
+  "lng": -95.377
+ },
+ {
+  "name": "Bemidji",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 2,
+  "water_body": "Lake Bemidji",
+  "lat": 47.487,
+  "lng": -94.8827
+ },
+ {
+  "name": "Brainerd",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 46.3553,
+  "lng": -94.1984
+ },
+ {
+  "name": "Crane Lake",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 2,
+  "water_body": "Crane Lake",
+  "lat": 48.2667,
+  "lng": -92.4894
+ },
+ {
+  "name": "Crosslake",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 2,
+  "water_body": "Whitefish Chain of Lakes",
+  "lat": 46.6782,
+  "lng": -94.102
+ },
+ {
+  "name": "Detroit Lakes",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 2,
+  "water_body": "Detroit Lake",
+  "lat": 46.8076,
+  "lng": -95.8466
+ },
+ {
+  "name": "Duluth",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 1,
+  "water_body": "Lake Superior",
+  "lat": 46.7745,
+  "lng": -92.1341
+ },
+ {
+  "name": "Ely",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 1,
+  "water_body": "Shagawa Lake",
+  "lat": 47.9056,
+  "lng": -91.8507
+ },
+ {
+  "name": "Excelsior",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 2,
+  "water_body": "Lake Minnetonka",
+  "lat": 44.9027,
+  "lng": -93.5664
+ },
+ {
+  "name": "Grand Marais",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 1,
+  "water_body": "Lake Superior",
+  "lat": 47.7586,
+  "lng": -90.3443
+ },
+ {
+  "name": "Grand Portage",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 2,
+  "water_body": "Lake Superior",
+  "lat": 47.9638,
+  "lng": -89.6848
+ },
+ {
+  "name": "International Falls",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 2,
+  "water_body": "Rainy Lake",
+  "lat": 48.5864,
+  "lng": -93.4077
+ },
+ {
+  "name": "Lake City",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 2,
+  "water_body": "Lake Pepin",
+  "lat": 44.4457,
+  "lng": -92.2809
+ },
+ {
+  "name": "Lutsen",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 2,
+  "water_body": "Lake Superior",
+  "lat": 47.6744,
+  "lng": -90.6928
+ },
+ {
+  "name": "Nisswa",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 2,
+  "water_body": "Gull Lake",
+  "lat": 46.5007,
+  "lng": -94.2978
+ },
+ {
+  "name": "Park Rapids",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 2,
+  "water_body": "Fish Hook River",
+  "lat": 46.9164,
+  "lng": -95.0579
+ },
+ {
+  "name": "Ranier",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 2,
+  "water_body": "Rainy Lake",
+  "lat": 48.6043,
+  "lng": -93.3573
+ },
+ {
+  "name": "Red Wing",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 44.5813,
+  "lng": -92.605
+ },
+ {
+  "name": "Stillwater",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 1,
+  "water_body": "St. Croix River",
+  "lat": 45.0586,
+  "lng": -92.8304
+ },
+ {
+  "name": "Tofte",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 2,
+  "water_body": "Lake Superior",
+  "lat": 47.5739,
+  "lng": -90.8364
+ },
+ {
+  "name": "Two Harbors",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 2,
+  "water_body": "Lake Superior",
+  "lat": 47.03,
+  "lng": -91.6757
+ },
+ {
+  "name": "Wabasha",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 44.3711,
+  "lng": -92.0457
+ },
+ {
+  "name": "Walker",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 2,
+  "water_body": "Leech Lake",
+  "lat": 47.0908,
+  "lng": -94.5869
+ },
+ {
+  "name": "Wayzata",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 2,
+  "water_body": "Lake Minnetonka",
+  "lat": 44.97,
+  "lng": -93.5182
+ },
+ {
+  "name": "Winona",
+  "state": "Minnesota",
+  "state_code": "MN",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 44.0513,
+  "lng": -91.6681
+ },
+ {
+  "name": "Bay St. Louis",
+  "state": "Mississippi",
+  "state_code": "MS",
+  "tier": 1,
+  "water_body": "Mississippi Sound",
+  "lat": 30.3234,
+  "lng": -89.3588
+ },
+ {
+  "name": "Biloxi",
+  "state": "Mississippi",
+  "state_code": "MS",
+  "tier": 1,
+  "water_body": "Mississippi Sound",
+  "lat": 30.4267,
+  "lng": -88.9358
+ },
+ {
+  "name": "Gulfport",
+  "state": "Mississippi",
+  "state_code": "MS",
+  "tier": 2,
+  "water_body": "Mississippi Sound",
+  "lat": 30.4195,
+  "lng": -89.069
+ },
+ {
+  "name": "Iuka",
+  "state": "Mississippi",
+  "state_code": "MS",
+  "tier": 2,
+  "water_body": "Pickwick Lake",
+  "lat": 34.8074,
+  "lng": -88.1969
+ },
+ {
+  "name": "Natchez",
+  "state": "Mississippi",
+  "state_code": "MS",
+  "tier": 1,
+  "water_body": "Mississippi River",
+  "lat": 31.5424,
+  "lng": -91.3856
+ },
+ {
+  "name": "Ocean Springs",
+  "state": "Mississippi",
+  "state_code": "MS",
+  "tier": 1,
+  "water_body": "Mississippi Sound",
+  "lat": 30.4027,
+  "lng": -88.7886
+ },
+ {
+  "name": "Pass Christian",
+  "state": "Mississippi",
+  "state_code": "MS",
+  "tier": 2,
+  "water_body": "Mississippi Sound",
+  "lat": 30.318,
+  "lng": -89.2391
+ },
+ {
+  "name": "Ridgeland",
+  "state": "Mississippi",
+  "state_code": "MS",
+  "tier": 2,
+  "water_body": "Ross Barnett Reservoir",
+  "lat": 32.4237,
+  "lng": -90.1618
+ },
+ {
+  "name": "Vicksburg",
+  "state": "Mississippi",
+  "state_code": "MS",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 32.322,
+  "lng": -90.8816
+ },
+ {
+  "name": "Branson",
+  "state": "Missouri",
+  "state_code": "MO",
+  "tier": 1,
+  "water_body": "Table Rock Lake",
+  "lat": 36.6123,
+  "lng": -93.2918
+ },
+ {
+  "name": "Camdenton",
+  "state": "Missouri",
+  "state_code": "MO",
+  "tier": 2,
+  "water_body": "Lake of the Ozarks",
+  "lat": 38.0132,
+  "lng": -92.7514
+ },
+ {
+  "name": "Cape Girardeau",
+  "state": "Missouri",
+  "state_code": "MO",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 37.3094,
+  "lng": -89.5584
+ },
+ {
+  "name": "Eminence",
+  "state": "Missouri",
+  "state_code": "MO",
+  "tier": 2,
+  "water_body": "Jacks Fork River",
+  "lat": 37.1509,
+  "lng": -91.3587
+ },
+ {
+  "name": "Hannibal",
+  "state": "Missouri",
+  "state_code": "MO",
+  "tier": 1,
+  "water_body": "Mississippi River",
+  "lat": 39.7102,
+  "lng": -91.394
+ },
+ {
+  "name": "Hermann",
+  "state": "Missouri",
+  "state_code": "MO",
+  "tier": 2,
+  "water_body": "Missouri River",
+  "lat": 38.6977,
+  "lng": -91.4349
+ },
+ {
+  "name": "Kimberling City",
+  "state": "Missouri",
+  "state_code": "MO",
+  "tier": 2,
+  "water_body": "Table Rock Lake",
+  "lat": 36.648,
+  "lng": -93.4242
+ },
+ {
+  "name": "Lake Ozark",
+  "state": "Missouri",
+  "state_code": "MO",
+  "tier": 1,
+  "water_body": "Lake of the Ozarks",
+  "lat": 38.2009,
+  "lng": -92.63
+ },
+ {
+  "name": "Lebanon",
+  "state": "Missouri",
+  "state_code": "MO",
+  "tier": 2,
+  "water_body": "Niangua River",
+  "lat": 37.6721,
+  "lng": -92.6597
+ },
+ {
+  "name": "Osage Beach",
+  "state": "Missouri",
+  "state_code": "MO",
+  "tier": 1,
+  "water_body": "Lake of the Ozarks",
+  "lat": 38.1362,
+  "lng": -92.647
+ },
+ {
+  "name": "Rocheport",
+  "state": "Missouri",
+  "state_code": "MO",
+  "tier": 2,
+  "water_body": "Missouri River",
+  "lat": 38.9782,
+  "lng": -92.5635
+ },
+ {
+  "name": "St. Charles",
+  "state": "Missouri",
+  "state_code": "MO",
+  "tier": 2,
+  "water_body": "Missouri River",
+  "lat": 38.7957,
+  "lng": -90.5154
+ },
+ {
+  "name": "Ste. Genevieve",
+  "state": "Missouri",
+  "state_code": "MO",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 37.975,
+  "lng": -90.05
+ },
+ {
+  "name": "Steelville",
+  "state": "Missouri",
+  "state_code": "MO",
+  "tier": 2,
+  "water_body": "Meramec River",
+  "lat": 37.9696,
+  "lng": -91.3546
+ },
+ {
+  "name": "Van Buren",
+  "state": "Missouri",
+  "state_code": "MO",
+  "tier": 2,
+  "water_body": "Current River",
+  "lat": 37.0144,
+  "lng": -91.0069
+ },
+ {
+  "name": "Warsaw",
+  "state": "Missouri",
+  "state_code": "MO",
+  "tier": 2,
+  "water_body": "Truman Lake",
+  "lat": 38.2493,
+  "lng": -93.367
+ },
+ {
+  "name": "Weston",
+  "state": "Missouri",
+  "state_code": "MO",
+  "tier": 2,
+  "water_body": "Missouri River",
+  "lat": 39.4041,
+  "lng": -94.8913
+ },
+ {
+  "name": "Big Sky",
+  "state": "Montana",
+  "state_code": "MT",
+  "tier": 2,
+  "water_body": "Gallatin River",
+  "lat": 45.2564,
+  "lng": -111.332
+ },
+ {
+  "name": "Bigfork",
+  "state": "Montana",
+  "state_code": "MT",
+  "tier": 1,
+  "water_body": "Flathead Lake",
+  "lat": 48.0841,
+  "lng": -114.0546
+ },
+ {
+  "name": "Ennis",
+  "state": "Montana",
+  "state_code": "MT",
+  "tier": 2,
+  "water_body": "Madison River",
+  "lat": 45.3461,
+  "lng": -111.7313
+ },
+ {
+  "name": "Fort Benton",
+  "state": "Montana",
+  "state_code": "MT",
+  "tier": 2,
+  "water_body": "Missouri River",
+  "lat": 47.829,
+  "lng": -110.6558
+ },
+ {
+  "name": "Fort Smith",
+  "state": "Montana",
+  "state_code": "MT",
+  "tier": 2,
+  "water_body": "Bighorn River",
+  "lat": 45.3171,
+  "lng": -107.9351
+ },
+ {
+  "name": "Gardiner",
+  "state": "Montana",
+  "state_code": "MT",
+  "tier": 2,
+  "water_body": "Yellowstone River",
+  "lat": 45.0525,
+  "lng": -110.7378
+ },
+ {
+  "name": "Lakeside",
+  "state": "Montana",
+  "state_code": "MT",
+  "tier": 2,
+  "water_body": "Flathead Lake",
+  "lat": 48.0183,
+  "lng": -114.2319
+ },
+ {
+  "name": "Livingston",
+  "state": "Montana",
+  "state_code": "MT",
+  "tier": 2,
+  "water_body": "Yellowstone River",
+  "lat": 45.6655,
+  "lng": -110.5559
+ },
+ {
+  "name": "Missoula",
+  "state": "Montana",
+  "state_code": "MT",
+  "tier": 2,
+  "water_body": "Clark Fork River",
+  "lat": 46.8744,
+  "lng": -114.0261
+ },
+ {
+  "name": "Polson",
+  "state": "Montana",
+  "state_code": "MT",
+  "tier": 2,
+  "water_body": "Flathead Lake",
+  "lat": 47.6882,
+  "lng": -114.1408
+ },
+ {
+  "name": "Red Lodge",
+  "state": "Montana",
+  "state_code": "MT",
+  "tier": 2,
+  "water_body": "Rock Creek",
+  "lat": 45.1933,
+  "lng": -109.2501
+ },
+ {
+  "name": "Seeley Lake",
+  "state": "Montana",
+  "state_code": "MT",
+  "tier": 2,
+  "water_body": "Seeley Lake",
+  "lat": 47.1705,
+  "lng": -113.4586
+ },
+ {
+  "name": "West Yellowstone",
+  "state": "Montana",
+  "state_code": "MT",
+  "tier": 2,
+  "water_body": "Hebgen Lake",
+  "lat": 44.6622,
+  "lng": -111.107
+ },
+ {
+  "name": "Whitefish",
+  "state": "Montana",
+  "state_code": "MT",
+  "tier": 1,
+  "water_body": "Whitefish Lake",
+  "lat": 48.438,
+  "lng": -114.348
+ },
+ {
+  "name": "Ashland",
+  "state": "Nebraska",
+  "state_code": "NE",
+  "tier": 2,
+  "water_body": "Platte River",
+  "lat": 41.0399,
+  "lng": -96.3725
+ },
+ {
+  "name": "Brownville",
+  "state": "Nebraska",
+  "state_code": "NE",
+  "tier": 2,
+  "water_body": "Missouri River",
+  "lat": 40.3976,
+  "lng": -95.6611
+ },
+ {
+  "name": "Nebraska City",
+  "state": "Nebraska",
+  "state_code": "NE",
+  "tier": 2,
+  "water_body": "Missouri River",
+  "lat": 40.6759,
+  "lng": -95.8616
+ },
+ {
+  "name": "Ogallala",
+  "state": "Nebraska",
+  "state_code": "NE",
+  "tier": 2,
+  "water_body": "Lake McConaughy",
+  "lat": 41.1296,
+  "lng": -101.7207
+ },
+ {
+  "name": "Omaha",
+  "state": "Nebraska",
+  "state_code": "NE",
+  "tier": 2,
+  "water_body": "Missouri River",
+  "lat": 41.2627,
+  "lng": -96.0535
+ },
+ {
+  "name": "Valentine",
+  "state": "Nebraska",
+  "state_code": "NE",
+  "tier": 2,
+  "water_body": "Niobrara River",
+  "lat": 42.8755,
+  "lng": -100.5471
+ },
+ {
+  "name": "Boulder City",
+  "state": "Nevada",
+  "state_code": "NV",
+  "tier": 2,
+  "water_body": "Lake Mead",
+  "lat": 35.8438,
+  "lng": -114.9116
+ },
+ {
+  "name": "Crystal Bay",
+  "state": "Nevada",
+  "state_code": "NV",
+  "tier": 2,
+  "water_body": "Lake Tahoe",
+  "lat": 39.2304,
+  "lng": -120.0022
+ },
+ {
+  "name": "Glenbrook",
+  "state": "Nevada",
+  "state_code": "NV",
+  "tier": 2,
+  "water_body": "Lake Tahoe",
+  "lat": 39.1001,
+  "lng": -119.9273
+ },
+ {
+  "name": "Henderson",
+  "state": "Nevada",
+  "state_code": "NV",
+  "tier": 2,
+  "water_body": "Lake Las Vegas",
+  "lat": 36.009,
+  "lng": -115.0268
+ },
+ {
+  "name": "Incline Village",
+  "state": "Nevada",
+  "state_code": "NV",
+  "tier": 1,
+  "water_body": "Lake Tahoe",
+  "lat": 39.2657,
+  "lng": -119.9463
+ },
+ {
+  "name": "Laughlin",
+  "state": "Nevada",
+  "state_code": "NV",
+  "tier": 2,
+  "water_body": "Colorado River",
+  "lat": 35.1404,
+  "lng": -114.6166
+ },
+ {
+  "name": "Reno",
+  "state": "Nevada",
+  "state_code": "NV",
+  "tier": 2,
+  "water_body": "Truckee River",
+  "lat": 39.5491,
+  "lng": -119.8499
+ },
+ {
+  "name": "Stateline",
+  "state": "Nevada",
+  "state_code": "NV",
+  "tier": 2,
+  "water_body": "Lake Tahoe",
+  "lat": 38.9687,
+  "lng": -119.9445
+ },
+ {
+  "name": "Zephyr Cove",
+  "state": "Nevada",
+  "state_code": "NV",
+  "tier": 2,
+  "water_body": "Lake Tahoe",
+  "lat": 39.0133,
+  "lng": -119.9236
+ },
+ {
+  "name": "Alton Bay",
+  "state": "New Hampshire",
+  "state_code": "NH",
+  "tier": 2,
+  "water_body": "Lake Winnipesaukee",
+  "lat": 43.4687,
+  "lng": -71.232
+ },
+ {
+  "name": "Bristol",
+  "state": "New Hampshire",
+  "state_code": "NH",
+  "tier": 2,
+  "water_body": "Newfound Lake",
+  "lat": 43.6034,
+  "lng": -71.7342
+ },
+ {
+  "name": "Center Harbor",
+  "state": "New Hampshire",
+  "state_code": "NH",
+  "tier": 2,
+  "water_body": "Lake Winnipesaukee",
+  "lat": 43.7176,
+  "lng": -71.4977
+ },
+ {
+  "name": "Gilford",
+  "state": "New Hampshire",
+  "state_code": "NH",
+  "tier": 2,
+  "water_body": "Lake Winnipesaukee",
+  "lat": 43.5481,
+  "lng": -71.407
+ },
+ {
+  "name": "Hampton",
+  "state": "New Hampshire",
+  "state_code": "NH",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 42.9439,
+  "lng": -70.8254
+ },
+ {
+  "name": "Holderness",
+  "state": "New Hampshire",
+  "state_code": "NH",
+  "tier": 2,
+  "water_body": "Squam Lake",
+  "lat": 43.7324,
+  "lng": -71.589
+ },
+ {
+  "name": "Laconia",
+  "state": "New Hampshire",
+  "state_code": "NH",
+  "tier": 1,
+  "water_body": "Lake Winnipesaukee",
+  "lat": 43.5765,
+  "lng": -71.4823
+ },
+ {
+  "name": "Meredith",
+  "state": "New Hampshire",
+  "state_code": "NH",
+  "tier": 1,
+  "water_body": "Lake Winnipesaukee",
+  "lat": 43.6527,
+  "lng": -71.4965
+ },
+ {
+  "name": "Moultonborough",
+  "state": "New Hampshire",
+  "state_code": "NH",
+  "tier": 2,
+  "water_body": "Lake Winnipesaukee",
+  "lat": 43.7552,
+  "lng": -71.396
+ },
+ {
+  "name": "New Castle",
+  "state": "New Hampshire",
+  "state_code": "NH",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 43.0664,
+  "lng": -70.7199
+ },
+ {
+  "name": "Newbury",
+  "state": "New Hampshire",
+  "state_code": "NH",
+  "tier": 2,
+  "water_body": "Lake Sunapee",
+  "lat": 43.3213,
+  "lng": -72.0363
+ },
+ {
+  "name": "Portsmouth",
+  "state": "New Hampshire",
+  "state_code": "NH",
+  "tier": 1,
+  "water_body": "Piscataqua River",
+  "lat": 43.0606,
+  "lng": -70.7803
+ },
+ {
+  "name": "Rye",
+  "state": "New Hampshire",
+  "state_code": "NH",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 43.012,
+  "lng": -70.7719
+ },
+ {
+  "name": "Sunapee",
+  "state": "New Hampshire",
+  "state_code": "NH",
+  "tier": 2,
+  "water_body": "Lake Sunapee",
+  "lat": 43.3875,
+  "lng": -72.0877
+ },
+ {
+  "name": "Wolfeboro",
+  "state": "New Hampshire",
+  "state_code": "NH",
+  "tier": 1,
+  "water_body": "Lake Winnipesaukee",
+  "lat": 43.5936,
+  "lng": -71.2116
+ },
+ {
+  "name": "Asbury Park",
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 40.2229,
+  "lng": -74.0102
+ },
+ {
+  "name": "Atlantic City",
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 39.3773,
+  "lng": -74.4511
+ },
+ {
+  "name": "Atlantic Highlands",
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "tier": 2,
+  "water_body": "Sandy Hook Bay",
+  "lat": 40.4118,
+  "lng": -74.0198
+ },
+ {
+  "name": "Avalon",
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 39.0865,
+  "lng": -74.739
+ },
+ {
+  "name": "Barnegat Light",
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 39.7513,
+  "lng": -74.1068
+ },
+ {
+  "name": "Bay Head",
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 40.0703,
+  "lng": -74.0482
+ },
+ {
+  "name": "Beach Haven",
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 39.576,
+  "lng": -74.2518
+ },
+ {
+  "name": "Belmar",
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 40.1797,
+  "lng": -74.0244
+ },
+ {
+  "name": "Cape May",
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 38.9411,
+  "lng": -74.8984
+ },
+ {
+  "name": "Frenchtown",
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "tier": 2,
+  "water_body": "Delaware River",
+  "lat": 40.5305,
+  "lng": -75.0528
+ },
+ {
+  "name": "Highlands",
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "tier": 2,
+  "water_body": "Sandy Hook Bay",
+  "lat": 40.4042,
+  "lng": -73.9882
+ },
+ {
+  "name": "Hopatcong",
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "tier": 2,
+  "water_body": "Lake Hopatcong",
+  "lat": 40.9516,
+  "lng": -74.6624
+ },
+ {
+  "name": "Lambertville",
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "tier": 1,
+  "water_body": "Delaware River",
+  "lat": 40.3686,
+  "lng": -74.943
+ },
+ {
+  "name": "Manasquan",
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 40.1124,
+  "lng": -74.0382
+ },
+ {
+  "name": "Margate City",
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 39.3309,
+  "lng": -74.5068
+ },
+ {
+  "name": "Ocean City",
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 39.2695,
+  "lng": -74.5998
+ },
+ {
+  "name": "Ocean Grove",
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 40.2118,
+  "lng": -74.0069
+ },
+ {
+  "name": "Point Pleasant Beach",
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 40.0926,
+  "lng": -74.0452
+ },
+ {
+  "name": "Red Bank",
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "tier": 2,
+  "water_body": "Navesink River",
+  "lat": 40.3487,
+  "lng": -74.0665
+ },
+ {
+  "name": "Sea Isle City",
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 39.1508,
+  "lng": -74.7027
+ },
+ {
+  "name": "Spring Lake",
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 40.1538,
+  "lng": -74.0269
+ },
+ {
+  "name": "Stone Harbor",
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 39.0417,
+  "lng": -74.7688
+ },
+ {
+  "name": "Wildwood",
+  "state": "New Jersey",
+  "state_code": "NJ",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 38.9875,
+  "lng": -74.8182
+ },
+ {
+  "name": "Abiquiu",
+  "state": "New Mexico",
+  "state_code": "NM",
+  "tier": 2,
+  "water_body": "Abiquiu Reservoir",
+  "lat": 36.2017,
+  "lng": -106.3239
+ },
+ {
+  "name": "Albuquerque",
+  "state": "New Mexico",
+  "state_code": "NM",
+  "tier": 2,
+  "water_body": "Rio Grande",
+  "lat": 35.1048,
+  "lng": -106.6468
+ },
+ {
+  "name": "Carlsbad",
+  "state": "New Mexico",
+  "state_code": "NM",
+  "tier": 2,
+  "water_body": "Pecos River",
+  "lat": 32.4008,
+  "lng": -104.241
+ },
+ {
+  "name": "Eagle Nest",
+  "state": "New Mexico",
+  "state_code": "NM",
+  "tier": 2,
+  "water_body": "Eagle Nest Lake",
+  "lat": 36.547,
+  "lng": -105.2607
+ },
+ {
+  "name": "Elephant Butte",
+  "state": "New Mexico",
+  "state_code": "NM",
+  "tier": 2,
+  "water_body": "Elephant Butte Reservoir",
+  "lat": 33.1824,
+  "lng": -107.2216
+ },
+ {
+  "name": "Jemez Springs",
+  "state": "New Mexico",
+  "state_code": "NM",
+  "tier": 2,
+  "water_body": "Jemez River",
+  "lat": 35.7731,
+  "lng": -106.691
+ },
+ {
+  "name": "Logan",
+  "state": "New Mexico",
+  "state_code": "NM",
+  "tier": 2,
+  "water_body": "Ute Lake",
+  "lat": 35.3555,
+  "lng": -103.453
+ },
+ {
+  "name": "Navajo Dam",
+  "state": "New Mexico",
+  "state_code": "NM",
+  "tier": 2,
+  "water_body": "Navajo Lake",
+  "lat": 36.8729,
+  "lng": -107.6232
+ },
+ {
+  "name": "Red River",
+  "state": "New Mexico",
+  "state_code": "NM",
+  "tier": 2,
+  "water_body": "Red River",
+  "lat": 36.7098,
+  "lng": -105.4185
+ },
+ {
+  "name": "Ruidoso",
+  "state": "New Mexico",
+  "state_code": "NM",
+  "tier": 2,
+  "water_body": "Rio Ruidoso",
+  "lat": 33.3495,
+  "lng": -105.6688
+ },
+ {
+  "name": "Santa Rosa",
+  "state": "New Mexico",
+  "state_code": "NM",
+  "tier": 2,
+  "water_body": "Pecos River",
+  "lat": 34.9361,
+  "lng": -104.675
+ },
+ {
+  "name": "Taos",
+  "state": "New Mexico",
+  "state_code": "NM",
+  "tier": 2,
+  "water_body": "Rio Grande",
+  "lat": 36.3871,
+  "lng": -105.5804
+ },
+ {
+  "name": "Truth or Consequences",
+  "state": "New Mexico",
+  "state_code": "NM",
+  "tier": 2,
+  "water_body": "Rio Grande",
+  "lat": 33.2376,
+  "lng": -107.2762
+ },
+ {
+  "name": "Alexandria Bay",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 1,
+  "water_body": "St. Lawrence River",
+  "lat": 44.3372,
+  "lng": -75.9227
+ },
+ {
+  "name": "Bolton Landing",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 1,
+  "water_body": "Lake George",
+  "lat": 43.564,
+  "lng": -73.6525
+ },
+ {
+  "name": "Canandaigua",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 1,
+  "water_body": "Canandaigua Lake",
+  "lat": 42.889,
+  "lng": -77.2803
+ },
+ {
+  "name": "Clayton",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 2,
+  "water_body": "St. Lawrence River",
+  "lat": 44.2375,
+  "lng": -76.0827
+ },
+ {
+  "name": "Cold Spring",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 1,
+  "water_body": "Hudson River",
+  "lat": 41.4192,
+  "lng": -73.9547
+ },
+ {
+  "name": "Cooperstown",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 1,
+  "water_body": "Otsego Lake",
+  "lat": 42.6989,
+  "lng": -74.9307
+ },
+ {
+  "name": "Essex",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 2,
+  "water_body": "Lake Champlain",
+  "lat": 44.0639,
+  "lng": -73.7542
+ },
+ {
+  "name": "Geneva",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 2,
+  "water_body": "Seneca Lake",
+  "lat": 42.8635,
+  "lng": -76.9827
+ },
+ {
+  "name": "Greenport",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 1,
+  "water_body": "Peconic Bay",
+  "lat": 41.1024,
+  "lng": -72.3668
+ },
+ {
+  "name": "Hammondsport",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 2,
+  "water_body": "Keuka Lake",
+  "lat": 42.4087,
+  "lng": -77.2229
+ },
+ {
+  "name": "Hudson",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 2,
+  "water_body": "Hudson River",
+  "lat": 42.2519,
+  "lng": -73.786
+ },
+ {
+  "name": "Ithaca",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 1,
+  "water_body": "Cayuga Lake",
+  "lat": 42.4439,
+  "lng": -76.5031
+ },
+ {
+  "name": "Kingston",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 2,
+  "water_body": "Hudson River",
+  "lat": 41.9301,
+  "lng": -73.9968
+ },
+ {
+  "name": "Lake George",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 1,
+  "water_body": "Lake George",
+  "lat": 43.4259,
+  "lng": -73.7152
+ },
+ {
+  "name": "Lake Placid",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 1,
+  "water_body": "Mirror Lake",
+  "lat": 44.2842,
+  "lng": -73.9864
+ },
+ {
+  "name": "Montauk",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 41.0475,
+  "lng": -71.9464
+ },
+ {
+  "name": "Niagara Falls",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 1,
+  "water_body": "Niagara River",
+  "lat": 43.0928,
+  "lng": -79.0147
+ },
+ {
+  "name": "Nyack",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 2,
+  "water_body": "Hudson River",
+  "lat": 41.093,
+  "lng": -73.9152
+ },
+ {
+  "name": "Old Forge",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 1,
+  "water_body": "Fulton Chain Lakes",
+  "lat": 43.7064,
+  "lng": -74.9691
+ },
+ {
+  "name": "Sackets Harbor",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 2,
+  "water_body": "Lake Ontario",
+  "lat": 43.9383,
+  "lng": -76.1129
+ },
+ {
+  "name": "Sag Harbor",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 1,
+  "water_body": "Gardiners Bay",
+  "lat": 40.9943,
+  "lng": -72.2885
+ },
+ {
+  "name": "Saranac Lake",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 1,
+  "water_body": "Lake Flower",
+  "lat": 44.3259,
+  "lng": -74.1309
+ },
+ {
+  "name": "Saugerties",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 2,
+  "water_body": "Hudson River",
+  "lat": 42.0742,
+  "lng": -73.9419
+ },
+ {
+  "name": "Skaneateles",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 1,
+  "water_body": "Skaneateles Lake",
+  "lat": 42.9473,
+  "lng": -76.4285
+ },
+ {
+  "name": "Watkins Glen",
+  "state": "New York",
+  "state_code": "NY",
+  "tier": 1,
+  "water_body": "Seneca Lake",
+  "lat": 42.3805,
+  "lng": -76.867
+ },
+ {
+  "name": "Atlantic Beach",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 34.7019,
+  "lng": -76.7423
+ },
+ {
+  "name": "Bath",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 2,
+  "water_body": "Pamlico River",
+  "lat": 35.4712,
+  "lng": -76.8111
+ },
+ {
+  "name": "Beaufort",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 1,
+  "water_body": "Taylor Creek",
+  "lat": 34.7227,
+  "lng": -76.6512
+ },
+ {
+  "name": "Bryson City",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 2,
+  "water_body": "Tuckasegee River",
+  "lat": 35.4266,
+  "lng": -83.4473
+ },
+ {
+  "name": "Carolina Beach",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 34.0419,
+  "lng": -77.8998
+ },
+ {
+  "name": "Chimney Rock",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 2,
+  "water_body": "Broad River",
+  "lat": 35.4512,
+  "lng": -82.2617
+ },
+ {
+  "name": "Corolla",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 36.3847,
+  "lng": -75.8287
+ },
+ {
+  "name": "Duck",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 36.1857,
+  "lng": -75.755
+ },
+ {
+  "name": "Edenton",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 2,
+  "water_body": "Albemarle Sound",
+  "lat": 36.0586,
+  "lng": -76.599
+ },
+ {
+  "name": "Elizabeth City",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 2,
+  "water_body": "Pasquotank River",
+  "lat": 36.2942,
+  "lng": -76.2378
+ },
+ {
+  "name": "Emerald Isle",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 34.6644,
+  "lng": -77.0314
+ },
+ {
+  "name": "Hatteras",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 35.2199,
+  "lng": -75.6879
+ },
+ {
+  "name": "Kill Devil Hills",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 36.0171,
+  "lng": -75.6714
+ },
+ {
+  "name": "Lake Lure",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 1,
+  "water_body": "Lake Lure",
+  "lat": 35.4484,
+  "lng": -82.2022
+ },
+ {
+  "name": "Manteo",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 1,
+  "water_body": "Roanoke Sound",
+  "lat": 35.8986,
+  "lng": -75.6513
+ },
+ {
+  "name": "Nags Head",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 35.9475,
+  "lng": -75.6257
+ },
+ {
+  "name": "New Bern",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 1,
+  "water_body": "Neuse River",
+  "lat": 35.0959,
+  "lng": -77.0705
+ },
+ {
+  "name": "Ocean Isle Beach",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 33.8876,
+  "lng": -78.4621
+ },
+ {
+  "name": "Ocracoke",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 35.0732,
+  "lng": -75.9985
+ },
+ {
+  "name": "Oriental",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 2,
+  "water_body": "Neuse River",
+  "lat": 35.0309,
+  "lng": -76.6808
+ },
+ {
+  "name": "Southport",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 1,
+  "water_body": "Cape Fear River",
+  "lat": 33.9333,
+  "lng": -78.0085
+ },
+ {
+  "name": "Swansboro",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 2,
+  "water_body": "White Oak River",
+  "lat": 34.6936,
+  "lng": -77.1343
+ },
+ {
+  "name": "Washington",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 2,
+  "water_body": "Pamlico River",
+  "lat": 35.558,
+  "lng": -77.0542
+ },
+ {
+  "name": "Wilmington",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 1,
+  "water_body": "Cape Fear River",
+  "lat": 34.2092,
+  "lng": -77.8858
+ },
+ {
+  "name": "Wrightsville Beach",
+  "state": "North Carolina",
+  "state_code": "NC",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 34.213,
+  "lng": -77.7979
+ },
+ {
+  "name": "Bismarck",
+  "state": "North Dakota",
+  "state_code": "ND",
+  "tier": 2,
+  "water_body": "Missouri River",
+  "lat": 46.8146,
+  "lng": -100.7701
+ },
+ {
+  "name": "Bottineau",
+  "state": "North Dakota",
+  "state_code": "ND",
+  "tier": 2,
+  "water_body": "Lake Metigoshe",
+  "lat": 48.8248,
+  "lng": -100.4425
+ },
+ {
+  "name": "Devils Lake",
+  "state": "North Dakota",
+  "state_code": "ND",
+  "tier": 2,
+  "water_body": "Devils Lake",
+  "lat": 48.1126,
+  "lng": -98.8748
+ },
+ {
+  "name": "Fargo",
+  "state": "North Dakota",
+  "state_code": "ND",
+  "tier": 2,
+  "water_body": "Red River of the North",
+  "lat": 46.8647,
+  "lng": -96.8291
+ },
+ {
+  "name": "Garrison",
+  "state": "North Dakota",
+  "state_code": "ND",
+  "tier": 2,
+  "water_body": "Lake Sakakawea",
+  "lat": 47.6532,
+  "lng": -101.4219
+ },
+ {
+  "name": "Grand Forks",
+  "state": "North Dakota",
+  "state_code": "ND",
+  "tier": 2,
+  "water_body": "Red River of the North",
+  "lat": 47.9196,
+  "lng": -97.0873
+ },
+ {
+  "name": "Medora",
+  "state": "North Dakota",
+  "state_code": "ND",
+  "tier": 1,
+  "water_body": "Little Missouri River",
+  "lat": 46.9113,
+  "lng": -103.5265
+ },
+ {
+  "name": "Ashtabula",
+  "state": "Ohio",
+  "state_code": "OH",
+  "tier": 2,
+  "water_body": "Lake Erie",
+  "lat": 41.8795,
+  "lng": -80.7985
+ },
+ {
+  "name": "Buckeye Lake",
+  "state": "Ohio",
+  "state_code": "OH",
+  "tier": 2,
+  "water_body": "Buckeye Lake",
+  "lat": 39.9364,
+  "lng": -82.4814
+ },
+ {
+  "name": "Cincinnati",
+  "state": "Ohio",
+  "state_code": "OH",
+  "tier": 2,
+  "water_body": "Ohio River",
+  "lat": 39.1402,
+  "lng": -84.5058
+ },
+ {
+  "name": "Cleveland",
+  "state": "Ohio",
+  "state_code": "OH",
+  "tier": 2,
+  "water_body": "Lake Erie",
+  "lat": 41.4785,
+  "lng": -81.6794
+ },
+ {
+  "name": "Geneva-on-the-Lake",
+  "state": "Ohio",
+  "state_code": "OH",
+  "tier": 2,
+  "water_body": "Lake Erie",
+  "lat": 41.8553,
+  "lng": -80.9513
+ },
+ {
+  "name": "Kelleys Island",
+  "state": "Ohio",
+  "state_code": "OH",
+  "tier": 1,
+  "water_body": "Lake Erie",
+  "lat": 41.6026,
+  "lng": -82.7065
+ },
+ {
+  "name": "Lakeside",
+  "state": "Ohio",
+  "state_code": "OH",
+  "tier": 2,
+  "water_body": "Lake Erie",
+  "lat": 41.5409,
+  "lng": -82.7534
+ },
+ {
+  "name": "Loudonville",
+  "state": "Ohio",
+  "state_code": "OH",
+  "tier": 2,
+  "water_body": "Mohican River",
+  "lat": 40.634,
+  "lng": -82.2323
+ },
+ {
+  "name": "Marblehead",
+  "state": "Ohio",
+  "state_code": "OH",
+  "tier": 2,
+  "water_body": "Lake Erie",
+  "lat": 41.5349,
+  "lng": -82.724
+ },
+ {
+  "name": "Marietta",
+  "state": "Ohio",
+  "state_code": "OH",
+  "tier": 2,
+  "water_body": "Ohio River",
+  "lat": 39.4232,
+  "lng": -81.4464
+ },
+ {
+  "name": "Port Clinton",
+  "state": "Ohio",
+  "state_code": "OH",
+  "tier": 2,
+  "water_body": "Lake Erie",
+  "lat": 41.5097,
+  "lng": -82.9383
+ },
+ {
+  "name": "Put-in-Bay",
+  "state": "Ohio",
+  "state_code": "OH",
+  "tier": 1,
+  "water_body": "Lake Erie",
+  "lat": 41.6533,
+  "lng": -82.8175
+ },
+ {
+  "name": "Russells Point",
+  "state": "Ohio",
+  "state_code": "OH",
+  "tier": 2,
+  "water_body": "Indian Lake",
+  "lat": 40.4674,
+  "lng": -83.8935
+ },
+ {
+  "name": "Sandusky",
+  "state": "Ohio",
+  "state_code": "OH",
+  "tier": 1,
+  "water_body": "Lake Erie",
+  "lat": 41.4559,
+  "lng": -82.7144
+ },
+ {
+  "name": "Vermilion",
+  "state": "Ohio",
+  "state_code": "OH",
+  "tier": 2,
+  "water_body": "Lake Erie",
+  "lat": 41.408,
+  "lng": -82.3173
+ },
+ {
+  "name": "Ardmore",
+  "state": "Oklahoma",
+  "state_code": "OK",
+  "tier": 2,
+  "water_body": "Lake Murray",
+  "lat": 34.1965,
+  "lng": -97.1318
+ },
+ {
+  "name": "Broken Bow",
+  "state": "Oklahoma",
+  "state_code": "OK",
+  "tier": 2,
+  "water_body": "Mountain Fork River",
+  "lat": 34.0289,
+  "lng": -94.7414
+ },
+ {
+  "name": "Davis",
+  "state": "Oklahoma",
+  "state_code": "OK",
+  "tier": 2,
+  "water_body": "Honey Creek",
+  "lat": 34.4294,
+  "lng": -97.1744
+ },
+ {
+  "name": "Eufaula",
+  "state": "Oklahoma",
+  "state_code": "OK",
+  "tier": 2,
+  "water_body": "Lake Eufaula",
+  "lat": 35.2921,
+  "lng": -95.5864
+ },
+ {
+  "name": "Grove",
+  "state": "Oklahoma",
+  "state_code": "OK",
+  "tier": 2,
+  "water_body": "Grand Lake o' the Cherokees",
+  "lat": 36.585,
+  "lng": -94.7872
+ },
+ {
+  "name": "Hochatown",
+  "state": "Oklahoma",
+  "state_code": "OK",
+  "tier": 1,
+  "water_body": "Broken Bow Lake",
+  "lat": 34.1657,
+  "lng": -94.7716
+ },
+ {
+  "name": "Jenks",
+  "state": "Oklahoma",
+  "state_code": "OK",
+  "tier": 2,
+  "water_body": "Arkansas River",
+  "lat": 35.9982,
+  "lng": -95.9734
+ },
+ {
+  "name": "Kingston",
+  "state": "Oklahoma",
+  "state_code": "OK",
+  "tier": 2,
+  "water_body": "Lake Texoma",
+  "lat": 34.0004,
+  "lng": -96.7065
+ },
+ {
+  "name": "Medicine Park",
+  "state": "Oklahoma",
+  "state_code": "OK",
+  "tier": 2,
+  "water_body": "Medicine Creek",
+  "lat": 34.732,
+  "lng": -98.489
+ },
+ {
+  "name": "Oklahoma City",
+  "state": "Oklahoma",
+  "state_code": "OK",
+  "tier": 2,
+  "water_body": "Oklahoma River",
+  "lat": 35.4671,
+  "lng": -97.5137
+ },
+ {
+  "name": "Sulphur",
+  "state": "Oklahoma",
+  "state_code": "OK",
+  "tier": 2,
+  "water_body": "Lake of the Arbuckles",
+  "lat": 34.5021,
+  "lng": -96.9852
+ },
+ {
+  "name": "Tahlequah",
+  "state": "Oklahoma",
+  "state_code": "OK",
+  "tier": 2,
+  "water_body": "Illinois River",
+  "lat": 35.9105,
+  "lng": -94.9777
+ },
+ {
+  "name": "Tulsa",
+  "state": "Oklahoma",
+  "state_code": "OK",
+  "tier": 2,
+  "water_body": "Arkansas River",
+  "lat": 36.1279,
+  "lng": -95.9023
+ },
+ {
+  "name": "Astoria",
+  "state": "Oregon",
+  "state_code": "OR",
+  "tier": 1,
+  "water_body": "Columbia River",
+  "lat": 46.1874,
+  "lng": -123.8151
+ },
+ {
+  "name": "Bandon",
+  "state": "Oregon",
+  "state_code": "OR",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 43.1147,
+  "lng": -124.4155
+ },
+ {
+  "name": "Bend",
+  "state": "Oregon",
+  "state_code": "OR",
+  "tier": 1,
+  "water_body": "Deschutes River",
+  "lat": 44.0567,
+  "lng": -121.308
+ },
+ {
+  "name": "Brookings",
+  "state": "Oregon",
+  "state_code": "OR",
+  "tier": 2,
+  "water_body": "Pacific Ocean",
+  "lat": 42.0724,
+  "lng": -124.3049
+ },
+ {
+  "name": "Cannon Beach",
+  "state": "Oregon",
+  "state_code": "OR",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 45.8881,
+  "lng": -123.9601
+ },
+ {
+  "name": "Cascade Locks",
+  "state": "Oregon",
+  "state_code": "OR",
+  "tier": 2,
+  "water_body": "Columbia River",
+  "lat": 45.676,
+  "lng": -121.8687
+ },
+ {
+  "name": "Depoe Bay",
+  "state": "Oregon",
+  "state_code": "OR",
+  "tier": 2,
+  "water_body": "Pacific Ocean",
+  "lat": 44.8091,
+  "lng": -124.0597
+ },
+ {
+  "name": "Florence",
+  "state": "Oregon",
+  "state_code": "OR",
+  "tier": 2,
+  "water_body": "Siuslaw River",
+  "lat": 43.9916,
+  "lng": -124.1065
+ },
+ {
+  "name": "Gold Beach",
+  "state": "Oregon",
+  "state_code": "OR",
+  "tier": 2,
+  "water_body": "Rogue River",
+  "lat": 42.4133,
+  "lng": -124.4222
+ },
+ {
+  "name": "Hood River",
+  "state": "Oregon",
+  "state_code": "OR",
+  "tier": 1,
+  "water_body": "Columbia River",
+  "lat": 45.7091,
+  "lng": -121.526
+ },
+ {
+  "name": "Joseph",
+  "state": "Oregon",
+  "state_code": "OR",
+  "tier": 1,
+  "water_body": "Wallowa Lake",
+  "lat": 45.3525,
+  "lng": -117.2304
+ },
+ {
+  "name": "Lincoln City",
+  "state": "Oregon",
+  "state_code": "OR",
+  "tier": 2,
+  "water_body": "Pacific Ocean",
+  "lat": 44.9779,
+  "lng": -124.0061
+ },
+ {
+  "name": "Manzanita",
+  "state": "Oregon",
+  "state_code": "OR",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 45.7166,
+  "lng": -123.9351
+ },
+ {
+  "name": "Newport",
+  "state": "Oregon",
+  "state_code": "OR",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 44.6214,
+  "lng": -124.0438
+ },
+ {
+  "name": "Pacific City",
+  "state": "Oregon",
+  "state_code": "OR",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 45.2053,
+  "lng": -123.9542
+ },
+ {
+  "name": "Port Orford",
+  "state": "Oregon",
+  "state_code": "OR",
+  "tier": 2,
+  "water_body": "Pacific Ocean",
+  "lat": 42.7493,
+  "lng": -124.4981
+ },
+ {
+  "name": "Rockaway Beach",
+  "state": "Oregon",
+  "state_code": "OR",
+  "tier": 2,
+  "water_body": "Pacific Ocean",
+  "lat": 45.617,
+  "lng": -123.9389
+ },
+ {
+  "name": "Seaside",
+  "state": "Oregon",
+  "state_code": "OR",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 45.989,
+  "lng": -123.921
+ },
+ {
+  "name": "Sunriver",
+  "state": "Oregon",
+  "state_code": "OR",
+  "tier": 2,
+  "water_body": "Deschutes River",
+  "lat": 43.8821,
+  "lng": -121.435
+ },
+ {
+  "name": "Yachats",
+  "state": "Oregon",
+  "state_code": "OR",
+  "tier": 1,
+  "water_body": "Pacific Ocean",
+  "lat": 44.3118,
+  "lng": -124.1014
+ },
+ {
+  "name": "Confluence",
+  "state": "Pennsylvania",
+  "state_code": "PA",
+  "tier": 2,
+  "water_body": "Youghiogheny River",
+  "lat": 39.8099,
+  "lng": -79.3559
+ },
+ {
+  "name": "Conneaut Lake",
+  "state": "Pennsylvania",
+  "state_code": "PA",
+  "tier": 2,
+  "water_body": "Conneaut Lake",
+  "lat": 41.6027,
+  "lng": -80.3094
+ },
+ {
+  "name": "Easton",
+  "state": "Pennsylvania",
+  "state_code": "PA",
+  "tier": 2,
+  "water_body": "Delaware River",
+  "lat": 40.686,
+  "lng": -75.2185
+ },
+ {
+  "name": "Erie",
+  "state": "Pennsylvania",
+  "state_code": "PA",
+  "tier": 1,
+  "water_body": "Lake Erie",
+  "lat": 42.1166,
+  "lng": -80.0735
+ },
+ {
+  "name": "Harrisburg",
+  "state": "Pennsylvania",
+  "state_code": "PA",
+  "tier": 2,
+  "water_body": "Susquehanna River",
+  "lat": 40.2759,
+  "lng": -76.885
+ },
+ {
+  "name": "Harveys Lake",
+  "state": "Pennsylvania",
+  "state_code": "PA",
+  "tier": 2,
+  "water_body": "Harveys Lake",
+  "lat": 41.3647,
+  "lng": -76.0447
+ },
+ {
+  "name": "Hawley",
+  "state": "Pennsylvania",
+  "state_code": "PA",
+  "tier": 2,
+  "water_body": "Lake Wallenpaupack",
+  "lat": 41.4759,
+  "lng": -75.176
+ },
+ {
+  "name": "Huntingdon",
+  "state": "Pennsylvania",
+  "state_code": "PA",
+  "tier": 2,
+  "water_body": "Raystown Lake",
+  "lat": 40.4982,
+  "lng": -78.0073
+ },
+ {
+  "name": "Jim Thorpe",
+  "state": "Pennsylvania",
+  "state_code": "PA",
+  "tier": 1,
+  "water_body": "Lehigh River",
+  "lat": 40.8572,
+  "lng": -75.7763
+ },
+ {
+  "name": "Lake Harmony",
+  "state": "Pennsylvania",
+  "state_code": "PA",
+  "tier": 2,
+  "water_body": "Lake Harmony",
+  "lat": 41.0605,
+  "lng": -75.5916
+ },
+ {
+  "name": "Milford",
+  "state": "Pennsylvania",
+  "state_code": "PA",
+  "tier": 2,
+  "water_body": "Delaware River",
+  "lat": 41.3237,
+  "lng": -74.801
+ },
+ {
+  "name": "New Hope",
+  "state": "Pennsylvania",
+  "state_code": "PA",
+  "tier": 1,
+  "water_body": "Delaware River",
+  "lat": 40.3614,
+  "lng": -74.9568
+ },
+ {
+  "name": "North East",
+  "state": "Pennsylvania",
+  "state_code": "PA",
+  "tier": 2,
+  "water_body": "Lake Erie",
+  "lat": 42.2134,
+  "lng": -79.8334
+ },
+ {
+  "name": "Ohiopyle",
+  "state": "Pennsylvania",
+  "state_code": "PA",
+  "tier": 1,
+  "water_body": "Youghiogheny River",
+  "lat": 39.8641,
+  "lng": -79.4947
+ },
+ {
+  "name": "Pittsburgh",
+  "state": "Pennsylvania",
+  "state_code": "PA",
+  "tier": 1,
+  "water_body": "Allegheny River",
+  "lat": 40.4399,
+  "lng": -79.9757
+ },
+ {
+  "name": "Warren",
+  "state": "Pennsylvania",
+  "state_code": "PA",
+  "tier": 2,
+  "water_body": "Allegheny River",
+  "lat": 41.8429,
+  "lng": -79.1439
+ },
+ {
+  "name": "Wellsboro",
+  "state": "Pennsylvania",
+  "state_code": "PA",
+  "tier": 2,
+  "water_body": "Pine Creek",
+  "lat": 41.7455,
+  "lng": -77.3037
+ },
+ {
+  "name": "Williamsport",
+  "state": "Pennsylvania",
+  "state_code": "PA",
+  "tier": 2,
+  "water_body": "Susquehanna River",
+  "lat": 41.24,
+  "lng": -77.0356
+ },
+ {
+  "name": "Bristol",
+  "state": "Rhode Island",
+  "state_code": "RI",
+  "tier": 1,
+  "water_body": "Narragansett Bay",
+  "lat": 41.677,
+  "lng": -71.2662
+ },
+ {
+  "name": "Charlestown",
+  "state": "Rhode Island",
+  "state_code": "RI",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 41.3781,
+  "lng": -71.6266
+ },
+ {
+  "name": "East Greenwich",
+  "state": "Rhode Island",
+  "state_code": "RI",
+  "tier": 2,
+  "water_body": "Greenwich Bay",
+  "lat": 41.6604,
+  "lng": -71.4559
+ },
+ {
+  "name": "Jamestown",
+  "state": "Rhode Island",
+  "state_code": "RI",
+  "tier": 2,
+  "water_body": "Narragansett Bay",
+  "lat": 41.497,
+  "lng": -71.3673
+ },
+ {
+  "name": "Little Compton",
+  "state": "Rhode Island",
+  "state_code": "RI",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 41.5101,
+  "lng": -71.1712
+ },
+ {
+  "name": "Middletown",
+  "state": "Rhode Island",
+  "state_code": "RI",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 41.5457,
+  "lng": -71.2914
+ },
+ {
+  "name": "Narragansett",
+  "state": "Rhode Island",
+  "state_code": "RI",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 41.4326,
+  "lng": -71.458
+ },
+ {
+  "name": "New Shoreham",
+  "state": "Rhode Island",
+  "state_code": "RI",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 41.1722,
+  "lng": -71.5573
+ },
+ {
+  "name": "Newport",
+  "state": "Rhode Island",
+  "state_code": "RI",
+  "tier": 1,
+  "water_body": "Narragansett Bay",
+  "lat": 41.4767,
+  "lng": -71.3196
+ },
+ {
+  "name": "North Kingstown",
+  "state": "Rhode Island",
+  "state_code": "RI",
+  "tier": 2,
+  "water_body": "Narragansett Bay",
+  "lat": 41.5514,
+  "lng": -71.4694
+ },
+ {
+  "name": "Portsmouth",
+  "state": "Rhode Island",
+  "state_code": "RI",
+  "tier": 2,
+  "water_body": "Narragansett Bay",
+  "lat": 41.6024,
+  "lng": -71.2503
+ },
+ {
+  "name": "Providence",
+  "state": "Rhode Island",
+  "state_code": "RI",
+  "tier": 2,
+  "water_body": "Providence River",
+  "lat": 41.8231,
+  "lng": -71.4188
+ },
+ {
+  "name": "South Kingstown",
+  "state": "Rhode Island",
+  "state_code": "RI",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 41.4549,
+  "lng": -71.5395
+ },
+ {
+  "name": "Tiverton",
+  "state": "Rhode Island",
+  "state_code": "RI",
+  "tier": 2,
+  "water_body": "Sakonnet River",
+  "lat": 41.654,
+  "lng": -71.2004
+ },
+ {
+  "name": "Warren",
+  "state": "Rhode Island",
+  "state_code": "RI",
+  "tier": 2,
+  "water_body": "Warren River",
+  "lat": 41.7304,
+  "lng": -71.2825
+ },
+ {
+  "name": "Westerly",
+  "state": "Rhode Island",
+  "state_code": "RI",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 41.3733,
+  "lng": -71.8068
+ },
+ {
+  "name": "Beaufort",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 1,
+  "water_body": "Beaufort River",
+  "lat": 32.4581,
+  "lng": -80.7225
+ },
+ {
+  "name": "Bluffton",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 2,
+  "water_body": "May River",
+  "lat": 32.2144,
+  "lng": -80.9295
+ },
+ {
+  "name": "Chapin",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 2,
+  "water_body": "Lake Murray",
+  "lat": 34.1653,
+  "lng": -81.3393
+ },
+ {
+  "name": "Charleston",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 1,
+  "water_body": "Charleston Harbor",
+  "lat": 32.828,
+  "lng": -79.9729
+ },
+ {
+  "name": "Clemson",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 2,
+  "water_body": "Lake Hartwell",
+  "lat": 34.6836,
+  "lng": -82.8106
+ },
+ {
+  "name": "Conway",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 2,
+  "water_body": "Waccamaw River",
+  "lat": 33.8419,
+  "lng": -79.0457
+ },
+ {
+  "name": "Edisto Beach",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 32.4987,
+  "lng": -80.3135
+ },
+ {
+  "name": "Folly Beach",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 32.6693,
+  "lng": -79.9606
+ },
+ {
+  "name": "Garden City",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 33.5918,
+  "lng": -79.0065
+ },
+ {
+  "name": "Georgetown",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 2,
+  "water_body": "Winyah Bay",
+  "lat": 33.3724,
+  "lng": -79.2808
+ },
+ {
+  "name": "Hilton Head Island",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 32.1903,
+  "lng": -80.7384
+ },
+ {
+  "name": "Isle of Palms",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 32.8039,
+  "lng": -79.7524
+ },
+ {
+  "name": "Kiawah Island",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 32.6164,
+  "lng": -80.0606
+ },
+ {
+  "name": "Little River",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 2,
+  "water_body": "Intracoastal Waterway",
+  "lat": 33.8806,
+  "lng": -78.6405
+ },
+ {
+  "name": "Mount Pleasant",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 2,
+  "water_body": "Charleston Harbor",
+  "lat": 32.8084,
+  "lng": -79.865
+ },
+ {
+  "name": "Murrells Inlet",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 33.5573,
+  "lng": -79.0572
+ },
+ {
+  "name": "Myrtle Beach",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 33.7104,
+  "lng": -78.886
+ },
+ {
+  "name": "North Myrtle Beach",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 33.8229,
+  "lng": -78.6999
+ },
+ {
+  "name": "Pawleys Island",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 33.4281,
+  "lng": -79.125
+ },
+ {
+  "name": "Port Royal",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 2,
+  "water_body": "Battery Creek",
+  "lat": 32.3554,
+  "lng": -80.7003
+ },
+ {
+  "name": "Santee",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 2,
+  "water_body": "Lake Marion",
+  "lat": 33.4846,
+  "lng": -80.49
+ },
+ {
+  "name": "Seabrook Island",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 32.575,
+  "lng": -80.182
+ },
+ {
+  "name": "Seneca",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 2,
+  "water_body": "Lake Keowee",
+  "lat": 34.6811,
+  "lng": -82.9656
+ },
+ {
+  "name": "Sullivan's Island",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 32.7709,
+  "lng": -79.8311
+ },
+ {
+  "name": "Surfside Beach",
+  "state": "South Carolina",
+  "state_code": "SC",
+  "tier": 2,
+  "water_body": "Atlantic Ocean",
+  "lat": 33.6097,
+  "lng": -78.9775
+ },
+ {
+  "name": "Chamberlain",
+  "state": "South Dakota",
+  "state_code": "SD",
+  "tier": 2,
+  "water_body": "Lake Francis Case",
+  "lat": 43.7987,
+  "lng": -99.3296
+ },
+ {
+  "name": "Hot Springs",
+  "state": "South Dakota",
+  "state_code": "SD",
+  "tier": 2,
+  "water_body": "Fall River",
+  "lat": 43.4195,
+  "lng": -103.4651
+ },
+ {
+  "name": "Mobridge",
+  "state": "South Dakota",
+  "state_code": "SD",
+  "tier": 2,
+  "water_body": "Lake Oahe",
+  "lat": 45.541,
+  "lng": -100.4349
+ },
+ {
+  "name": "Pierre",
+  "state": "South Dakota",
+  "state_code": "SD",
+  "tier": 2,
+  "water_body": "Missouri River",
+  "lat": 44.3752,
+  "lng": -100.32
+ },
+ {
+  "name": "Sioux Falls",
+  "state": "South Dakota",
+  "state_code": "SD",
+  "tier": 2,
+  "water_body": "Big Sioux River",
+  "lat": 43.5407,
+  "lng": -96.732
+ },
+ {
+  "name": "Spearfish",
+  "state": "South Dakota",
+  "state_code": "SD",
+  "tier": 2,
+  "water_body": "Spearfish Creek",
+  "lat": 44.4921,
+  "lng": -103.8197
+ },
+ {
+  "name": "Watertown",
+  "state": "South Dakota",
+  "state_code": "SD",
+  "tier": 2,
+  "water_body": "Lake Kampeska",
+  "lat": 44.9092,
+  "lng": -97.1557
+ },
+ {
+  "name": "Yankton",
+  "state": "South Dakota",
+  "state_code": "SD",
+  "tier": 2,
+  "water_body": "Lewis and Clark Lake",
+  "lat": 42.8898,
+  "lng": -97.3927
+ },
+ {
+  "name": "Butler",
+  "state": "Tennessee",
+  "state_code": "TN",
+  "tier": 2,
+  "water_body": "Watauga Lake",
+  "lat": 36.3571,
+  "lng": -82.0356
+ },
+ {
+  "name": "Celina",
+  "state": "Tennessee",
+  "state_code": "TN",
+  "tier": 2,
+  "water_body": "Dale Hollow Lake",
+  "lat": 36.5476,
+  "lng": -85.5038
+ },
+ {
+  "name": "Chattanooga",
+  "state": "Tennessee",
+  "state_code": "TN",
+  "tier": 1,
+  "water_body": "Tennessee River",
+  "lat": 35.066,
+  "lng": -85.2484
+ },
+ {
+  "name": "Dandridge",
+  "state": "Tennessee",
+  "state_code": "TN",
+  "tier": 2,
+  "water_body": "Douglas Lake",
+  "lat": 36.0301,
+  "lng": -83.4298
+ },
+ {
+  "name": "Dover",
+  "state": "Tennessee",
+  "state_code": "TN",
+  "tier": 2,
+  "water_body": "Lake Barkley",
+  "lat": 36.4816,
+  "lng": -87.8438
+ },
+ {
+  "name": "Gatlinburg",
+  "state": "Tennessee",
+  "state_code": "TN",
+  "tier": 1,
+  "water_body": "Little Pigeon River",
+  "lat": 35.725,
+  "lng": -83.4938
+ },
+ {
+  "name": "Hartford",
+  "state": "Tennessee",
+  "state_code": "TN",
+  "tier": 2,
+  "water_body": "Pigeon River",
+  "lat": 35.8168,
+  "lng": -83.1432
+ },
+ {
+  "name": "Knoxville",
+  "state": "Tennessee",
+  "state_code": "TN",
+  "tier": 2,
+  "water_body": "Tennessee River",
+  "lat": 35.9707,
+  "lng": -83.9493
+ },
+ {
+  "name": "Memphis",
+  "state": "Tennessee",
+  "state_code": "TN",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 35.109,
+  "lng": -89.9675
+ },
+ {
+  "name": "Nashville",
+  "state": "Tennessee",
+  "state_code": "TN",
+  "tier": 2,
+  "water_body": "Cumberland River",
+  "lat": 36.1623,
+  "lng": -86.7743
+ },
+ {
+  "name": "Paris",
+  "state": "Tennessee",
+  "state_code": "TN",
+  "tier": 2,
+  "water_body": "Kentucky Lake",
+  "lat": 36.2927,
+  "lng": -88.3081
+ },
+ {
+  "name": "Pigeon Forge",
+  "state": "Tennessee",
+  "state_code": "TN",
+  "tier": 2,
+  "water_body": "Little Pigeon River",
+  "lat": 35.798,
+  "lng": -83.5638
+ },
+ {
+  "name": "Rock Island",
+  "state": "Tennessee",
+  "state_code": "TN",
+  "tier": 2,
+  "water_body": "Caney Fork River",
+  "lat": 36.0629,
+  "lng": -86.5274
+ },
+ {
+  "name": "Smithville",
+  "state": "Tennessee",
+  "state_code": "TN",
+  "tier": 2,
+  "water_body": "Center Hill Lake",
+  "lat": 35.9584,
+  "lng": -85.8211
+ },
+ {
+  "name": "Townsend",
+  "state": "Tennessee",
+  "state_code": "TN",
+  "tier": 1,
+  "water_body": "Little River",
+  "lat": 35.6763,
+  "lng": -83.753
+ },
+ {
+  "name": "Winchester",
+  "state": "Tennessee",
+  "state_code": "TN",
+  "tier": 2,
+  "water_body": "Tims Ford Lake",
+  "lat": 35.1891,
+  "lng": -86.1049
+ },
+ {
+  "name": "Austin",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 1,
+  "water_body": "Lady Bird Lake",
+  "lat": 30.2986,
+  "lng": -97.7541
+ },
+ {
+  "name": "Bandera",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 2,
+  "water_body": "Medina River",
+  "lat": 29.7251,
+  "lng": -99.0743
+ },
+ {
+  "name": "Canyon Lake",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 2,
+  "water_body": "Canyon Lake",
+  "lat": 29.8758,
+  "lng": -98.2612
+ },
+ {
+  "name": "Concan",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 2,
+  "water_body": "Frio River",
+  "lat": 29.5004,
+  "lng": -99.7226
+ },
+ {
+  "name": "Corpus Christi",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 1,
+  "water_body": "Corpus Christi Bay",
+  "lat": 27.7543,
+  "lng": -97.1734
+ },
+ {
+  "name": "Crystal Beach",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 2,
+  "water_body": "Gulf of Mexico",
+  "lat": 29.4573,
+  "lng": -94.6389
+ },
+ {
+  "name": "Denison",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 2,
+  "water_body": "Lake Texoma",
+  "lat": 33.7669,
+  "lng": -96.5807
+ },
+ {
+  "name": "Fulton",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 2,
+  "water_body": "Aransas Bay",
+  "lat": 28.0724,
+  "lng": -97.0389
+ },
+ {
+  "name": "Galveston",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 1,
+  "water_body": "Gulf of Mexico",
+  "lat": 29.1863,
+  "lng": -94.9658
+ },
+ {
+  "name": "Graford",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 2,
+  "water_body": "Possum Kingdom Lake",
+  "lat": 32.9374,
+  "lng": -98.2475
+ },
+ {
+  "name": "Granbury",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 2,
+  "water_body": "Lake Granbury",
+  "lat": 32.4328,
+  "lng": -97.7751
+ },
+ {
+  "name": "Horseshoe Bay",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 2,
+  "water_body": "Lake LBJ",
+  "lat": 30.5408,
+  "lng": -98.3806
+ },
+ {
+  "name": "Jefferson",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 2,
+  "water_body": "Big Cypress Bayou",
+  "lat": 32.7635,
+  "lng": -94.3508
+ },
+ {
+  "name": "Kemah",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 1,
+  "water_body": "Galveston Bay",
+  "lat": 29.5286,
+  "lng": -95.02
+ },
+ {
+  "name": "Kerrville",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 2,
+  "water_body": "Guadalupe River",
+  "lat": 30.0377,
+  "lng": -99.1324
+ },
+ {
+  "name": "Marble Falls",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 2,
+  "water_body": "Lake Marble Falls",
+  "lat": 30.5602,
+  "lng": -98.2773
+ },
+ {
+  "name": "New Braunfels",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 1,
+  "water_body": "Comal River",
+  "lat": 29.6993,
+  "lng": -98.1151
+ },
+ {
+  "name": "Port Aransas",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 1,
+  "water_body": "Gulf of Mexico",
+  "lat": 27.8209,
+  "lng": -97.0892
+ },
+ {
+  "name": "Port Isabel",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 2,
+  "water_body": "Laguna Madre",
+  "lat": 26.063,
+  "lng": -97.2467
+ },
+ {
+  "name": "Port O'Connor",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 2,
+  "water_body": "Matagorda Bay",
+  "lat": 28.446,
+  "lng": -96.4201
+ },
+ {
+  "name": "Rockport",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 1,
+  "water_body": "Aransas Bay",
+  "lat": 28.0476,
+  "lng": -97.05
+ },
+ {
+  "name": "San Marcos",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 2,
+  "water_body": "San Marcos River",
+  "lat": 29.8724,
+  "lng": -97.936
+ },
+ {
+  "name": "South Padre Island",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 1,
+  "water_body": "Gulf of Mexico",
+  "lat": 26.1205,
+  "lng": -97.1707
+ },
+ {
+  "name": "Uncertain",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 2,
+  "water_body": "Caddo Lake",
+  "lat": 32.7006,
+  "lng": -94.1333
+ },
+ {
+  "name": "Wimberley",
+  "state": "Texas",
+  "state_code": "TX",
+  "tier": 2,
+  "water_body": "Blanco River",
+  "lat": 29.9848,
+  "lng": -98.0906
+ },
+ {
+  "name": "Bluff",
+  "state": "Utah",
+  "state_code": "UT",
+  "tier": 2,
+  "water_body": "San Juan River",
+  "lat": 37.2903,
+  "lng": -109.5961
+ },
+ {
+  "name": "Bullfrog",
+  "state": "Utah",
+  "state_code": "UT",
+  "tier": 2,
+  "water_body": "Lake Powell",
+  "lat": 37.5159,
+  "lng": -110.7296
+ },
+ {
+  "name": "Dutch John",
+  "state": "Utah",
+  "state_code": "UT",
+  "tier": 2,
+  "water_body": "Flaming Gorge Reservoir",
+  "lat": 40.9271,
+  "lng": -109.4031
+ },
+ {
+  "name": "Eden",
+  "state": "Utah",
+  "state_code": "UT",
+  "tier": 2,
+  "water_body": "Pineview Reservoir",
+  "lat": 41.3062,
+  "lng": -111.8038
+ },
+ {
+  "name": "Garden City",
+  "state": "Utah",
+  "state_code": "UT",
+  "tier": 1,
+  "water_body": "Bear Lake",
+  "lat": 41.9371,
+  "lng": -111.4122
+ },
+ {
+  "name": "Heber City",
+  "state": "Utah",
+  "state_code": "UT",
+  "tier": 2,
+  "water_body": "Jordanelle Reservoir",
+  "lat": 40.5065,
+  "lng": -111.4133
+ },
+ {
+  "name": "Huntsville",
+  "state": "Utah",
+  "state_code": "UT",
+  "tier": 2,
+  "water_body": "Pineview Reservoir",
+  "lat": 41.2598,
+  "lng": -111.7713
+ },
+ {
+  "name": "Manila",
+  "state": "Utah",
+  "state_code": "UT",
+  "tier": 2,
+  "water_body": "Flaming Gorge Reservoir",
+  "lat": 40.9922,
+  "lng": -109.721
+ },
+ {
+  "name": "Midway",
+  "state": "Utah",
+  "state_code": "UT",
+  "tier": 2,
+  "water_body": "Deer Creek Reservoir",
+  "lat": 40.5202,
+  "lng": -111.4755
+ },
+ {
+  "name": "Moab",
+  "state": "Utah",
+  "state_code": "UT",
+  "tier": 1,
+  "water_body": "Colorado River",
+  "lat": 38.5701,
+  "lng": -109.5478
+ },
+ {
+  "name": "Springdale",
+  "state": "Utah",
+  "state_code": "UT",
+  "tier": 2,
+  "water_body": "Virgin River",
+  "lat": 37.1817,
+  "lng": -113.005
+ },
+ {
+  "name": "St. George",
+  "state": "Utah",
+  "state_code": "UT",
+  "tier": 2,
+  "water_body": "Virgin River",
+  "lat": 37.077,
+  "lng": -113.5765
+ },
+ {
+  "name": "Brattleboro",
+  "state": "Vermont",
+  "state_code": "VT",
+  "tier": 2,
+  "water_body": "Connecticut River",
+  "lat": 42.8616,
+  "lng": -72.5592
+ },
+ {
+  "name": "Burlington",
+  "state": "Vermont",
+  "state_code": "VT",
+  "tier": 1,
+  "water_body": "Lake Champlain",
+  "lat": 44.4919,
+  "lng": -73.2389
+ },
+ {
+  "name": "Castleton",
+  "state": "Vermont",
+  "state_code": "VT",
+  "tier": 2,
+  "water_body": "Lake Bomoseen",
+  "lat": 43.6054,
+  "lng": -73.1848
+ },
+ {
+  "name": "Colchester",
+  "state": "Vermont",
+  "state_code": "VT",
+  "tier": 2,
+  "water_body": "Lake Champlain",
+  "lat": 44.5341,
+  "lng": -73.1846
+ },
+ {
+  "name": "Fairlee",
+  "state": "Vermont",
+  "state_code": "VT",
+  "tier": 2,
+  "water_body": "Lake Morey",
+  "lat": 43.8938,
+  "lng": -72.1591
+ },
+ {
+  "name": "Grand Isle",
+  "state": "Vermont",
+  "state_code": "VT",
+  "tier": 2,
+  "water_body": "Lake Champlain",
+  "lat": 44.7225,
+  "lng": -73.2931
+ },
+ {
+  "name": "Island Pond",
+  "state": "Vermont",
+  "state_code": "VT",
+  "tier": 2,
+  "water_body": "Island Pond",
+  "lat": 44.814,
+  "lng": -71.8855
+ },
+ {
+  "name": "Middlebury",
+  "state": "Vermont",
+  "state_code": "VT",
+  "tier": 2,
+  "water_body": "Otter Creek",
+  "lat": 44.0079,
+  "lng": -73.1576
+ },
+ {
+  "name": "Newport",
+  "state": "Vermont",
+  "state_code": "VT",
+  "tier": 2,
+  "water_body": "Lake Memphremagog",
+  "lat": 44.9367,
+  "lng": -72.2096
+ },
+ {
+  "name": "North Hero",
+  "state": "Vermont",
+  "state_code": "VT",
+  "tier": 2,
+  "water_body": "Lake Champlain",
+  "lat": 44.8171,
+  "lng": -73.2901
+ },
+ {
+  "name": "Shelburne",
+  "state": "Vermont",
+  "state_code": "VT",
+  "tier": 2,
+  "water_body": "Lake Champlain",
+  "lat": 44.3905,
+  "lng": -73.218
+ },
+ {
+  "name": "St. Albans",
+  "state": "Vermont",
+  "state_code": "VT",
+  "tier": 2,
+  "water_body": "Lake Champlain",
+  "lat": 44.8115,
+  "lng": -73.0845
+ },
+ {
+  "name": "Stowe",
+  "state": "Vermont",
+  "state_code": "VT",
+  "tier": 2,
+  "water_body": "Little River",
+  "lat": 44.4672,
+  "lng": -72.6838
+ },
+ {
+  "name": "Vergennes",
+  "state": "Vermont",
+  "state_code": "VT",
+  "tier": 2,
+  "water_body": "Otter Creek",
+  "lat": 44.1677,
+  "lng": -73.2553
+ },
+ {
+  "name": "Wilmington",
+  "state": "Vermont",
+  "state_code": "VT",
+  "tier": 2,
+  "water_body": "Harriman Reservoir",
+  "lat": 42.8693,
+  "lng": -72.8611
+ },
+ {
+  "name": "Woodstock",
+  "state": "Vermont",
+  "state_code": "VT",
+  "tier": 2,
+  "water_body": "Ottauquechee River",
+  "lat": 43.6234,
+  "lng": -72.513
+ },
+ {
+  "name": "Alexandria",
+  "state": "Virginia",
+  "state_code": "VA",
+  "tier": 1,
+  "water_body": "Potomac River",
+  "lat": 38.8193,
+  "lng": -77.0837
+ },
+ {
+  "name": "Cape Charles",
+  "state": "Virginia",
+  "state_code": "VA",
+  "tier": 1,
+  "water_body": "Chesapeake Bay",
+  "lat": 37.2497,
+  "lng": -76.0142
+ },
+ {
+  "name": "Chincoteague",
+  "state": "Virginia",
+  "state_code": "VA",
+  "tier": 1,
+  "water_body": "Chincoteague Bay",
+  "lat": 37.9493,
+  "lng": -75.3526
+ },
+ {
+  "name": "Colonial Beach",
+  "state": "Virginia",
+  "state_code": "VA",
+  "tier": 2,
+  "water_body": "Potomac River",
+  "lat": 38.2644,
+  "lng": -76.9937
+ },
+ {
+  "name": "Deltaville",
+  "state": "Virginia",
+  "state_code": "VA",
+  "tier": 2,
+  "water_body": "Chesapeake Bay",
+  "lat": 37.5513,
+  "lng": -76.3278
+ },
+ {
+  "name": "Fredericksburg",
+  "state": "Virginia",
+  "state_code": "VA",
+  "tier": 2,
+  "water_body": "Rappahannock River",
+  "lat": 38.2993,
+  "lng": -77.4867
+ },
+ {
+  "name": "Front Royal",
+  "state": "Virginia",
+  "state_code": "VA",
+  "tier": 2,
+  "water_body": "Shenandoah River",
+  "lat": 38.925,
+  "lng": -78.1834
+ },
+ {
+  "name": "Hampton",
+  "state": "Virginia",
+  "state_code": "VA",
+  "tier": 2,
+  "water_body": "Hampton Roads",
+  "lat": 37.048,
+  "lng": -76.2973
+ },
+ {
+  "name": "Irvington",
+  "state": "Virginia",
+  "state_code": "VA",
+  "tier": 2,
+  "water_body": "Rappahannock River",
+  "lat": 37.6624,
+  "lng": -76.42
+ },
+ {
+  "name": "Moneta",
+  "state": "Virginia",
+  "state_code": "VA",
+  "tier": 2,
+  "water_body": "Smith Mountain Lake",
+  "lat": 37.1882,
+  "lng": -79.6134
+ },
+ {
+  "name": "Norfolk",
+  "state": "Virginia",
+  "state_code": "VA",
+  "tier": 2,
+  "water_body": "Elizabeth River",
+  "lat": 36.923,
+  "lng": -76.2446
+ },
+ {
+  "name": "Occoquan",
+  "state": "Virginia",
+  "state_code": "VA",
+  "tier": 2,
+  "water_body": "Occoquan River",
+  "lat": 38.6817,
+  "lng": -77.2619
+ },
+ {
+  "name": "Onancock",
+  "state": "Virginia",
+  "state_code": "VA",
+  "tier": 2,
+  "water_body": "Onancock Creek",
+  "lat": 37.71,
+  "lng": -75.7437
+ },
+ {
+  "name": "Portsmouth",
+  "state": "Virginia",
+  "state_code": "VA",
+  "tier": 2,
+  "water_body": "Elizabeth River",
+  "lat": 36.8593,
+  "lng": -76.357
+ },
+ {
+  "name": "Radford",
+  "state": "Virginia",
+  "state_code": "VA",
+  "tier": 2,
+  "water_body": "New River",
+  "lat": 37.1201,
+  "lng": -80.5591
+ },
+ {
+  "name": "Reedville",
+  "state": "Virginia",
+  "state_code": "VA",
+  "tier": 2,
+  "water_body": "Great Wicomico River",
+  "lat": 37.8421,
+  "lng": -76.2758
+ },
+ {
+  "name": "Richmond",
+  "state": "Virginia",
+  "state_code": "VA",
+  "tier": 2,
+  "water_body": "James River",
+  "lat": 37.5314,
+  "lng": -77.476
+ },
+ {
+  "name": "Smithfield",
+  "state": "Virginia",
+  "state_code": "VA",
+  "tier": 2,
+  "water_body": "Pagan River",
+  "lat": 36.9724,
+  "lng": -76.6142
+ },
+ {
+  "name": "Tangier",
+  "state": "Virginia",
+  "state_code": "VA",
+  "tier": 2,
+  "water_body": "Chesapeake Bay",
+  "lat": 37.8234,
+  "lng": -75.9928
+ },
+ {
+  "name": "Urbanna",
+  "state": "Virginia",
+  "state_code": "VA",
+  "tier": 2,
+  "water_body": "Rappahannock River",
+  "lat": 37.6399,
+  "lng": -76.5751
+ },
+ {
+  "name": "Virginia Beach",
+  "state": "Virginia",
+  "state_code": "VA",
+  "tier": 1,
+  "water_body": "Atlantic Ocean",
+  "lat": 36.7795,
+  "lng": -76.0291
+ },
+ {
+  "name": "Yorktown",
+  "state": "Virginia",
+  "state_code": "VA",
+  "tier": 1,
+  "water_body": "York River",
+  "lat": 37.234,
+  "lng": -76.5182
+ },
+ {
+  "name": "Anacortes",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 2,
+  "water_body": "Puget Sound",
+  "lat": 48.4887,
+  "lng": -122.624
+ },
+ {
+  "name": "Bainbridge Island",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 1,
+  "water_body": "Puget Sound",
+  "lat": 47.6425,
+  "lng": -122.5078
+ },
+ {
+  "name": "Bellingham",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 2,
+  "water_body": "Bellingham Bay",
+  "lat": 48.7534,
+  "lng": -122.4702
+ },
+ {
+  "name": "Chelan",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 1,
+  "water_body": "Lake Chelan",
+  "lat": 47.8443,
+  "lng": -120.0136
+ },
+ {
+  "name": "Coupeville",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 1,
+  "water_body": "Penn Cove",
+  "lat": 48.2188,
+  "lng": -122.6795
+ },
+ {
+  "name": "Eastsound",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 1,
+  "water_body": "East Sound",
+  "lat": 48.6968,
+  "lng": -122.9055
+ },
+ {
+  "name": "Edmonds",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 2,
+  "water_body": "Puget Sound",
+  "lat": 47.8136,
+  "lng": -122.3533
+ },
+ {
+  "name": "Friday Harbor",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 1,
+  "water_body": "Puget Sound",
+  "lat": 48.5339,
+  "lng": -123.019
+ },
+ {
+  "name": "Gig Harbor",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 1,
+  "water_body": "Puget Sound",
+  "lat": 47.3384,
+  "lng": -122.6008
+ },
+ {
+  "name": "Ilwaco",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 2,
+  "water_body": "Columbia River",
+  "lat": 46.3127,
+  "lng": -124.0267
+ },
+ {
+  "name": "Kirkland",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 2,
+  "water_body": "Lake Washington",
+  "lat": 47.6967,
+  "lng": -122.2042
+ },
+ {
+  "name": "La Conner",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 1,
+  "water_body": "Swinomish Channel",
+  "lat": 48.3926,
+  "lng": -122.4945
+ },
+ {
+  "name": "Langley",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 1,
+  "water_body": "Saratoga Passage",
+  "lat": 48.0375,
+  "lng": -122.4071
+ },
+ {
+  "name": "Leavenworth",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 2,
+  "water_body": "Wenatchee River",
+  "lat": 47.5947,
+  "lng": -120.6639
+ },
+ {
+  "name": "Long Beach",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 2,
+  "water_body": "Pacific Ocean",
+  "lat": 46.3619,
+  "lng": -124.0578
+ },
+ {
+  "name": "Manson",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 2,
+  "water_body": "Lake Chelan",
+  "lat": 47.8743,
+  "lng": -120.1623
+ },
+ {
+  "name": "Ocean Shores",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 2,
+  "water_body": "Pacific Ocean",
+  "lat": 46.9654,
+  "lng": -124.1472
+ },
+ {
+  "name": "Port Angeles",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 2,
+  "water_body": "Strait of Juan de Fuca",
+  "lat": 48.1192,
+  "lng": -123.448
+ },
+ {
+  "name": "Port Townsend",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 1,
+  "water_body": "Puget Sound",
+  "lat": 48.1218,
+  "lng": -122.7879
+ },
+ {
+  "name": "Poulsbo",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 1,
+  "water_body": "Liberty Bay",
+  "lat": 47.7411,
+  "lng": -122.6422
+ },
+ {
+  "name": "Seattle",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 1,
+  "water_body": "Puget Sound",
+  "lat": 47.6193,
+  "lng": -122.3515
+ },
+ {
+  "name": "Sequim",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 2,
+  "water_body": "Sequim Bay",
+  "lat": 48.0737,
+  "lng": -123.0878
+ },
+ {
+  "name": "Stevenson",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 2,
+  "water_body": "Columbia River",
+  "lat": 45.6947,
+  "lng": -121.8964
+ },
+ {
+  "name": "Westport",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 2,
+  "water_body": "Pacific Ocean",
+  "lat": 46.8918,
+  "lng": -124.1198
+ },
+ {
+  "name": "Winthrop",
+  "state": "Washington",
+  "state_code": "WA",
+  "tier": 2,
+  "water_body": "Methow River",
+  "lat": 48.4716,
+  "lng": -120.1791
+ },
+ {
+  "name": "Ansted",
+  "state": "West Virginia",
+  "state_code": "WV",
+  "tier": 2,
+  "water_body": "New River",
+  "lat": 38.1354,
+  "lng": -81.1035
+ },
+ {
+  "name": "Cass",
+  "state": "West Virginia",
+  "state_code": "WV",
+  "tier": 2,
+  "water_body": "Greenbrier River",
+  "lat": 38.397,
+  "lng": -79.9199
+ },
+ {
+  "name": "Charleston",
+  "state": "West Virginia",
+  "state_code": "WV",
+  "tier": 2,
+  "water_body": "Kanawha River",
+  "lat": 38.3487,
+  "lng": -81.6323
+ },
+ {
+  "name": "Fayetteville",
+  "state": "West Virginia",
+  "state_code": "WV",
+  "tier": 1,
+  "water_body": "New River",
+  "lat": 38.0641,
+  "lng": -81.1087
+ },
+ {
+  "name": "Harpers Ferry",
+  "state": "West Virginia",
+  "state_code": "WV",
+  "tier": 1,
+  "water_body": "Potomac River",
+  "lat": 39.3252,
+  "lng": -77.7414
+ },
+ {
+  "name": "Hinton",
+  "state": "West Virginia",
+  "state_code": "WV",
+  "tier": 2,
+  "water_body": "New River",
+  "lat": 37.6746,
+  "lng": -80.8811
+ },
+ {
+  "name": "Marlinton",
+  "state": "West Virginia",
+  "state_code": "WV",
+  "tier": 2,
+  "water_body": "Greenbrier River",
+  "lat": 38.2241,
+  "lng": -80.0875
+ },
+ {
+  "name": "Morgantown",
+  "state": "West Virginia",
+  "state_code": "WV",
+  "tier": 2,
+  "water_body": "Cheat Lake",
+  "lat": 39.6375,
+  "lng": -79.9469
+ },
+ {
+  "name": "Parkersburg",
+  "state": "West Virginia",
+  "state_code": "WV",
+  "tier": 2,
+  "water_body": "Ohio River",
+  "lat": 39.2613,
+  "lng": -81.5434
+ },
+ {
+  "name": "Petersburg",
+  "state": "West Virginia",
+  "state_code": "WV",
+  "tier": 2,
+  "water_body": "South Branch Potomac River",
+  "lat": 38.9957,
+  "lng": -79.1277
+ },
+ {
+  "name": "Point Pleasant",
+  "state": "West Virginia",
+  "state_code": "WV",
+  "tier": 2,
+  "water_body": "Ohio River",
+  "lat": 38.8502,
+  "lng": -82.132
+ },
+ {
+  "name": "Seneca Rocks",
+  "state": "West Virginia",
+  "state_code": "WV",
+  "tier": 2,
+  "water_body": "North Fork South Branch Potomac",
+  "lat": 38.8347,
+  "lng": -79.3661
+ },
+ {
+  "name": "Shepherdstown",
+  "state": "West Virginia",
+  "state_code": "WV",
+  "tier": 2,
+  "water_body": "Potomac River",
+  "lat": 39.4319,
+  "lng": -77.8047
+ },
+ {
+  "name": "Summersville",
+  "state": "West Virginia",
+  "state_code": "WV",
+  "tier": 2,
+  "water_body": "Summersville Lake",
+  "lat": 38.287,
+  "lng": -80.8415
+ },
+ {
+  "name": "Weston",
+  "state": "West Virginia",
+  "state_code": "WV",
+  "tier": 2,
+  "water_body": "Stonewall Jackson Lake",
+  "lat": 39.0388,
+  "lng": -80.4622
+ },
+ {
+  "name": "Wheeling",
+  "state": "West Virginia",
+  "state_code": "WV",
+  "tier": 2,
+  "water_body": "Ohio River",
+  "lat": 40.0738,
+  "lng": -80.696
+ },
+ {
+  "name": "Baileys Harbor",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 2,
+  "water_body": "Lake Michigan",
+  "lat": 45.0671,
+  "lng": -87.1355
+ },
+ {
+  "name": "Bayfield",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 1,
+  "water_body": "Lake Superior",
+  "lat": 46.8161,
+  "lng": -90.8248
+ },
+ {
+  "name": "Eagle River",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 1,
+  "water_body": "Eagle River Chain of Lakes",
+  "lat": 45.9247,
+  "lng": -89.2578
+ },
+ {
+  "name": "Egg Harbor",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 1,
+  "water_body": "Green Bay",
+  "lat": 45.0513,
+  "lng": -87.3049
+ },
+ {
+  "name": "Elkhart Lake",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 2,
+  "water_body": "Elkhart Lake",
+  "lat": 43.8314,
+  "lng": -88.0138
+ },
+ {
+  "name": "Ellison Bay",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 2,
+  "water_body": "Green Bay",
+  "lat": 45.2553,
+  "lng": -87.0729
+ },
+ {
+  "name": "Ephraim",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 1,
+  "water_body": "Green Bay",
+  "lat": 45.1677,
+  "lng": -87.1726
+ },
+ {
+  "name": "Fish Creek",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 1,
+  "water_body": "Green Bay",
+  "lat": 45.1278,
+  "lng": -87.2467
+ },
+ {
+  "name": "Green Lake",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 2,
+  "water_body": "Green Lake",
+  "lat": 43.8428,
+  "lng": -88.9558
+ },
+ {
+  "name": "Hayward",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 2,
+  "water_body": "Lake Hayward",
+  "lat": 46.0066,
+  "lng": -91.4897
+ },
+ {
+  "name": "La Crosse",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 43.8247,
+  "lng": -91.2246
+ },
+ {
+  "name": "La Pointe",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 2,
+  "water_body": "Lake Superior",
+  "lat": 46.7791,
+  "lng": -90.7866
+ },
+ {
+  "name": "Lake Geneva",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 1,
+  "water_body": "Geneva Lake",
+  "lat": 42.5833,
+  "lng": -88.4285
+ },
+ {
+  "name": "Milwaukee",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 2,
+  "water_body": "Lake Michigan",
+  "lat": 43.0633,
+  "lng": -87.9667
+ },
+ {
+  "name": "Minocqua",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 1,
+  "water_body": "Lake Minocqua",
+  "lat": 45.8792,
+  "lng": -89.7036
+ },
+ {
+  "name": "Oshkosh",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 2,
+  "water_body": "Lake Winnebago",
+  "lat": 44.0232,
+  "lng": -88.5623
+ },
+ {
+  "name": "Pepin",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 2,
+  "water_body": "Lake Pepin",
+  "lat": 44.4428,
+  "lng": -92.1477
+ },
+ {
+  "name": "Port Washington",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 2,
+  "water_body": "Lake Michigan",
+  "lat": 43.3849,
+  "lng": -87.8841
+ },
+ {
+  "name": "Prairie du Chien",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 2,
+  "water_body": "Mississippi River",
+  "lat": 43.0433,
+  "lng": -91.1373
+ },
+ {
+  "name": "Sheboygan",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 2,
+  "water_body": "Lake Michigan",
+  "lat": 43.7387,
+  "lng": -87.7315
+ },
+ {
+  "name": "Sister Bay",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 1,
+  "water_body": "Green Bay",
+  "lat": 45.1871,
+  "lng": -87.1294
+ },
+ {
+  "name": "Sturgeon Bay",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 1,
+  "water_body": "Sturgeon Bay",
+  "lat": 44.8227,
+  "lng": -87.3698
+ },
+ {
+  "name": "Washington Island",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 2,
+  "water_body": "Lake Michigan",
+  "lat": 45.3758,
+  "lng": -86.8997
+ },
+ {
+  "name": "Williams Bay",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 2,
+  "water_body": "Geneva Lake",
+  "lat": 42.5788,
+  "lng": -88.5457
+ },
+ {
+  "name": "Wisconsin Dells",
+  "state": "Wisconsin",
+  "state_code": "WI",
+  "tier": 1,
+  "water_body": "Wisconsin River",
+  "lat": 43.6384,
+  "lng": -89.7758
+ },
+ {
+  "name": "Alpine",
+  "state": "Wyoming",
+  "state_code": "WY",
+  "tier": 2,
+  "water_body": "Palisades Reservoir",
+  "lat": 43.1604,
+  "lng": -111.0148
+ },
+ {
+  "name": "Cody",
+  "state": "Wyoming",
+  "state_code": "WY",
+  "tier": 1,
+  "water_body": "Shoshone River",
+  "lat": 44.5212,
+  "lng": -109.0575
+ },
+ {
+  "name": "Dubois",
+  "state": "Wyoming",
+  "state_code": "WY",
+  "tier": 2,
+  "water_body": "Wind River",
+  "lat": 43.546,
+  "lng": -109.6476
+ },
+ {
+  "name": "Green River",
+  "state": "Wyoming",
+  "state_code": "WY",
+  "tier": 2,
+  "water_body": "Green River",
+  "lat": 41.5129,
+  "lng": -109.4708
+ },
+ {
+  "name": "Jackson",
+  "state": "Wyoming",
+  "state_code": "WY",
+  "tier": 1,
+  "water_body": "Snake River",
+  "lat": 43.4719,
+  "lng": -110.7753
+ },
+ {
+  "name": "Lander",
+  "state": "Wyoming",
+  "state_code": "WY",
+  "tier": 2,
+  "water_body": "Popo Agie River",
+  "lat": 42.8313,
+  "lng": -108.7599
+ },
+ {
+  "name": "Lovell",
+  "state": "Wyoming",
+  "state_code": "WY",
+  "tier": 2,
+  "water_body": "Bighorn Lake",
+  "lat": 44.8358,
+  "lng": -108.3919
+ },
+ {
+  "name": "Pinedale",
+  "state": "Wyoming",
+  "state_code": "WY",
+  "tier": 2,
+  "water_body": "Fremont Lake",
+  "lat": 42.8676,
+  "lng": -109.8705
+ },
+ {
+  "name": "Saratoga",
+  "state": "Wyoming",
+  "state_code": "WY",
+  "tier": 2,
+  "water_body": "North Platte River",
+  "lat": 41.4524,
+  "lng": -106.8117
+ },
+ {
+  "name": "Thermopolis",
+  "state": "Wyoming",
+  "state_code": "WY",
+  "tier": 2,
+  "water_body": "Bighorn River",
+  "lat": 43.6476,
+  "lng": -108.2145
+ }
+]

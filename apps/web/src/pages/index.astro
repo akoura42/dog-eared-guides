@@ -2,7 +2,7 @@
 import Base from '~/layouts/Base.astro';
 import CityMap from '~/components/CityMap.astro';
 import { BRAND_NAME, BRAND_TAGLINE } from '~/lib/site';
-import { getCities } from '~/lib/config';
+import { getCities, getUpcomingTowns } from '~/lib/config';
 import { getCollection } from 'astro:content';
 import { guidePath } from '~/lib/venues';
 import AdSlot from '~/components/AdSlot.astro';
@@ -52,7 +52,11 @@ const guides = (await getCollection('guides'))
           autocomplete="off"
         />
       </div>
-      <CityMap cities={cities} />
+      <CityMap cities={cities} upcoming={getUpcomingTowns()} />
+      <p class="map-key">
+        <span class="key-live">●</span> live guides ·
+        <span class="key-soon">●</span> waterfront towns coming soon
+      </p>
       {states.map(([state, stateCities]) => (
         <div class="state-block" data-state>
           <h3 class="state-head">{state}</h3>
@@ -165,6 +169,18 @@ const guides = (await getCollection('guides'))
   #city-filter:focus {
     outline: 2px solid var(--moss);
     outline-offset: 1px;
+  }
+  .map-key {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    margin: 0.25rem 0 0;
+  }
+  .key-live {
+    color: var(--clay);
+  }
+  .key-soon {
+    color: var(--moss);
+    opacity: 0.6;
   }
   .state-head {
     font-size: 0.82rem;

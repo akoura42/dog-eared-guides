@@ -133,10 +133,18 @@ Decision (2026-08-04): stay on the free stack. City-hub venue maps are
 Leaflet + OpenStreetMap tiles (no key, no billing); "Google reviews" links
 on markers and venue pages are free Google Maps deep links (Maps URLs).
 
-Upgrade path if wanted later: a native embedded Google map needs a Maps
-JavaScript API key with billing (Dynamic Maps SKU: 10K free loads/month,
-then $7/1K as of 2026). The swap is contained to
-`apps/web/src/components/CityVenueMap.astro`.
+All three maps (homepage US picker, city venue map, itinerary plan map)
+are dual-mode: they render Google Maps when `PUBLIC_GMAPS_API_KEY` is set
+(Dynamic Maps SKU: 10K free loads/month, then $7/1K as of 2026) and fall
+back to the free stack (build-time SVG / Leaflet+OSM) when it isn't — so
+the site works identically with or without the key.
+
+"Coming soon" towns: `data/cities/waterfront-towns.csv` (tiers 1-2 only)
+is geocoded by `python pipeline/geocode_towns.py` (US Census Gazetteer +
+Nominatim fallback) into `waterfront-towns-geo.json`, which the homepage
+map renders as muted dots. Re-run the script only when the CSV changes.
+Launching one of these towns (creating its city config) automatically
+removes its gray dot and adds the live pin.
 
 ### Click-to-reveal Google reviews (built, dormant)
 

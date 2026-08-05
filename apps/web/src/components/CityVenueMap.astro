@@ -7,6 +7,7 @@
 import type { Venue } from '~/lib/venues';
 import { venuePath } from '~/lib/venues';
 import { getCategoryByKey, type CityConfig } from '~/lib/config';
+import { GMAPS_API_KEY } from '~/lib/site';
 
 interface Props {
   city: CityConfig;
@@ -50,6 +51,7 @@ const legend = [...new Map(venues.map((v) => {
     id="venue-map-canvas"
     data-center={JSON.stringify(center)}
     data-markers={JSON.stringify(markers)}
+    data-gmaps-key={GMAPS_API_KEY}
     aria-label={`Map of verified dog-friendly places in ${city.name}`}
   >
     <p class="placeholder">Map loading…</p>
@@ -142,22 +144,90 @@ const legend = [...new Map(venues.map((v) => {
 </style>
 
 <script>
+  import { ensureGoogleMaps, QUIET_MAP_STYLES } from '~/lib/gmaps-loader';
+
+  type MarkerData = {
+    name: string;
+    lat: number;
+    lng: number;
+    category: string;
+    color: string;
+    path: string;
+    gmaps: string;
+  };
+
+  const esc2 = (s: string) =>
+    s.replace(/[&<>"']/g, (c) =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!
+    );
+
+  function popupHtml(m: MarkerData): string {
+    return `<div class="venue-popup">
+      <h4>${esc2(m.name)}</h4>
+      <p class="cat">${esc2(m.category)}</p>
+      <div class="links">
+        <a href="${m.path}">Our verified policy</a>
+        <a href="${m.gmaps}" target="_blank" rel="noopener nofollow">Google reviews ↗</a>
+      </div>
+    </div>`;
+  }
+
+  // Google Maps mode — used when PUBLIC_GMAPS_API_KEY is configured.
+  async function initGoogleMap(el: HTMLElement, markers: MarkerData[]) {
+    const maps = await ensureGoogleMaps(el.dataset.gmapsKey!);
+    el.querySelector('.placeholder')?.remove();
+    const map = new maps.Map(el, {
+      center: JSON.parse(el.dataset.center!),
+      zoom: 13,
+      styles: QUIET_MAP_STYLES,
+      mapTypeControl: false,
+      streetViewControl: false,
+      fullscreenControl: true,
+      gestureHandling: 'cooperative',
+    });
+    const bounds = new maps.LatLngBounds();
+    const info = new maps.InfoWindow();
+    for (const m of markers) {
+      const marker = new maps.Marker({
+        map,
+        position: { lat: m.lat, lng: m.lng },
+        title: m.name,
+        icon: {
+          path: maps.SymbolPath.CIRCLE,
+          scale: 9,
+          fillColor: m.color,
+          fillOpacity: 0.95,
+          strokeColor: '#ffffff',
+          strokeWeight: 2,
+        },
+      });
+      marker.addListener('click', () => {
+        info.setContent(popupHtml(m));
+        info.open({ map, anchor: marker });
+      });
+      bounds.extend({ lat: m.lat, lng: m.lng });
+    }
+    if (!bounds.isEmpty()) map.fitBounds(bounds, 48);
+  }
+
   async function initMap(el: HTMLElement) {
+    const markers = JSON.parse(el.dataset.markers!) as MarkerData[];
+
+    if (el.dataset.gmapsKey) {
+      try {
+        await initGoogleMap(el, markers);
+        return;
+      } catch {
+        // fall through to the OSM stack if Google fails to load
+      }
+    }
+
     const [{ default: L }] = await Promise.all([
       import('leaflet'),
       import('leaflet/dist/leaflet.css'),
     ]);
 
     const center = JSON.parse(el.dataset.center!);
-    const markers = JSON.parse(el.dataset.markers!) as {
-      name: string;
-      lat: number;
-      lng: number;
-      category: string;
-      color: string;
-      path: string;
-      gmaps: string;
-    }[];
 
     el.querySelector('.placeholder')?.remove();
     const map = L.map(el, { scrollWheelZoom: false }).setView(
