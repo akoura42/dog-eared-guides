@@ -1,14 +1,18 @@
-# RUNBOOK — operating the site day-to-day
+# RUNBOOK — operating Dog-Eared Guides day-to-day
 
 ## The one workflow that matters
 
 ```
-queue item → generate.py → PR → you review & merge → Cloudflare Pages deploys
+discover (monthly, OSM) ──▶ research ledger ──▶ generate.py ──▶ PR ──▶ you review & merge ──▶ Cloudflare deploys
+                                   ▲                                          │
+                                   └────────── outcomes recorded ◀───────────┘
 ```
 
-**Merging a PR is the entire approval step.** Nothing ships without it; there
-is no other publish mechanism. The `Build check` GitHub Action runs the Astro
-build (strict Zod schemas) on every PR, so malformed content cannot merge green.
+**Merging a PR is the entire approval step.** Nothing ships without it;
+there is no other publish mechanism. The `Build check` GitHub Action runs
+the Astro build (strict Zod schemas) on every PR, so malformed content
+cannot merge green. Merges to `main` deploy to https://dogearedguides.com
+via Cloudflare Pages.
 
 ---
 
@@ -25,62 +29,34 @@ pip install -r pipeline/requirements.txt
 # Auth — two engines, chosen automatically:
 #   Claude subscription (default): the pipeline shells out to the Claude
 #   Code CLI, using the login you already have on this machine. Nothing to
-#   configure. For CI, run `claude setup-token` once and store the result
-#   as the CLAUDE_CODE_OAUTH_TOKEN repo secret.
+#   configure locally.
 #   API billing (alternative): export ANTHROPIC_API_KEY=sk-ant-... and the
 #   pipeline switches to direct SDK calls. Force either with
 #   PIPELINE_ENGINE=claude-code|api.
-gh auth login
+gh auth login   # (or SSH keys — pushing and `gh pr create` both need GitHub auth)
 ```
 
 Run the site locally: `cd apps/web && npm run dev` → http://localhost:4321
 
-## Add a venue (via pipeline — the normal path)
+## The verification tiers (the product)
 
-1. Add an item to `pipeline/queue.yaml`:
-   ```yaml
-   - type: venue
-     city: tahoe-city
-     name: Some Tavern
-     category: eat
-     notes: anything useful (candidate URLs, phone, warnings)
-   ```
-2. `python pipeline/generate.py --limit 1`
-3. Review the PR it opens:
-   - Check every `verification.source_url` actually supports the claim.
-   - Fix wording; **for each correction, add one line to
-     `pipeline/prompts/EDITORIAL_LOG.md`** (this is the improvement loop —
-     recent entries are injected into every future generation prompt).
-   - Resolve "Open questions" in the PR body (usually a phone call), or leave
-     them unchecked and strip the unverified claims.
-4. Merge → deployed. Mark the queue item `done: true`.
+Every published venue carries one of two verification levels, enforced by
+the Zod schema and shown to readers:
 
-## Add a venue (by hand)
+- **Tier 1 — `official` (green badge)**: the dog policy is confirmed by an
+  official source (venue's own site/social, or the managing agency), with
+  `verification.source_url` linked on the page.
+- **Tier 2 — `reported` (amber badge)**: no official source exists, but at
+  least **two independent, openly linkable visitor mentions agree**. The
+  page lists every mention with a link and date and states plainly that
+  the venue hasn't confirmed. Google Maps reviews may NOT be used as
+  mentions (API terms); openly linkable pages only.
+- **Tier 3 — neither**: not published. Tracked in the ledger as
+  `unverifiable` with the evidence trail, so the research isn't repeated.
 
-Copy an existing file in `apps/web/src/content/venues/<city>/`, follow the
-schema in `pipeline/prompts/STYLE_GUIDE.md`, and open a PR. The build enforces
-the schema — `verification` fields are required, so a venue physically cannot
-ship without a dated source.
-
-## Add a guide
-
-Same as venues with `type: guide` + `topic:` in the queue. Guides live in
-`apps/web/src/content/guides/<city>/*.mdx` and embed venues with
-`<VenueEmbed city="..." slug="..." />` so venue data stays single-sourced.
-
-## The 90-day re-verification cron
-
-`.github/workflows/verify.yml` runs `pipeline/verify.py` every Monday. It
-finds venues whose `verification.last_verified` is older than 90 days,
-re-checks official sources, and opens one PR containing:
-
-- ✅ unchanged venues → date bumped
-- ✏️ changed policies → full updated file for review
-- 🚫 apparently-closed venues → flagged for your confirmation and removal
-
-Requires the `ANTHROPIC_API_KEY` repository secret. Run it manually anytime
-from the Actions tab (workflow_dispatch) or locally:
-`python pipeline/verify.py --dry-run`.
+Tier-2 listings upgrade to tier 1 when an official policy appears or a
+phone call confirms (`method: phone`). `/how-we-verify/` explains all of
+this to readers — it's a trust asset, keep it accurate.
 
 ## The research ledger (pipeline/ledger/)
 
@@ -92,117 +68,171 @@ append-only `checks.jsonl` history. Statuses: `unchecked`, `queued`,
 `duplicate`.
 
 ```sh
-python pipeline/ledger.py stats                      # counts per city
+python pipeline/ledger.py stats                      # coverage dashboard
 python pipeline/ledger.py list --city tahoe-city --status unchecked
 python pipeline/ledger.py set-status --city tahoe-city --id X --status queued
 python pipeline/ledger.py sync                       # reconcile with published files
 ```
 
 - **Discovery**: `python pipeline/discover.py --city <slug>` seeds
-  candidates from OpenStreetMap (© OpenStreetMap contributors, ODbL —
-  the open license is why OSM and not Google is the seed source). A
-  monthly GitHub Action (`discover.yml`) sweeps all launched cities and
-  opens a PR with new candidates.
-- **Generation from the ledger**: `python pipeline/generate.py
-  --from-ledger tahoe-city --limit 5` pulls queued/unchecked candidates,
-  drafts the ones that verify, marks the rest `unverifiable`, and includes
-  the ledger update in the PR. `--list-only` previews the selection.
-- Phone-call outcomes and manual findings go in with `set-status` — e.g.
-  after calling Bridgetender, set `published`-track or `rejected-no-dogs`
-  and the note, then add a queue item if it's publishable.
+  candidates from OpenStreetMap (© OpenStreetMap contributors, ODbL — the
+  open license is why OSM, not Google, is the seed source). The monthly
+  `discover.yml` GitHub Action sweeps all launched cities and opens a PR
+  with new candidates.
+- Phone-call outcomes and manual findings go in with `set-status` (with a
+  `--note`); the check history records who/when/why.
+
+## Add venues (the normal path: from the ledger)
+
+```sh
+python pipeline/generate.py --from-ledger tahoe-city --list-only   # preview batch
+python pipeline/generate.py --from-ledger tahoe-city --limit 5     # run it
+```
+
+The model researches each candidate against the tier rules, drafts pages
+for the ones that verify (tier 1 or 2), marks the rest `unverifiable` in
+the ledger, and opens one PR containing the drafts + the ledger update.
+Then review:
+
+- Check every `verification.source_url` / mention actually supports the claim.
+- Fix wording; **for each correction, add one line to
+  `pipeline/prompts/EDITORIAL_LOG.md`** — recent entries are injected into
+  every future generation prompt (the improvement loop).
+- Resolve "Open questions" in the PR body (usually a phone call), or strip
+  the unverified claims and merge without them.
+- Merge → deployed, and `ledger.py sync` (or the next generate run)
+  reconciles statuses.
+
+`pipeline/queue.yaml` still works for named work — guides especially
+(`type: guide` + `topic:`) — and for venues you want researched that
+discovery hasn't surfaced.
+
+## Add a venue or guide by hand
+
+Copy an existing file in `apps/web/src/content/venues/<city>/` (schema
+reference: `pipeline/prompts/STYLE_GUIDE.md`) and open a PR. The build
+enforces the schema — `verification` fields are required, so a venue
+physically cannot ship without a dated source. Guides live in
+`src/content/guides/<city>/*.mdx` and embed venues with
+`<VenueEmbed city="..." slug="..." />` so venue data stays single-sourced.
+
+Special frontmatter worth knowing:
+
+- `field_notes` — **human-editor-only** first-person observations from an
+  actual visit; the only channel allowed to claim experience (voice.md §6).
+  Presence renders the "Field-tested" badge.
+- `menu` — real menu items from the venue's own published menu (never
+  inferred from cuisine): `source_url` (where verified — archive.org
+  captures of the official site are acceptable), `current_url` (live menu
+  for readers), `last_verified`, `items` (with `"SECTION: Name"` headers).
+  Powers dish search on category hubs.
+- `google_place_id` — optional; pins the Google reviews panel to the exact
+  listing (place IDs are the one thing Google's ToS lets you cache).
+
+## The scheduled jobs
+
+| Workflow | Cadence | What it does |
+|---|---|---|
+| `ci.yml` | every PR/push | Astro build = the schema gate |
+| `verify.yml` | Mondays | Re-checks venues verified >90 days ago; opens one PR (✅ date bumps, ✏️ policy changes, 🚫 closures). Also tries upgrading tier-2 listings to tier 1. Logs to `checks.jsonl`. |
+| `discover.yml` | monthly | OSM candidate sweep for all launched cities → PR of new `unchecked` ledger rows |
+
+Auth for the model-using jobs: store `CLAUDE_CODE_OAUTH_TOKEN` as a repo
+secret (mint it locally with `claude setup-token`) to run on the Claude
+subscription; or set `ANTHROPIC_API_KEY` for API billing. All jobs can be
+run manually from the Actions tab or locally (`--dry-run` supported).
 
 ## Monthly: point generation at demand
 
-Pull the top and bottom pages from GA4/Cloudflare Analytics and add queue
-items accordingly: expand what's winning (more venues in a hot category, a
-deeper guide) and refresh or improve what's losing. The queue file is the
-editorial calendar.
+Pull the top and bottom pages from GA4/Cloudflare Analytics, then aim the
+next `--from-ledger` batches and queue items accordingly: expand what's
+winning, refresh what's losing. The ledger's `unchecked` counts per city
+are the backlog dashboard.
 
 ## Prompts are code
 
-`pipeline/prompts/` is versioned deliberately:
-
-- `SYSTEM.md` — the hard rules (sourcing contract, output format)
-- `STYLE_GUIDE.md` — voice + schemas; update it when patterns emerge
-- `EDITORIAL_LOG.md` — one line per human correction; newest first
+- `pipeline/prompts/SYSTEM.md` — the hard rules: tier contract, output format
+- `pipeline/prompts/STYLE_GUIDE.md` — schemas + craft rules (incl. menus)
+- `docs/voice.md` — the house voice; injected into every generation prompt
+  as binding; conditions-not-advice, no reader-modeling, honesty guardrails
+- `pipeline/prompts/EDITORIAL_LOG.md` — one line per human correction;
+  newest first; injected into future prompts
 
 Change them in PRs like any code change. If an editorial-log entry becomes
-permanent doctrine, promote it into the style guide.
+permanent doctrine, promote it into the style guide or voice doc.
 
 ## Add a new city (the multi-city contract)
 
-Zero component edits required. The whole procedure:
+Zero component edits required:
 
 1. Create `data/cities/<slug>.yaml` (copy `tahoe-city.yaml`): name, slug,
-   geo, hero copy, intro, sourced regulations, seasonal notes, category list.
-2. Add queue items for the city's first ~15 venues and 3 guides; run the
-   pipeline; review the PRs.
-3. Merge. The city picker, hub pages, category hubs (once ≥4 venues qualify),
-   sitemap, and OG images all generate from config + content.
+   geo, hero copy, intro, **officially sourced** regulations (every entry
+   needs a `source_url`), seasonal notes, categories. Research agents or a
+   generation run can source the regulations; never publish unsourced rules.
+2. `python pipeline/discover.py --city <slug>` to fill the candidate pool,
+   then `generate.py --from-ledger <slug>` batches + a starter guide via
+   the queue.
+3. Merge PRs. Everything downstream is automatic: city picker + map pin
+   (replacing any "coming soon" dot), hub page, category hubs (browsable
+   from 1 venue; indexed/sitemapped at ≥4 — the thin-page guard), venue
+   map, itinerary planner, sitemap, OG images.
+
+"Coming soon" dots on the homepage map come from
+`data/cities/waterfront-towns.csv` (tiers 1–2), geocoded by
+`python pipeline/geocode_towns.py` (US Census Gazetteer + Nominatim
+fallback) into `waterfront-towns-geo.json`. Re-run only when the CSV
+changes.
 
 ## Deploy (Cloudflare Pages)
 
-- Create a Pages project pointed at this repo.
-- Build command: `npm run build` · Build output: `dist` · Root dir: `apps/web`
-- Production branch: `main` (merge = deploy).
-- Environment variables (optional until monetization is live):
-  - `SITE_URL` — production URL (canonicals/sitemap/OG)
-  - `PUBLIC_ADSENSE_CLIENT` — AdSense publisher ID (also update `apps/web/public/ads.txt`)
-  - `PUBLIC_GA4_ID` — GA4 measurement ID
-  - `PUBLIC_CF_ANALYTICS_TOKEN` — Cloudflare Web Analytics token
+- Project connects to `akoura42/dog-eared-guides`, production branch
+  `main` (merge = deploy). Custom domain: dogearedguides.com.
+- Build: command `npm run build` · output `dist` · **root dir `apps/web`**.
+- Environment variables (Production + Preview):
+  - `NODE_VERSION` — `22`
+  - `SITE_URL` — `https://dogearedguides.com` (canonicals/sitemap/OG; also
+    the in-repo default)
+  - `PUBLIC_GMAPS_API_KEY` — enables Google Maps mode + reviews panel
+  - `PUBLIC_CF_ANALYTICS_TOKEN` — Cloudflare Web Analytics (cookieless)
+  - `PUBLIC_GA4_ID` — GA4 (consent-gated)
+  - `PUBLIC_ADSENSE_CLIENT` — AdSense (consent-gated; also update
+    `apps/web/public/ads.txt`)
+
+## Maps & Google integration
+
+All three maps (homepage US picker, city venue map, itinerary plan map)
+are **dual-mode**: Google Maps when `PUBLIC_GMAPS_API_KEY` is set, free
+stack (build-time SVG / Leaflet+OSM) when it isn't — the site works
+identically either way, and Google load failures fall back gracefully.
+
+Google Cloud setup for the key: enable **Maps JavaScript API** and
+**Places API (New)**; restrict the key by HTTP referrer
+(`https://dogearedguides.com/*`, `https://*.pages.dev/*`, localhost) and
+to those two APIs; set a budget alert. Costs as of 2026: Dynamic Maps 10K
+free loads/month then $7/1K; Place Details with reviews ~$40/1K with 1K
+free/month.
+
+**Click-to-reveal Google reviews** (venue pages): absent without the key;
+with it, nothing loads or bills until a reader expands the panel — the
+place-ID lookup uses the free IDs-only search and the single billed call
+is the rating/reviews fetch. Expect ≈ $0.04 × (expands beyond 1,000/mo).
+"Google reviews" deep links (free, no key) exist regardless.
 
 ## Monetization notes
 
-- Ad slots are consent-gated, lazy, and height-reserved (zero CLS). They render
-  nothing until `PUBLIC_ADSENSE_CLIENT` is set. Swapping to a premium network
-  later = replacing the loader inside `AdSlot.astro` — placements stay put.
-- Affiliate links: set `affiliate.viator_url` / `booking_url` in venue
-  frontmatter (store the Viator product code alongside in
-  `viator_product_code`). Pages with affiliate links automatically render the
-  FTC disclosure; links carry `rel="sponsored nofollow"`.
-- `apps/web/public/ads.txt` must carry your real publisher line before ads go live.
-
-## Maps
-
-Decision (2026-08-04): stay on the free stack. City-hub venue maps are
-Leaflet + OpenStreetMap tiles (no key, no billing); "Google reviews" links
-on markers and venue pages are free Google Maps deep links (Maps URLs).
-
-All three maps (homepage US picker, city venue map, itinerary plan map)
-are dual-mode: they render Google Maps when `PUBLIC_GMAPS_API_KEY` is set
-(Dynamic Maps SKU: 10K free loads/month, then $7/1K as of 2026) and fall
-back to the free stack (build-time SVG / Leaflet+OSM) when it isn't — so
-the site works identically with or without the key.
-
-"Coming soon" towns: `data/cities/waterfront-towns.csv` (tiers 1-2 only)
-is geocoded by `python pipeline/geocode_towns.py` (US Census Gazetteer +
-Nominatim fallback) into `waterfront-towns-geo.json`, which the homepage
-map renders as muted dots. Re-run the script only when the CSV changes.
-Launching one of these towns (creating its city config) automatically
-removes its gray dot and adds the live pin.
-
-### Click-to-reveal Google reviews (built, dormant)
-
-Venue pages include a "Google rating & reviews" panel that stays entirely
-absent until `PUBLIC_GMAPS_API_KEY` is set. Cost design: nothing loads or
-bills until a reader expands the panel; the place-ID lookup uses the free
-IDs-only text search, and the single billed call is Place Details with
-rating/review fields (~$40/1K, 1,000 free/month, as of 2026). Expect cost
-≈ $0.04 × (number of panel-expands beyond 1,000/month).
-
-To activate:
-1. Google Cloud Console → create an API key with billing enabled.
-2. Restrict it: HTTP referrers (your domains) + API restriction to
-   "Maps JavaScript API".
-3. Set `PUBLIC_GMAPS_API_KEY` in Cloudflare Pages env vars and redeploy.
-4. Optional: set a billing budget alert (e.g. $50) in Google Cloud.
-
-Optional per-venue tuning: add `google_place_id` to venue frontmatter
-(place IDs are the one thing Google's ToS lets you cache) to skip the
-lookup and guarantee the right listing. Find a place ID with Google's
-place-ID finder or the first panel-expand's network response.
+- Ad slots are consent-gated, lazy, and height-reserved (zero CLS); render
+  nothing until `PUBLIC_ADSENSE_CLIENT` is set. Swapping to a premium
+  network later = replacing the loader inside `AdSlot.astro`.
+- Affiliate links: set `affiliate.viator_url` / `booking_url` (+
+  `viator_product_code`) in venue frontmatter. Pages with affiliate links
+  auto-render the FTC disclosure; links carry `rel="sponsored nofollow"`.
+- `apps/web/public/ads.txt` must carry the real publisher line before ads
+  go live.
+- Decision (2026-08-04): reviews/maps stay on the free deep-link pattern
+  until the Google key is provisioned; inline always-visible reviews were
+  ruled out (cost exceeds page revenue — see git history for the math).
 
 ## Brand name
 
-Dog-Eared Guides, set in `apps/web/src/lib/site.ts` — the one place the
-name lives; it flows through copy, metadata, JSON-LD, and OG images.
+Dog-Eared Guides, set once in `apps/web/src/lib/site.ts`; flows through
+copy, metadata, JSON-LD, and OG images.

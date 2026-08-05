@@ -1,44 +1,63 @@
-# Dog-Friendly City Guides
+# Dog-Eared Guides
 
-A deeply informative visitor-guide network where **dog-friendly is the brand,
-not a filter**. Launch city: Tahoe City, CA. Verified accuracy of dog policies
-is the product: every policy claim carries an official source and a
-"Verified" date, and everything is automatically re-checked every 90 days.
-
-The brand is **Dog-Eared Guides** — set in `apps/web/src/lib/site.ts`, the
-single source for the name across copy, metadata, and OG images.
+A deeply informative visitor-guide network where **dog-friendly is the
+brand, not a filter**. Live at https://dogearedguides.com. Launch city:
+Tahoe City, CA, with 11 more cities configured and ~880 waterfront towns
+queued on the map. Verified accuracy is the product: every dog-policy
+claim carries a source and a "Verified" date, everything is re-checked on
+a schedule, and evidence quality is shown to readers as a three-tier badge
+system (official / visitor-reported / unpublished).
 
 ## Layout
 
 ```
-apps/web/            # Astro 5 static site (deployed on Cloudflare Pages)
-  src/content/       # content collections: venues (md), guides (mdx)
-  src/components/    # VenueCard, DogPolicyBlock, VerifiedBadge, AdSlot, ...
-data/                # city configs, category & attribute definitions
-pipeline/            # Python: generation, verification, maintenance
+apps/web/            # Astro 5 static site → Cloudflare Pages
+  src/content/       # venues (md) + guides (mdx) — the published layer, git-reviewed
+  src/components/    # DogPolicyBlock, VerifiedBadge, DishSearch, maps, planner, ...
+data/
+  cities/            # city configs (the multi-city contract) + waterfront-towns CSV/geo
+  categories.yaml    # category + attribute definitions
+pipeline/            # Python: generation, verification, discovery, geocoding
+  ledger/            # research ledger: every known place per city + check history
   prompts/           # versioned system prompt, style guide, editorial log
-.github/workflows/   # PR build check + weekly 90-day re-verification cron
-docs/RUNBOOK.md      # how to operate the site day-to-day  ← start here
+docs/
+  RUNBOOK.md         # how to operate everything  ← start here
+  voice.md           # the house voice, injected into every generation prompt
+.github/workflows/   # PR build gate, weekly re-verify cron, monthly OSM discovery
 ```
 
 ## Quick start
 
 ```sh
-cd apps/web && npm install && npm run dev     # site at localhost:4321
-pip install -r pipeline/requirements.txt      # content pipeline
-python pipeline/generate.py --dry-run         # draft queued content locally
+cd apps/web && npm install && npm run dev          # site at localhost:4321
+pip install -r pipeline/requirements.txt           # pipeline (auth: your Claude
+                                                   # subscription via Claude Code,
+                                                   # or ANTHROPIC_API_KEY)
+python pipeline/ledger.py stats                    # research coverage dashboard
+python pipeline/generate.py --from-ledger tahoe-city --list-only
 ```
 
 ## The rules that make this work
 
-1. **No AI-authored venue fact ships without a source** — enforced by the
-   generation prompt contract, `validate_venue_file()`, and the required
-   `verification` block in the Zod schema.
+1. **Evidence tiers, enforced.** Tier 1: official source (green badge).
+   Tier 2: ≥2 agreeing, linkable visitor mentions (amber badge, labeled
+   unconfirmed). Neither: not published — tracked in the ledger instead.
+   The Zod schema makes unverified venues unbuildable.
 2. **Sign-off = PR merge.** The pipeline only opens PRs; merge to `main`
-   triggers the Cloudflare Pages deploy. That's the whole approval workflow.
-3. **Cities are config + content.** Adding a city touches `data/cities/` and
-   the content pipeline — never components.
-4. **Hubs need ≥4 venues.** Category and attribute pages generate only when
-   enough venues qualify; no thin programmatic pages.
+   deploys via Cloudflare Pages. CI runs the strict-schema build on every PR.
+3. **The ledger remembers everything.** Published, rejected-no-dogs,
+   unverifiable-with-evidence, closed — nothing gets researched twice.
+   Monthly OSM discovery refills the candidate pool; weekly verification
+   re-checks anything older than 90 days.
+4. **Cities are config + content.** A new city is one YAML file plus
+   pipeline runs — components never change. Category hubs index only at
+   ≥4 venues (no thin pages); maps, planner, and picker update themselves.
+5. **Voice is code.** `docs/voice.md` (conditions, not advice; no invented
+   experience) is injected into every generation prompt; human corrections
+   accumulate in the editorial log and feed back into future drafts.
+6. **Free-tier by default.** Maps, reviews links, and search all work with
+   zero paid APIs; setting `PUBLIC_GMAPS_API_KEY` upgrades maps to Google
+   and enables the click-to-reveal reviews panel, with cost guardrails
+   documented in the runbook.
 
 Full operations guide: [`docs/RUNBOOK.md`](docs/RUNBOOK.md)
