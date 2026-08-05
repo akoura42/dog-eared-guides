@@ -157,10 +157,20 @@ def existing_venue_slugs(city: str) -> list[str]:
     return sorted(p.stem for p in city_dir.glob("*.md"))
 
 
+def _strip_code_fences(body: str) -> str:
+    """Models occasionally wrap file contents in ``` fences — remove them."""
+    lines = body.strip().splitlines()
+    if lines and lines[0].startswith("```") and lines[-1].startswith("```"):
+        lines = lines[1:-1]
+    return "\n".join(lines)
+
+
 def parse_generation_output(text: str) -> GenerationResult:
     result = GenerationResult()
     for m in FILE_RE.finditer(text):
-        result.files.append(GeneratedFile(m.group("path").strip(), m.group("body")))
+        result.files.append(
+            GeneratedFile(m.group("path").strip(), _strip_code_fences(m.group("body")))
+        )
     qm = QUESTIONS_RE.search(text)
     if qm:
         for line in qm.group("body").splitlines():
