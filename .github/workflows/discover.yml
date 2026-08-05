@@ -1,0 +1,47 @@
+name: Monthly candidate discovery
+
+on:
+  schedule:
+    # First Tuesday-ish of the month, 14:00 UTC
+    - cron: '0 14 1 * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install pipeline dependencies
+        run: pip install -r pipeline/requirements.txt
+
+      - name: Discover OSM candidates for all launched cities
+        run: python pipeline/discover.py --all-launched
+
+      - name: Open PR with ledger updates
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "discover-bot"
+          git config user.email "discover-bot@users.noreply.github.com"
+          if git diff --quiet pipeline/ledger/; then
+            echo "No new candidates this month."
+            exit 0
+          fi
+          BRANCH="discover/$(date +%Y-%m)"
+          git checkout -b "$BRANCH"
+          git add pipeline/ledger/
+          git commit -m "discover: monthly OSM candidate sweep"
+          git push -u origin "$BRANCH"
+          gh pr create --base main --title "discover: monthly candidate sweep" \
+            --body "New OpenStreetMap candidates added to the research ledger (status: unchecked). Data © OpenStreetMap contributors, ODbL. Merge to accept them into the candidate pool; run \`generate.py --from-ledger <city>\` to start verifying."

@@ -129,6 +129,8 @@ def main() -> int:
             print(f"  stale: {p.relative_to(REPO_ROOT)}")
         return 0
 
+    from ledger import CHECKS_FILE, record_check
+
     print(f"Engine: {model_engine()}")
     touched: list[Path] = []
     report: list[str] = []
@@ -137,6 +139,7 @@ def main() -> int:
         rel = path.relative_to(REPO_ROOT)
         print(f"\n=== Re-verifying {rel} ===")
         verdict, new_content, raw = reverify(args.model, path)
+        record_check(path.parent.name, path.stem, "verify", verdict, str(rel))
         print(f"  verdict: {verdict}")
         if verdict == "unchanged":
             bump_verified_date(path)
@@ -166,7 +169,8 @@ def main() -> int:
         "Scheduled 90-day re-verification. **Merging this PR is the approval step.**\n\n"
         + "\n".join(report)
     )
-    open_pr(branch, f"verify: re-checked {len(stale)} stale venue(s)", body, touched)
+    files = touched + ([CHECKS_FILE] if CHECKS_FILE.exists() else [])
+    open_pr(branch, f"verify: re-checked {len(stale)} stale venue(s)", body, files)
     return 0
 
 

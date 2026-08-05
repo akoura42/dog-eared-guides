@@ -82,6 +82,35 @@ Requires the `ANTHROPIC_API_KEY` repository secret. Run it manually anytime
 from the Actions tab (workflow_dispatch) or locally:
 `python pipeline/verify.py --dry-run`.
 
+## The research ledger (pipeline/ledger/)
+
+The ledger is the pipeline's memory of every known place per city —
+published or not. One JSONL file per city (PR-diffable on purpose) plus an
+append-only `checks.jsonl` history. Statuses: `unchecked`, `queued`,
+`published-official`, `published-reported`, `unverifiable`,
+`rejected-no-dogs` (verified no — saves re-researching), `closed`,
+`duplicate`.
+
+```sh
+python pipeline/ledger.py stats                      # counts per city
+python pipeline/ledger.py list --city tahoe-city --status unchecked
+python pipeline/ledger.py set-status --city tahoe-city --id X --status queued
+python pipeline/ledger.py sync                       # reconcile with published files
+```
+
+- **Discovery**: `python pipeline/discover.py --city <slug>` seeds
+  candidates from OpenStreetMap (© OpenStreetMap contributors, ODbL —
+  the open license is why OSM and not Google is the seed source). A
+  monthly GitHub Action (`discover.yml`) sweeps all launched cities and
+  opens a PR with new candidates.
+- **Generation from the ledger**: `python pipeline/generate.py
+  --from-ledger tahoe-city --limit 5` pulls queued/unchecked candidates,
+  drafts the ones that verify, marks the rest `unverifiable`, and includes
+  the ledger update in the PR. `--list-only` previews the selection.
+- Phone-call outcomes and manual findings go in with `set-status` — e.g.
+  after calling Bridgetender, set `published`-track or `rejected-no-dogs`
+  and the note, then add a queue item if it's publishable.
+
 ## Monthly: point generation at demand
 
 Pull the top and bottom pages from GA4/Cloudflare Analytics and add queue

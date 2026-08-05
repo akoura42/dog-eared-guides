@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
-"""Draft venue/guide content from the work queue and open a PR.
+"""Draft venue/guide content from the work queue (or ledger) and open a PR.
 
 Usage:
   python pipeline/generate.py                 # process pending queue items
   python pipeline/generate.py --limit 3       # first 3 pending items
   python pipeline/generate.py --dry-run       # write files, no branch/PR
+  python pipeline/generate.py --from-ledger tahoe-city --limit 5
+                                              # pull unchecked ledger candidates
+  python pipeline/generate.py --from-ledger tahoe-city --list-only
+                                              # show what would be selected
 
 Reads pipeline/queue.yaml. Every dog-policy fact must be verified by the
 model against an official source (web search/fetch tools are enabled and the
@@ -91,25 +95,60 @@ def generate_item(model: str, item: dict) -> GenerationResult:
     return parse_generation_output(text)
 
 
+def ledger_items(city: str, limit: int) -> list[dict]:
+    """Turn unchecked/queued ledger candidates into venue work items."""
+    from ledger import next_candidates
+
+    items = []
+    for row in next_candidates(city, limit):
+        notes = [f"Ledger candidate ({row['status']}, source: {row['source']}, id: {row['id']})."]
+        if row.get("note"):
+            notes.append(row["note"])
+        if row.get("lat") is not None:
+            notes.append(f"Approx location: {row['lat']}, {row['lng']}.")
+        items.append(
+            {
+                "type": "venue",
+                "city": city,
+                "name": row["name"],
+                "category": row.get("category"),
+                "notes": " ".join(notes),
+                "_ledger_id": row["id"],
+            }
+        )
+    return items
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--from-ledger", metavar="CITY", default=None)
+    parser.add_argument("--list-only", action="store_true")
     parser.add_argument("--model", default=os.environ.get("MODEL", DEFAULT_MODEL))
     args = parser.parse_args()
 
-    queue = yaml.safe_load(QUEUE_FILE.read_text()) or {}
-    items = [i for i in queue.get("items", []) if not i.get("done")]
-    if args.limit:
-        items = items[: args.limit]
+    if args.from_ledger:
+        items = ledger_items(args.from_ledger, args.limit or 5)
+        if args.list_only:
+            for item in items:
+                print(f"{item['_ledger_id']:45} {item.get('category') or '?':10} {item['name']}")
+            print(f"({len(items)} candidates selected)")
+            return 0
+    else:
+        queue = yaml.safe_load(QUEUE_FILE.read_text()) or {}
+        items = [i for i in queue.get("items", []) if not i.get("done")]
+        if args.limit:
+            items = items[: args.limit]
     if not items:
-        print("Queue is empty — nothing to generate.")
+        print("Nothing to generate.")
         return 0
 
     print(f"Engine: {model_engine()}")
     written: list[Path] = []
     all_questions: list[str] = []
     titles: list[str] = []
+    ledger_outcomes: list[tuple[dict, bool]] = []  # (item, produced_a_file)
 
     for item in items:
         label = item.get("name") or item.get("topic")
@@ -138,6 +177,29 @@ def main() -> int:
 
         if not result.files:
             print("  no file produced (unverifiable — see open questions)")
+        if item.get("_ledger_id"):
+            ledger_outcomes.append((item, bool(result.files)))
+
+    # Ledger bookkeeping: published candidates flip via sync; the rest are
+    # recorded as unverifiable so they aren't re-selected next run.
+    ledger_paths: list[Path] = []
+    if args.from_ledger and ledger_outcomes:
+        from ledger import CHECKS_FILE, city_file, load_city, record_check, save_city, sync_published
+
+        places = load_city(args.from_ledger)
+        for item, produced in ledger_outcomes:
+            pid = item["_ledger_id"]
+            outcome = "draft-produced" if produced else "unverifiable"
+            if not produced and pid in places:
+                places[pid]["status"] = "unverifiable"
+                places[pid]["note"] = (
+                    "Generation run found no publishable evidence — see the PR's open questions."
+                )
+                places[pid]["last_checked"] = today()
+            record_check(args.from_ledger, pid, "generate", outcome, item["name"])
+        save_city(args.from_ledger, places)
+        sync_published()
+        ledger_paths = [city_file(args.from_ledger), CHECKS_FILE]
 
     if not written:
         print("\nNothing verifiable was produced. Open questions:")
@@ -159,7 +221,12 @@ def main() -> int:
         "Corrections you make during review should get a one-line entry in "
         "`pipeline/prompts/EDITORIAL_LOG.md` so future drafts improve."
     )
-    open_pr(branch, f"content: {len(written)} drafted page(s) for review", body, written)
+    open_pr(
+        branch,
+        f"content: {len(written)} drafted page(s) for review",
+        body,
+        written + [p for p in ledger_paths if p.exists()],
+    )
     return 0
 
 
