@@ -60,9 +60,14 @@ def _call_claude_code(system: str, prompt: str, model: str) -> str:
         "--allowedTools",
         "WebSearch,WebFetch",
         "--max-turns",
-        "50",
+        "40",
     ]
-    proc = subprocess.run(cmd, capture_output=True, text=True, timeout=3600)
+    # 30 min is generous for one venue; the old 60-min ceiling mostly meant
+    # a rate-limited call burning the whole window before failing anyway.
+    try:
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=1800)
+    except subprocess.TimeoutExpired as exc:
+        raise RuntimeError("claude CLI timed out after 30 minutes") from exc
     if proc.returncode != 0:
         raise RuntimeError(
             f"claude CLI failed (exit {proc.returncode}): {proc.stderr.strip()[:2000]}"

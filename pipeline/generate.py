@@ -152,8 +152,15 @@ def main() -> int:
 
     for item in items:
         label = item.get("name") or item.get("topic")
-        print(f"\n=== Generating: {label} ===")
-        result = generate_item(args.model, item)
+        print(f"\n=== Generating: {label} ===", flush=True)
+        try:
+            result = generate_item(args.model, item)
+        except RuntimeError as exc:
+            # One failed item (timeout, rate limit, refusal) must not kill
+            # the batch. Leave its ledger status untouched for a retry.
+            print(f"  ERRORED: {exc}", flush=True)
+            all_questions.append(f"{label}: generation errored ({exc}) — item left for retry")
+            continue
         all_questions.extend(result.open_questions)
 
         for gen in result.files:
