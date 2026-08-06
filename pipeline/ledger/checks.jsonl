@@ -8,3 +8,4 @@
 {"actor": "generate", "city": "tahoe-city", "note": "batch 2026-08-05: detailed finding recorded", "outcome": "unverifiable", "place_id": "osm-blue-fish-pok", "ts": "2026-08-05T22:05:30+00:00"}
 {"actor": "generate", "city": "tahoe-city", "note": "batch 2026-08-05: detailed finding recorded", "outcome": "unverifiable", "place_id": "osm-coffee-connexion", "ts": "2026-08-05T22:05:30+00:00"}
 {"actor": "generate", "city": "tahoe-city", "note": "batch 2026-08-05: detailed finding recorded", "outcome": "unverifiable", "place_id": "osm-dog-park", "ts": "2026-08-05T22:05:30+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "members-only policy decision", "outcome": "not-listable", "place_id": "osm-alpine-springs-community-park", "ts": "2026-08-06T18:00:36+00:00"}

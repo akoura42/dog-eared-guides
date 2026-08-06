@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+<circle cx="120" cy="120" r="110" fill="#F4EEDF" stroke="#20302A" stroke-width="8"/>
+<circle cx="120" cy="120" r="88" fill="none" stroke="#2F6047" stroke-width="2.5"/>
+<defs>
+  <path id="arcTop" d="M 23 120 A 97 97 0 0 1 217 120"/>
+  <path id="arcBot" d="M 50 120 A 70 70 0 0 0 190 120"/>
+</defs>
+<text font-family="Palatino Linotype, Book Antiqua, Palatino, Georgia, serif" font-size="17" font-weight="700" letter-spacing="2" fill="#20302A">
+  <textPath href="#arcTop" startOffset="50%" text-anchor="middle">DOG-EARED GUIDES</textPath>
+</text>
+<text font-family="Palatino Linotype, Book Antiqua, Palatino, Georgia, serif" font-size="13.5" font-weight="600" letter-spacing="4" fill="#2F6047">
+  <textPath href="#arcBot" startOffset="50%" text-anchor="middle">FIELD-TESTED</textPath>
+</text>
+<g transform="translate(67,60) scale(0.45)"><g stroke-linejoin="round" stroke-linecap="round">
+  <path d="M 64 40 H 130 L 196 106 V 184 Q 196 202 178 202 H 64 Q 46 202 46 184 V 58 Q 46 40 64 40 Z" fill="#F4EEDF" stroke="#20302A" stroke-width="9"/>
+  <path d="M 130 40 C 126 70 130 98 144 114 C 160 128 184 124 196 106 Z" fill="#2F6047" stroke="#20302A" stroke-width="9"/>
+  <circle cx="94" cy="116" r="9.5" fill="#20302A"/>
+  <path d="M 103 148 H 133 Q 140 148 136 156 L 123 171 Q 118 176 113 171 L 100 156 Q 96 148 103 148 Z" fill="#20302A"/>
+</g></g>
+</svg>
