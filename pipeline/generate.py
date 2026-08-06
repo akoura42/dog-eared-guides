@@ -125,6 +125,14 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--from-ledger", metavar="CITY", default=None)
     parser.add_argument("--list-only", action="store_true")
+    parser.add_argument(
+        "--parallel",
+        type=int,
+        default=1,
+        metavar="N",
+        help="concurrent generation calls (2-3 recommended; the ceiling is "
+        "the Claude subscription's usage window, not this machine)",
+    )
     parser.add_argument("--model", default=os.environ.get("MODEL", DEFAULT_MODEL))
     args = parser.parse_args()
 
@@ -150,16 +158,33 @@ def main() -> int:
     titles: list[str] = []
     ledger_outcomes: list[tuple[dict, bool]] = []  # (item, produced_a_file)
 
-    for item in items:
+    def run_one(item: dict) -> tuple[dict, GenerationResult | None, Exception | None]:
         label = item.get("name") or item.get("topic")
-        print(f"\n=== Generating: {label} ===", flush=True)
+        print(f"[start] {label}", flush=True)
         try:
-            result = generate_item(args.model, item)
+            res = generate_item(args.model, item)
+            print(f"[done ] {label}", flush=True)
+            return item, res, None
         except RuntimeError as exc:
             # One failed item (timeout, rate limit, refusal) must not kill
             # the batch. Leave its ledger status untouched for a retry.
-            print(f"  ERRORED: {exc}", flush=True)
-            all_questions.append(f"{label}: generation errored ({exc}) — item left for retry")
+            print(f"[error] {label}: {exc}", flush=True)
+            return item, None, exc
+
+    if args.parallel > 1:
+        from concurrent.futures import ThreadPoolExecutor
+
+        with ThreadPoolExecutor(max_workers=args.parallel) as pool:
+            outcomes = list(pool.map(run_one, items))  # order preserved
+    else:
+        outcomes = [run_one(item) for item in items]
+
+    # Results are processed sequentially so file writes, validation output,
+    # and ledger bookkeeping stay deterministic regardless of concurrency.
+    for item, result, error in outcomes:
+        label = item.get("name") or item.get("topic")
+        if error or result is None:
+            all_questions.append(f"{label}: generation errored ({error}) — item left for retry")
             continue
         all_questions.extend(result.open_questions)
 
