@@ -173,8 +173,12 @@ def _strip_code_fences(body: str) -> str:
 def parse_generation_output(text: str) -> GenerationResult:
     result = GenerationResult()
     for m in FILE_RE.finditer(text):
+        # Paths are relative to src/content/; models sometimes emit the
+        # prefix anyway, which would nest the file where the build can't
+        # see it (src/content/src/content/...).
+        rel_path = re.sub(r"^(?:apps/web/)?(?:src/)?content/", "", m.group("path").strip())
         result.files.append(
-            GeneratedFile(m.group("path").strip(), _strip_code_fences(m.group("body")))
+            GeneratedFile(rel_path, _strip_code_fences(m.group("body")))
         )
     qm = QUESTIONS_RE.search(text)
     if qm:
