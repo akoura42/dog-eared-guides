@@ -28,3 +28,17 @@
 {"actor": "generate", "city": "tahoe-city", "note": "Mountain Slice", "outcome": "draft-produced", "place_id": "osm-mountain-slice", "ts": "2026-08-06T21:24:14+00:00"}
 {"actor": "generate", "city": "tahoe-city", "note": "Olympic Valley Park", "outcome": "unverifiable", "place_id": "osm-olympic-valley-park", "ts": "2026-08-06T21:24:14+00:00"}
 {"actor": "generate", "city": "tahoe-city", "note": "Pepper Tree Inn", "outcome": "draft-produced", "place_id": "osm-pepper-tree-inn", "ts": "2026-08-06T21:24:14+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Published (batch 4) as mountain-slice; sync missed on name mismatch.", "outcome": "published-reported", "place_id": "osm-mountain-slice", "ts": "2026-08-06T21:45:44+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Same venue as published river-ranch-lodge (River Ranch Lodge & Restaurant); OSM point is the restaurant.", "outcome": "duplicate", "place_id": "osm-river-ranch", "ts": "2026-08-06T21:45:44+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Same venue as published skylandia-park-and-beach; OSM point duplicates it.", "outcome": "duplicate", "place_id": "osm-skylandia", "ts": "2026-08-06T21:45:51+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Pepper Tree Inn", "outcome": "draft-produced", "place_id": "osm-pepper-tree-inn", "ts": "2026-08-06T21:56:57+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Pete 'n Peters", "outcome": "unverifiable", "place_id": "osm-pete-n-peters", "ts": "2026-08-06T21:56:57+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Poppy's Frozen Yogurt", "outcome": "unverifiable", "place_id": "osm-poppy-s-frozen-yogurt", "ts": "2026-08-06T21:56:57+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "River Grill", "outcome": "unverifiable", "place_id": "osm-river-grill", "ts": "2026-08-06T21:56:57+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Robert Pomin Park", "outcome": "unverifiable", "place_id": "osm-robert-pomin-park", "ts": "2026-08-06T21:56:57+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Rosie's Cafe", "outcome": "draft-produced", "place_id": "osm-rosie-s-cafe", "ts": "2026-08-06T21:56:57+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Sandy's Pub", "outcome": "draft-produced", "place_id": "osm-sandy-s-pub", "ts": "2026-08-06T21:56:57+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Scraps Dog Bakery", "outcome": "unverifiable", "place_id": "osm-scraps-dog-bakery", "ts": "2026-08-06T21:56:57+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Silver Creek Campground", "outcome": "draft-produced", "place_id": "osm-silver-creek-campground", "ts": "2026-08-06T21:56:57+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Spoon", "outcome": "draft-produced", "place_id": "osm-spoon", "ts": "2026-08-06T21:56:57+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Inside Everline Resort & Spa (Olympic Valley, ~8 mi from Tahoe City): resort-wide published pet ban, $250 recovery fee (everlineresort.com Know Before You Go). Same property as rejected everline-resort. Also out of city scope.", "outcome": "rejected-no-dogs", "place_id": "osm-sandy-s-pub", "ts": "2026-08-06T21:57:32+00:00"}
