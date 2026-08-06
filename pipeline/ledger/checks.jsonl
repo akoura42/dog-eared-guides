@@ -42,3 +42,16 @@
 {"actor": "generate", "city": "tahoe-city", "note": "Silver Creek Campground", "outcome": "draft-produced", "place_id": "osm-silver-creek-campground", "ts": "2026-08-06T21:56:57+00:00"}
 {"actor": "generate", "city": "tahoe-city", "note": "Spoon", "outcome": "draft-produced", "place_id": "osm-spoon", "ts": "2026-08-06T21:56:57+00:00"}
 {"actor": "manual", "city": "tahoe-city", "note": "Inside Everline Resort & Spa (Olympic Valley, ~8 mi from Tahoe City): resort-wide published pet ban, $250 recovery fee (everlineresort.com Know Before You Go). Same property as rejected everline-resort. Also out of city scope.", "outcome": "rejected-no-dogs", "place_id": "osm-sandy-s-pub", "ts": "2026-08-06T21:57:32+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Duplicate of the-cottage-inn-at-lake-tahoe (rejected-no-dogs: 'Absolutely No PETS' per official policies page).", "outcome": "duplicate", "place_id": "osm-the-cottage-inn", "ts": "2026-08-06T21:59:10+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Same venue as published sunnyside-restaurant-and-lodge; OSM point is the restaurant.", "outcome": "duplicate", "place_id": "osm-sunnyside-restaurant", "ts": "2026-08-06T21:59:10+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Editorial skip: national chain sandwich shop, indoor counter service — not guide material regardless of policy. No research spent.", "outcome": "unverifiable", "place_id": "osm-subway", "ts": "2026-08-06T21:59:10+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Sylva", "outcome": "unverifiable", "place_id": "osm-sylva", "ts": "2026-08-06T22:08:13+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Tahoe City PUD Boat Ramp", "outcome": "unverifiable", "place_id": "osm-tahoe-city-pud-boat-ramp", "ts": "2026-08-06T22:08:13+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Tahoe City Sushi", "outcome": "unverifiable", "place_id": "osm-tahoe-city-sushi", "ts": "2026-08-06T22:08:13+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Tahoe Fuller’s", "outcome": "unverifiable", "place_id": "osm-tahoe-fuller-s", "ts": "2026-08-06T22:08:13+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Tahoe State Recreational Area", "outcome": "draft-produced", "place_id": "osm-tahoe-state-recreational-area", "ts": "2026-08-06T22:08:13+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Thai Kitchen", "outcome": "unverifiable", "place_id": "osm-thai-kitchen", "ts": "2026-08-06T22:08:13+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "The Chalet", "outcome": "draft-produced", "place_id": "osm-the-chalet", "ts": "2026-08-06T22:08:13+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "The Inn at Boatworks", "outcome": "draft-produced", "place_id": "osm-the-inn-at-boatworks", "ts": "2026-08-06T22:08:13+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Uncorked", "outcome": "unverifiable", "place_id": "osm-uncorked", "ts": "2026-08-06T22:08:13+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "US Forest Service Klausen Property", "outcome": "unverifiable", "place_id": "osm-us-forest-service-klausen-property", "ts": "2026-08-06T22:08:13+00:00"}

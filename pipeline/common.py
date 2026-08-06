@@ -215,6 +215,18 @@ def validate_venue_file(text: str) -> list[str]:
         problems.append("verification.source_url is required — no unsourced venue facts")
     if not verification.get("last_verified"):
         problems.append("verification.last_verified is required")
+    # YAML gotcha the models hit repeatedly: an unquoted "Summer: ..." list
+    # item parses as a mapping, and an unquoted `allowed: no` as a boolean.
+    seasonal = data.get("seasonal") or []
+    if isinstance(seasonal, list):
+        for i, entry in enumerate(seasonal):
+            if not isinstance(entry, str):
+                problems.append(
+                    f"seasonal[{i}] is not a string — quote list items containing colons"
+                )
+    allowed = (data.get("dog_policy") or {}).get("allowed")
+    if isinstance(allowed, bool):
+        problems.append('dog_policy.allowed parsed as boolean — quote it: allowed: "no"')
     word_count = len(body.split())
     if word_count < 150:
         problems.append(f"body too short ({word_count} words; target 200-400)")
