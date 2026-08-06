@@ -39,7 +39,7 @@ export const { getStaticPaths, GET } = OGImageRoute({
   getImageOptions: (_path, page) => ({
     title: page.title,
     description: page.description,
-    logo: undefined,
+    logo: { path: './src/assets/logo/logo-mark-og.png', size: [88] },
     bgGradient: [
       [20, 52, 39],
       [31, 77, 58],
