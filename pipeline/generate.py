@@ -233,10 +233,15 @@ def main() -> int:
         sync_published()
         ledger_paths = [city_file(args.from_ledger), CHECKS_FILE]
 
-    if not written:
-        print("\nNothing verifiable was produced. Open questions:")
+    # Open questions carry the research detail behind every non-published
+    # outcome — print them in every mode, or that context is lost.
+    if all_questions:
+        print("\nOpen questions:")
         for q in all_questions:
             print(f"  - {q}")
+
+    if not written:
+        print("\nNothing verifiable was produced.")
         return 1
 
     if args.dry_run:
