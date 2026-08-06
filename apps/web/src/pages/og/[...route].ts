@@ -41,8 +41,8 @@ export const { getStaticPaths, GET } = OGImageRoute({
     description: page.description,
     logo: { path: './src/assets/logo/logo-mark-og.png', size: [88] },
     bgGradient: [
-      [20, 52, 39],
-      [31, 77, 58],
+      [32, 66, 47],
+      [47, 96, 71],
     ],
     border: { color: [232, 161, 60], width: 14, side: 'inline-start' },
     padding: 72,

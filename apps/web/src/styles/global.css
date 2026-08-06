@@ -1,16 +1,17 @@
-/* Design tokens — warm, outdoorsy, trustworthy. Modern trail guide. */
+/* Design tokens — warm, outdoorsy, trustworthy. Modern trail guide.
+   Core hues (paper, ink, pine) come straight from the logo set. */
 :root {
-  --paper: #faf6ee;
+  --paper: #f4eedf;
   --paper-raised: #ffffff;
-  --ink: #24312a;
-  --ink-soft: #55645c;
-  --pine: #1f4d3a;
-  --pine-deep: #143427;
+  --ink: #20302a;
+  --ink-soft: #52625a;
+  --pine: #2f6047;
+  --pine-deep: #20422f;
   --moss: #6d8b74;
   --clay: #c05f33;
   --clay-soft: #f3e2d6;
   --sun: #e8a13c;
-  --line: #e3dccc;
+  --line: #e0d8c2;
   --ok: #2c7a4b;
   --warn: #b3541e;
   --no: #a63c2e;

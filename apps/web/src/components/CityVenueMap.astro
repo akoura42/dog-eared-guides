@@ -19,7 +19,7 @@ const { city, venues } = Astro.props;
 const CATEGORY_COLORS: Record<string, string> = {
   eat: '#c05f33',
   drink: '#a24d27',
-  stay: '#1f4d3a',
+  stay: '#2f6047',
   trail: '#6d8b74',
   beach: '#2c6e8a',
   activity: '#e8a13c',
@@ -32,7 +32,7 @@ const markers = venues.map((venue) => ({
   lat: venue.data.lat,
   lng: venue.data.lng,
   category: getCategoryByKey(venue.data.category).label,
-  color: CATEGORY_COLORS[venue.data.category] ?? '#1f4d3a',
+  color: CATEGORY_COLORS[venue.data.category] ?? '#2f6047',
   path: venuePath(venue),
   gmaps: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
     `${venue.data.name} ${venue.data.address}`
@@ -42,7 +42,7 @@ const markers = venues.map((venue) => ({
 const center = { lat: city.geo.lat, lng: city.geo.lng };
 const legend = [...new Map(venues.map((v) => {
   const key = v.data.category;
-  return [key, { label: getCategoryByKey(key).label, color: CATEGORY_COLORS[key] ?? '#1f4d3a' }];
+  return [key, { label: getCategoryByKey(key).label, color: CATEGORY_COLORS[key] ?? '#2f6047' }];
 })).values()];
 ---
 
