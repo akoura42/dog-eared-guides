@@ -5,6 +5,7 @@ import Breadcrumbs from '~/components/Breadcrumbs.astro';
 import DogPolicyBlock from '~/components/DogPolicyBlock.astro';
 import Photo from '~/components/Photo.astro';
 import GoogleReviews from '~/components/GoogleReviews.astro';
+import VenueLocationMap from '~/components/VenueLocationMap.astro';
 import VenueMenu from '~/components/VenueMenu.astro';
 import AdSlot from '~/components/AdSlot.astro';
 import AffiliateCTA from '~/components/AffiliateCTA.astro';
@@ -89,6 +90,14 @@ const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
           <p>{d.field_notes}</p>
         </aside>
       )}
+
+      <VenueLocationMap
+        name={d.name}
+        address={d.address}
+        lat={d.lat}
+        lng={d.lng}
+        placeId={d.google_place_id}
+      />
 
       <GoogleReviews
         name={d.name}

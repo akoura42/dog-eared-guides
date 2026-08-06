@@ -1,0 +1,119 @@
+---
+// Per-venue location map. With PUBLIC_GMAPS_API_KEY set this renders the
+// Google Maps Embed API in "place" mode — unlimited free usage (unlike the
+// JS Maps API), and the place card shows the venue's Google rating with a
+// link into full Google Maps. Without a key it falls back to a Leaflet +
+// OpenStreetMap pin, matching the rest of the site's maps.
+import { GMAPS_API_KEY } from '~/lib/site';
+
+interface Props {
+  name: string;
+  address: string;
+  lat: number;
+  lng: number;
+  placeId?: string | null;
+}
+
+const { name, address, lat, lng, placeId } = Astro.props;
+
+const query = placeId ? `place_id:${placeId}` : `${name}, ${address}`;
+const embedUrl = GMAPS_API_KEY
+  ? `https://www.google.com/maps/embed/v1/place?key=${GMAPS_API_KEY}&q=${encodeURIComponent(query)}&zoom=15`
+  : null;
+---
+
+<section class="location-map" aria-label={`Map showing the location of ${name}`}>
+  <p class="map-head">Where it is</p>
+  {embedUrl ? (
+    <iframe
+      src={embedUrl}
+      title={`Map of ${name}`}
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen
+    />
+  ) : (
+    <div
+      class="osm-canvas"
+      data-lat={lat}
+      data-lng={lng}
+      data-name={name}
+      data-gmaps={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${name} ${address}`)}`}
+    >
+      <p class="placeholder">Map loading…</p>
+    </div>
+  )}
+</section>
+
+<style>
+  .location-map {
+    margin: 1.5rem 0;
+  }
+  .map-head {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pine);
+    margin: 0 0 0.5rem;
+  }
+  iframe,
+  .osm-canvas {
+    width: 100%;
+    height: 300px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    display: block;
+  }
+  .osm-canvas {
+    background: color-mix(in srgb, var(--moss) 12%, var(--paper));
+  }
+  .placeholder {
+    text-align: center;
+    padding-top: 8rem;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+  }
+</style>
+
+<script>
+  // Leaflet fallback only renders when no Google key is configured; it
+  // initializes lazily so map tiles never compete with first paint.
+  const el = document.querySelector<HTMLElement>('.location-map .osm-canvas');
+  if (el) {
+    const init = async () => {
+      const [{ default: L }] = await Promise.all([
+        import('leaflet'),
+        import('leaflet/dist/leaflet.css'),
+      ]);
+      const lat = Number(el.dataset.lat);
+      const lng = Number(el.dataset.lng);
+      el.querySelector('.placeholder')?.remove();
+      const map = L.map(el, { scrollWheelZoom: false }).setView([lat, lng], 15);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(map);
+      L.circleMarker([lat, lng], {
+        radius: 9,
+        color: '#20302a',
+        weight: 2,
+        fillColor: '#2f6047',
+        fillOpacity: 0.95,
+      })
+        .addTo(map)
+        .bindPopup(
+          `<strong>${el.dataset.name}</strong><br/><a href="${el.dataset.gmaps}" target="_blank" rel="noopener nofollow">Open in Google Maps</a>`
+        );
+    };
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          io.disconnect();
+          init();
+        }
+      },
+      { rootMargin: '400px' }
+    );
+    io.observe(el);
+  }
+</script>
