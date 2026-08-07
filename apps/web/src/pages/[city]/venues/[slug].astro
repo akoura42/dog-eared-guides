@@ -14,7 +14,13 @@ import { getCollection } from 'astro:content';
 import { getCity, getCategoryByKey } from '~/lib/config';
 import { venueSlug } from '~/lib/venues';
 import { venueJsonLd, breadcrumbJsonLd } from '~/lib/jsonld';
-import { lodgingAffiliateUrl } from '~/lib/affiliate';
+import {
+  lodgingAffiliateUrl,
+  viatorAffiliateUrl,
+  PET_INSURANCE_URL,
+  PET_INSURANCE_PARTNER,
+} from '~/lib/affiliate';
+import PetInsuranceCTA from '~/components/PetInsuranceCTA.astro';
 import { BRAND_NAME } from '~/lib/site';
 
 export async function getStaticPaths() {
@@ -42,12 +48,26 @@ const crumbs = [
 ];
 
 const affiliate = d.affiliate;
-const rawAffiliateUrl = affiliate?.viator_url ?? affiliate?.booking_url ?? null;
-const affiliateUrl =
-  rawAffiliateUrl && affiliate?.booking_url === rawAffiliateUrl
-    ? lodgingAffiliateUrl(rawAffiliateUrl)
-    : rawAffiliateUrl;
-const hasAffiliate = Boolean(affiliateUrl);
+const affiliateUrl = affiliate?.viator_url
+  ? viatorAffiliateUrl(affiliate.viator_url)
+  : affiliate?.booking_url
+    ? lodgingAffiliateUrl(affiliate.booking_url)
+    : null;
+
+// Pet-insurance module: emergency-vet pages and lodging that charges a
+// pet fee — the two contexts where the reader is already looking at what
+// an emergency or a fee costs. Renders only when a partner is configured.
+const insuranceConfigured = Boolean(PET_INSURANCE_URL && PET_INSURANCE_PARTNER);
+const showInsurance =
+  insuranceConfigured &&
+  (d.tags.includes('emergency-vet') ||
+    (d.category === 'stay' && d.dog_policy.fee !== null));
+const insuranceContext =
+  d.category === 'stay' && d.dog_policy.fee
+    ? `The pet fee here is ${d.dog_policy.fee}.`
+    : undefined;
+
+const hasAffiliate = Boolean(affiliateUrl) || showInsurance;
 
 const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
   `${d.name} ${d.address}`
@@ -119,6 +139,7 @@ const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
           note={affiliate?.viator_url ? 'Booking through this link supports the site.' : 'Rates shown by our booking partner; booking through this link supports the site.'}
         />
       )}
+      {showInsurance && <PetInsuranceCTA context={insuranceContext} />}
 
       <div class="prose body">
         <Content />

@@ -65,7 +65,7 @@ zones:
     policy: off-leash
     note: The designated off-leash spot in town — dawn to dusk, water and clean-up bags on site; closes for winter after the first snow. Location approximate.
     source_url: https://www.tcpud.org/parks-recreation/facilities-parks-and-rentals/parks/dog-park
-    venue: null
+    venue: tahoe-city-dog-park
   - id: pomin-boat-ramp
     osm_name: Tahoe City PUD Boat Ramp
     near: [39.1815, -120.1195]

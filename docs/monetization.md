@@ -90,3 +90,32 @@ Long game: the index as licensed data.
   page when one exists, else the property's own booking page (direct,
   no commission, still useful). Verify the property identity before
   linking — wrong-property links burn trust faster than no link.
+
+## Pet insurance — implementation notes
+
+- `PetInsuranceCTA.astro` renders on emergency-vet-tagged venue pages
+  and on lodging pages with a non-null `dog_policy.fee`, labeled
+  "Sponsored", alongside the standard affiliate disclosure. Copy states
+  conditions only (what insurance mechanically is; the page's own fee as
+  context) — no advice, per voice.md.
+- To activate: pick a partner program (Embrace, Lemonade, Healthy Paws
+  referral — typically via ShareASale/Impact), then set
+  `PET_INSURANCE_URL` and `PET_INSURANCE_PARTNER` (display name) in the
+  build environment. Both unset → the module renders nothing anywhere.
+
+## Activities (Viator) — implementation notes
+
+- `viatorAffiliateUrl()` in `lib/affiliate.ts` appends the partner
+  params to any `affiliate.viator_url` at render when
+  `VIATOR_PARTNER_ID` (P00xxxxx) is set. The venue template already
+  renders the Viator CTA.
+- Rule: only attach a Viator URL whose product is verifiably the SAME
+  operator as the venue. As of 2026-08-08 the dog-friendly Tahoe City
+  float (Truckee River Raft Company — now a published venue with a
+  tier-1 dog policy) has no findable Viator listing; the Viator "Truckee
+  River" products are a different operator's Class III whitewater runs.
+  Re-check when new bookable dog-friendly activities enter the catalog.
+- Note there are two rival raft companies in town: Truckee River Raft
+  Company (truckeeriverraft.com, official "we happily welcome dogs") and
+  Truckee River Rafting (truckeeriverrafting.com, directory-reported
+  50-lb leashed limit). Never mix their facts.

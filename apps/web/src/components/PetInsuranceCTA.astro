@@ -1,0 +1,74 @@
+---
+// Pet-insurance referral module (docs/monetization.md tier 1, item 2).
+// Renders ONLY when both PET_INSURANCE_URL and PET_INSURANCE_PARTNER are
+// configured — no partner, no module. Placement is limited to emergency-vet
+// venue pages and lodging pages that charge a pet fee; the surrounding page
+// must render <AffiliateDisclosure /> (the venue template handles this).
+//
+// Copy rules (docs/voice.md): state conditions, never advise. The module
+// states what insurance mechanically is; the reader draws conclusions.
+import { PET_INSURANCE_URL, PET_INSURANCE_PARTNER } from '~/lib/affiliate';
+
+interface Props {
+  // Context line stating a verified condition from the page, e.g. the
+  // drive time to the nearest ER. Optional; omitted renders no line.
+  context?: string;
+}
+
+const { context } = Astro.props;
+const enabled = Boolean(PET_INSURANCE_URL && PET_INSURANCE_PARTNER);
+---
+
+{enabled && (
+  <aside class="insurance" aria-label="Pet insurance">
+    <p class="label">Sponsored</p>
+    {context && <p class="context">{context}</p>}
+    <p class="body">
+      Emergency veterinary care is billed at time of service. Pet insurance
+      reimburses covered vet bills after a deductible; pre-existing
+      conditions are excluded on every major policy.
+    </p>
+    <a
+      class="btn btn--ghost"
+      href={PET_INSURANCE_URL}
+      rel="sponsored nofollow noopener"
+      target="_blank"
+    >
+      Compare quotes at {PET_INSURANCE_PARTNER}
+      <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M6 3h7v7M13 3L3 13" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+    </a>
+  </aside>
+)}
+
+<style>
+  .insurance {
+    margin: 1.5rem 0;
+    padding: 1rem 1.2rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--paper-raised);
+  }
+  .label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 0.4rem;
+  }
+  .context {
+    font-weight: 650;
+    margin: 0 0 0.25rem;
+  }
+  .body {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    margin: 0 0 0.8rem;
+    max-width: 38rem;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+</style>
