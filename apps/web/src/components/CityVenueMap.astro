@@ -147,44 +147,53 @@ const legend = [...new Map(venues.map((v) => {
       ))}
     </div>
     {attributeChips.length > 0 && (
-      <div class="attr-toggles" role="group" aria-label="Filter map by special list">
-        {attributeChips.map(({ attr, count }) => (
-          <button
-            type="button"
-            class="key attr"
-            data-attr={attr.key}
-            aria-pressed="false"
-            title={attr.blurb}
-          >{attr.label} <span class="n">{count}</span></button>
-        ))}
-      </div>
+      <details class="fmenu" data-badge="active">
+        <summary>Lists <span class="badge" hidden></span></summary>
+        <div class="panel attr-toggles" role="group" aria-label="Filter map by special list">
+          {attributeChips.map(({ attr, count }) => (
+            <button
+              type="button"
+              class="key attr"
+              data-attr={attr.key}
+              aria-pressed="false"
+              title={attr.blurb}
+            >{attr.label} <span class="n">{count}</span></button>
+          ))}
+        </div>
+      </details>
     )}
     {indexChips.length > 0 && (
-      <div class="index-toggles" role="group" aria-label="Filter by Dog-Eared Index component">
-        <a class="group-label" href="/dog-eared-index/" title="Components that contributed to this town's Dog-Eared Index">Index</a>
-        {indexChips.map((c) => (
-          <button
-            type="button"
-            class="key ixf"
-            data-ixf={c.key}
-            aria-pressed="false"
-            title={`Scored ${c.score}/100 — show the ${c.count} ${c.count === 1 ? 'venue' : 'venues'} behind it`}
-          >{c.label} <span class="n">{c.count}</span></button>
-        ))}
-      </div>
+      <details class="fmenu" data-badge="active">
+        <summary>Index <span class="badge" hidden></span></summary>
+        <div class="panel index-toggles" role="group" aria-label="Filter by Dog-Eared Index component">
+          {indexChips.map((c) => (
+            <button
+              type="button"
+              class="key ixf"
+              data-ixf={c.key}
+              aria-pressed="false"
+              title={`Scored ${c.score}/100 — show the ${c.count} ${c.count === 1 ? 'venue' : 'venues'} behind it`}
+            >{c.label} <span class="n">{c.count}</span></button>
+          ))}
+          <a class="panel-link" href="/dog-eared-index/">How the index works →</a>
+        </div>
+      </details>
     )}
     {zoneGroupChips.length > 0 && (
-      <div class="zone-toggles" role="group" aria-label="Filter dog-policy zones by type">
-        {zoneGroupChips.map((g) => (
-          <button
-            type="button"
-            class="key zgroup"
-            data-zone-group={g.key}
-            aria-pressed="true"
-            title={`Show or hide ${g.label.toLowerCase()} zones`}
-          ><i style={`background:${g.color}`}></i>{g.label} <span class="n">{g.count}</span></button>
-        ))}
-      </div>
+      <details class="fmenu" data-badge="off">
+        <summary>Map layers <span class="badge" hidden></span></summary>
+        <div class="panel zone-toggles" role="group" aria-label="Filter dog-policy zones by type">
+          {zoneGroupChips.map((g) => (
+            <button
+              type="button"
+              class="key zgroup"
+              data-zone-group={g.key}
+              aria-pressed="true"
+              title={`Show or hide ${g.label.toLowerCase()} zones`}
+            ><i style={`background:${g.color}`}></i>{g.label} <span class="n">{g.count}</span></button>
+          ))}
+        </div>
+      </details>
     )}
     {cuisineOptions.length > 0 && (
       <div class="food-filters">
@@ -317,50 +326,83 @@ const legend = [...new Map(venues.map((v) => {
     background: transparent !important;
     box-shadow: inset 0 0 0 2px currentColor;
   }
-  .attr-toggles {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem 0.5rem;
-    font-size: 0.82rem;
-    color: var(--ink-soft);
-    padding-left: 0.75rem;
-    border-left: 1px solid var(--line);
-  }
   .attr[aria-pressed='true'],
   .ixf[aria-pressed='true'] {
     border-color: var(--moss);
     background: color-mix(in srgb, var(--moss) 15%, transparent);
     color: var(--ink);
   }
-  .index-toggles {
-    display: flex;
+  /* Dropdown filter menus (Lists, Index, Map layers) — the pills live
+     inside a panel; the summary is the one visible pill. */
+  .fmenu {
+    position: relative;
+  }
+  .fmenu summary {
+    list-style: none;
+    display: inline-flex;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 0.35rem 0.5rem;
-    font-size: 0.82rem;
+    gap: 0.4rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.85rem;
     color: var(--ink-soft);
-    padding-left: 0.75rem;
-    border-left: 1px solid var(--line);
+    background: none;
+    cursor: pointer;
+    user-select: none;
+    transition: border-color 0.15s ease, background 0.15s ease;
   }
-  .index-toggles .group-label {
-    font-size: 0.72rem;
+  .fmenu summary::-webkit-details-marker {
+    display: none;
+  }
+  .fmenu summary::after {
+    content: '▾';
+    font-size: 0.7em;
+    opacity: 0.7;
+  }
+  .fmenu summary:hover,
+  .fmenu[open] summary {
+    border-color: var(--moss);
+    background: color-mix(in srgb, var(--moss) 8%, transparent);
+    color: var(--ink);
+  }
+  .fmenu .badge {
+    background: var(--moss);
+    color: #fff;
+    border-radius: 999px;
+    font-size: 0.7rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--moss);
-    text-decoration: none;
+    padding: 0 0.45rem;
+    line-height: 1.5;
   }
-  .index-toggles .group-label:hover {
-    text-decoration: underline;
-  }
-  .zone-toggles {
+  .fmenu .panel {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    left: 0;
+    z-index: 40;
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem 0.5rem;
-    font-size: 0.82rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.35rem;
+    min-width: 14rem;
+    padding: 0.6rem;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    font-size: 0.85rem;
     color: var(--ink-soft);
-    padding-left: 0.75rem;
-    border-left: 1px solid var(--line);
+  }
+  .fmenu .panel .key {
+    border-radius: 8px;
+  }
+  .fmenu .panel .key .n {
+    margin-left: auto;
+  }
+  .panel-link {
+    font-size: 0.78rem;
+    font-weight: 650;
+    margin: 0.25rem 0.3rem 0;
   }
   .zgroup[data-zone-group='trails'] i {
     height: 3px;
@@ -1070,6 +1112,33 @@ const legend = [...new Map(venues.map((v) => {
     }
     if (activeIndexFilters.size > 0) updateList();
   }
+
+  // Dropdown filter menus: a badge on each closed menu shows how many of
+  // its filters are engaged (data-badge="active": pressed on; "off":
+  // toggled off). Clicking outside an open menu closes it.
+  const filterMenus = Array.from(
+    document.querySelectorAll<HTMLElement>('.explorer .fmenu')
+  );
+  function updateMenuBadges() {
+    for (const menu of filterMenus) {
+      const engaged = menu.dataset.badge === 'off' ? 'false' : 'true';
+      const n = menu.querySelectorAll(`.panel [aria-pressed="${engaged}"]`).length;
+      const badge = menu.querySelector<HTMLElement>('.badge');
+      if (badge) {
+        badge.textContent = String(n);
+        badge.hidden = n === 0;
+      }
+    }
+  }
+  document.addEventListener('click', (e) => {
+    for (const menu of filterMenus) {
+      if ((menu as HTMLDetailsElement).open && !menu.contains(e.target as Node)) {
+        (menu as HTMLDetailsElement).open = false;
+      }
+    }
+    updateMenuBadges();
+  });
+  updateMenuBadges();
 
   // --- Itinerary picks: checking a card writes the same localStorage plan
   // the /plan/ page reads ({slug, day}[] under `plan:<city>`), so the
