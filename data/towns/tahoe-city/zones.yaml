@@ -1,0 +1,113 @@
+# Dog-zone definitions for the explorer map. Geometry comes from OSM
+# (pipeline/index/zones.py fetches polygons and writes zones.geojson);
+# the POLICY of each zone comes from the catalog's verified records and
+# the city regulations — never from OSM tags. `osm_name` + `near` locate
+# the polygon; `venue` links the zone to its catalog page when one exists.
+#
+# policy values: no-dogs | off-leash | leashed | restricted
+#
+# `trails` draws dog-allowed trail lines on the same layer: the paved
+# TCPUD network (highway=cycleway) and named forest trails
+# (highway=path + name), minus trails inside state parks, where dogs are
+# banned from unpaved trails (Sierra District order).
+trails:
+  center: [39.1677, -120.1452]
+  radius_m: 6500
+  # Trails inside these zone polygons (by zone id above) are dropped —
+  # dogs are banned from unpaved state-park trails.
+  exclude_zone_ids:
+    - burton-creek-sp
+    - tahoe-sra
+  classes:
+    - selector: cycleway
+      policy: leashed
+      label: Paved multi-use trail
+      note: TCPUD's paved network — dogs on a short leash, kept to the handler's side; shared with bikes.
+      source_url: https://www.tcpud.org/trails
+      venue: truckee-river-trail
+    - selector: named-path
+      policy: leashed
+      label: Forest trail
+      note: National-forest trail — the Forest Service asks that dogs be leashed at all times; designated swim beaches are the exception, not trails.
+      source_url: https://www.fs.usda.gov/r05/laketahoebasin/recreation/where-can-i-take-my-dog-lake-tahoe
+      venue: null
+zones:
+  - id: commons-beach
+    osm_name: Lake Tahoe Commons Beach
+    near: [39.1704, -120.1405]
+    policy: no-dogs
+    note: Dogs prohibited on the sand, lawn, and picnic areas; leashed dogs may pass through on the paved trail at the upper edge.
+    source_url: https://www.tcpud.org/parks-facilities/facilities-parks-and-rentals/beaches/commons-beach
+    venue: lake-tahoe-commons-beach
+  - id: lake-forest-beach
+    osm_name: Lake Forest Beach Park
+    near: [39.18215, -120.11262]
+    policy: no-dogs
+    note: County beach rules are explicit — no dogs on the beach or in the water.
+    source_url: https://www.placer.ca.gov/10337/PCSO-reminder-to-follow-beach-rules
+    venue: lake-forest-beach
+  - id: william-kent-beach
+    osm_name: William Kent Beach
+    near: [39.1345, -120.1590]
+    policy: no-dogs
+    note: One of six USFS designated swim beaches where pets are prohibited.
+    source_url: https://www.fs.usda.gov/r05/laketahoebasin/recreation/where-can-i-take-my-dog-lake-tahoe
+    venue: null
+  - id: tahoe-city-dog-park
+    osm_name: Dog Park
+    label: Tahoe City Dog Park
+    # 375 Grove St (geocoded), behind Fat Cat next to Conners Field. Not
+    # mapped in OSM — the only OSM way named "Dog Park" is 2.5 km away in
+    # Lake Forest and is a different place — so this renders as an
+    # approximate circle until someone maps the real boundary.
+    near: [39.17399, -120.14196]
+    approx_radius_m: 45
+    policy: off-leash
+    note: The designated off-leash spot in town — dawn to dusk, water and clean-up bags on site; closes for winter after the first snow. Location approximate.
+    source_url: https://www.tcpud.org/parks-recreation/facilities-parks-and-rentals/parks/dog-park
+    venue: null
+  - id: pomin-boat-ramp
+    osm_name: Tahoe City PUD Boat Ramp
+    near: [39.1815, -120.1195]
+    policy: leashed
+    note: TCPUD's sanctioned dog water access — dogs allowed next to the boat ramp; Placer County leash law applies.
+    source_url: http://www.tcpud.org/your-district/frequently-asked-questions
+    venue: lake-forest-boat-ramp
+  - id: gatekeepers-day-use
+    osm_name: Gate Keepers Cottage
+    near: [39.1668, -120.1440]
+    policy: leashed
+    note: The one State Parks shoreline in town where leashed dogs are legal — the day-use area at the Truckee River outlet. Boundary approximate.
+    source_url: https://www.parks.ca.gov/?page_id=504
+    venue: gatekeepers-day-use-area
+  - id: sixty-four-acres
+    osm_name: 64-Acres Park
+    near: [39.1656, -120.1458]
+    policy: leashed
+    note: Trailhead park and riverbank — leashed dogs welcome on the paved network and at the water's edge.
+    source_url: https://www.tcpud.org/trails
+    venue: 64-acres-park
+  - id: skylandia-park
+    osm_name: Skylandia Park
+    near: [39.1806, -120.1214]
+    policy: leashed
+    note: Leashed dogs welcome in the pine forest, meadow, and woodland trails — not on the sand.
+    source_url: https://www.tcpud.org/parks-facilities/facilities-parks-and-rentals/parks/skylandia-park
+    venue: skylandia-park-and-beach
+  - id: tahoe-sra
+    osm_name: Tahoe State Recreational Area
+    near: [39.1710, -120.1350]
+    policy: no-dogs
+    note: Dogs are limited to the Gatekeepers day-use area; the campground and its beach are a no-dog zone.
+    source_url: https://www.parks.ca.gov/?page_id=504
+    venue: gatekeepers-day-use-area
+  - id: burton-creek-sp
+    osm_name: Burton Creek State Park
+    near: [39.1900, -120.1000]
+    # Name is unambiguous and the park is huge; the boundary's nearest
+    # vertex sits ~2 km from the reference point.
+    max_match_m: 3000
+    policy: restricted
+    note: State Parks baseline — dogs on paved roads only, max 6-foot leash, and ski trails closed to dogs Nov 1 – May 1.
+    source_url: https://www.parks.ca.gov/pages/499/files/DSO%20683-22-002%20Dogs.pdf
+    venue: null

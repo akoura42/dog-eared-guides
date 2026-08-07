@@ -10,6 +10,7 @@ import type { Venue } from '~/lib/venues';
 import { venuePath, venueSlug, matchesAttribute } from '~/lib/venues';
 import { getCategoryByKey, getAttributes, type CityConfig } from '~/lib/config';
 import { GMAPS_API_KEY } from '~/lib/site';
+import { getTownZones } from '~/lib/zones';
 import VenueCard from './VenueCard.astro';
 
 interface Props {
@@ -73,6 +74,28 @@ const markers = venues.map((venue) => ({
 const cuisineOptions = [...new Set(venues.flatMap((v) => v.data.cuisines))].sort();
 
 const center = { lat: city.geo.lat, lng: city.geo.lng };
+// Dog-policy zone polygons (no-dogs beaches, the off-leash park, leashed
+// day-use areas) — generated from OSM geometry, classified from our
+// verified records. Null when the town has no zones file yet.
+const zones = getTownZones(city.slug);
+
+// Zone chips: one toggle per zone type. Trails share the leashed policy
+// but toggle independently — they're a different thing on the map.
+const zoneGroupOf = (f: { properties: { kind?: string; policy: string } }) =>
+  f.properties.kind === 'trail' ? 'trails' : f.properties.policy;
+const ZONE_GROUP_META = [
+  { key: 'no-dogs', label: 'No dogs', color: '#b23a2a' },
+  { key: 'off-leash', label: 'Off-leash', color: '#2e7d43' },
+  { key: 'leashed', label: 'Leashed areas', color: '#4d7d62' },
+  { key: 'trails', label: 'Trails', color: '#4d7d62' },
+  { key: 'restricted', label: 'Restricted', color: '#c08a2e' },
+];
+const zoneGroupChips = zones
+  ? ZONE_GROUP_META.map((m) => ({
+      ...m,
+      count: zones.features.filter((f) => zoneGroupOf(f) === m.key).length,
+    })).filter((m) => m.count > 0)
+  : [];
 const legend = [...new Map(venues.map((v) => {
   const key = v.data.category;
   return [key, {
@@ -111,6 +134,19 @@ const legend = [...new Map(venues.map((v) => {
         ))}
       </div>
     )}
+    {zoneGroupChips.length > 0 && (
+      <div class="zone-toggles" role="group" aria-label="Filter dog-policy zones by type">
+        {zoneGroupChips.map((g) => (
+          <button
+            type="button"
+            class="key zgroup"
+            data-zone-group={g.key}
+            aria-pressed="true"
+            title={`Show or hide ${g.label.toLowerCase()} zones`}
+          ><i style={`background:${g.color}`}></i>{g.label} <span class="n">{g.count}</span></button>
+        ))}
+      </div>
+    )}
     {cuisineOptions.length > 0 && (
       <div class="food-filters">
         <select id="cuisine-filter" aria-label="Filter restaurants by cuisine">
@@ -135,6 +171,7 @@ const legend = [...new Map(venues.map((v) => {
         id="venue-map-canvas"
         data-center={JSON.stringify(center)}
         data-markers={JSON.stringify(markers)}
+        data-zones={zones ? JSON.stringify(zones) : undefined}
         data-gmaps-key={GMAPS_API_KEY}
         aria-label={`Map of verified dog-friendly places in ${city.name}`}
       >
@@ -177,6 +214,7 @@ const legend = [...new Map(venues.map((v) => {
       <p class="hint">
         Each marker links to our verified dog policy and to the venue's
         Google Maps listing, where its Google reviews live.
+        {zones && ' Zone boundaries © OpenStreetMap contributors; boundaries are approximate.'}
       </p>
     </aside>
   </div>
@@ -253,6 +291,27 @@ const legend = [...new Map(venues.map((v) => {
     border-color: var(--moss);
     background: color-mix(in srgb, var(--moss) 15%, transparent);
     color: var(--ink);
+  }
+  .zone-toggles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.5rem;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    padding-left: 0.75rem;
+    border-left: 1px solid var(--line);
+  }
+  .zgroup[data-zone-group='trails'] i {
+    height: 3px;
+    width: 12px;
+    border-radius: 2px;
+  }
+  .zgroup[aria-pressed='false'] {
+    opacity: 0.45;
+  }
+  .zgroup[aria-pressed='false'] i {
+    background: transparent !important;
+    box-shadow: inset 0 0 0 2px currentColor;
   }
   .key i {
     width: 10px;
@@ -495,6 +554,12 @@ const legend = [...new Map(venues.map((v) => {
     gap: 0.9rem;
     font-size: 0.88rem;
   }
+  :global(.venue-popup .zone-note) {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin: 0 0 0.45rem;
+    max-width: 16rem;
+  }
 </style>
 
 <script>
@@ -534,6 +599,43 @@ const legend = [...new Map(venues.map((v) => {
   // entry in this array.
   const canvasEl = document.getElementById('venue-map-canvas') as HTMLElement | null;
   const markersData: MarkerData[] = canvasEl ? JSON.parse(canvasEl.dataset.markers!) : [];
+
+  // Dog-policy zone layer (polygons). Colors by policy; approximate
+  // geometries render dashed. Toggled by the toolbar chip; each map stack
+  // registers its own visibility callback when it initializes.
+  type ZoneProps = {
+    id: string;
+    name: string;
+    kind?: string;
+    policy: string;
+    note: string;
+    source_url: string;
+    venue: string | null;
+    acres: number | null;
+    miles?: number | null;
+    approx: boolean;
+  };
+  const zonesData = canvasEl?.dataset.zones ? JSON.parse(canvasEl.dataset.zones) : null;
+  const ZONE_COLORS: Record<string, string> = {
+    'no-dogs': '#b23a2a',
+    'off-leash': '#2e7d43',
+    leashed: '#4d7d62',
+    restricted: '#c08a2e',
+  };
+  const ZONE_LABELS: Record<string, string> = {
+    'no-dogs': 'No dogs',
+    'off-leash': 'Off-leash',
+    leashed: 'Dogs on leash',
+    restricted: 'Restricted',
+  };
+  // Per-type zone visibility ('no-dogs', 'off-leash', 'leashed', 'trails',
+  // 'restricted'). Undefined means visible; chips flip entries to false.
+  const zoneGroupState: Record<string, boolean> = {};
+  const zoneGroupOf = (p: { kind?: string; policy: string }) =>
+    p.kind === 'trail' ? 'trails' : p.policy;
+  const zoneVisible = (p: { kind?: string; policy: string }) =>
+    zoneGroupState[zoneGroupOf(p)] !== false;
+  let setZonesVisible: (() => void) | null = null;
   const emptyMsg = listPane?.querySelector<HTMLElement>('.empty');
   const cuisineSelect = document.getElementById('cuisine-filter') as HTMLSelectElement | null;
   const dishInput = document.getElementById('dish-filter') as HTMLInputElement | null;
@@ -580,6 +682,24 @@ const legend = [...new Map(venues.map((v) => {
       ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!
     );
 
+  function zonePopupHtml(p: ZoneProps): string {
+    const acres =
+      p.acres != null ? ` · ~${p.acres} acres` : p.miles != null ? ` · ~${p.miles} mi` : '';
+    const cityBase = location.pathname.split('/')[1];
+    const venueLink = p.venue
+      ? `<a href="/${cityBase}/venues/${p.venue}/">Our verified policy</a>`
+      : '';
+    return `<div class="venue-popup">
+      <h4>${esc2(p.name)}</h4>
+      <p class="cat">${esc2(ZONE_LABELS[p.policy] ?? p.policy)}${acres}${p.approx ? ' · boundary approximate' : ''}</p>
+      <p class="zone-note">${esc2(p.note)}</p>
+      <div class="links">
+        ${venueLink}
+        <a href="${esc2(p.source_url)}" target="_blank" rel="noopener nofollow">Official rule ↗</a>
+      </div>
+    </div>`;
+  }
+
   function popupHtml(m: MarkerData): string {
     return `<div class="venue-popup">
       <h4>${esc2(m.name)}</h4>
@@ -614,6 +734,35 @@ const legend = [...new Map(venues.map((v) => {
     });
     const bounds = new maps.LatLngBounds();
     const info = new maps.InfoWindow();
+    if (zonesData) {
+      map.data.addGeoJson(zonesData);
+      const styleZones = () =>
+        map.data.setStyle((f: any) => {
+          const props = { kind: f.getProperty('kind'), policy: f.getProperty('policy') };
+          const c = ZONE_COLORS[props.policy] ?? '#666';
+          const visible = zoneVisible(props);
+          if (props.kind === 'trail') {
+            return { strokeColor: c, strokeWeight: 3, strokeOpacity: 0.75, visible };
+          }
+          return {
+            strokeColor: c,
+            strokeWeight: 2,
+            strokeOpacity: 0.9,
+            fillColor: c,
+            fillOpacity: 0.16,
+            visible,
+          };
+        });
+      styleZones();
+      map.data.addListener('click', (e: any) => {
+        const p: any = {};
+        e.feature.forEachProperty((v: unknown, k: string) => (p[k] = v));
+        info.setContent(zonePopupHtml(p as ZoneProps));
+        info.setPosition(e.latLng);
+        info.open({ map });
+      });
+      setZonesVisible = styleZones;
+    }
     const gmarkers = markers.map((m, i) => {
       const marker = new maps.Marker({
         map,
@@ -674,6 +823,48 @@ const legend = [...new Map(venues.map((v) => {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
+
+    if (zonesData) {
+      const zoneStyle = (f: any) => {
+        const c = ZONE_COLORS[f?.properties?.policy] ?? '#666';
+        if (f?.properties?.kind === 'trail') {
+          return { color: c, weight: 3, opacity: 0.75 };
+        }
+        return {
+          color: c,
+          weight: 2,
+          opacity: 0.9,
+          fillColor: c,
+          fillOpacity: 0.16,
+          dashArray: f?.properties?.approx ? '4 4' : undefined,
+        };
+      };
+      // One layer per zone type so chips can toggle them independently.
+      const groupKeys = [
+        ...new Set<string>(zonesData.features.map((f: any) => zoneGroupOf(f.properties))),
+      ];
+      const groupLayers: Record<string, any> = {};
+      for (const key of groupKeys) {
+        groupLayers[key] = L.geoJSON(zonesData, {
+          filter: (f: any) => zoneGroupOf(f.properties) === key,
+          style: zoneStyle,
+          onEachFeature: (f: any, layer: any) => {
+            layer.bindPopup(zonePopupHtml(f.properties));
+            layer.bindTooltip(f.properties.name, { sticky: true });
+          },
+        });
+      }
+      setZonesVisible = () => {
+        for (const [key, layer] of Object.entries(groupLayers)) {
+          if (zoneGroupState[key] !== false) {
+            if (!map.hasLayer(layer)) layer.addTo(map);
+          } else {
+            map.removeLayer(layer);
+          }
+        }
+      };
+      setZonesVisible();
+    }
 
     const bounds = L.latLngBounds([]);
     const lmarkers = markers.map((m, i) => {
@@ -738,6 +929,19 @@ const legend = [...new Map(venues.map((v) => {
     paneToggle.textContent = collapsed ? '‹' : '›';
     requestAnimationFrame(() => resizeMap?.());
   });
+
+  // Zone chips toggle each zone type (no-dogs, off-leash, …) on its own.
+  document
+    .querySelectorAll<HTMLButtonElement>('.explorer .zone-toggles [data-zone-group]')
+    .forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.zoneGroup!;
+        const nowVisible = zoneGroupState[key] === false;
+        zoneGroupState[key] = nowVisible;
+        btn.setAttribute('aria-pressed', String(nowVisible));
+        setZonesVisible?.();
+      });
+    });
 
   // Legend chips toggle their category's markers and cards on/off.
   document
