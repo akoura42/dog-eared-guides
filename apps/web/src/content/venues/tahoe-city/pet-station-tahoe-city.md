@@ -26,7 +26,8 @@ verification:
   method: official_website
   source_url: https://tahoepetstation.com/apps/pages/locations
 affiliate: null
-tags: []
+tags:
+  - pet-supply
 summary: The in-town pet supply stop — food, gear, and chain-wide services like a self-serve dog wash. Open daily 10–6.
 image: null
 ---
