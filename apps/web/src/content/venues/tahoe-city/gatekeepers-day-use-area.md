@@ -26,7 +26,8 @@ verification:
   method: official_website
   source_url: https://www.parks.ca.gov/?page_id=504
 affiliate: null
-tags: []
+tags:
+  - water-access
 summary: The one State Parks shoreline in town where dogs are legal — the day-use area at the Truckee River outlet, leash on.
 image: tahoe-city/lake-tahoe-dam.jpg
 image_alt: The Lake Tahoe Dam at the Truckee River outlet, beside the Gatekeepers day-use area

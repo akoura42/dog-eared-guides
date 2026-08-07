@@ -26,7 +26,8 @@ verification:
   method: official_website
   source_url: http://www.tcpud.org/your-district/frequently-asked-questions
 affiliate: null
-tags: []
+tags:
+  - water-access
 summary: The one TCPUD-sanctioned spot where a dog can reach Lake Tahoe's water in Tahoe City — beside the Lake Forest boat ramp.
 image: null
 ---

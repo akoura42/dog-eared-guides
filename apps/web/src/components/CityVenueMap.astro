@@ -11,6 +11,8 @@ import { venuePath, venueSlug, matchesAttribute } from '~/lib/venues';
 import { getCategoryByKey, getAttributes, type CityConfig } from '~/lib/config';
 import { GMAPS_API_KEY } from '~/lib/site';
 import { getTownZones } from '~/lib/zones';
+import { getTownIndex, getIndexBands } from '~/lib/dogEaredIndex';
+import { INDEX_VENUE_FILTERS } from '~/lib/indexFilters';
 import VenueCard from './VenueCard.astro';
 
 interface Props {
@@ -54,6 +56,28 @@ const attrsOf = (venue: Venue) =>
     .map((attr) => attr.key)
     .join('|');
 
+// Index-component filters: every component that contributed positively to
+// the town's Dog-Eared Index (verified score > 0) and maps to venues
+// becomes a chip, so readers can filter to the venues behind the score.
+const townIndex = getTownIndex(city.slug);
+const indexBands = getIndexBands();
+const indexChips = townIndex
+  ? Object.entries(INDEX_VENUE_FILTERS)
+      .map(([key, pred]) => ({
+        key,
+        pred,
+        label: indexBands.components.find((c) => c.key === key)?.label ?? key,
+        score: townIndex.components[key]?.score ?? null,
+        count: venues.filter((v) => pred(v.data)).length,
+      }))
+      .filter((c) => c.score !== null && c.score! > 0 && c.count > 0)
+  : [];
+const indexKeysOf = (venue: Venue) =>
+  indexChips
+    .filter((c) => c.pred(venue.data))
+    .map((c) => c.key)
+    .join('|');
+
 // Marker order mirrors the card list — index is the shared id between them.
 const markers = venues.map((venue) => ({
   name: venue.data.name,
@@ -65,6 +89,7 @@ const markers = venues.map((venue) => ({
   cuisines: cuisinesOf(venue),
   food: foodTextOf(venue),
   attrs: attrsOf(venue),
+  ix: indexKeysOf(venue),
   path: venuePath(venue),
   gmaps: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
     `${venue.data.name} ${venue.data.address}`
@@ -131,6 +156,20 @@ const legend = [...new Map(venues.map((v) => {
             aria-pressed="false"
             title={attr.blurb}
           >{attr.label} <span class="n">{count}</span></button>
+        ))}
+      </div>
+    )}
+    {indexChips.length > 0 && (
+      <div class="index-toggles" role="group" aria-label="Filter by Dog-Eared Index component">
+        <a class="group-label" href="/dog-eared-index/" title="Components that contributed to this town's Dog-Eared Index">Index</a>
+        {indexChips.map((c) => (
+          <button
+            type="button"
+            class="key ixf"
+            data-ixf={c.key}
+            aria-pressed="false"
+            title={`Scored ${c.score}/100 — show the ${c.count} ${c.count === 1 ? 'venue' : 'venues'} behind it`}
+          >{c.label} <span class="n">{c.count}</span></button>
         ))}
       </div>
     )}
@@ -287,10 +326,32 @@ const legend = [...new Map(venues.map((v) => {
     padding-left: 0.75rem;
     border-left: 1px solid var(--line);
   }
-  .attr[aria-pressed='true'] {
+  .attr[aria-pressed='true'],
+  .ixf[aria-pressed='true'] {
     border-color: var(--moss);
     background: color-mix(in srgb, var(--moss) 15%, transparent);
     color: var(--ink);
+  }
+  .index-toggles {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.5rem;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    padding-left: 0.75rem;
+    border-left: 1px solid var(--line);
+  }
+  .index-toggles .group-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--moss);
+    text-decoration: none;
+  }
+  .index-toggles .group-label:hover {
+    text-decoration: underline;
   }
   .zone-toggles {
     display: flex;
@@ -575,6 +636,7 @@ const legend = [...new Map(venues.map((v) => {
     cuisines: string;
     food: string;
     attrs: string;
+    ix: string;
     path: string;
     gmaps: string;
   };
@@ -585,6 +647,8 @@ const legend = [...new Map(venues.map((v) => {
   const hiddenCategories = new Set<string>();
   // Special-list chips currently active — a venue must match every one.
   const activeAttrs = new Set<string>();
+  // Active Dog-Eared Index component filters — same every-one semantics.
+  const activeIndexFilters = new Set<string>();
   let applyVisibility: (() => void) | null = null;
   let focusMarker: ((idx: number, on: boolean) => void) | null = null;
   let resizeMap: (() => void) | null = null;
@@ -654,6 +718,8 @@ const legend = [...new Map(venues.map((v) => {
     if (hiddenCategories.has(m.categoryKey)) return false;
     const venueAttrs = m.attrs.split('|');
     for (const a of activeAttrs) if (!venueAttrs.includes(a)) return false;
+    const venueIx = m.ix.split('|');
+    for (const k of activeIndexFilters) if (!venueIx.includes(k)) return false;
     return foodOk(m.cuisines, m.food);
   }
 
@@ -972,6 +1038,38 @@ const legend = [...new Map(venues.map((v) => {
         applyVisibility?.();
       });
     });
+
+  // Index-component chips narrow to the venues behind that component.
+  document
+    .querySelectorAll<HTMLButtonElement>('.explorer .index-toggles [data-ixf]')
+    .forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.ixf!;
+        const nowActive = !activeIndexFilters.has(key);
+        if (nowActive) activeIndexFilters.add(key);
+        else activeIndexFilters.delete(key);
+        btn.setAttribute('aria-pressed', String(nowActive));
+        updateList();
+        applyVisibility?.();
+      });
+    });
+
+  // ?ixf=<key>[,<key>] pre-activates index filters — the Dog-Eared Index
+  // table links here so each contributing component can jump straight to
+  // its venues on the map.
+  const ixfParam = new URLSearchParams(location.search).get('ixf');
+  if (ixfParam) {
+    for (const key of ixfParam.split(',')) {
+      const btn = document.querySelector<HTMLButtonElement>(
+        `.explorer .index-toggles [data-ixf="${CSS.escape(key)}"]`
+      );
+      if (btn) {
+        activeIndexFilters.add(key);
+        btn.setAttribute('aria-pressed', 'true');
+      }
+    }
+    if (activeIndexFilters.size > 0) updateList();
+  }
 
   // --- Itinerary picks: checking a card writes the same localStorage plan
   // the /plan/ page reads ({slug, day}[] under `plan:<city>`), so the

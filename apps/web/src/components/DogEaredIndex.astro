@@ -10,6 +10,7 @@ import {
   getIndexBands,
   formatComponentValue,
 } from '~/lib/dogEaredIndex';
+import { INDEX_FILTERABLE_KEYS } from '~/lib/indexFilters';
 
 interface Props {
   city: CityConfig;
@@ -29,6 +30,11 @@ const rows =
           def,
           data,
           display: data ? formatComponentValue(def, data) : null,
+          // Positively-contributing components with a venue mapping link
+          // to the explorer pre-filtered to the venues behind the score.
+          filterable:
+            INDEX_FILTERABLE_KEYS.includes(def.key) &&
+            (data?.score ?? 0) > 0,
         };
       });
 ---
@@ -100,11 +106,14 @@ const rows =
             </tr>
           </thead>
           <tbody>
-            {rows.map(({ def, data, display }) => (
+            {rows.map(({ def, data, display, filterable }) => (
               <tr class:list={{ missing: display === null }}>
                 <td>
                   <span class="c-label">{def.label}</span>
                   <span class="c-pillar">{def.pillar}</span>
+                  {filterable && (
+                    <a class="c-map" href={`?ixf=${def.key}#explore`}>See these venues on the map ↑</a>
+                  )}
                 </td>
                 <td>{def.weight}</td>
                 <td>{display ?? 'not yet verified'}</td>
@@ -234,6 +243,12 @@ const rows =
   .c-pillar {
     font-size: 0.78rem;
     color: var(--ink-soft);
+  }
+  .c-map {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 650;
+    margin-top: 0.15rem;
   }
   tr.missing td {
     color: var(--ink-soft);
