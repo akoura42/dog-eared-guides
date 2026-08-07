@@ -2,6 +2,8 @@
 name: The Chalet
 city: tahoe-city
 category: eat
+cuisines:
+  - German
 neighborhood: Alpine Meadows
 address: 2600 Alpine Meadows Rd, Alpine Meadows, CA 96146
 lat: 39.15947

@@ -76,6 +76,11 @@ const venues = defineCollection({
     phone: z.string().nullable().default(null),
     website: z.string().url().nullable().default(null),
     dog_policy: dogPolicySchema,
+    // Cuisine labels for eat/drink venues, grounded in the venue's own
+    // published copy (e.g. "pizzeria", "beer garden") — powers the cuisine
+    // filter on the city explorer. Never inferred beyond what the venue
+    // says about itself.
+    cuisines: z.array(z.string()).default([]),
     seasonal: z.array(z.string()).default([]),
     verification: verificationSchema,
     menu: menuSchema.nullable().default(null),

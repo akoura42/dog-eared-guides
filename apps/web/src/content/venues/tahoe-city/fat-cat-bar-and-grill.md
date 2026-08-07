@@ -2,6 +2,9 @@
 name: Fat Cat Bar & Grill
 city: tahoe-city
 category: eat
+cuisines:
+  - American
+  - Burgers
 neighborhood: Downtown
 address: 599 N Lake Blvd, Tahoe City, CA 96145
 lat: 39.17226

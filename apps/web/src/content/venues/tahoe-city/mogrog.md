@@ -2,6 +2,8 @@
 name: MOGROG
 city: tahoe-city
 category: eat
+cuisines:
+  - Rotisserie
 neighborhood: Alpine Meadows
 address: 2680 Alpine Meadows Rd, Olympic Valley, CA 96146
 lat: 39.16634

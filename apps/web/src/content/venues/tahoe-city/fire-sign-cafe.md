@@ -2,6 +2,8 @@
 name: Fire Sign Cafe
 city: tahoe-city
 category: eat
+cuisines:
+  - Breakfast & brunch
 neighborhood: West Shore
 address: 1785 W Lake Blvd, Tahoe City, CA 96145
 lat: 39.14047

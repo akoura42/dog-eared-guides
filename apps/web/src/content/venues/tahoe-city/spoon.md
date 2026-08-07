@@ -2,6 +2,8 @@
 name: Spoon
 city: tahoe-city
 category: eat
+cuisines:
+  - Comfort food
 neighborhood: West Shore
 address: 1785 W Lake Blvd #5, Tahoe City, CA 96145
 lat: 39.14084

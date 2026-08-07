@@ -1,13 +1,16 @@
 ---
-// Interactive venue map for a city hub. Leaflet + OpenStreetMap tiles (no
-// API key). Each marker links to our venue page and deep-links to the
-// venue's Google Maps place page — that's where Google reviews live.
-// The map initializes lazily when scrolled near the viewport so tiles
-// never block first paint.
+// Zillow-style explorer for a city hub: filter toolbar on top, map pinned
+// on the left, independently scrolling venue-card list on the right.
+// Map runs on Google Maps when PUBLIC_GMAPS_API_KEY is set, otherwise
+// Leaflet + OpenStreetMap tiles. Each marker links to our venue page and
+// deep-links to the venue's Google Maps place page — that's where Google
+// reviews live. The map initializes lazily when scrolled near the viewport
+// so tiles never block first paint.
 import type { Venue } from '~/lib/venues';
-import { venuePath } from '~/lib/venues';
-import { getCategoryByKey, type CityConfig } from '~/lib/config';
+import { venuePath, venueSlug, matchesAttribute } from '~/lib/venues';
+import { getCategoryByKey, getAttributes, type CityConfig } from '~/lib/config';
 import { GMAPS_API_KEY } from '~/lib/site';
+import VenueCard from './VenueCard.astro';
 
 interface Props {
   city: CityConfig;
@@ -27,58 +30,285 @@ const CATEGORY_COLORS: Record<string, string> = {
   services: '#55645c',
 };
 
+// Food-filter text per venue: cuisine labels + real items from the
+// verified menu (never inferred). Empty for venues with neither.
+const cuisinesOf = (venue: Venue) => venue.data.cuisines.join('|').toLowerCase();
+const foodTextOf = (venue: Venue) =>
+  [
+    ...venue.data.cuisines,
+    ...(venue.data.menu?.items ?? []).filter((i) => !i.startsWith('SECTION:')),
+  ]
+    .join(' | ')
+    .toLowerCase();
+
+// Special-list filters (off-leash, water bowls, …) reuse the attribute
+// rules that power the /{city}/{attr}/ hub pages. Chips only appear for
+// attributes at least one venue matches.
+const attributeChips = getAttributes()
+  .map((attr) => ({ attr, count: venues.filter((v) => matchesAttribute(v, attr)).length }))
+  .filter((a) => a.count > 0);
+const attrsOf = (venue: Venue) =>
+  getAttributes()
+    .filter((attr) => matchesAttribute(venue, attr))
+    .map((attr) => attr.key)
+    .join('|');
+
+// Marker order mirrors the card list — index is the shared id between them.
 const markers = venues.map((venue) => ({
   name: venue.data.name,
   lat: venue.data.lat,
   lng: venue.data.lng,
+  categoryKey: venue.data.category,
   category: getCategoryByKey(venue.data.category).label,
   color: CATEGORY_COLORS[venue.data.category] ?? '#1f4d3a',
+  cuisines: cuisinesOf(venue),
+  food: foodTextOf(venue),
+  attrs: attrsOf(venue),
   path: venuePath(venue),
   gmaps: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
     `${venue.data.name} ${venue.data.address}`
   )}`,
 }));
 
+const cuisineOptions = [...new Set(venues.flatMap((v) => v.data.cuisines))].sort();
+
 const center = { lat: city.geo.lat, lng: city.geo.lng };
 const legend = [...new Map(venues.map((v) => {
   const key = v.data.category;
-  return [key, { label: getCategoryByKey(key).label, color: CATEGORY_COLORS[key] ?? '#1f4d3a' }];
+  return [key, {
+    key,
+    label: getCategoryByKey(key).label,
+    color: CATEGORY_COLORS[key] ?? '#1f4d3a',
+    count: venues.filter((x) => x.data.category === key).length,
+  }];
 })).values()];
 ---
 
-<div class="venue-map">
-  <div
-    id="venue-map-canvas"
-    data-center={JSON.stringify(center)}
-    data-markers={JSON.stringify(markers)}
-    data-gmaps-key={GMAPS_API_KEY}
-    aria-label={`Map of verified dog-friendly places in ${city.name}`}
-  >
-    <p class="placeholder">Map loading…</p>
+<section class="explorer" id="explore" data-city={city.slug}>
+  <div class="toolbar">
+    <span class="toolbar-label">Filter:</span>
+    <div class="legend" role="group" aria-label="Filter map by category">
+      {legend.map((item) => (
+        <button
+          type="button"
+          class="key"
+          data-category={item.key}
+          aria-pressed="true"
+          title={`Show or hide ${item.label.toLowerCase()}`}
+        ><i style={`background:${item.color}`}></i>{item.label} <span class="n">{item.count}</span></button>
+      ))}
+    </div>
+    {attributeChips.length > 0 && (
+      <div class="attr-toggles" role="group" aria-label="Filter map by special list">
+        {attributeChips.map(({ attr, count }) => (
+          <button
+            type="button"
+            class="key attr"
+            data-attr={attr.key}
+            aria-pressed="false"
+            title={attr.blurb}
+          >{attr.label} <span class="n">{count}</span></button>
+        ))}
+      </div>
+    )}
+    {cuisineOptions.length > 0 && (
+      <div class="food-filters">
+        <select id="cuisine-filter" aria-label="Filter restaurants by cuisine">
+          <option value="">Any cuisine</option>
+          {cuisineOptions.map((c) => <option value={c.toLowerCase()}>{c}</option>)}
+        </select>
+        <input
+          type="search"
+          id="dish-filter"
+          placeholder="Dish, e.g. “burger”…"
+          aria-label="Filter restaurants by dish"
+          title="Matches cuisines and real items from menus we've verified"
+          autocomplete="off"
+        />
+      </div>
+    )}
   </div>
-  <div class="legend">
-    {legend.map((item) => (
-      <span class="key"><i style={`background:${item.color}`}></i>{item.label}</span>
-    ))}
+
+  <div class="split">
+    <div class="map-pane">
+      <div
+        id="venue-map-canvas"
+        data-center={JSON.stringify(center)}
+        data-markers={JSON.stringify(markers)}
+        data-gmaps-key={GMAPS_API_KEY}
+        aria-label={`Map of verified dog-friendly places in ${city.name}`}
+      >
+        <p class="placeholder">Map loading…</p>
+      </div>
+      <button
+        type="button"
+        class="pane-toggle"
+        aria-controls="explorer-list"
+        aria-expanded="true"
+        title="Hide the list"
+      >›</button>
+    </div>
+
+    <aside class="list-pane" id="explorer-list" aria-label={`Verified places in ${city.name}`}>
+      <header class="list-head">
+        <div>
+          <h2>Dog-friendly places in {city.name}</h2>
+          <p class="results" aria-live="polite">
+            <strong id="explorer-count">{venues.length}</strong> results — every
+            dog policy verified against an official source
+          </p>
+        </div>
+        <a class="btn btn--clay plan-cta" href={`/${city.slug}/plan/`}>
+          Build itinerary<span class="plan-n" id="plan-count" hidden>0</span>
+        </a>
+      </header>
+      <ol class="cards">
+        {venues.map((venue, i) => (
+          <li data-idx={i} data-slug={venueSlug(venue)}>
+            <VenueCard venue={venue} />
+            <label class="pick">
+              <input type="checkbox" />
+              Add to itinerary
+            </label>
+          </li>
+        ))}
+      </ol>
+      <p class="empty" hidden>No places match the active filters.</p>
+      <p class="hint">
+        Each marker links to our verified dog policy and to the venue's
+        Google Maps listing, where its Google reviews live.
+      </p>
+    </aside>
   </div>
-  <p class="hint">
-    Tap a marker for our verified dog policy — or jump to Google Maps for
-    directions and Google reviews.
-  </p>
-</div>
+</section>
 
 <style>
-  .venue-map {
-    margin: 1.5rem 0;
+  .explorer {
+    border-block: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .toolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+    padding: 0.7rem 1.25rem;
+    background: var(--paper-raised);
+    border-bottom: 1px solid var(--line);
+  }
+  .toolbar-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.5rem;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+  }
+  .key {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.22rem 0.7rem;
+    background: none;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    transition: opacity 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+  .key:hover {
+    border-color: var(--moss);
+    background: color-mix(in srgb, var(--moss) 8%, transparent);
+  }
+  .key .n {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+    opacity: 0.8;
+  }
+  .legend .key[aria-pressed='false'] {
+    opacity: 0.45;
+  }
+  .legend .key[aria-pressed='false'] i {
+    background: transparent !important;
+    box-shadow: inset 0 0 0 2px currentColor;
+  }
+  .attr-toggles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.5rem;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    padding-left: 0.75rem;
+    border-left: 1px solid var(--line);
+  }
+  .attr[aria-pressed='true'] {
+    border-color: var(--moss);
+    background: color-mix(in srgb, var(--moss) 15%, transparent);
+    color: var(--ink);
+  }
+  .key i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .food-filters {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+  }
+  #cuisine-filter,
+  #dish-filter {
+    font: inherit;
+    font-size: 0.88rem;
+    padding: 0.35rem 0.8rem;
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    background: var(--paper);
+    color: var(--ink);
+  }
+  #dish-filter {
+    width: 11rem;
+  }
+  #cuisine-filter:focus,
+  #dish-filter:focus {
+    outline: 2px solid var(--moss);
+    outline-offset: 1px;
+  }
+  @media (max-width: 640px) {
+    .food-filters {
+      margin-left: 0;
+      flex: 1 1 100%;
+    }
+    #dish-filter {
+      flex: 1;
+      width: auto;
+    }
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    height: calc(100dvh - 7.5rem);
+    min-height: 540px;
+  }
+  .map-pane {
+    position: relative;
   }
   #venue-map-canvas {
-    height: 460px;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--line);
-    box-shadow: var(--shadow);
+    position: absolute;
+    inset: 0;
     background: color-mix(in srgb, var(--moss) 12%, var(--paper-raised));
     z-index: 1;
-    position: relative;
   }
   .placeholder {
     position: absolute;
@@ -88,30 +318,159 @@ const legend = [...new Map(venues.map((v) => {
     color: var(--ink-soft);
     margin: 0;
   }
-  .legend {
+  .list-pane {
+    overflow-y: auto;
+    padding: 1.1rem 1.25rem 1.5rem;
+    border-left: 1px solid var(--line);
+    background: var(--paper-raised);
+  }
+  .pane-toggle {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 1.6rem;
+    height: 3.4rem;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+    background: var(--paper-raised);
+    color: var(--ink-soft);
+    font-size: 1.15rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+  }
+  .pane-toggle:hover {
+    color: var(--ink);
+  }
+  .explorer.list-collapsed .split {
+    grid-template-columns: 1fr;
+  }
+  .explorer.list-collapsed .list-pane {
+    display: none;
+  }
+  .list-head {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1rem;
     flex-wrap: wrap;
-    gap: 0.4rem 1rem;
-    margin-top: 0.6rem;
-    font-size: 0.82rem;
+    margin-bottom: 0.9rem;
+  }
+  .list-head h2 {
+    font-size: 1.45rem;
+    margin: 0 0 0.15rem;
+  }
+  .plan-cta {
+    font-size: 0.88rem;
+    padding: 0.5rem 1.1rem;
+    white-space: nowrap;
+  }
+  .plan-n {
+    display: inline-block;
+    background: #fff;
+    color: var(--clay);
+    border-radius: 999px;
+    padding: 0 0.5rem;
+    margin-left: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  .results {
+    margin: 0;
+    font-size: 0.88rem;
     color: var(--ink-soft);
   }
-  .key {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
+  .results strong {
+    color: var(--ink);
   }
-  .key i {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    display: inline-block;
+  .cards {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 1rem;
+  }
+  .cards > li {
+    display: flex;
+    flex-direction: column;
+    scroll-margin-top: 0.5rem;
+  }
+  .cards > li[hidden] {
+    display: none;
+  }
+  .cards > li > :global(.venue-card) {
+    flex: 1;
+  }
+  .pick {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 0.45rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--pine);
+    cursor: pointer;
+    user-select: none;
+    width: fit-content;
+  }
+  .pick input {
+    accent-color: var(--pine);
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+    cursor: pointer;
+  }
+  .cards > li.picked > :global(.venue-card) {
+    outline: 2px solid var(--moss);
+  }
+  .cards > li.flash > :global(.venue-card) {
+    animation: card-flash 1.4s ease;
+  }
+  @keyframes card-flash {
+    0%,
+    60% {
+      border-color: var(--clay);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--clay) 30%, transparent);
+    }
+    100% {
+      border-color: var(--line);
+    }
+  }
+  .empty {
+    margin: 1.5rem 0 0;
+    color: var(--ink-soft);
   }
   .hint {
     font-size: 0.82rem;
     color: var(--ink-soft);
-    margin: 0.35rem 0 0;
+    margin: 1.1rem 0 0;
   }
+
+  @media (max-width: 900px) {
+    .split {
+      grid-template-columns: 1fr;
+      height: auto;
+      min-height: 0;
+    }
+    .map-pane {
+      height: 380px;
+    }
+    .list-pane {
+      overflow-y: visible;
+      border-left: none;
+      border-top: 1px solid var(--line);
+    }
+    .pane-toggle {
+      display: none;
+    }
+  }
+
   /* Popup styling to match the site */
   :global(.leaflet-popup-content-wrapper) {
     border-radius: 10px;
@@ -136,11 +495,6 @@ const legend = [...new Map(venues.map((v) => {
     gap: 0.9rem;
     font-size: 0.88rem;
   }
-  @media (max-width: 640px) {
-    #venue-map-canvas {
-      height: 380px;
-    }
-  }
 </style>
 
 <script>
@@ -150,11 +504,76 @@ const legend = [...new Map(venues.map((v) => {
     name: string;
     lat: number;
     lng: number;
+    categoryKey: string;
     category: string;
     color: string;
+    cuisines: string;
+    food: string;
+    attrs: string;
     path: string;
     gmaps: string;
   };
+
+  // Categories currently toggled off via the legend. The map initializes
+  // lazily, so the active map registers callbacks once its markers exist;
+  // legend clicks before that still filter the card list.
+  const hiddenCategories = new Set<string>();
+  // Special-list chips currently active — a venue must match every one.
+  const activeAttrs = new Set<string>();
+  let applyVisibility: (() => void) | null = null;
+  let focusMarker: ((idx: number, on: boolean) => void) | null = null;
+  let resizeMap: (() => void) | null = null;
+
+  const listPane = document.getElementById('explorer-list');
+  const countEl = document.getElementById('explorer-count');
+  const cardItems = Array.from(
+    listPane?.querySelectorAll<HTMLLIElement>('[data-idx]') ?? []
+  );
+  // Single source of per-venue filter data: the markers JSON on the map
+  // canvas. Card order mirrors marker order, so a card's index is its
+  // entry in this array.
+  const canvasEl = document.getElementById('venue-map-canvas') as HTMLElement | null;
+  const markersData: MarkerData[] = canvasEl ? JSON.parse(canvasEl.dataset.markers!) : [];
+  const emptyMsg = listPane?.querySelector<HTMLElement>('.empty');
+  const cuisineSelect = document.getElementById('cuisine-filter') as HTMLSelectElement | null;
+  const dishInput = document.getElementById('dish-filter') as HTMLInputElement | null;
+
+  // Cuisine/dish filter: an active food filter keeps only venues whose
+  // cuisine labels or verified menu items match — everything else hides.
+  function foodOk(cuisines: string, food: string): boolean {
+    const c = cuisineSelect?.value ?? '';
+    if (c && !cuisines.split('|').includes(c)) return false;
+    const q = dishInput?.value.trim().toLowerCase() ?? '';
+    if (q && !food.includes(q)) return false;
+    return true;
+  }
+
+  function isShown(m: MarkerData): boolean {
+    if (hiddenCategories.has(m.categoryKey)) return false;
+    const venueAttrs = m.attrs.split('|');
+    for (const a of activeAttrs) if (!venueAttrs.includes(a)) return false;
+    return foodOk(m.cuisines, m.food);
+  }
+
+  function updateList() {
+    let visible = 0;
+    cardItems.forEach((li, i) => {
+      const m = markersData[i];
+      const show = !m || isShown(m);
+      li.hidden = !show;
+      if (show) visible++;
+    });
+    if (countEl) countEl.textContent = String(visible);
+    if (emptyMsg) emptyMsg.hidden = visible > 0;
+  }
+
+  function scrollToCard(idx: number) {
+    const li = cardItems[idx];
+    if (!li || li.hidden) return;
+    li.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    li.classList.remove('flash');
+    requestAnimationFrame(() => li.classList.add('flash'));
+  }
 
   const esc2 = (s: string) =>
     s.replace(/[&<>"']/g, (c) =>
@@ -185,33 +604,49 @@ const legend = [...new Map(venues.map((v) => {
       fullscreenControl: true,
       gestureHandling: 'cooperative',
     });
+    const icon = (m: MarkerData, focused: boolean) => ({
+      path: maps.SymbolPath.CIRCLE,
+      scale: focused ? 12 : 9,
+      fillColor: m.color,
+      fillOpacity: 0.95,
+      strokeColor: '#ffffff',
+      strokeWeight: 2,
+    });
     const bounds = new maps.LatLngBounds();
     const info = new maps.InfoWindow();
-    for (const m of markers) {
+    const gmarkers = markers.map((m, i) => {
       const marker = new maps.Marker({
         map,
         position: { lat: m.lat, lng: m.lng },
         title: m.name,
-        icon: {
-          path: maps.SymbolPath.CIRCLE,
-          scale: 9,
-          fillColor: m.color,
-          fillOpacity: 0.95,
-          strokeColor: '#ffffff',
-          strokeWeight: 2,
-        },
+        icon: icon(m, false),
       });
       marker.addListener('click', () => {
         info.setContent(popupHtml(m));
         info.open({ map, anchor: marker });
+        scrollToCard(i);
       });
       bounds.extend({ lat: m.lat, lng: m.lng });
-    }
+      return marker;
+    });
     if (!bounds.isEmpty()) map.fitBounds(bounds, 48);
+    applyVisibility = () => {
+      info.close();
+      gmarkers.forEach((marker, i) => marker.setVisible(isShown(markers[i])));
+    };
+    focusMarker = (idx, on) => {
+      gmarkers[idx]?.setIcon(icon(markers[idx], on));
+      gmarkers[idx]?.setZIndex(on ? 1000 : null);
+    };
+    resizeMap = () => {
+      maps.event.trigger(map, 'resize');
+      if (!bounds.isEmpty()) map.fitBounds(bounds, 48);
+    };
+    applyVisibility();
   }
 
   async function initMap(el: HTMLElement) {
-    const markers = JSON.parse(el.dataset.markers!) as MarkerData[];
+    const markers = markersData;
 
     if (el.dataset.gmapsKey) {
       try {
@@ -240,13 +675,8 @@ const legend = [...new Map(venues.map((v) => {
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
 
-    const esc = (s: string) =>
-      s.replace(/[&<>"']/g, (c) =>
-        ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!
-      );
-
     const bounds = L.latLngBounds([]);
-    for (const m of markers) {
+    const lmarkers = markers.map((m, i) => {
       const marker = L.circleMarker([m.lat, m.lng], {
         radius: 9,
         color: '#ffffff',
@@ -254,33 +684,163 @@ const legend = [...new Map(venues.map((v) => {
         fillColor: m.color,
         fillOpacity: 0.95,
       }).addTo(map);
-      marker.bindPopup(
-        `<div class="venue-popup">
-          <h4>${esc(m.name)}</h4>
-          <p class="cat">${esc(m.category)}</p>
-          <div class="links">
-            <a href="${m.path}">Our verified policy</a>
-            <a href="${m.gmaps}" target="_blank" rel="noopener nofollow">Google reviews ↗</a>
-          </div>
-        </div>`
-      );
+      marker.bindPopup(popupHtml(m));
       marker.bindTooltip(m.name, { direction: 'top', offset: [0, -8] });
+      marker.on('click', () => scrollToCard(i));
       bounds.extend([m.lat, m.lng]);
-    }
+      return marker;
+    });
     if (bounds.isValid()) map.fitBounds(bounds.pad(0.15));
+    applyVisibility = () => {
+      map.closePopup();
+      lmarkers.forEach((marker, i) => {
+        if (!isShown(markers[i])) {
+          map.removeLayer(marker);
+        } else if (!map.hasLayer(marker)) {
+          marker.addTo(map);
+        }
+      });
+    };
+    focusMarker = (idx, on) => {
+      const marker = lmarkers[idx];
+      if (!marker) return;
+      marker.setStyle({ radius: on ? 12 : 9 });
+      if (on) marker.bringToFront();
+    };
+    resizeMap = () => {
+      map.invalidateSize();
+      if (bounds.isValid()) map.fitBounds(bounds.pad(0.15));
+    };
+    applyVisibility();
   }
 
-  const el = document.getElementById('venue-map-canvas');
-  if (el) {
+  if (canvasEl) {
     const io = new IntersectionObserver(
       (entries) => {
         if (entries.some((e) => e.isIntersecting)) {
           io.disconnect();
-          initMap(el);
+          initMap(canvasEl);
         }
       },
       { rootMargin: '600px' }
     );
-    io.observe(el);
+    io.observe(canvasEl);
   }
+
+  // Pop-out list pane: the divider tab collapses the card list so the map
+  // takes the full width, then restores it. The map re-fits after resize.
+  const explorerRoot = document.getElementById('explore');
+  const paneToggle = document.querySelector<HTMLButtonElement>('.explorer .pane-toggle');
+  paneToggle?.addEventListener('click', () => {
+    const collapsed = explorerRoot?.classList.toggle('list-collapsed') ?? false;
+    paneToggle.setAttribute('aria-expanded', String(!collapsed));
+    paneToggle.title = collapsed ? 'Show the list' : 'Hide the list';
+    paneToggle.textContent = collapsed ? '‹' : '›';
+    requestAnimationFrame(() => resizeMap?.());
+  });
+
+  // Legend chips toggle their category's markers and cards on/off.
+  document
+    .querySelectorAll<HTMLButtonElement>('.explorer .legend [data-category]')
+    .forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.category!;
+        const nowHidden = !hiddenCategories.has(key);
+        if (nowHidden) hiddenCategories.add(key);
+        else hiddenCategories.delete(key);
+        btn.setAttribute('aria-pressed', String(!nowHidden));
+        updateList();
+        applyVisibility?.();
+      });
+    });
+
+  // Special-list chips narrow to venues matching every active attribute.
+  document
+    .querySelectorAll<HTMLButtonElement>('.explorer .attr-toggles [data-attr]')
+    .forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.attr!;
+        const nowActive = !activeAttrs.has(key);
+        if (nowActive) activeAttrs.add(key);
+        else activeAttrs.delete(key);
+        btn.setAttribute('aria-pressed', String(nowActive));
+        updateList();
+        applyVisibility?.();
+      });
+    });
+
+  // --- Itinerary picks: checking a card writes the same localStorage plan
+  // the /plan/ page reads ({slug, day}[] under `plan:<city>`), so the
+  // planner opens with these selections already in place. New picks join
+  // the plan's current last day, matching the planner's own Add behavior.
+  type PlanItem = { slug: string; day: number };
+  const explorerEl = document.getElementById('explore');
+  const planStoreKey = `plan:${explorerEl?.dataset.city ?? ''}`;
+  const planCount = document.getElementById('plan-count');
+
+  function loadPlan(): PlanItem[] {
+    try {
+      const items = JSON.parse(localStorage.getItem(planStoreKey) ?? '[]');
+      return Array.isArray(items) ? items : [];
+    } catch {
+      return [];
+    }
+  }
+
+  function savePlan(plan: PlanItem[]) {
+    try {
+      localStorage.setItem(planStoreKey, JSON.stringify(plan));
+    } catch {
+      // storage unavailable (private mode) — picks just won't persist
+    }
+  }
+
+  function refreshPlanUI() {
+    const plan = loadPlan();
+    for (const li of cardItems) {
+      const picked = plan.some((i) => i.slug === li.dataset.slug);
+      li.classList.toggle('picked', picked);
+      const box = li.querySelector<HTMLInputElement>('.pick input');
+      if (box) box.checked = picked;
+    }
+    if (planCount) {
+      planCount.textContent = String(plan.length);
+      planCount.hidden = plan.length === 0;
+    }
+  }
+
+  cardItems.forEach((li) => {
+    li.querySelector<HTMLInputElement>('.pick input')?.addEventListener('change', (e) => {
+      const slug = li.dataset.slug!;
+      const plan = loadPlan();
+      const existing = plan.findIndex((i) => i.slug === slug);
+      if ((e.target as HTMLInputElement).checked) {
+        if (existing < 0) plan.push({ slug, day: plan.at(-1)?.day ?? 1 });
+      } else if (existing >= 0) {
+        plan.splice(existing, 1);
+      }
+      savePlan(plan);
+      refreshPlanUI();
+    });
+  });
+
+  refreshPlanUI();
+  // Re-read picks when the page is restored from bfcache (e.g. back from
+  // the planner, where the same plan may have changed).
+  window.addEventListener('pageshow', refreshPlanUI);
+
+  cuisineSelect?.addEventListener('change', () => {
+    updateList();
+    applyVisibility?.();
+  });
+  dishInput?.addEventListener('input', () => {
+    updateList();
+    applyVisibility?.();
+  });
+
+  // Hovering a card spotlights its pin, Zillow-style.
+  cardItems.forEach((li, i) => {
+    li.addEventListener('mouseenter', () => focusMarker?.(i, true));
+    li.addEventListener('mouseleave', () => focusMarker?.(i, false));
+  });
 </script>

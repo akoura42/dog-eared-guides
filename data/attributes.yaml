@@ -29,3 +29,10 @@ attributes:
     rule:
       field: tags
       includes: winter-friendly
+  - key: emergency-vet
+    slug: emergency-vets
+    label: Emergency Vets
+    blurb: Clinics that take emergencies, with hours and after-hours referrals verified.
+    rule:
+      field: tags
+      includes: emergency-vet

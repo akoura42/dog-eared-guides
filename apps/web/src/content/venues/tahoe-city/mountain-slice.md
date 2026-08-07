@@ -2,6 +2,8 @@
 name: Mountain Slice Pizzeria and Creamery
 city: tahoe-city
 category: eat
+cuisines:
+  - Pizza
 neighborhood: Downtown
 address: 690 N Lake Blvd, Tahoe City, CA 96145
 lat: 39.17269

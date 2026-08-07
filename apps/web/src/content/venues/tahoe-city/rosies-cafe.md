@@ -2,6 +2,8 @@
 name: Rosie's Cafe
 city: tahoe-city
 category: eat
+cuisines:
+  - Diner
 neighborhood: Downtown
 address: 571 N Lake Blvd, Tahoe City, CA 96145
 lat: 39.17176
