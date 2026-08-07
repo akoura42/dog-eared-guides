@@ -1,18 +1,12 @@
 ---
 import Base from '~/layouts/Base.astro';
 import Breadcrumbs from '~/components/Breadcrumbs.astro';
-import VenueCard from '~/components/VenueCard.astro';
 import Photo from '~/components/Photo.astro';
+import DogEaredIndex from '~/components/DogEaredIndex.astro';
 import CityVenueMap from '~/components/CityVenueMap.astro';
 import AdSlot from '~/components/AdSlot.astro';
-import { getCities, getCategoryByKey, getAttributes } from '~/lib/config';
-import {
-  venuesForCity,
-  guidesForCity,
-  guidePath,
-  matchesAttribute,
-  MIN_HUB_VENUES,
-} from '~/lib/venues';
+import { getCities } from '~/lib/config';
+import { venuesForCity } from '~/lib/venues';
 import { breadcrumbJsonLd } from '~/lib/jsonld';
 import { BRAND_NAME } from '~/lib/site';
 
@@ -24,25 +18,6 @@ export async function getStaticPaths() {
 
 const { city } = Astro.props;
 const venues = await venuesForCity(city.slug);
-const guides = await guidesForCity(city.slug);
-
-const categoryHubs = city.categories
-  .map((key) => ({
-    category: getCategoryByKey(key),
-    venues: venues.filter((v) => v.data.category === key),
-  }))
-  .filter((c) => c.venues.length > 0);
-
-const attributeHubs = getAttributes()
-  .map((attr) => ({ attr, count: venues.filter((v) => matchesAttribute(v, attr)).length }))
-  .filter((a) => a.count >= MIN_HUB_VENUES);
-
-const recentVenues = [...venues]
-  .sort(
-    (a, b) =>
-      b.data.verification.last_verified.getTime() - a.data.verification.last_verified.getTime()
-  )
-  .slice(0, 6);
 
 const crumbs = [
   { name: 'Home', url: '/' },
@@ -60,18 +35,24 @@ const crumbs = [
     <Breadcrumbs crumbs={crumbs} />
   </div>
 
-  <section class="hero">
-    <div class:list={['wrap', { 'hero-split': city.hero_image }]}>
+  <header class="page-head">
+    <div class="wrap head-row">
       <div>
         <p class="eyebrow">{city.name}, {city.state}</p>
         <h1>{city.hero.headline}</h1>
+      </div>
+      {city.regulations.length > 0 && (
+        <a class="rules-link" href="#dog-rules">Local dog rules ↓</a>
+      )}
+    </div>
+  </header>
+
+  {venues.length > 0 && <CityVenueMap city={city} venues={venues} />}
+
+  <section class="band">
+    <div class:list={['wrap', { 'hero-split': city.hero_image }]}>
+      <div>
         <p class="lede">{city.intro}</p>
-        {venues.length > 0 && (
-          <p class="hero-cta">
-            <a class="btn btn--clay" href={`/${city.slug}/plan/`}>Build your itinerary</a>
-            <a class="btn btn--ghost" href="#venue-map-canvas">See the map</a>
-          </p>
-        )}
       </div>
       {city.hero_image && (
         <Photo
@@ -80,13 +61,15 @@ const crumbs = [
           credit={city.hero_image_credit}
           creditUrl={city.hero_image_credit_url}
           width={720}
-          loading="eager"
+          loading="lazy"
         />
       )}
     </div>
   </section>
 
-  {categoryHubs.length === 0 && (
+  <DogEaredIndex city={city} />
+
+  {venues.length === 0 && (
     <section class="band">
       <div class="wrap">
         <p class="building">
@@ -99,50 +82,12 @@ const crumbs = [
     </section>
   )}
 
-  {categoryHubs.length > 0 && (
-  <section class="band">
-    <div class="wrap">
-      <h2>Browse by category</h2>
-      <ul class="card-grid">
-        {categoryHubs.map(({ category, venues: catVenues }) => (
-          <li>
-            {catVenues.length > 0 ? (
-              <a class="cat-card" href={`/${city.slug}/${category.slug}/`}>
-                <span class="cat-name">{category.label}</span>
-                <span class="cat-blurb">{category.blurb}</span>
-                <span class="cat-count">{catVenues.length} verified {catVenues.length === 1 ? 'listing' : 'listings'} →</span>
-              </a>
-            ) : (
-              <div class="cat-card cat-card--flat">
-                <span class="cat-name">{category.label}</span>
-                <span class="cat-blurb">{category.blurb}</span>
-                <span class="cat-count">{catVenues.length} verified {catVenues.length === 1 ? 'listing' : 'listings'} so far</span>
-              </div>
-            )}
-          </li>
-        ))}
-      </ul>
-      {attributeHubs.length > 0 && (
-        <p class="attr-links">
-          Special lists:
-          {attributeHubs.map(({ attr }) => (
-            <a class="pill" href={`/${city.slug}/${attr.slug}/`}>{attr.label}</a>
-          ))}
-        </p>
-      )}
-
-      <h2 class="map-head">On the map</h2>
-      <CityVenueMap city={city} venues={venues} />
-    </div>
-  </section>
-  )}
-
   <AdSlot placement="below-hero" />
 
   {city.regulations.length > 0 && (
-    <section class="band band--tint">
+    <section class="band band--tint" id="dog-rules">
       <div class="wrap">
-        <h2>Local dog rules, in plain English</h2>
+        <h2>Local dog rules</h2>
         <ul class="reg-list">
           {city.regulations.map((reg) => (
             <li>
@@ -166,46 +111,11 @@ const crumbs = [
     </section>
   )}
 
-  {guides.length > 0 && (
-    <section class="band">
-      <div class="wrap">
-        <h2>Guides &amp; itineraries</h2>
-        {venues.length > 0 && (
-          <p class="plan-cta">
-            <a class="btn btn--clay" href={`/${city.slug}/plan/`}>Build your own itinerary</a>
-            <span>Pick from the verified venues, organize by day, share the link.</span>
-          </p>
-        )}
-        <ul class="guide-list">
-          {guides.map((guide) => (
-            <li>
-              <a href={guidePath(guide)}>{guide.data.title}</a>
-              <p>{guide.data.description}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  )}
-
-  {recentVenues.length > 0 && (
-    <section class="band">
-      <div class="wrap">
-        <h2>Recently verified</h2>
-        <ul class="card-grid">
-          {recentVenues.map((venue) => (
-            <li><VenueCard venue={venue} /></li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  )}
-
   {city.resources.length > 0 && (
     <section class="band band--tint">
       <div class="wrap">
         <h2>Official resources</h2>
-        <p class="res-lede">The primary sources we verify against — useful for checking current conditions yourself.</p>
+        <p class="res-lede">The primary sources we verify against.</p>
         <ul class="res-list">
           {city.resources.map((res) => (
             <li>
@@ -220,20 +130,37 @@ const crumbs = [
 </Base>
 
 <style>
-  .hero {
-    padding: 3rem 0 1rem;
+  .page-head {
+    padding: 0.25rem 0 0.9rem;
+  }
+  .page-head h1 {
+    font-size: clamp(1.6rem, 3.5vw, 2.1rem);
+    margin: 0;
+  }
+  .page-head .eyebrow {
+    margin-bottom: 0.15rem;
+  }
+  .head-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .rules-link {
+    font-size: 0.9rem;
+    font-weight: 650;
+    white-space: nowrap;
+    margin-bottom: 0.35rem;
+  }
+  #dog-rules {
+    scroll-margin-top: 4.5rem;
   }
   .hero-split {
     display: grid;
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
     gap: 2.5rem;
     align-items: center;
-  }
-  .hero-cta {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    margin-top: 1.5rem;
   }
   @media (max-width: 860px) {
     .hero-split {
@@ -278,66 +205,6 @@ const crumbs = [
     color: var(--ink-soft);
     max-width: 42rem;
   }
-  .cat-card {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    height: 100%;
-    background: var(--paper-raised);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow);
-    padding: 1.2rem 1.3rem;
-    text-decoration: none;
-  }
-  a.cat-card:hover {
-    transform: translateY(-2px);
-  }
-  .cat-card--flat {
-    opacity: 0.75;
-    box-shadow: none;
-  }
-  .cat-name {
-    font-family: var(--font-display);
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--pine-deep);
-  }
-  .cat-blurb {
-    font-size: 0.9rem;
-    color: var(--ink-soft);
-    flex: 1;
-  }
-  .cat-count {
-    font-size: 0.85rem;
-    font-weight: 650;
-    color: var(--clay);
-  }
-  .attr-links {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-    flex-wrap: wrap;
-    font-size: 0.9rem;
-    color: var(--ink-soft);
-  }
-  .map-head {
-    margin-top: 2.5rem;
-  }
-  .plan-cta {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin: 0 0 1.5rem;
-  }
-  .plan-cta span {
-    font-size: 0.9rem;
-    color: var(--ink-soft);
-  }
-  .attr-links .pill {
-    text-decoration: none;
-  }
   .reg-list {
     list-style: none;
     padding: 0;
@@ -370,24 +237,5 @@ const crumbs = [
     margin: 0;
     padding-left: 1.2rem;
     font-size: 0.95rem;
-  }
-  .guide-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 1rem;
-    max-width: 44rem;
-  }
-  .guide-list a {
-    font-family: var(--font-display);
-    font-size: 1.2rem;
-    font-weight: 600;
-    text-decoration: none;
-  }
-  .guide-list p {
-    font-size: 0.93rem;
-    color: var(--ink-soft);
-    margin: 0.15rem 0 0;
   }
 </style>

@@ -1,0 +1,325 @@
+{
+  "version": "index-v1",
+  "tagline": "This counts what exists; it doesn't know your dog.",
+  "publish_gate": 7,
+  "pillars": [
+    "Hospitality",
+    "Access",
+    "Rules",
+    "Practical"
+  ],
+  "components": [
+    {
+      "key": "patio_share",
+      "label": "Patio share",
+      "pillar": "Hospitality",
+      "weight": 15,
+      "kind": "share",
+      "unit": "% of food/drink venues",
+      "bands": [
+        {
+          "label": "≥ 50%",
+          "score": 100
+        },
+        {
+          "label": "35–49%",
+          "score": 80
+        },
+        {
+          "label": "25–34%",
+          "score": 60
+        },
+        {
+          "label": "15–24%",
+          "score": 40
+        },
+        {
+          "label": "5–14%",
+          "score": 20
+        },
+        {
+          "label": "< 5%",
+          "score": 0
+        }
+      ],
+      "auto": true
+    },
+    {
+      "key": "indoor_welcome",
+      "label": "Indoor welcome",
+      "pillar": "Hospitality",
+      "weight": 5,
+      "kind": "share",
+      "unit": "% of retail/taproom venues",
+      "bands": [
+        {
+          "label": "≥ 25%",
+          "score": 100
+        },
+        {
+          "label": "15–24%",
+          "score": 75
+        },
+        {
+          "label": "8–14%",
+          "score": 50
+        },
+        {
+          "label": "3–7%",
+          "score": 25
+        },
+        {
+          "label": "< 3%",
+          "score": 0
+        }
+      ],
+      "auto": true
+    },
+    {
+      "key": "lodging_share",
+      "label": "Lodging share",
+      "pillar": "Hospitality",
+      "weight": 10,
+      "kind": "share",
+      "unit": "% of lodging properties",
+      "bands": [
+        {
+          "label": "≥ 60%",
+          "score": 100
+        },
+        {
+          "label": "45–59%",
+          "score": 80
+        },
+        {
+          "label": "30–44%",
+          "score": 60
+        },
+        {
+          "label": "15–29%",
+          "score": 40
+        },
+        {
+          "label": "5–14%",
+          "score": 20
+        },
+        {
+          "label": "< 5%",
+          "score": 0
+        }
+      ],
+      "auto": true
+    },
+    {
+      "key": "water_access",
+      "label": "Water access",
+      "pillar": "Access",
+      "weight": 15,
+      "kind": "condition",
+      "unit": "legal dog water-entry points, 15-min isochrone",
+      "bands": [
+        {
+          "label": "≥ 3 points, year-round",
+          "score": 100
+        },
+        {
+          "label": "≥ 3 seasonal, or 2 year-round",
+          "score": 80
+        },
+        {
+          "label": "2 seasonal, or 1 year-round",
+          "score": 60
+        },
+        {
+          "label": "1 seasonal",
+          "score": 40
+        },
+        {
+          "label": "Legal wading/bank access only (no swim point)",
+          "score": 20
+        },
+        {
+          "label": "None",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "key": "trail_access",
+      "label": "Trail access",
+      "pillar": "Access",
+      "weight": 12,
+      "kind": "number",
+      "unit": "dog-allowed trail miles, 15-min isochrone",
+      "bands": [
+        {
+          "label": "≥ 100",
+          "score": 100
+        },
+        {
+          "label": "50–99",
+          "score": 85
+        },
+        {
+          "label": "25–49",
+          "score": 70
+        },
+        {
+          "label": "10–24",
+          "score": 50
+        },
+        {
+          "label": "3–9",
+          "score": 30
+        },
+        {
+          "label": "1–2",
+          "score": 15
+        },
+        {
+          "label": "< 1",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "key": "off_leash",
+      "label": "Off-leash space",
+      "pillar": "Access",
+      "weight": 8,
+      "kind": "condition",
+      "unit": "designated off-leash acreage",
+      "bands": [
+        {
+          "label": "≥ 20 acres, or any designated off-leash beach",
+          "score": 100
+        },
+        {
+          "label": "5–19.9 acres",
+          "score": 75
+        },
+        {
+          "label": "1–4.9 acres",
+          "score": 50
+        },
+        {
+          "label": "Fenced run under 1 acre",
+          "score": 25
+        },
+        {
+          "label": "None",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "key": "ordinance",
+      "label": "Ordinance regime",
+      "pillar": "Rules",
+      "weight": 15,
+      "kind": "rubric",
+      "unit": "points (base 50, floor 0, cap 100)",
+      "modifiers": [
+        {
+          "key": "patio-permitted",
+          "label": "Patio dining explicitly permitted by state or local rule",
+          "points": 20
+        },
+        {
+          "key": "voice-control-areas",
+          "label": "Any voice-control / off-leash-under-command areas in code",
+          "points": 15
+        },
+        {
+          "key": "shoreline-open",
+          "label": "No shoreline dog ban at the primary shoreline, or a designated dog beach exists",
+          "points": 15
+        },
+        {
+          "key": "shoreline-seasonal-ban",
+          "label": "Seasonal ban at the primary shoreline",
+          "points": -10
+        },
+        {
+          "key": "shoreline-yearround-ban",
+          "label": "Year-round ban at the primary shoreline",
+          "points": -25
+        },
+        {
+          "key": "bsl",
+          "label": "Breed-specific legislation in force",
+          "points": -40
+        }
+      ],
+      "base": 50
+    },
+    {
+      "key": "emergency_vet",
+      "label": "Emergency vet",
+      "pillar": "Practical",
+      "weight": 10,
+      "kind": "number-max",
+      "unit": "minutes to nearest 24/7 or after-hours ER vet",
+      "bands": [
+        {
+          "label": "≤ 15",
+          "score": 100
+        },
+        {
+          "label": "16–30",
+          "score": 80
+        },
+        {
+          "label": "31–45",
+          "score": 60
+        },
+        {
+          "label": "46–60",
+          "score": 40
+        },
+        {
+          "label": "61–90",
+          "score": 20
+        },
+        {
+          "label": "> 90",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "key": "heat_risk",
+      "label": "Heat risk",
+      "pillar": "Practical",
+      "weight": 10,
+      "kind": "number-max",
+      "unit": "days/year with normal high ≥ 90°F (NOAA 1991–2020)",
+      "bands": [
+        {
+          "label": "≤ 5",
+          "score": 100
+        },
+        {
+          "label": "6–15",
+          "score": 85
+        },
+        {
+          "label": "16–30",
+          "score": 70
+        },
+        {
+          "label": "31–60",
+          "score": 50
+        },
+        {
+          "label": "61–100",
+          "score": 30
+        },
+        {
+          "label": "> 100",
+          "score": 10
+        }
+      ]
+    }
+  ]
+}

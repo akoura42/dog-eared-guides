@@ -1,0 +1,203 @@
+---
+// Public methodology page for the Dog-Eared Index (spec §6.4). The band
+// tables render from data/index-bands.json, which pipeline/index/compute.py
+// exports from the same definitions it scores with — no copy drift.
+import Base from '~/layouts/Base.astro';
+import Breadcrumbs from '~/components/Breadcrumbs.astro';
+import { getIndexBands, getPublishedTownIndexes } from '~/lib/dogEaredIndex';
+import { BRAND_NAME } from '~/lib/site';
+
+const bands = getIndexBands();
+const published = getPublishedTownIndexes();
+
+const pillarWeights = bands.pillars.map((pillar) => ({
+  pillar,
+  weight: bands.components
+    .filter((c) => c.pillar === pillar)
+    .reduce((sum, c) => sum + c.weight, 0),
+}));
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'The Dog-Eared Index', url: '/dog-eared-index/' },
+];
+---
+
+<Base
+  title={`The Dog-Eared Index — Methodology | ${BRAND_NAME}`}
+  description="How the town-level Dog-Eared Index is computed: nine components, absolute bands, every value verified against a citable source."
+>
+  <div class="wrap">
+    <Breadcrumbs crumbs={crumbs} />
+  </div>
+
+  <section class="hero">
+    <div class="wrap">
+      <h1>The Dog-Eared Index</h1>
+      <p class="lede tagline">“{bands.tagline}”</p>
+      <p class="lede">
+        The index is arithmetic over verified conditions. Every component is a
+        countable fact with a citable source: a share of venues, a count of
+        legal water-entry points, a drive time, a code section. No component is
+        opinion, review sentiment, or a venue score — venues never receive a
+        scalar on this site.
+      </p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap prose">
+      <h2>Structure</h2>
+      <p>
+        Nine components in four pillars. Each component scores 0–100 against
+        the absolute bands below — never percentiles, so a score means the same
+        thing for the first town scored and the hundredth. The composite is the
+        weighted sum, displayed as an integer out of 100.
+      </p>
+      <table class="weights">
+        <thead><tr><th>Pillar</th><th>Component</th><th>Weight</th></tr></thead>
+        <tbody>
+          {bands.components.map((c) => (
+            <tr>
+              <td>{c.pillar}</td>
+              <td>{c.label}</td>
+              <td>{c.weight}</td>
+            </tr>
+          ))}
+          <tr class="totals">
+            <td>{pillarWeights.map(({ pillar, weight }) => `${pillar} ${weight}`).join(' · ')}</td>
+            <td>Total</td>
+            <td>{pillarWeights.reduce((s, p) => s + p.weight, 0)}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        A town's composite publishes only when at least {bands.publish_gate} of
+        9 components carry verified data. At 7–8, weights renormalize over the
+        available components and the score is labeled provisional. Missing data
+        stays missing — nothing is imputed.
+      </p>
+    </div>
+  </section>
+
+  <section class="band band--tint">
+    <div class="wrap prose">
+      <h2>Components and bands</h2>
+      {bands.components.map((c) => (
+        <div class="component">
+          <h3>{c.label} <span class="w">weight {c.weight}</span></h3>
+          <p class="unit">
+            Measures: {c.unit}.
+            {c.auto && ' Computed live from published venue records on every change — never hand-entered.'}
+          </p>
+          {c.kind === 'rubric' ? (
+            <table>
+              <thead><tr><th>Modifier</th><th>Points</th></tr></thead>
+              <tbody>
+                <tr><td>Base</td><td>{c.base}</td></tr>
+                {c.modifiers!.map((m) => (
+                  <tr><td>{m.label}</td><td>{m.points > 0 ? `+${m.points}` : m.points}</td></tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <table>
+              <thead><tr><th>Value</th><th>Score</th></tr></thead>
+              <tbody>
+                {c.bands!.map((b) => (
+                  <tr><td>{b.label}</td><td>{b.score}</td></tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap prose">
+      <h2>Excluded on principle</h2>
+      <p>
+        Review sentiment, staff friendliness, venue quality, fee levels,
+        "vibe," anything scraped without a citable source, and any venue-level
+        scalar. A future component enters the index only if it can be phrased
+        as "count of X per published rule Y."
+      </p>
+
+      <h2>Independence</h2>
+      <p>
+        Advertising and affiliate relationships exist at the venue layer of
+        this site. No index component measures venues individually, so no
+        venue relationship can move a town's score.
+      </p>
+
+      <h2>Versioning</h2>
+      <p>
+        Bands and weights are frozen as <code>{bands.version}</code>. Any
+        change bumps the version and every published town recomputes, so
+        cross-town comparisons are always same-version.
+      </p>
+      <h3>Changelog</h3>
+      <ul>
+        <li><code>index-v1</code> — initial bands and weights.</li>
+      </ul>
+
+      <h2>Data</h2>
+      <p>
+        {published.length === 0
+          ? 'No town has reached the publish gate yet. '
+          : `${published.length} ${published.length === 1 ? 'town has' : 'towns have'} a published index. `}
+        Component values for every published town:
+        <a href="/dog-eared-index.csv">dog-eared-index.csv</a>
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding: 2.5rem 0 1.5rem;
+  }
+  .lede {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 44rem;
+  }
+  .tagline {
+    font-style: italic;
+    color: var(--ink);
+  }
+  table {
+    border-collapse: collapse;
+    margin: 0.75rem 0 1.25rem;
+    font-size: 0.92rem;
+    min-width: 20rem;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 0.4rem 1rem 0.4rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  th {
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .component h3 {
+    margin-bottom: 0.1rem;
+  }
+  .component .w {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--clay);
+    margin-left: 0.4rem;
+  }
+  .unit {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    margin-top: 0;
+  }
+</style>
