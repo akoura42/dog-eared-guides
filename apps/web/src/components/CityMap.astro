@@ -92,7 +92,13 @@ const allPins = [
 
 const stateOptions = [...new Map(
   [...cities, ...upcoming].map((p) => [p.state_code, p.state])
-).entries()].sort(([, a], [, b]) => a.localeCompare(b));
+).entries()]
+  .map(([code, name]) => ({
+    code,
+    name,
+    count: allPins.filter((p) => p.state === code).length,
+  }))
+  .sort((a, b) => a.name.localeCompare(b.name));
 ---
 
 <div class="city-map">
@@ -104,18 +110,27 @@ const stateOptions = [...new Map(
       aria-label="Search towns on the map"
       autocomplete="off"
     />
-    <select id="map-state" aria-label="Filter by state">
-      <option value="">All states</option>
-      {stateOptions.map(([code, name]) => <option value={code}>{name}</option>)}
-    </select>
-    <div class="pin-toggles" role="group" aria-label="Filter map pins by type">
-      <button type="button" class="chip" data-kind="live" aria-pressed="true">
-        <i class="live"></i>Live guides <span class="n">{cities.length}</span>
-      </button>
-      <button type="button" class="chip" data-kind="soon" aria-pressed="true">
-        <i class="soon"></i>Coming soon <span class="n">{upcoming.length}</span>
-      </button>
-    </div>
+    <details class="fmenu" id="state-menu">
+      <summary>State <span class="badge" hidden></span></summary>
+      <div class="panel state-list" role="group" aria-label="Filter by state">
+        {stateOptions.map((s) => (
+          <button type="button" class="chip st" data-state-opt={s.code} aria-pressed="false">
+            {s.name} <span class="n">{s.count}</span>
+          </button>
+        ))}
+      </div>
+    </details>
+    <details class="fmenu" id="pins-menu">
+      <summary>Pins <span class="badge" hidden></span></summary>
+      <div class="panel pin-toggles" role="group" aria-label="Filter map pins by type">
+        <button type="button" class="chip" data-kind="live" aria-pressed="true">
+          <i class="live"></i>Live guides <span class="n">{cities.length}</span>
+        </button>
+        <button type="button" class="chip" data-kind="soon" aria-pressed="true">
+          <i class="soon"></i>Coming soon <span class="n">{upcoming.length}</span>
+        </button>
+      </div>
+    </details>
     <p class="map-count" aria-live="polite"><span id="map-count">{allPins.length}</span> shown</p>
   </div>
 
@@ -202,8 +217,7 @@ const stateOptions = [...new Map(
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     border-bottom: none;
   }
-  #map-search,
-  #map-state {
+  #map-search {
     font: inherit;
     font-size: 0.92rem;
     padding: 0.45rem 0.9rem;
@@ -211,19 +225,78 @@ const stateOptions = [...new Map(
     border-radius: 999px;
     background: var(--paper);
     color: var(--ink);
-  }
-  #map-search {
     flex: 1 1 12rem;
     min-width: 10rem;
   }
-  #map-search:focus,
-  #map-state:focus {
+  #map-search:focus {
     outline: 2px solid var(--moss);
     outline-offset: 1px;
   }
-  .pin-toggles {
-    display: flex;
+  /* Dropdown filter menus, matching the explorer toolbar's idiom. */
+  .fmenu {
+    position: relative;
+  }
+  .fmenu summary {
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
     gap: 0.4rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    background: none;
+    cursor: pointer;
+    user-select: none;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .fmenu summary::-webkit-details-marker {
+    display: none;
+  }
+  .fmenu summary::after {
+    content: '▾';
+    font-size: 0.7em;
+    opacity: 0.7;
+  }
+  .fmenu summary:hover,
+  .fmenu[open] summary {
+    border-color: var(--moss);
+    background: color-mix(in srgb, var(--moss) 8%, transparent);
+    color: var(--ink);
+  }
+  .fmenu .badge {
+    background: var(--moss);
+    color: #fff;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0 0.45rem;
+    line-height: 1.5;
+  }
+  .fmenu .panel {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    left: 0;
+    z-index: 40;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.35rem;
+    min-width: 13rem;
+    max-height: 20rem;
+    overflow-y: auto;
+    padding: 0.6rem;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+  }
+  .fmenu .panel .chip {
+    border-radius: 8px;
+  }
+  .fmenu .panel .chip .n {
+    margin-left: auto;
   }
   .chip {
     display: inline-flex;
@@ -261,12 +334,19 @@ const stateOptions = [...new Map(
     background: var(--moss);
     opacity: 0.6;
   }
-  .chip[aria-pressed='false'] {
+  /* Pin chips default ON — pressed-off fades them. State chips default
+     OFF (radio-style) — pressed-on highlights instead. */
+  .pin-toggles .chip[aria-pressed='false'] {
     opacity: 0.45;
   }
-  .chip[aria-pressed='false'] i {
+  .pin-toggles .chip[aria-pressed='false'] i {
     background: transparent;
     box-shadow: inset 0 0 0 2px currentColor;
+  }
+  .st[aria-pressed='true'] {
+    border-color: var(--moss);
+    background: color-mix(in srgb, var(--moss) 15%, transparent);
+    color: var(--ink);
   }
   .map-count {
     margin: 0 0 0 auto;
@@ -367,17 +447,17 @@ const stateOptions = [...new Map(
   type PinData = { kind: string; search: string; state: string };
 
   const searchInput = document.getElementById('map-search') as HTMLInputElement | null;
-  const stateSelect = document.getElementById('map-state') as HTMLSelectElement | null;
   const countEl = document.getElementById('map-count');
   const filterBar = document.querySelector<HTMLElement>('.map-filters');
   const allPins: PinData[] = filterBar ? JSON.parse(filterBar.dataset.pins!) : [];
   const kinds: Record<string, boolean> = { live: true, soon: true };
+  // Radio-style state filter: '' means all states.
+  let activeState = '';
   let googleApply: (() => void) | null = null;
 
   function matches(pin: PinData): boolean {
     if (!kinds[pin.kind]) return false;
-    const st = stateSelect?.value ?? '';
-    if (st && pin.state !== st) return false;
+    if (activeState && pin.state !== activeState) return false;
     const q = searchInput?.value.trim().toLowerCase() ?? '';
     if (q && !pin.search.includes(q)) return false;
     return true;
@@ -396,10 +476,39 @@ const stateOptions = [...new Map(
     });
     googleApply?.();
     if (countEl) countEl.textContent = String(allPins.filter(matches).length);
+    updateMenuBadges();
+  }
+
+  // Menu badges: the State badge shows the selected state code; the Pins
+  // badge shows how many pin types are toggled off.
+  const stateMenu = document.getElementById('state-menu');
+  const pinsMenu = document.getElementById('pins-menu');
+  function updateMenuBadges() {
+    const sBadge = stateMenu?.querySelector<HTMLElement>('.badge');
+    if (sBadge) {
+      sBadge.textContent = activeState;
+      sBadge.hidden = !activeState;
+    }
+    const off = Object.values(kinds).filter((v) => !v).length;
+    const pBadge = pinsMenu?.querySelector<HTMLElement>('.badge');
+    if (pBadge) {
+      pBadge.textContent = String(off);
+      pBadge.hidden = off === 0;
+    }
   }
 
   searchInput?.addEventListener('input', applyFilters);
-  stateSelect?.addEventListener('change', applyFilters);
+  document.querySelectorAll<HTMLButtonElement>('.state-list [data-state-opt]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const code = btn.dataset.stateOpt!;
+      const nowOn = activeState !== code;
+      activeState = nowOn ? code : '';
+      document
+        .querySelectorAll<HTMLButtonElement>('.state-list [data-state-opt]')
+        .forEach((b) => b.setAttribute('aria-pressed', String(b === btn && nowOn)));
+      applyFilters();
+    });
+  });
   document.querySelectorAll<HTMLButtonElement>('.pin-toggles [data-kind]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const kind = btn.dataset.kind!;
@@ -407,6 +516,13 @@ const stateOptions = [...new Map(
       btn.setAttribute('aria-pressed', String(kinds[kind]));
       applyFilters();
     });
+  });
+  // Clicking outside an open menu closes it.
+  document.addEventListener('click', (e) => {
+    for (const menu of [stateMenu, pinsMenu]) {
+      const details = menu as HTMLDetailsElement | null;
+      if (details?.open && !details.contains(e.target as Node)) details.open = false;
+    }
   });
 
   // Google Maps mode (PUBLIC_GMAPS_API_KEY set): live-guide pins navigate

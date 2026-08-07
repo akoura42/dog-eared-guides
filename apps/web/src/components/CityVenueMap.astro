@@ -96,7 +96,15 @@ const markers = venues.map((venue) => ({
   )}`,
 }));
 
-const cuisineOptions = [...new Set(venues.flatMap((v) => v.data.cuisines))].sort();
+const cuisineOptions = [...new Set(venues.flatMap((v) => v.data.cuisines))]
+  .sort()
+  .map((label) => ({
+    label,
+    key: label.toLowerCase(),
+    count: venues.filter((v) =>
+      v.data.cuisines.some((c) => c.toLowerCase() === label.toLowerCase())
+    ).length,
+  }));
 
 const center = { lat: city.geo.lat, lng: city.geo.lng };
 // Dog-policy zone polygons (no-dogs beaches, the off-leash park, leashed
@@ -196,20 +204,28 @@ const legend = [...new Map(venues.map((v) => {
       </details>
     )}
     {cuisineOptions.length > 0 && (
-      <div class="food-filters">
-        <select id="cuisine-filter" aria-label="Filter restaurants by cuisine">
-          <option value="">Any cuisine</option>
-          {cuisineOptions.map((c) => <option value={c.toLowerCase()}>{c}</option>)}
-        </select>
-        <input
-          type="search"
-          id="dish-filter"
-          placeholder="Dish, e.g. “burger”…"
-          aria-label="Filter restaurants by dish"
-          title="Matches cuisines and real items from menus we've verified"
-          autocomplete="off"
-        />
-      </div>
+      <details class="fmenu food-menu" data-badge="active">
+        <summary>Food <span class="badge" hidden></span></summary>
+        <div class="panel food-filters" role="group" aria-label="Filter restaurants by cuisine or dish">
+          <input
+            type="search"
+            id="dish-filter"
+            placeholder="Dish, e.g. “burger”…"
+            aria-label="Filter restaurants by dish"
+            title="Matches cuisines and real items from menus we've verified"
+            autocomplete="off"
+          />
+          {cuisineOptions.map((c) => (
+            <button
+              type="button"
+              class="key cx"
+              data-cuisine={c.key}
+              aria-pressed="false"
+              title={`Show restaurants serving ${c.label.toLowerCase()}`}
+            >{c.label} <span class="n">{c.count}</span></button>
+          ))}
+        </div>
+      </details>
     )}
   </div>
 
@@ -422,38 +438,41 @@ const legend = [...new Map(venues.map((v) => {
     border-radius: 50%;
     display: inline-block;
   }
-  .food-filters {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  .food-menu {
     margin-left: auto;
   }
-  #cuisine-filter,
+  .food-menu .panel {
+    left: auto;
+    right: 0;
+    max-height: 20rem;
+    overflow-y: auto;
+  }
+  .cx[aria-pressed='true'] {
+    border-color: var(--moss);
+    background: color-mix(in srgb, var(--moss) 15%, transparent);
+    color: var(--ink);
+  }
   #dish-filter {
     font: inherit;
     font-size: 0.88rem;
     padding: 0.35rem 0.8rem;
     border: 1.5px solid var(--line);
-    border-radius: 999px;
+    border-radius: 8px;
     background: var(--paper);
     color: var(--ink);
+    margin-bottom: 0.25rem;
   }
-  #dish-filter {
-    width: 11rem;
-  }
-  #cuisine-filter:focus,
   #dish-filter:focus {
     outline: 2px solid var(--moss);
     outline-offset: 1px;
   }
   @media (max-width: 640px) {
-    .food-filters {
+    .food-menu {
       margin-left: 0;
-      flex: 1 1 100%;
     }
-    #dish-filter {
-      flex: 1;
-      width: auto;
+    .food-menu .panel {
+      left: 0;
+      right: auto;
     }
   }
 
@@ -743,14 +762,18 @@ const legend = [...new Map(venues.map((v) => {
     zoneGroupState[zoneGroupOf(p)] !== false;
   let setZonesVisible: (() => void) | null = null;
   const emptyMsg = listPane?.querySelector<HTMLElement>('.empty');
-  const cuisineSelect = document.getElementById('cuisine-filter') as HTMLSelectElement | null;
   const dishInput = document.getElementById('dish-filter') as HTMLInputElement | null;
+  // Cuisine chips active in the Food menu — a venue matches if it serves
+  // ANY selected cuisine (unlike attribute filters, which are all-of).
+  const activeCuisines = new Set<string>();
 
   // Cuisine/dish filter: an active food filter keeps only venues whose
   // cuisine labels or verified menu items match — everything else hides.
   function foodOk(cuisines: string, food: string): boolean {
-    const c = cuisineSelect?.value ?? '';
-    if (c && !cuisines.split('|').includes(c)) return false;
+    if (activeCuisines.size > 0) {
+      const list = cuisines.split('|');
+      if (![...activeCuisines].some((c) => list.includes(c))) return false;
+    }
     const q = dishInput?.value.trim().toLowerCase() ?? '';
     if (q && !food.includes(q)) return false;
     return true;
@@ -1122,7 +1145,12 @@ const legend = [...new Map(venues.map((v) => {
   function updateMenuBadges() {
     for (const menu of filterMenus) {
       const engaged = menu.dataset.badge === 'off' ? 'false' : 'true';
-      const n = menu.querySelectorAll(`.panel [aria-pressed="${engaged}"]`).length;
+      let n = menu.querySelectorAll(`.panel [aria-pressed="${engaged}"]`).length;
+      // Text inputs inside a panel (the dish search) count as one engaged
+      // filter each when non-empty.
+      menu.querySelectorAll<HTMLInputElement>('.panel input').forEach((input) => {
+        if (input.value.trim()) n++;
+      });
       const badge = menu.querySelector<HTMLElement>('.badge');
       if (badge) {
         badge.textContent = String(n);
@@ -1200,13 +1228,23 @@ const legend = [...new Map(venues.map((v) => {
   // the planner, where the same plan may have changed).
   window.addEventListener('pageshow', refreshPlanUI);
 
-  cuisineSelect?.addEventListener('change', () => {
-    updateList();
-    applyVisibility?.();
-  });
+  document
+    .querySelectorAll<HTMLButtonElement>('.explorer .food-filters [data-cuisine]')
+    .forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.cuisine!;
+        const nowActive = !activeCuisines.has(key);
+        if (nowActive) activeCuisines.add(key);
+        else activeCuisines.delete(key);
+        btn.setAttribute('aria-pressed', String(nowActive));
+        updateList();
+        applyVisibility?.();
+      });
+    });
   dishInput?.addEventListener('input', () => {
     updateList();
     applyVisibility?.();
+    updateMenuBadges();
   });
 
   // Hovering a card spotlights its pin, Zillow-style.
