@@ -14,6 +14,7 @@ import { getCollection } from 'astro:content';
 import { getCity, getCategoryByKey } from '~/lib/config';
 import { venueSlug } from '~/lib/venues';
 import { venueJsonLd, breadcrumbJsonLd } from '~/lib/jsonld';
+import { lodgingAffiliateUrl } from '~/lib/affiliate';
 import { BRAND_NAME } from '~/lib/site';
 
 export async function getStaticPaths() {
@@ -41,7 +42,11 @@ const crumbs = [
 ];
 
 const affiliate = d.affiliate;
-const affiliateUrl = affiliate?.viator_url ?? affiliate?.booking_url ?? null;
+const rawAffiliateUrl = affiliate?.viator_url ?? affiliate?.booking_url ?? null;
+const affiliateUrl =
+  rawAffiliateUrl && affiliate?.booking_url === rawAffiliateUrl
+    ? lodgingAffiliateUrl(rawAffiliateUrl)
+    : rawAffiliateUrl;
 const hasAffiliate = Boolean(affiliateUrl);
 
 const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(

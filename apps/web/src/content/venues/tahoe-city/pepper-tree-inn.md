@@ -30,7 +30,7 @@ verification:
 affiliate:
   viator_product_code: null
   viator_url: null
-  booking_url: null
+  booking_url: https://www.booking.com/hotel/us/pepper-tree-inn-tahoe-city.html
 tags: []
 summary: Seven-story hotel on North Lake Boulevard where dogs stay in ground-floor rooms only, booked by phone; no fee amount is published.
 image: null

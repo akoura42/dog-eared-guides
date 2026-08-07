@@ -34,7 +34,7 @@ verification:
 affiliate:
   viator_product_code: null
   viator_url: null
-  booking_url: null
+  booking_url: https://www.booking.com/hotel/us/tahoe-city-inn.html
 tags:
   - winter-friendly
 summary: Downtown hotel beside the Boatworks retail village where dogs stay for a flat $75 fee per stay; nothing else about the policy is published.

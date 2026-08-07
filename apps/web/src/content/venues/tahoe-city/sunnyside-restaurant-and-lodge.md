@@ -27,7 +27,7 @@ verification:
 affiliate:
   viator_product_code: null
   viator_url: null
-  booking_url: null
+  booking_url: https://www.booking.com/hotel/us/sunnyside-resort.html
 tags: []
 summary: The classic lakefront lodge on the West Shore takes dogs in pet-designated rooms for a $60 flat fee.
 image: null
