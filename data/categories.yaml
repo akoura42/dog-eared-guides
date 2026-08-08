@@ -37,6 +37,11 @@ categories:
     label: Shops
     singular: shop
     blurb: Pet stores and dog-welcoming retail.
+  - key: pet-supply
+    slug: pet-supply-stores
+    label: Pet Supply
+    singular: pet store
+    blurb: Stores stocking dog food and gear — hours and dogs-inside policy verified.
   - key: daycare
     slug: dog-daycare-boarding
     label: Daycare & Boarding

@@ -285,7 +285,7 @@ def hospitality_values(venues: list[dict]) -> dict[str, dict]:
         ),
         # Verified dog-allowed *inside* at retail/taproom venues.
         "indoor_welcome": share(
-            lambda v: v["category"] in ("shop", "drink"),
+            lambda v: v["category"] in ("shop", "pet-supply", "drink"),
             lambda v: v["allowed"] == "indoors",
         ),
         # Lodging properties accepting dogs in any room class.

@@ -21,7 +21,7 @@ Frontmatter (all fields; use `null` where unknown, never invent):
 ```yaml
 name: <string>
 city: <city-slug>
-category: eat | drink | stay | trail | beach | activity | shop | daycare | services
+category: eat | drink | stay | trail | beach | activity | shop | pet-supply | daycare | services
 neighborhood: <string | null>
 address: <street address>
 lat: <number>

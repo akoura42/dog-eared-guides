@@ -1,6 +1,6 @@
 version: index-v1
 town: tahoe-city
-computed: '2026-08-07'
+computed: '2026-08-08'
 components:
   patio_share:
     value: 0.8889
@@ -10,8 +10,8 @@ components:
     sources:
     - method: venue-records
       note: computed from 9 published venue records
-      date: '2026-08-07'
-    last_verified: '2026-08-07'
+      date: '2026-08-08'
+    last_verified: '2026-08-08'
     score: 100
   indoor_welcome:
     value: 1.0
@@ -21,8 +21,8 @@ components:
     sources:
     - method: venue-records
       note: computed from 1 published venue records
-      date: '2026-08-07'
-    last_verified: '2026-08-07'
+      date: '2026-08-08'
+    last_verified: '2026-08-08'
     score: 100
   lodging_share:
     value: 1.0
@@ -32,8 +32,8 @@ components:
     sources:
     - method: venue-records
       note: computed from 9 published venue records
-      date: '2026-08-07'
-    last_verified: '2026-08-07'
+      date: '2026-08-08'
+    last_verified: '2026-08-08'
     score: 100
   water_access:
     value: three-seasonal-or-two-yearround

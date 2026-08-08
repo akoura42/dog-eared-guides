@@ -29,10 +29,3 @@ attributes:
     rule:
       field: tags
       includes: winter-friendly
-  - key: pet-supply
-    slug: pet-supply-stores
-    label: Pet Supply
-    blurb: Stores stocking dog food and gear — hours and dogs-inside policy verified.
-    rule:
-      field: tags
-      includes: pet-supply

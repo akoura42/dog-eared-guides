@@ -1,7 +1,7 @@
 ---
 name: Pet Station (Tahoe City)
 city: tahoe-city
-category: shop
+category: pet-supply
 neighborhood: West Lake / The Y
 address: 585 West Lake Blvd, Tahoe City, CA 96145
 lat: 39.1601
@@ -26,8 +26,7 @@ verification:
   method: official_website
   source_url: https://tahoepetstation.com/apps/pages/locations
 affiliate: null
-tags:
-  - pet-supply
+tags: []
 summary: The in-town pet supply stop — food, gear, and chain-wide services like a self-serve dog wash. Open daily 10–6.
 image: null
 ---

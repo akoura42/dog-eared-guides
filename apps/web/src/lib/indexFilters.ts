@@ -17,7 +17,7 @@ export const INDEX_VENUE_FILTERS: Record<string, (d: VenueData) => boolean> = {
     ['eat', 'drink'].includes(d.category) &&
     ['patio_only', 'outdoor_areas', 'indoors'].includes(d.dog_policy.allowed),
   indoor_welcome: (d) =>
-    ['shop', 'drink'].includes(d.category) && d.dog_policy.allowed === 'indoors',
+    ['shop', 'pet-supply', 'drink'].includes(d.category) && d.dog_policy.allowed === 'indoors',
   lodging_share: (d) => d.category === 'stay' && d.dog_policy.allowed !== 'no',
   water_access: (d) => d.tags.includes('water-access'),
   trail_access: (d) => d.category === 'trail',
