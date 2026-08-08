@@ -1,0 +1,76 @@
+# Dog-zone definitions for the Charlotte explorer. Geometry from OSM via
+# pipeline/index/zones.py; POLICY from the verified records and county
+# rules, never OSM tags.
+#
+# policy values: no-dogs | off-leash | leashed | restricted
+trails:
+  center: [35.2271, -80.8431]
+  radius_m: 8000
+  exclude_zone_ids: []
+  classes:
+    - selector: cycleway
+      policy: leashed
+      label: Greenway / paved trail
+      note: Mecklenburg County greenways — leashed dogs allowed; designated dog parks are the off-leash exception.
+      source_url: https://parkandrec.mecknc.gov/Places-to-Visit/Dog-Parks
+      venue: little-sugar-creek-greenway
+    - selector: named-path
+      policy: leashed
+      label: Park path
+      note: County parks require leashed dogs on paths and in open areas.
+      source_url: https://parkandrec.mecknc.gov/Places-to-Visit/Dog-Parks
+      venue: null
+zones:
+  - id: ninth-street-dog-park
+    osm_name: Ninth Street Dog Park
+    label: Ninth Street Dog Park
+    near: [35.234, -80.8413]
+    approx_radius_m: 40
+    policy: off-leash
+    note: Mecklenburg County's Uptown off-leash dog park in Fourth Ward — open 7:30am to sunset, current vaccinations required, no kids under 12.
+    source_url: https://parkandrec.mecknc.gov/Places-to-Visit/Dog-Parks
+    venue: ninth-street-dog-park
+  - id: skiptown
+    osm_name: Skiptown
+    label: Skiptown (membership)
+    near: [35.20921, -80.86437]
+    approx_radius_m: 45
+    policy: off-leash
+    note: Private membership dog park and bar in South End — off-leash inside, with published vaccination requirements. Not a public park.
+    source_url: https://www.skiptown.com/
+    venue: skiptown
+  - id: freedom-park
+    osm_name: Freedom Park
+    near: [35.19145, -80.84303]
+    policy: leashed
+    note: The signature in-town park — leashed dogs under the county parks rule; dogs must stay out of playgrounds and athletic areas where posted.
+    source_url: https://parkandrec.mecknc.gov/Places-to-Visit/Dog-Parks
+    venue: freedom-park
+  - id: romare-bearden-park
+    osm_name: Romare Bearden Park
+    near: [35.2269, -80.8472]
+    policy: leashed
+    note: Uptown's Third Ward lawn — leashed dogs under the county parks rule.
+    source_url: https://parkandrec.mecknc.gov/Places-to-Visit/Dog-Parks
+    venue: romare-bearden-park
+  - id: frazier-park
+    osm_name: Frazier Park
+    near: [35.2333, -80.8569]
+    policy: leashed
+    note: Greenway-linked park northwest of Uptown — leashed dogs under the county parks rule.
+    source_url: https://parkandrec.mecknc.gov/Places-to-Visit/Dog-Parks
+    venue: frazier-park
+  - id: alexander-street-park
+    osm_name: Alexander Street Park
+    near: [35.2278, -80.82636]
+    policy: leashed
+    note: Optimist Park neighborhood park — leashed dogs under the county parks rule.
+    source_url: https://parkandrec.mecknc.gov/Places-to-Visit/Dog-Parks
+    venue: alexander-street-park
+  - id: cherry-park
+    osm_name: Cherry Park
+    near: [35.20977, -80.83265]
+    policy: leashed
+    note: Midtown-adjacent neighborhood park on the greenway spine — leashed dogs under the county parks rule.
+    source_url: https://parkandrec.mecknc.gov/Places-to-Visit/Dog-Parks
+    venue: cherry-park

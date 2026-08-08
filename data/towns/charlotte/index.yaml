@@ -1,0 +1,134 @@
+version: index-v1
+town: charlotte
+computed: '2026-08-08'
+components:
+  patio_share:
+    value: 1.0
+    basis:
+      numerator: 23
+      denominator: 23
+    sources:
+    - method: venue-records
+      note: computed from 23 published venue records
+      date: '2026-08-08'
+    last_verified: '2026-08-08'
+    score: 100
+  indoor_welcome:
+    value: 0.2727
+    basis:
+      numerator: 3
+      denominator: 11
+    sources:
+    - method: venue-records
+      note: computed from 11 published venue records
+      date: '2026-08-08'
+    last_verified: '2026-08-08'
+    score: 100
+  lodging_share:
+    value: 1.0
+    basis:
+      numerator: 5
+      denominator: 5
+    sources:
+    - method: venue-records
+      note: computed from 5 published venue records
+      date: '2026-08-08'
+    last_verified: '2026-08-08'
+    score: 100
+  water_access:
+    value: null
+    sources: []
+    last_verified: null
+    score: null
+  trail_access:
+    value: 300
+    sources:
+    - url: https://overpass-api.de/api/interpreter
+      method: osm-overpass
+      note: 'Sum of way lengths around:16093m of (35.2271, -80.8431): highway=path
+        118.5 mi + highway=cycleway 181.9 mi = 300.4 mi; non-sidewalk footways (294.7
+        mi) excluded as an urban haircut'
+      date: '2026-08-08'
+    - url: https://parkandrec.mecknc.gov/Places-to-Visit/Dog-Parks
+      method: official_website
+      note: 'County rule: leashed dogs allowed in parks and on greenways; designated
+        dog parks are the off-leash exception'
+      date: '2026-08-08'
+    last_verified: '2026-08-08'
+    geometry: fallback
+    score: 100
+  off_leash:
+    value: fenced-run
+    sources:
+    - url: https://parkandrec.mecknc.gov/Places-to-Visit/Dog-Parks
+      method: official_website
+      note: 'County dog parks: off-leash areas open 7:30am–sunset, posted vaccination
+        rules, small/large sections at most locations. No published acreage for Ninth
+        Street.'
+      date: '2026-08-08'
+    last_verified: '2026-08-08'
+    score: 25
+  ordinance:
+    modifiers:
+    - patio-permitted
+    sources:
+    - url: https://www.animallaw.info/administrative/nc-restaurant-animals-2656-physical-facilities
+      method: official_website
+      note: '15A NCAC 18A .2656 (Food Code 6-501.115(B)(4)): dogs and cats permitted
+        in outdoor dining areas, physically restrained, not passing through indoors.
+        +20'
+      date: '2026-08-08'
+    - url: https://www.charlottenc.gov/Animal-Care-and-Control/Pet-Resources/Mecklenburg-County-Animal-Ordinance
+      method: official_website
+      note: Sec. 3-71 restraint requirement; own-property voice-control allowance
+        only, so no public voice-control modifier. No breed- specific legislation
+        in force.
+      date: '2026-08-08'
+    last_verified: '2026-08-08'
+    score: 70
+  emergency_vet:
+    value: 9
+    sources:
+    - url: https://carecharlotte.com/services/emergency/
+      method: official_website
+      note: 'CARE — Charlotte Animal Referral & Emergency, 3726 Latrobe Dr: open 24
+        hours, every day'
+      date: '2026-08-08'
+    - url: https://router.project-osrm.org/route/v1/driving/-80.8431,35.2271;-80.79706,35.19498
+      method: osrm-route
+      note: 'Town center (Trade & Tryon) to CARE: 9.4 min / 4.8 mi, rounded to 9'
+      date: '2026-08-08'
+    last_verified: '2026-08-08'
+    score: 100
+  heat_risk:
+    value: 35
+    sources:
+    - url: https://www.ncei.noaa.gov/access/services/data/v1?dataset=normals-annualseasonal&stations=USW00013881&dataTypes=ANN-TMAX-AVGNDS-GRTH090&format=json
+      method: noaa-normals-1991-2020
+      note: 'Station USW00013881 (CHARLOTTE DOUGLAS AIRPORT, NC US): ANN-TMAX-AVGNDS-GRTH090
+        raw 350, in tenths = 35.0 days/year with a normal high at or above 90F'
+      date: '2026-08-08'
+    last_verified: '2026-08-08'
+    score: 50
+pillars:
+  hospitality:
+    components_verified: 3
+    components_total: 3
+    score: 100
+  access:
+    components_verified: 2
+    components_total: 3
+    score: 70
+  rules:
+    components_verified: 1
+    components_total: 1
+    score: 70
+  practical:
+    components_verified: 2
+    components_total: 2
+    score: 75
+composite:
+  components_verified: 8
+  components_total: 9
+  score: 82
+  provisional: true

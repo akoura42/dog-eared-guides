@@ -158,12 +158,13 @@ components:
     last_verified: '2026-08-07'
     score: 40
   heat_risk:
-    value: 1
+    value: 0.1
     sources:
     - url: https://www.ncei.noaa.gov/access/services/data/v1?dataset=normals-annualseasonal&stations=USC00048758&dataTypes=ANN-TMAX-AVGNDS-GRTH090&format=json
       method: noaa-normals-1991-2020
       note: 'Station USC00048758 (TAHOE CITY, CA US; 39.1678, -120.1428; 0.4 mi from
-        town center): annual mean days with max temp >= 90F = 1'
+        town center): ANN-TMAX-AVGNDS-GRTH090 raw value 1, in tenths of days = 0.1
+        days/year (NCEI normals report AVGNDS in tenths)'
       date: '2026-08-07'
     last_verified: '2026-08-07'
     score: 100
