@@ -2,6 +2,7 @@
 import type { Venue } from '~/lib/venues';
 import { venuePath, ALLOWED_LABELS } from '~/lib/venues';
 import { getCategoryByKey } from '~/lib/config';
+import { venueLogoUrl } from '~/lib/logos';
 import VerifiedBadge from './VerifiedBadge.astro';
 
 interface Props {
@@ -13,6 +14,7 @@ interface Props {
 const { venue, showCategory = true } = Astro.props;
 const d = venue.data;
 const category = getCategoryByKey(d.category);
+const logoUrl = venueLogoUrl(venue);
 ---
 
 <article class="venue-card">
@@ -25,7 +27,10 @@ const category = getCategoryByKey(d.category);
       compact
     />
   </div>
-  <h3><a href={venuePath(venue)}>{d.name}</a></h3>
+  <div class="name-row">
+    {logoUrl && <img class="logo" src={logoUrl} alt="" width="34" height="34" loading="lazy" />}
+    <h3><a href={venuePath(venue)}>{d.name}</a></h3>
+  </div>
   <p class="policy-line">{ALLOWED_LABELS[d.dog_policy.allowed]}{d.dog_policy.fee ? ` · ${d.dog_policy.fee}` : ''}</p>
   <p class="summary">{d.summary}</p>
   {d.neighborhood && <p class="hood">{d.neighborhood}</p>}
@@ -55,9 +60,25 @@ const category = getCategoryByKey(d.category);
     gap: 0.5rem;
     flex-wrap: wrap;
   }
+  .name-row {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: 0.2rem;
+  }
+  .logo {
+    flex: none;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    object-fit: contain;
+    background: #fff;
+    border: 1px solid var(--line);
+    padding: 2px;
+  }
   h3 {
     font-size: 1.2rem;
-    margin: 0.2rem 0 0;
+    margin: 0;
   }
   h3 a {
     text-decoration: none;
