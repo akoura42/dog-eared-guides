@@ -28,7 +28,10 @@ verification:
   last_verified: 2026-08-08
   method: official_website
   source_url: https://www.marriott.com/hotels/fact-sheet/travel/cltmd-le-meridien-charlotte?program=spg
-affiliate: null
+affiliate:
+  viator_product_code: null
+  viator_url: null
+  booking_url: https://www.booking.com/hotel/us/le-meridien-charlotte.html
 tags:
   - uptown
   - pet-fee

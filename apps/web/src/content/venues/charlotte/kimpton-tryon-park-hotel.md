@@ -36,7 +36,10 @@ verification:
   last_verified: 2026-08-08
   method: official_website
   source_url: https://www.tryonparkhotel.com/uptown-charlotte-hotel/pet-friendly/
-affiliate: null
+affiliate:
+  viator_product_code: null
+  viator_url: null
+  booking_url: https://www.booking.com/hotel/us/kimpton-tryon-park.html
 tags:
   - uptown
   - no-pet-fee

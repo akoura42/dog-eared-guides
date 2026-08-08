@@ -33,7 +33,10 @@ verification:
   last_verified: 2026-08-08
   method: official_website
   source_url: https://www.grandbohemiancharlotte.com/downtown-charlotte-hotels
-affiliate: null
+affiliate:
+  viator_product_code: null
+  viator_url: null
+  booking_url: https://www.booking.com/hotel/us/grand-bohemian-charlotte-autograph-collection.html
 tags:
   - uptown
   - dogs-in-rooms
