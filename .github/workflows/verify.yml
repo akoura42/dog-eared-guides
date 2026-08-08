@@ -10,13 +10,23 @@ permissions:
   contents: write
   pull-requests: write
 
+concurrency:
+  group: verify
+  cancel-in-progress: false
+
 jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
+      # PIPELINE_PAT (a fine-grained PAT or GitHub App token with contents +
+      # pull-requests write) is REQUIRED for the CI build check to run on the
+      # PRs this workflow opens: GitHub suppresses workflow triggers on
+      # events created with the default GITHUB_TOKEN. Without it, bot PRs
+      # show no checks at all.
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.PIPELINE_PAT || github.token }}
 
       - uses: actions/setup-python@v5
         with:
@@ -27,9 +37,12 @@ jobs:
           node-version: 22
 
       - name: Install pipeline dependencies
+        # claude-code is pinned: an unpinned install-latest changes the
+        # behavior of every scheduled run overnight with no way to bisect.
+        # Bump deliberately.
         run: |
           pip install -r pipeline/requirements.txt
-          npm install -g @anthropic-ai/claude-code
+          npm install -g @anthropic-ai/claude-code@2.1.226
 
       - name: Configure git author
         run: |
@@ -43,5 +56,7 @@ jobs:
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python pipeline/verify.py
+          GH_TOKEN: ${{ secrets.PIPELINE_PAT || secrets.GITHUB_TOKEN }}
+        # --limit caps one run's work so a killed job wastes bounded model
+        # spend; oldest venues go first, the rest roll to next week.
+        run: python pipeline/verify.py --limit 40

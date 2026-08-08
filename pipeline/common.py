@@ -148,10 +148,24 @@ def few_shot_examples(city: str, limit: int = 2) -> str:
     examples = []
     city_dir = VENUES_DIR / city
     candidates = sorted(city_dir.glob("*.md")) if city_dir.is_dir() else []
-    if not candidates:  # fall back to any city
+    cross_city = not candidates
+    if cross_city:  # new city: borrow structure from an existing one
         candidates = sorted(VENUES_DIR.glob("*/*.md"))
     for path in candidates[:limit]:
-        examples.append(f"--- APPROVED EXAMPLE ({path.name}) ---\n{path.read_text()}")
+        text = path.read_text()
+        if cross_city:
+            # The example carries another city's frontmatter and ordinance
+            # framing; neutralize the city field and fence off the rest so
+            # the model doesn't copy the wrong city's facts.
+            text = re.sub(r"(?m)^city: .*$", f"city: {city}", text, count=1)
+            header = (
+                f"--- APPROVED EXAMPLE ({path.name}) — from a DIFFERENT city; "
+                "copy the structure, voice, and frontmatter shape only. Its "
+                "ordinances, regulations, and location facts do NOT apply ---"
+            )
+        else:
+            header = f"--- APPROVED EXAMPLE ({path.name}) ---"
+        examples.append(f"{header}\n{text}")
     return "\n\n".join(examples) if examples else "(no approved examples yet)"
 
 
@@ -243,9 +257,17 @@ def git_current_branch() -> str:
 
 
 def open_pr(branch: str, title: str, body: str, files: list[Path]) -> None:
-    """Commit files on a new branch and open a PR. Never commits to main."""
+    """Commit files on a new branch and open a PR. Never commits to main.
+
+    The branch starts from origin/main, not the current HEAD — branching
+    from HEAD would smuggle whatever unmerged commits the working branch
+    holds into the PR.
+    """
     base = git_current_branch()
-    run(["git", "checkout", "-b", branch])
+    run(["git", "fetch", "origin", "main"], check=False)
+    has_remote = run(["git", "rev-parse", "--verify", "origin/main"], check=False)
+    start_point = "origin/main" if has_remote.returncode == 0 else "main"
+    run(["git", "checkout", "-b", branch, start_point])
     try:
         run(["git", "add", *[str(f) for f in files]])
         run(["git", "commit", "-m", title, "-m", body])

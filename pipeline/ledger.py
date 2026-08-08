@@ -186,7 +186,15 @@ def sync_published() -> dict[str, int]:
         places = load_city(city)
         by_name = {norm_name(r["name"]): pid for pid, r in places.items()}
         for md in sorted(city_dir.glob("*.md")):
-            data, _ = split_frontmatter(md.read_text())
+            # One malformed hand-edited file must not abort the sync for
+            # every other city — and sync runs at the tail of generate.py,
+            # after the model spend.
+            try:
+                data, _ = split_frontmatter(md.read_text())
+                name = data["name"]
+            except (ValueError, KeyError) as exc:
+                print(f"WARNING sync_published: skipping {md}: {exc}")
+                continue
             level = (data.get("verification") or {}).get("level", "official")
             status = "published-reported" if level == "reported" else "published-official"
             last = (data.get("verification") or {}).get("last_verified")

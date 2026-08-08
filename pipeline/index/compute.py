@@ -345,7 +345,9 @@ def run(slug: str, check: bool = False, rescore: bool = False) -> dict:
     stored = {}
     if index_file.exists():
         stored = yaml.safe_load(index_file.read_text()) or {}
-    if stored.get("version", VERSION) != VERSION:
+    # No default: an index.yaml missing its version key is exactly the
+    # malformed file the drift gate exists to catch.
+    if stored and stored.get("version") != VERSION:
         raise SystemExit(
             f"{index_file}: version {stored.get('version')!r} != {VERSION}; "
             "recompute after reconciling the version bump"

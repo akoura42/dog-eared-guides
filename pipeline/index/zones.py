@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import json
 import math
+import re
 import sys
 import time
 import urllib.parse
@@ -296,7 +297,13 @@ def run(slug: str) -> None:
     names = sorted({z["osm_name"] for z in zones})
     center_lat = sum(z["near"][0] for z in zones) / len(zones)
     center_lng = sum(z["near"][1] for z in zones) / len(zones)
-    name_regex = "^(" + "|".join(n.replace(" ", "\\ ") for n in names) + ")$"
+    # Overpass regexes are POSIX ERE; escape metacharacters or a zone named
+    # "Commons Park (North)" sends an unbalanced paren (HTTP 400) and names
+    # with "." or "+" silently over-match and can attach the wrong polygon.
+    def _ere_escape(name: str) -> str:
+        return re.sub(r'([.^$*+?()\[\]{}|\\"])', r"\\\1", name).replace(" ", "\\ ")
+
+    name_regex = "^(" + "|".join(_ere_escape(n) for n in names) + ")$"
     query = (
         f'[out:json][timeout:120];\n'
         f'wr(around:{SEARCH_RADIUS_M},{center_lat},{center_lng})'
