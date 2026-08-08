@@ -10,6 +10,8 @@ phone: (980) 580-4841
 website: https://luckydogbarkandbrew.com/locations/charlotte/
 dog_policy:
   allowed: indoors
+  vaccinations_required:
+    - Rabies
   leash_required: false
   water_bowls: null
   size_or_breed_restrictions: >-

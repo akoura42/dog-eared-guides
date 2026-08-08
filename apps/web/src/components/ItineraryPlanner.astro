@@ -23,6 +23,7 @@ const catalog = venues.map((v) => ({
   policy: ALLOWED_LABELS[v.data.dog_policy.allowed],
   summary: v.data.summary,
   reported: v.data.verification.level === 'reported',
+  vax: v.data.dog_policy.vaccinations_required,
   lat: v.data.lat,
   lng: v.data.lng,
 }));
@@ -57,6 +58,10 @@ for (const item of catalog) {
       stays in your browser and copies into a shareable link.
     </p>
     <div id="plan-days"></div>
+    <p class="records" id="plan-records" hidden>
+      <strong>Records to bring:</strong> <span id="plan-records-list"></span>
+      — venues on this plan require proof at the gate.
+    </p>
     <div id="plan-map" hidden></div>
   </section>
 
@@ -125,6 +130,14 @@ for (const item of catalog) {
   .empty {
     color: var(--ink-soft);
     font-size: 0.92rem;
+  }
+  .records {
+    margin: 1rem 0 0;
+    padding: 0.7rem 1rem;
+    background: color-mix(in srgb, #c08a2e 12%, transparent);
+    border: 1px solid color-mix(in srgb, #c08a2e 40%, transparent);
+    border-radius: var(--radius-lg);
+    font-size: 0.9rem;
   }
   #plan-days :global(h4) {
     font-size: 0.78rem;
@@ -283,6 +296,9 @@ for (const item of catalog) {
       box-shadow: none;
       padding: 0;
     }
+    .records {
+      border: 1px solid #000;
+    }
     #plan-days :global(.plan-item button) {
       display: none;
     }
@@ -300,6 +316,7 @@ for (const item of catalog) {
       name: string;
       path: string;
       category: string;
+      vax: string[];
     }[];
     const bySlug = new Map(catalog.map((c) => [c.slug, c]));
     const storeKey = `plan:${citySlug}`;
@@ -537,6 +554,16 @@ for (const item of catalog) {
         const btn = el.querySelector<HTMLButtonElement>('.add')!;
         btn.textContent = inPlan ? 'Added ✓' : 'Add';
       });
+
+      // Union of vaccination/health proof required across planned venues —
+      // knowing what to bring before standing at a gate is the point.
+      const recordsEl = document.getElementById('plan-records')!;
+      const recordsList = document.getElementById('plan-records-list')!;
+      const required = [
+        ...new Set(plan.flatMap((i) => bySlug.get(i.slug)?.vax ?? [])),
+      ];
+      recordsEl.hidden = required.length === 0;
+      recordsList.textContent = required.join(' · ');
     }
 
     root.addEventListener('click', (e) => {

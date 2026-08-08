@@ -10,6 +10,14 @@ phone: (530) 546-7522
 website: https://www.agatebayanimalhospital.com/daycare.pml
 dog_policy:
   allowed: indoors
+  vaccinations_required:
+    - Rabies
+    - DAPP
+    - Bordetella
+    - Leptospirosis
+    - Canine influenza
+    - Negative fecal test (within 12 months)
+    - Parasite prevention (within 30 days)
   leash_required: null
   water_bowls: null
   size_or_breed_restrictions: null

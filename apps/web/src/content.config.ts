@@ -17,6 +17,9 @@ export const CATEGORY_KEYS = [
 
 const dogPolicySchema = z.object({
   allowed: z.enum(['indoors', 'patio_only', 'outdoor_areas', 'grounds_only', 'no']),
+  // Vaccination/health proof the venue REQUIRES, from its own published
+  // rules (dog parks, daycare, dog bars). Names as the venue states them.
+  vaccinations_required: z.array(z.string()).default([]),
   leash_required: z.boolean().nullable().default(null),
   water_bowls: z.boolean().nullable().default(null),
   size_or_breed_restrictions: z.string().nullable().default(null),

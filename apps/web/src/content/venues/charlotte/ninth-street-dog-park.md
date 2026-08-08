@@ -10,6 +10,10 @@ phone: null
 website: https://parkandrec.mecknc.gov/Places-to-Visit/Dog-Parks/ninth-street-dog-park
 dog_policy:
   allowed: outdoor_areas
+  vaccinations_required:
+    - Rabies (with tag number)
+    - DHLPP
+    - Bordetella
   leash_required: false
   water_bowls: null
   size_or_breed_restrictions: null
