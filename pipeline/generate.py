@@ -205,9 +205,11 @@ def main() -> int:
             res = generate_item(args.model, item)
             print(f"[done ] {label}", flush=True)
             return item, res, None
-        except RuntimeError as exc:
-            # One failed item (timeout, rate limit, refusal) must not kill
-            # the batch. Leave its ledger status untouched for a retry.
+        except Exception as exc:  # noqa: BLE001
+            # One failed item (timeout, rate limit, API error, malformed
+            # queue row) must not kill the batch — with --parallel an
+            # uncaught exception here would discard every other item's
+            # finished model output. Leave state untouched for a retry.
             print(f"[error] {label}: {exc}", flush=True)
             return item, None, exc
 
@@ -228,6 +230,7 @@ def main() -> int:
             continue
         all_questions.extend(result.open_questions)
 
+        wrote_for_item = 0
         for gen in result.files:
             target = (CONTENT_DIR / gen.rel_path).resolve()
             if CONTENT_DIR.resolve() not in target.parents:
@@ -245,26 +248,42 @@ def main() -> int:
             target.write_text(gen.content)
             written.append(target)
             titles.append(label)
+            wrote_for_item += 1
             print(f"  wrote {target.relative_to(REPO_ROOT)}")
 
         if not result.files:
             print("  no file produced (unverifiable — see open questions)")
+        # Three outcomes per item — only what was actually WRITTEN counts:
+        #   published    ≥1 file written to disk
+        #   unverifiable model produced no file (evidence missing)
+        #   rejected     model produced files but validation refused them all
+        #                — left pending for retry, never marked done
+        if wrote_for_item:
+            status = "published"
+        elif result.files:
+            status = "rejected"
+        else:
+            status = "unverifiable"
         if item.get("_ledger_id"):
-            ledger_outcomes.append((item, bool(result.files)))
+            ledger_outcomes.append((item, status))
         if item.get("_queue_path"):
-            queue_outcomes.append((item, bool(result.files)))
+            queue_outcomes.append((item, status))
 
-    # Ledger bookkeeping: published candidates flip via sync; the rest are
-    # recorded as unverifiable so they aren't re-selected next run.
+    # Ledger bookkeeping: published candidates flip via sync; unverifiable
+    # ones are recorded so they aren't re-selected; rejected drafts keep
+    # their status for a retry. Dry runs write NO state — a dry run must
+    # never consume queue items or flip ledger rows.
     ledger_paths: list[Path] = []
-    if args.from_ledger and ledger_outcomes:
+    if not args.dry_run and args.from_ledger and ledger_outcomes:
         from ledger import checks_file, city_file, load_city, record_check, save_city, sync_published
 
         places = load_city(args.from_ledger)
-        for item, produced in ledger_outcomes:
+        for item, status in ledger_outcomes:
             pid = item["_ledger_id"]
-            outcome = "draft-produced" if produced else "unverifiable"
-            if not produced and pid in places:
+            outcome = {"published": "draft-produced", "rejected": "draft-rejected"}.get(
+                status, "unverifiable"
+            )
+            if status == "unverifiable" and pid in places:
                 places[pid]["status"] = "unverifiable"
                 places[pid]["note"] = (
                     "Generation run found no publishable evidence — see the PR's open questions."
@@ -278,15 +297,17 @@ def main() -> int:
     # Queue write-back: a processed item is marked done in its city's queue
     # file — re-running generate must never re-draft it. Unverifiable items
     # are done too (the ledger + PR open questions carry the evidence trail);
-    # errored items were never recorded and stay pending for retry.
+    # rejected and errored items stay pending for retry.
     queue_paths: list[Path] = []
-    if queue_outcomes:
+    if not args.dry_run and queue_outcomes:
         touched = set()
-        for item, produced in queue_outcomes:
+        for item, status in queue_outcomes:
             path = item.pop("_queue_path")  # item is a live ref into queue_docs
+            if status == "rejected":
+                continue
             item["done"] = True
             item["done_date"] = today()
-            if not produced:
+            if status == "unverifiable":
                 item["done_note"] = "unverifiable — see the PR's open questions"
             touched.add(path)
         for path in sorted(touched):
@@ -300,13 +321,27 @@ def main() -> int:
         for q in all_questions:
             print(f"  - {q}")
 
-    if not written:
-        print("\nNothing verifiable was produced.")
-        return 1
-
     if args.dry_run:
-        print("\n--dry-run: files written, skipping branch/PR.")
-        return 0
+        print("\n--dry-run: content files written for inspection; no state or PR.")
+        return 0 if written else 1
+
+    bookkeeping = [p for p in [*ledger_paths, *queue_paths] if p.exists()]
+    if not written:
+        # The run still moved state (unverifiable flips, check log, done
+        # markers) — that MUST land in a PR or an ephemeral runner discards
+        # it and next run repeats the whole model spend.
+        print("\nNothing verifiable was produced.")
+        if bookkeeping:
+            question_md = "\n".join(f"- [ ] {q}" for q in all_questions) or "_none_"
+            open_pr(
+                f"content/generate-{today()}-{os.getpid()}",
+                "generate: bookkeeping only — no publishable drafts",
+                "No drafts survived verification this run; this PR records the "
+                "ledger/queue outcomes so the work isn't repeated.\n\n"
+                f"## Open questions\n{question_md}",
+                bookkeeping,
+            )
+        return 1
 
     branch = f"content/generate-{today()}-{os.getpid()}"
     question_md = "\n".join(f"- [ ] {q}" for q in all_questions) or "_none_"
@@ -322,7 +357,7 @@ def main() -> int:
         branch,
         f"content: {len(written)} drafted page(s) for review",
         body,
-        written + [p for p in [*ledger_paths, *queue_paths] if p.exists()],
+        written + bookkeeping,
     )
     return 0
 

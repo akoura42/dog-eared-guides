@@ -203,7 +203,19 @@ def sync_published() -> dict[str, int]:
             continue
         city = city_dir.name
         places = load_city(city)
-        by_name = {norm_name(r["name"]): pid for pid, r in places.items()}
+        # Name-based re-pointing is only safe when the name is UNAMBIGUOUS:
+        # with two same-name rows (chain stores), attaching published state
+        # to "whichever the dict kept" silently corrupts the other store's
+        # identity. Ambiguous names get a fresh row keyed by the md stem.
+        name_counts: dict[str, int] = {}
+        for r in places.values():
+            key = norm_name(r["name"])
+            name_counts[key] = name_counts.get(key, 0) + 1
+        by_name = {
+            norm_name(r["name"]): pid
+            for pid, r in places.items()
+            if name_counts[norm_name(r["name"])] == 1
+        }
         for md in sorted(city_dir.glob("*.md")):
             # One malformed hand-edited file must not abort the sync for
             # every other city — and sync runs at the tail of generate.py,

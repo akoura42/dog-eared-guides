@@ -69,7 +69,7 @@ links still stand; if the venue now officially disallows dogs, that's also
 
 def is_stale(path: Path, max_age_days: int) -> tuple[bool, dict]:
     data, _ = split_frontmatter(path.read_text())
-    last = data.get("verification", {}).get("last_verified")
+    last = (data.get("verification") or {}).get("last_verified")
     if isinstance(last, dt.datetime):
         last = last.date()
     if not isinstance(last, dt.date):
@@ -157,6 +157,7 @@ def main() -> int:
     touched: list[Path] = []
     report: list[str] = []
 
+    errors = 0
     for path in stale_paths:
         rel = path.relative_to(REPO_ROOT)
         print(f"\n=== Re-verifying {rel} ===")
@@ -167,6 +168,7 @@ def main() -> int:
         except Exception as exc:  # noqa: BLE001
             print(f"  ERROR: {exc}")
             report.append(f"- ❌ `{rel}` — re-verification errored: {exc}")
+            errors += 1
             continue
         record_check(path.parent.name, path.stem, "verify", verdict, str(rel))
         print(f"  verdict: {verdict}")
@@ -188,8 +190,21 @@ def main() -> int:
         else:
             report.append(f"- ⚠️ `{rel}` — needs manual review (model output unclear)")
 
-    if not touched:
-        print("\nNo file changes; report:")
+    if errors and errors == len(stale_paths):
+        # Every venue errored (expired token, rate limit) — this must be a
+        # RED scheduled run, not a silent green no-op.
+        print(f"\nAll {errors} re-verifications errored; failing the run.")
+        print("\n".join(report))
+        return 1
+
+    # Even with zero file changes, closures/errors and the check-log
+    # entries are real outcomes — a PR is the only way they survive an
+    # ephemeral runner.
+    cities_touched = sorted({p.parent.name for p in stale_paths})
+    check_logs = [checks_file(c) for c in cities_touched if checks_file(c).exists()]
+    files = touched + check_logs
+    if not files:
+        print("\nNothing to record; report:")
         print("\n".join(report))
         return 0
 
@@ -201,9 +216,6 @@ def main() -> int:
         "Scheduled 90-day re-verification. **Merging this PR is the approval step.**\n\n"
         + "\n".join(report)
     )
-    cities_touched = sorted({p.parent.name for p in stale_paths})
-    check_logs = [checks_file(c) for c in cities_touched if checks_file(c).exists()]
-    files = touched + check_logs
     open_pr(branch, f"verify: re-checked {len(stale_paths)} stale venue(s)", body, files)
     return 0
 

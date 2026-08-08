@@ -157,14 +157,21 @@ def discover(city_slug: str, radius_km: float | None, dry_run: bool) -> int:
 
         # Legacy rows (pre-osm_ref) are matched by name + proximity: a
         # same-name row within 500 m with no ref yet is the same place and
-        # adopts this ref; a same-name row further away is a different
-        # location and gets its own row.
+        # adopts this ref. Both coordinates must be KNOWN — a coordless row
+        # matching any same-name element at any distance would let the
+        # wrong chain store adopt the ref. Coordless rows never adopt; a
+        # possible duplicate row is visible and mergeable, a silently
+        # wrong identity is not.
         legacy = None
         for row in places.values():
             if row.get("osm_ref") or norm_name(row["name"]) != norm_name(name):
                 continue
             r_lat, r_lng = row.get("lat"), row.get("lng")
-            if r_lat is None or el_lat is None or _haversine_m(r_lat, r_lng, el_lat, el_lng) <= 500:
+            if (
+                r_lat is not None
+                and el_lat is not None
+                and _haversine_m(r_lat, r_lng, el_lat, el_lng) <= 500
+            ):
                 legacy = row
                 break
         if legacy is not None:
@@ -224,10 +231,20 @@ def main() -> int:
     if not slugs or slugs == [None]:
         parser.error("pass --city <slug> or --all-launched")
 
+    # One city's Overpass failure must not discard every other city's
+    # discoveries — finish the sweep, then fail loudly if anything broke.
+    failed: list[str] = []
     for i, slug in enumerate(slugs):
         if i:
             time.sleep(5)  # be polite to the public Overpass instance
-        discover(slug, args.radius_km, args.dry_run)
+        try:
+            discover(slug, args.radius_km, args.dry_run)
+        except SystemExit as exc:
+            print(f"  {slug}: FAILED ({exc})")
+            failed.append(slug)
+    if failed:
+        print(f"\n{len(failed)} city sweep(s) failed: {', '.join(failed)}")
+        return 1
     return 0
 
 

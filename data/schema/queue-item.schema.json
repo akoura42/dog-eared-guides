@@ -7,6 +7,10 @@
   "properties": {
     "type": { "enum": ["venue", "guide"] },
     "city": { "type": "string", "minLength": 1 },
+    "place_id": {
+      "type": "string",
+      "description": "Optional stable join to the city ledger row — prefer this over free-text name matching."
+    },
     "name": { "type": "string" },
     "topic": { "type": "string" },
     "category": { "type": "string" },

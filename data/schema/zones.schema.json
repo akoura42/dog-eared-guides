@@ -11,7 +11,7 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["id", "policy", "source_url"],
+        "required": ["id", "policy", "source_url", "osm_name", "near", "note"],
         "properties": {
           "id": { "type": "string", "minLength": 1 },
           "label": { "type": "string" },
@@ -34,6 +34,7 @@
     "trails": {
       "type": ["object", "null"],
       "additionalProperties": false,
+      "required": ["center", "radius_m", "classes"],
       "properties": {
         "center": {
           "type": "array",

@@ -31,5 +31,11 @@
     "osm_ref": { "type": "string", "pattern": "^[nwr][0-9]+$" },
     "published_slug": { "type": "string" },
     "website": { "type": "string" }
-  }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "status": { "pattern": "^published-" } }, "required": ["status"] },
+      "then": { "required": ["published_slug"] }
+    }
+  ]
 }

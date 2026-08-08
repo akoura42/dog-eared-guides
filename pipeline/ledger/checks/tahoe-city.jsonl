@@ -55,3 +55,6 @@
 {"actor": "generate", "city": "tahoe-city", "note": "The Inn at Boatworks", "outcome": "draft-produced", "place_id": "osm-the-inn-at-boatworks", "ts": "2026-08-06T22:08:13+00:00"}
 {"actor": "generate", "city": "tahoe-city", "note": "Uncorked", "outcome": "unverifiable", "place_id": "osm-uncorked", "ts": "2026-08-06T22:08:13+00:00"}
 {"actor": "generate", "city": "tahoe-city", "note": "US Forest Service Klausen Property", "outcome": "unverifiable", "place_id": "osm-us-forest-service-klausen-property", "ts": "2026-08-06T22:08:13+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Duplicate of published row lake-forest-beach (OSM name differed; sync name-miss)", "outcome": "duplicate", "place_id": "osm-lake-forest-beach-park", "ts": "2026-08-08T22:43:56+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Duplicate of published row lake-tahoe-commons-beach (OSM name differed; sync name-miss)", "outcome": "duplicate", "place_id": "osm-lake-tahoe-commons-beach", "ts": "2026-08-08T22:43:57+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Duplicate of published row mountain-slice (sync name-miss)", "outcome": "duplicate", "place_id": "osm-mountain-slice", "ts": "2026-08-08T22:43:57+00:00"}

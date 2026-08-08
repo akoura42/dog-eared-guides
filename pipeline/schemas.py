@@ -54,7 +54,12 @@ def validate(kind: str, obj, source: str) -> list[str]:
     """
     if jsonschema is None:
         return []
-    validator = jsonschema.Draft7Validator(_schema(kind))
+    # FormatChecker makes "format": "uri" real — without it, draft-07
+    # treats format as annotation-only and the write gate never checks
+    # URLs. (uri checking needs the rfc3987 package; see requirements.)
+    validator = jsonschema.Draft7Validator(
+        _schema(kind), format_checker=jsonschema.FormatChecker()
+    )
     errors = []
     for err in validator.iter_errors(_jsonable(obj)):
         where = "/".join(str(p) for p in err.absolute_path) or "(root)"
