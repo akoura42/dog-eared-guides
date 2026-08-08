@@ -23,7 +23,7 @@ const fetchedLogoUrl = venueLogoUrl(venue);
 // beats the favicon. Full credit renders on the venue page; the thumb
 // carries it as title.
 const photoMeta =
-  d.image && (!fetchedLogoUrl || isAgencyWebsite(d.website)) ? resolvePhoto(d.image) : null;
+  d.image && (!fetchedLogoUrl || isAgencyWebsite(d.city, d.website)) ? resolvePhoto(d.image) : null;
 const logoUrl = photoMeta ? null : fetchedLogoUrl;
 // Off-season flag, computed at build from the venue's own published dates.
 const offSeason = d.season !== null && !inSeason(d.season);

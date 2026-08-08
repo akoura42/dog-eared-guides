@@ -33,7 +33,7 @@ export type ZoneCollection = {
 };
 
 export function getTownZones(slug: string): ZoneCollection | null {
-  const file = path.join(DATA_DIR, 'towns', slug, 'zones.geojson');
+  const file = path.join(DATA_DIR, 'cities', slug, 'zones.geojson');
   if (!fs.existsSync(file)) return null;
   const zones = JSON.parse(fs.readFileSync(file, 'utf8')) as ZoneCollection;
   return zones.features.length > 0 ? zones : null;

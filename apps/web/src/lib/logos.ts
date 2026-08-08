@@ -12,16 +12,17 @@ const LOGOS_DIR = path.resolve(here, '../../public/venue-logos');
 
 const EXTS = ['.png', '.svg', '.webp', '.jpg', '.gif', '.ico'];
 
-// Government/agency-run venues share their agency's favicon (TCPUD,
-// State Parks, USFS) — informative, but repetitive across cards. When
-// such a venue has a licensed photo, the photo takes the tile instead.
-const AGENCY_DOMAINS = ['tcpud.org', 'parks.ca.gov', 'placer.ca.gov', 'fs.usda.gov'];
+// Government/agency-run venues share their agency's favicon (county
+// parks, State Parks, USFS) — informative, but repetitive across cards.
+// When such a venue has a licensed photo, the photo takes the tile
+// instead. The domain list is per-city data (city yaml `agency_domains`).
+import { getCity } from './config';
 
-export function isAgencyWebsite(website: string | null): boolean {
+export function isAgencyWebsite(city: string, website: string | null): boolean {
   if (!website) return false;
   try {
     const host = new URL(website).hostname;
-    return AGENCY_DOMAINS.some((d) => host === d || host.endsWith(`.${d}`));
+    return getCity(city).agency_domains.some((d) => host === d || host.endsWith(`.${d}`));
   } catch {
     return false;
   }

@@ -1,6 +1,6 @@
 // Dog-Eared Index (docs/dog-eared-index.md) — read side.
 // Scores are computed by pipeline/index/compute.py; this module only reads
-// data/towns/<slug>/index.yaml and data/index-bands.json (the band tables
+// data/cities/<slug>/index.yaml and data/index-bands.json (the band tables
 // exported by the same code that scores, so display can't drift).
 import fs from 'node:fs';
 import path from 'node:path';
@@ -69,17 +69,20 @@ export function getIndexBands(): IndexBands {
 }
 
 export function getTownIndex(slug: string): TownIndex | null {
-  const file = path.join(DATA_DIR, 'towns', slug, 'index.yaml');
+  const file = path.join(DATA_DIR, 'cities', slug, 'index.yaml');
   if (!fs.existsSync(file)) return null;
   return yaml.load(fs.readFileSync(file, 'utf8')) as TownIndex;
 }
 
 export function getPublishedTownIndexes(): TownIndex[] {
-  const townsDir = path.join(DATA_DIR, 'towns');
-  if (!fs.existsSync(townsDir)) return [];
+  // data/cities holds <slug>.yaml configs alongside <slug>/ artifact dirs;
+  // only the dirs can carry an index.yaml, and getTownIndex filters those.
+  const citiesDir = path.join(DATA_DIR, 'cities');
+  if (!fs.existsSync(citiesDir)) return [];
   return fs
-    .readdirSync(townsDir)
-    .map((slug) => getTownIndex(slug))
+    .readdirSync(citiesDir, { withFileTypes: true })
+    .filter((e) => e.isDirectory())
+    .map((e) => getTownIndex(e.name))
     .filter((t): t is TownIndex => t !== null && t.composite.score !== null);
 }
 

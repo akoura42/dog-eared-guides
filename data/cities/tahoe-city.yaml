@@ -160,4 +160,30 @@ emergency:
       phone: (530) 886-5500
       note: Animal-control reports, Mon–Fri; the weekend line is (530) 823-4411.
       source_url: https://www.placer.ca.gov/1932/Find-Lost-Animals-in-Eastern-Placer-Coun
+# Explorer area chips: neighborhood token -> visitor-level area (null drops
+# the token; the other token in a compound neighborhood carries the area).
+areas:
+  # sub-spots -> their area
+  truckee river outlet: Truckee River
+  truckee river canyon: Truckee River
+  fanny bridge: Truckee River
+  west lake: West Shore
+  blackwood canyon: West Shore
+  ward avenue: West Shore
+  commons beach: Downtown
+  tahoe vista: North Shore
+  burton creek: Highlands
+  # street descriptors -> dropped (the other token carries the area)
+  hwy 89: null
+  highway 28: null
+  grove street: null
+  west river st: null
+  64-acres: null
+# Agency-run venues share these domains' favicons; a licensed photo beats
+# the repeated favicon on cards.
+agency_domains:
+  - tcpud.org
+  - parks.ca.gov
+  - placer.ca.gov
+  - fs.usda.gov
 launched: true

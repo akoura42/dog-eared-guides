@@ -71,14 +71,14 @@ const attrsOf = (venue: Venue) =>
 // Multi-select, any-of — a compound neighborhood matches all its areas.
 const areaOptions = [
   ...venues
-    .flatMap((v) => venueAreas(v.data.neighborhood))
+    .flatMap((v) => venueAreas(v.data.city, v.data.neighborhood))
     .reduce((m, a) => m.set(a, (m.get(a) ?? 0) + 1), new Map<string, number>())
     .entries(),
 ]
   .map(([label, count]) => ({ label, key: label.toLowerCase(), count }))
   .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
 const areasOf = (venue: Venue) =>
-  venueAreas(venue.data.neighborhood).join('|').toLowerCase();
+  venueAreas(venue.data.city, venue.data.neighborhood).join('|').toLowerCase();
 
 // Index-component filters: every component that contributed positively to
 // the town's Dog-Eared Index (verified score > 0) and maps to venues

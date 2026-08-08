@@ -77,6 +77,19 @@ const citySchema = z.object({
     })
     .nullable()
     .default(null),
+  // Area-alias map for the explorer's area chips: lowercase neighborhood
+  // token -> visitor-level area name, or null to drop the token. Unknown
+  // tokens pass through unchanged, so a new city works before it earns
+  // any aliases. Per-city data — a "cherry" in one city must never
+  // relabel a "Cherry" in another.
+  areas: z.record(z.string(), z.string().nullable()).default({}),
+  // Agency domains whose favicon is shared across many venues (county
+  // parks dept, state parks, USFS): when such a venue has a licensed
+  // photo, the photo takes the card tile instead of the repeated favicon.
+  agency_domains: z.array(z.string()).default([]),
+  // Optional per-city OSM discovery radius (pipeline/discover.py); unset
+  // falls back to 8 km. Metros need more, hamlets less.
+  discover_radius_km: z.number().nullable().default(null),
   // Safe polarity for mass onboarding: a city ships nothing until it has
   // passed the QA gate and someone deliberately flips this to true.
   launched: z.boolean().default(false),
@@ -175,7 +188,7 @@ export interface UpcomingTown {
  */
 export function getUpcomingTowns(): UpcomingTown[] {
   if (upcomingTownsCache) return upcomingTownsCache;
-  const file = path.join(DATA_DIR, 'cities', 'waterfront-towns-geo.json');
+  const file = path.join(DATA_DIR, 'waterfront-towns-geo.json');
   if (!fs.existsSync(file)) return (upcomingTownsCache = []);
   const towns = JSON.parse(fs.readFileSync(file, 'utf8')) as UpcomingTown[];
   const launched = new Set(
