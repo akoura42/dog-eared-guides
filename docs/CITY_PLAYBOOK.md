@@ -34,7 +34,7 @@ Copy `tahoe-city.yaml` as the template. Required before anything else:
   coordinates optional, stored for a future map layer.
 - `seasonal_notes` — winter bans, HAB/water advisories, giardia. Facts
   with jurisdictions, not advice.
-- `emergency` block — see Phase 6; can land later but the page and
+- `emergency` block — see Phase 5; can land later but the page and
   pocket card render only when present.
 - `categories` — full list; hubs only generate at ≥4 venues so listing
   extras is harmless.

@@ -1,9 +1,10 @@
 # Dog-Eared Guides
 
 A deeply informative visitor-guide network where **dog-friendly is the
-brand, not a filter**. Live at https://dogearedguides.com. Launch city:
-Tahoe City, CA, with 11 more cities configured and ~880 waterfront towns
-queued on the map. Verified accuracy is the product: every dog-policy
+brand, not a filter**. Live at https://dogearedguides.com. Launched:
+Tahoe City, CA and Charlotte, NC, with 11 more cities configured
+(`launched: false` until their QA gate passes) and ~1,250 waterfront
+towns queued on the map. Verified accuracy is the product: every dog-policy
 claim carries a source and a "Verified" date, everything is re-checked on
 a schedule, and evidence quality is shown to readers as a three-tier badge
 system (official / visitor-reported / unpublished).

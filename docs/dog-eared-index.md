@@ -1,6 +1,7 @@
 # Spec — The Dog-Eared Index, v1
 
-Companion to `dog-friendly-tahoe-site-spec.md` and `dog-eared-tahoe-book-spec.md`.
+Companion to `dog_friendly_city_guide_project_spec.md` (repo root) and
+`docs/kindle-lake-tahoe.md`.
 Adds a town-level, fact-composed dog-friendliness index to the content graph.
 
 **What this is:** arithmetic over verified conditions. Every component is a
@@ -197,8 +198,10 @@ data/towns/<slug>/index.yaml
   composite: 78              # computed; provisional flag if 7–8 components
 pipeline/index/
   compute.py                 # yaml -> scores -> composite; fails on band drift
-  sensitivity.py             # ±20% weight perturbation; reports rank flips
-  isochrone.py
+  test_compute.py            # golden-file tests, every band edge
+  zones.py                   # OSM polygons -> zones.geojson for the map
+  sensitivity.py             # PLANNED, not built — see §6 rule 3
+  isochrone.py               # PLANNED, not built
 ```
 
 - Hospitality components derive **live from venue records** — they are never
@@ -218,10 +221,12 @@ pipeline/index/
    bumps the version, logs rationale in `prompts/EDITORIAL_LOG.md`, and
    triggers recomputation of every published town so cross-town comparisons
    are always same-version.
-3. **Sensitivity requirement:** before v1 freezes — and before any weight
-   change — run `sensitivity.py` across all scored towns. If ±20% weight
-   perturbation flips town rankings, the flagged components are too
-   correlated; prune or merge before publishing.
+3. **Sensitivity requirement (PLANNED — `sensitivity.py` is not yet
+   built):** before any weight change, run a ±20% weight perturbation
+   across all scored towns. If it flips town rankings, the flagged
+   components are too correlated; prune or merge before publishing. Until
+   the script exists, weight changes require the same analysis by hand,
+   logged in `prompts/EDITORIAL_LOG.md`.
 4. **Methodology page:** public, complete — every band table above, the
    tagline, the exclusion list, and a changelog. A downloadable CSV of all
    published town indexes (with component values) is the press/link asset.
@@ -247,7 +252,8 @@ pipeline/index/
 ## 8. Definition of done
 
 Tahoe City publishes a full 9/9 index with every component citing a source;
-`compute.py` and `sensitivity.py` run in CI; the methodology page renders the
+`test_compute.py` and `compute.py --check` run in CI (`ci.yml`, pipeline
+job); the methodology page renders the
 band tables from the same code that scores (no copy drift); and deleting any
 component's data flips the town to a correctly labeled provisional state
 without human intervention.

@@ -58,6 +58,11 @@ Tier-2 listings upgrade to tier 1 when an official policy appears or a
 phone call confirms (`method: phone`). `/how-we-verify/` explains all of
 this to readers — it's a trust asset, keep it accurate.
 
+How to actually execute these tiers on a real city — the mention
+independence test, blocked-site workarounds, chain and lodging rules, OSM
+candidate hygiene — lives in `docs/RESEARCH_CRAFT.md`. Read it before
+researching any queue batch.
+
 ## The research ledger (pipeline/ledger/)
 
 The ledger is the pipeline's memory of every known place per city —
