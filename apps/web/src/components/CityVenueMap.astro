@@ -532,12 +532,7 @@ const legend = [...new Map(venues.map((v) => {
     border-radius: 50%;
     display: inline-block;
   }
-  .food-menu {
-    margin-left: auto;
-  }
   .food-menu .panel {
-    left: auto;
-    right: 0;
     max-height: 20rem;
     overflow-y: auto;
   }
@@ -559,15 +554,6 @@ const legend = [...new Map(venues.map((v) => {
   #dish-filter:focus {
     outline: 2px solid var(--moss);
     outline-offset: 1px;
-  }
-  @media (max-width: 640px) {
-    .food-menu {
-      margin-left: 0;
-    }
-    .food-menu .panel {
-      left: 0;
-      right: auto;
-    }
   }
 
   .split {
