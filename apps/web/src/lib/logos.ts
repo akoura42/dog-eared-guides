@@ -12,6 +12,21 @@ const LOGOS_DIR = path.resolve(here, '../../public/venue-logos');
 
 const EXTS = ['.png', '.svg', '.webp', '.jpg', '.gif', '.ico'];
 
+// Government/agency-run venues share their agency's favicon (TCPUD,
+// State Parks, USFS) — informative, but repetitive across cards. When
+// such a venue has a licensed photo, the photo takes the tile instead.
+const AGENCY_DOMAINS = ['tcpud.org', 'parks.ca.gov', 'placer.ca.gov', 'fs.usda.gov'];
+
+export function isAgencyWebsite(website: string | null): boolean {
+  if (!website) return false;
+  try {
+    const host = new URL(website).hostname;
+    return AGENCY_DOMAINS.some((d) => host === d || host.endsWith(`.${d}`));
+  } catch {
+    return false;
+  }
+}
+
 export function venueLogoUrl(venue: Venue): string | null {
   const slug = venueSlug(venue);
   for (const ext of EXTS) {

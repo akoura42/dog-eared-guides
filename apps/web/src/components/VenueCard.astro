@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import type { Venue } from '~/lib/venues';
 import { venuePath, ALLOWED_LABELS } from '~/lib/venues';
 import { getCategoryByKey } from '~/lib/config';
-import { venueLogoUrl } from '~/lib/logos';
+import { venueLogoUrl, isAgencyWebsite } from '~/lib/logos';
 import { resolvePhoto } from '~/lib/photos';
 import { inSeason, formatMD } from '~/lib/season';
 import VerifiedBadge from './VerifiedBadge.astro';
@@ -17,10 +17,14 @@ interface Props {
 const { venue, showCategory = true } = Astro.props;
 const d = venue.data;
 const category = getCategoryByKey(d.category);
-const logoUrl = venueLogoUrl(venue);
-// No logo but a licensed photo on file → the photo fills the tile.
-// Full credit renders on the venue page; the thumb carries it as title.
-const photoMeta = !logoUrl && d.image ? resolvePhoto(d.image) : null;
+const fetchedLogoUrl = venueLogoUrl(venue);
+// Tile priority: a business's own logo wins; for agency-run venues (whose
+// "logo" is the shared TCPUD/State Parks/USFS favicon) a licensed photo
+// beats the favicon. Full credit renders on the venue page; the thumb
+// carries it as title.
+const photoMeta =
+  d.image && (!fetchedLogoUrl || isAgencyWebsite(d.website)) ? resolvePhoto(d.image) : null;
+const logoUrl = photoMeta ? null : fetchedLogoUrl;
 // Off-season flag, computed at build from the venue's own published dates.
 const offSeason = d.season !== null && !inSeason(d.season);
 ---
