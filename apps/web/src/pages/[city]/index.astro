@@ -92,21 +92,27 @@ const crumbs = [
 
   <AdSlot placement="below-hero" />
 
-  {city.regulations.length > 0 && (
+  {/* Seasonal info renders even when a city has no sourced regulations
+      yet — nesting it under regulations silently dropped it. */}
+  {(city.regulations.length > 0 || city.seasonal_notes.length > 0 || offSeasonVenues.length > 0) && (
     <section class="band band--tint" id="dog-rules">
       <div class="wrap">
-        <h2>Local dog rules</h2>
-        <ul class="reg-list">
-          {city.regulations.map((reg) => (
-            <li>
-              <p class="reg-summary">{reg.summary}</p>
-              <p class="reg-detail">
-                {reg.detail}
-                {' '}<a href={reg.source_url} rel="nofollow noopener" target="_blank">Official source ({reg.jurisdiction})</a>
-              </p>
-            </li>
-          ))}
-        </ul>
+        {city.regulations.length > 0 && (
+          <>
+            <h2>Local dog rules</h2>
+            <ul class="reg-list">
+              {city.regulations.map((reg) => (
+                <li>
+                  <p class="reg-summary">{reg.summary}</p>
+                  <p class="reg-detail">
+                    {reg.detail}
+                    {' '}<a href={reg.source_url} rel="nofollow noopener" target="_blank">Official source ({reg.jurisdiction})</a>
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
         {(city.seasonal_notes.length > 0 || offSeasonVenues.length > 0) && (
           <div class="seasonal">
             <h3>Right now / seasonal</h3>

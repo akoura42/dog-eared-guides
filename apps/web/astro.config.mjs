@@ -64,8 +64,12 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
+      // pocket-card pages are noindexed (print-oriented) — keep them out
+      // of the sitemap so the signals agree.
       filter: (page) =>
-        !page.includes('/og/') && !THIN_HUBS.some((p) => page.endsWith(p)),
+        !page.includes('/og/') &&
+        !page.includes('/pocket-card/') &&
+        !THIN_HUBS.some((p) => page.endsWith(p)),
     }),
   ],
 });

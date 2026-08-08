@@ -96,8 +96,8 @@ const venues = defineCollection({
     // free-text `seasonal` notes and never get a computed flag.
     season: z
       .object({
-        opens: z.string().regex(/^\d{2}-\d{2}$/),
-        closes: z.string().regex(/^\d{2}-\d{2}$/),
+        opens: z.string().regex(/^(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/),
+        closes: z.string().regex(/^(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/),
       })
       .nullable()
       .default(null),
@@ -133,7 +133,7 @@ const venues = defineCollection({
 
 const guides = defineCollection({
   loader: glob({ pattern: '**/*.mdx', base: './src/content/guides' }),
-  schema: z.object({
+  schema: z.strictObject({
     title: z.string(),
     city: z.string(),
     description: z.string(),

@@ -2,7 +2,7 @@
 import Base from '~/layouts/Base.astro';
 import CityMap from '~/components/CityMap.astro';
 import { BRAND_NAME, BRAND_TAGLINE } from '~/lib/site';
-import { getCities, getUpcomingTowns } from '~/lib/config';
+import { getCities, getUpcomingTowns, isLaunched } from '~/lib/config';
 import { getCollection } from 'astro:content';
 import { guidePath } from '~/lib/venues';
 import AdSlot from '~/components/AdSlot.astro';
@@ -10,6 +10,7 @@ import AdSlot from '~/components/AdSlot.astro';
 const cities = getCities().filter((c) => c.launched);
 
 const guides = (await getCollection('guides'))
+  .filter((g) => isLaunched(g.data.city))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 6);
 ---

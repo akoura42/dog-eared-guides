@@ -5,33 +5,33 @@ components:
   patio_share:
     value: 1.0
     basis:
-      numerator: 23
-      denominator: 23
+      numerator: 28
+      denominator: 28
     sources:
     - method: venue-records
-      note: computed from 23 published venue records
+      note: computed from 28 published venue records
       date: '2026-08-08'
     last_verified: '2026-08-08'
     score: 100
   indoor_welcome:
-    value: 0.2727
+    value: 0.4375
     basis:
-      numerator: 3
-      denominator: 11
+      numerator: 7
+      denominator: 16
     sources:
     - method: venue-records
-      note: computed from 11 published venue records
+      note: computed from 16 published venue records
       date: '2026-08-08'
     last_verified: '2026-08-08'
     score: 100
   lodging_share:
     value: 1.0
     basis:
-      numerator: 5
-      denominator: 5
+      numerator: 8
+      denominator: 8
     sources:
     - method: venue-records
-      note: computed from 5 published venue records
+      note: computed from 8 published venue records
       date: '2026-08-08'
     last_verified: '2026-08-08'
     score: 100

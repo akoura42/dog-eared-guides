@@ -8,9 +8,24 @@
 // earns any aliases.
 import { getCity } from './config';
 
+// Alias keys are matched lowercase; normalize once per city so a
+// "NoDa:" key in the yaml still matches instead of silently never firing.
+const normalizedAliases = new Map<string, Record<string, string | null>>();
+
+function aliasesFor(city: string): Record<string, string | null> {
+  let aliases = normalizedAliases.get(city);
+  if (!aliases) {
+    aliases = Object.fromEntries(
+      Object.entries(getCity(city).areas).map(([k, v]) => [k.toLowerCase(), v])
+    );
+    normalizedAliases.set(city, aliases);
+  }
+  return aliases;
+}
+
 export function venueAreas(city: string, neighborhood: string | null): string[] {
   if (!neighborhood) return [];
-  const aliases = getCity(city).areas;
+  const aliases = aliasesFor(city);
   const out = new Set<string>();
   for (const raw of neighborhood.split('/')) {
     const token = raw.trim();

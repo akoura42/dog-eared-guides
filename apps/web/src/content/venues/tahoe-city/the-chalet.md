@@ -11,7 +11,7 @@ lng: -120.2354
 phone: null
 website: https://www.palisadestahoe.com/events-and-activities/dining-and-apres/chalet
 dog_policy:
-  allowed: no
+  allowed: "no"
   leash_required: true
   water_bowls: null
   size_or_breed_restrictions: null

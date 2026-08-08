@@ -8,13 +8,14 @@ import AffiliateDisclosure from '~/components/AffiliateDisclosure.astro';
 import VenueEmbed from '~/components/VenueEmbed.astro';
 import Photo from '~/components/Photo.astro';
 import AffiliateCTA from '~/components/AffiliateCTA.astro';
-import { getCity } from '~/lib/config';
+import { getCity, isLaunched } from '~/lib/config';
 import { guideSlug, formatVerifiedDate } from '~/lib/venues';
 import { guideJsonLd, breadcrumbJsonLd } from '~/lib/jsonld';
 import { BRAND_NAME } from '~/lib/site';
 
 export async function getStaticPaths() {
-  const guides = await getCollection('guides');
+  // Launched gate — see venues/[slug].astro.
+  const guides = (await getCollection('guides')).filter((g) => isLaunched(g.data.city));
   return guides.map((guide) => ({
     params: { city: guide.data.city, slug: guideSlug(guide) },
     props: { guide },

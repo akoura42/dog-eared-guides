@@ -5,7 +5,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import yaml from 'js-yaml';
-import { DATA_DIR } from './config';
+import { DATA_DIR, isLaunched } from './config';
 
 export type IndexSource = {
   url?: string;
@@ -77,11 +77,13 @@ export function getTownIndex(slug: string): TownIndex | null {
 export function getPublishedTownIndexes(): TownIndex[] {
   // data/cities holds <slug>.yaml configs alongside <slug>/ artifact dirs;
   // only the dirs can carry an index.yaml, and getTownIndex filters those.
+  // Launched cities only — the CSV and methodology page must not publish
+  // scores for cities with no site presence.
   const citiesDir = path.join(DATA_DIR, 'cities');
   if (!fs.existsSync(citiesDir)) return [];
   return fs
     .readdirSync(citiesDir, { withFileTypes: true })
-    .filter((e) => e.isDirectory())
+    .filter((e) => e.isDirectory() && isLaunched(e.name))
     .map((e) => getTownIndex(e.name))
     .filter((t): t is TownIndex => t !== null && t.composite.score !== null);
 }

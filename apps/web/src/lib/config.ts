@@ -153,6 +153,18 @@ export function getCity(slug: string): CityConfig {
   return city;
 }
 
+/**
+ * The launched gate for content routes. Venue/guide/OG/index generators
+ * must filter on this — content can land in git before a city's QA flip,
+ * and those pages must not build (or enter the sitemap) until it does.
+ */
+export function isLaunched(slug: string): boolean {
+  if (!cityBySlug) {
+    cityBySlug = new Map(getCities().map((c) => [c.slug, c]));
+  }
+  return cityBySlug.get(slug)?.launched ?? false;
+}
+
 export function getCategories(): CategoryDef[] {
   if (categoriesCache) return categoriesCache;
   const raw = readYaml(path.join(DATA_DIR, 'categories.yaml')) as {

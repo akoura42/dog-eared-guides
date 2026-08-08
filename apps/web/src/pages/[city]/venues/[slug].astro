@@ -11,7 +11,7 @@ import AdSlot from '~/components/AdSlot.astro';
 import AffiliateCTA from '~/components/AffiliateCTA.astro';
 import AffiliateDisclosure from '~/components/AffiliateDisclosure.astro';
 import { getCollection } from 'astro:content';
-import { getCity, getCategoryByKey } from '~/lib/config';
+import { getCity, getCategoryByKey, isLaunched } from '~/lib/config';
 import { venueSlug } from '~/lib/venues';
 import { venueJsonLd, breadcrumbJsonLd } from '~/lib/jsonld';
 import {
@@ -24,7 +24,9 @@ import PetInsuranceCTA from '~/components/PetInsuranceCTA.astro';
 import { BRAND_NAME } from '~/lib/site';
 
 export async function getStaticPaths() {
-  const venues = await getCollection('venues');
+  // Launched gate: venue files can merge before the city's QA flip; those
+  // pages must not build until the city index they link back to exists.
+  const venues = (await getCollection('venues')).filter((v) => isLaunched(v.data.city));
   return venues.map((venue) => ({
     params: { city: venue.data.city, slug: venueSlug(venue) },
     props: { venue },
