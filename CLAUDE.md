@@ -11,14 +11,20 @@ impute** — a missing fact renders as missing; that honesty is the brand.
   `src/content/venues/<city>/` and `src/content/guides/<city>/`; the venue
   schema (`src/content.config.ts`) is STRICT — unknown/misplaced frontmatter
   keys fail the build. City configs are Zod-validated by `src/lib/config.ts`.
-- `data/cities/<slug>.yaml` — per-city editorial config. `launched: false`
-  (the default) until the QA gate passes; flipping it is the launch step.
-- `data/towns/<slug>/` — computed artifacts: Dog-Eared Index
+- `data/cities/<slug>.yaml` — per-city editorial config, including
+  `areas:` (explorer area aliases), `agency_domains:`, and
+  `discover_radius_km`. `launched: false` (the default) until the QA gate
+  passes; flipping it is the launch step.
+- `data/cities/<slug>/` — computed artifacts: Dog-Eared Index
   (`index.yaml`), map zones (`zones.yaml` + `zones.geojson`).
-- `pipeline/` — Python research/generation pipeline. Per-city research
-  ledgers in `pipeline/ledger/<city>.jsonl`; global check log
-  `checks.jsonl`; work queue `queue.yaml` (hand-maintained: mark rows
-  `done: true` yourself — nothing writes back automatically).
+- `data/schema/` — canonical JSON Schemas for every data format. The
+  pipeline validates on write; CI runs `schemas.py --check-all` on every
+  PR. Format changes touch the schema and both readers in one PR.
+- `pipeline/` — Python research/generation pipeline. Everything is
+  per-city: ledgers `pipeline/ledger/<city>.jsonl`, check logs
+  `pipeline/ledger/checks/<city>.jsonl`, work queues
+  `pipeline/queue/<city>.yaml` (generate.py writes `done:` markers back
+  automatically after each run).
 - `pipeline/prompts/` — SYSTEM.md, STYLE_GUIDE.md, voice.md injections.
   **Prompts are code**: when a human corrects generated output, log the
   correction in `EDITORIAL_LOG.md` (recent entries are injected into every
@@ -46,14 +52,16 @@ impute** — a missing fact renders as missing; that honesty is the brand.
 ## Command crib sheet
 
 ```
-python pipeline/discover.py <city> [--radius-km N]   # OSM candidate sweep
+python pipeline/discover.py --city <city>            # OSM sweep (radius from city yaml)
 python pipeline/discover.py --all-launched
+python pipeline/generate.py --city <city> [--limit N]        # queue items
 python pipeline/generate.py --from-ledger <city> [--parallel 2-3] [--model M]
 python pipeline/ledger.py stats|list|set-status|sync
 python pipeline/verify.py [--city <city>] [--limit N] [--max-age 90] [--dry-run]
 python pipeline/index/compute.py <slug> [--check|--rescore]
 python pipeline/index/zones.py <slug>
 python pipeline/fetch_logos.py <slug>
+python pipeline/schemas.py --check-all               # data vs data/schema/
 cd apps/web && npm run check && npm run build        # the machine gate
 python -m pytest pipeline/index/test_compute.py -q
 ```

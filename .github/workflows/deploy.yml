@@ -1,0 +1,56 @@
+name: Deploy to Cloudflare Pages
+
+# In-repo deploy so shipping is versioned, auditable, and fails loudly —
+# not a dashboard-configured build nobody can bisect. Requires:
+#   repo variable  CF_PAGES_PROJECT   (the Pages project name; gates the job)
+#   repo secrets   CLOUDFLARE_API_TOKEN (Pages:Edit), CLOUDFLARE_ACCOUNT_ID
+#   repo variable  SITE_URL, plus the PUBLIC_*/affiliate vars (see
+#   apps/web/.env.example) — set as variables/secrets so the production
+#   build ships with monetization and analytics wired.
+# If the Cloudflare dashboard's git integration is still connected,
+# disconnect it when enabling this workflow (one deployer, not two).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: ${{ vars.CF_PAGES_PROJECT != '' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: apps/web/package-lock.json
+      - run: npm ci
+        working-directory: apps/web
+      - name: Build
+        working-directory: apps/web
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          PUBLIC_ADSENSE_CLIENT: ${{ vars.PUBLIC_ADSENSE_CLIENT }}
+          PUBLIC_GMAPS_API_KEY: ${{ secrets.PUBLIC_GMAPS_API_KEY }}
+          PUBLIC_GA4_ID: ${{ vars.PUBLIC_GA4_ID }}
+          PUBLIC_CF_ANALYTICS_TOKEN: ${{ secrets.PUBLIC_CF_ANALYTICS_TOKEN }}
+          BOOKING_AFFILIATE_AID: ${{ secrets.BOOKING_AFFILIATE_AID }}
+          VIATOR_PARTNER_ID: ${{ secrets.VIATOR_PARTNER_ID }}
+          PET_INSURANCE_URL: ${{ vars.PET_INSURANCE_URL }}
+          PET_INSURANCE_PARTNER: ${{ vars.PET_INSURANCE_PARTNER }}
+        run: npm run build
+      - name: Deploy
+        working-directory: apps/web
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler@4 pages deploy dist --project-name "${{ vars.CF_PAGES_PROJECT }}"

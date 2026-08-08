@@ -186,7 +186,7 @@ doesn't enter the index.
 ## 5. Data model and computation
 
 ```
-data/towns/<slug>/index.yaml
+data/cities/<slug>/index.yaml
   version: index-v1
   components:
     patio_share:

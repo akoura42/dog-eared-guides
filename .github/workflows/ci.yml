@@ -36,11 +36,15 @@ jobs:
       # Dog-Eared Index band math: golden-file tests + drift check on every
       # town's stored index.yaml.
       - run: python -m pytest pipeline/index/test_compute.py -q
-      - name: Index drift check (compute.py --check per town)
+      - name: Index drift check (compute.py --check per city with an index)
         run: |
-          for town in data/towns/*/; do
-            slug="$(basename "$town")"
+          for f in data/cities/*/index.yaml; do
+            slug="$(basename "$(dirname "$f")")"
             python pipeline/index/compute.py "$slug" --check
           done
+      # Every data file (city yamls, index/zones, ledger rows, check log,
+      # queues) against the canonical schemas in data/schema/.
+      - name: Data schema check
+        run: python pipeline/schemas.py --check-all
       - name: Pipeline syntax check
         run: python -m compileall -q pipeline

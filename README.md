@@ -16,8 +16,8 @@ apps/web/            # Astro 5 static site → Cloudflare Pages
   src/content/       # venues (md) + guides (mdx) — the published layer, git-reviewed
   src/components/    # DogPolicyBlock, VerifiedBadge, DishSearch, maps, planner, ...
 data/
-  cities/            # city configs (the multi-city contract) + waterfront-towns CSV/geo
-  towns/<slug>/      # per-town data: Dog-Eared Index values, dog-zone geometry
+  cities/            # per-city: <slug>.yaml config + <slug>/ computed artifacts (index, zones)
+  schema/            # canonical JSON Schemas for every data format (CI-enforced)
   categories.yaml    # category + attribute definitions
 pipeline/            # Python: generation, verification, discovery, geocoding
   index/             # Dog-Eared Index: compute.py (bands as code), zones.py (map geometry)

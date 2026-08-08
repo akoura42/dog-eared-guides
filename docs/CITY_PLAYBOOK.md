@@ -83,7 +83,7 @@ Per-venue rules beyond STYLE_GUIDE.md, learned the hard way:
 
 ## Phase 3 — geo layers (zones + trails + areas)
 
-1. `data/towns/<slug>/zones.yaml` — curate the dog-policy zones: no-dogs
+1. `data/cities/<slug>/zones.yaml` — curate the dog-policy zones: no-dogs
    beaches, the off-leash park, leashed day-use areas, restricted parks.
    POLICY COMES FROM VERIFIED RECORDS, never OSM tags. Per zone: `near`
    coords, `osm_name`, `max_match_m` for big parks (nearest-vertex
@@ -103,7 +103,7 @@ Per-venue rules beyond STYLE_GUIDE.md, learned the hard way:
    neighborhood taxonomy (NoDa, South End, Plaza Midwood…) is how
    readers filter a large catalog.
 
-## Phase 4 — the Dog-Eared Index (`data/towns/<slug>/index.yaml`)
+## Phase 4 — the Dog-Eared Index (`data/cities/<slug>/index.yaml`)
 
 Copy the Tahoe skeleton; hospitality components fill themselves from
 venue records. The six external components, with the verification

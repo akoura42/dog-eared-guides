@@ -67,7 +67,8 @@ researching any queue batch.
 
 The ledger is the pipeline's memory of every known place per city —
 published or not. One JSONL file per city (PR-diffable on purpose) plus an
-append-only `checks.jsonl` history. Statuses: `unchecked`, `queued`,
+append-only per-city check history (`checks/<city>.jsonl`). Statuses:
+`unchecked`, `queued`,
 `published-official`, `published-reported`, `unverifiable`,
 `rejected-no-dogs` (verified no — saves re-researching), `closed`,
 `duplicate`.
@@ -108,7 +109,7 @@ Then review:
 - Merge → deployed, and `ledger.py sync` (or the next generate run)
   reconciles statuses.
 
-`pipeline/queue.yaml` still works for named work — guides especially
+`pipeline/queue/<city>.yaml` still works for named work — guides especially
 (`type: guide` + `topic:`) — and for venues you want researched that
 discovery hasn't surfaced.
 
@@ -139,8 +140,9 @@ Special frontmatter worth knowing:
 | Workflow | Cadence | What it does |
 |---|---|---|
 | `ci.yml` | every PR/push | Astro build = the schema gate |
-| `verify.yml` | Mondays | Re-checks venues verified >90 days ago; opens one PR (✅ date bumps, ✏️ policy changes, 🚫 closures). Also tries upgrading tier-2 listings to tier 1. Logs to `checks.jsonl`. |
+| `verify.yml` | Mondays | Per-city matrix jobs re-check venues verified >90 days ago (25/city/week, oldest first); one PR per city (✅ date bumps, ✏️ policy changes, 🚫 closures). Also tries upgrading tier-2 listings to tier 1. Logs to `checks/<city>.jsonl`. |
 | `discover.yml` | monthly | OSM candidate sweep for all launched cities → PR of new `unchecked` ledger rows |
+| `deploy.yml` | push to main | Builds with production env vars and deploys to Cloudflare Pages via wrangler. Gated on the `CF_PAGES_PROJECT` repo variable — until that's set (and the CF dashboard git integration disconnected), shipping stays on the dashboard integration. |
 
 Auth for the model-using jobs: store `CLAUDE_CODE_OAUTH_TOKEN` as a repo
 secret (mint it locally with `claude setup-token`) to run on the Claude
@@ -172,15 +174,16 @@ permanent doctrine, promote it into the style guide or voice doc.
 Tahoe City, covering city config, discovery, venue batches, the
 zones/trails layer, the Dog-Eared Index, the emergency block + pocket
 card, logos/photos, the monetization pass, and the QA gate. The short
-version: it's all data — `data/cities/<slug>.yaml`, the ledger,
-`data/towns/<slug>/` — plus optional area aliases and agency domains in
-two lib files. Everything downstream is automatic once `launched: true`:
+version: it's all data — `data/cities/<slug>.yaml` (config, plus optional
+`areas:` aliases and `agency_domains:`), the ledger, and
+`data/cities/<slug>/` computed artifacts. Everything downstream is
+automatic once `launched: true`:
 city picker + map pin, hub pages (≥4-venue thin-page guard), explorer
 with filters/zones/emergency layer, index block, emergency + pocket-card
 pages, itinerary planner, sitemap, OG images, CSV export.
 
 "Coming soon" dots on the homepage map come from
-`data/cities/waterfront-towns.csv` (tiers 1–2), geocoded by
+`data/waterfront-towns.csv` (tiers 1–2), geocoded by
 `python pipeline/geocode_towns.py` (US Census Gazetteer + Nominatim
 fallback) into `waterfront-towns-geo.json`. Re-run only when the CSV
 changes.
