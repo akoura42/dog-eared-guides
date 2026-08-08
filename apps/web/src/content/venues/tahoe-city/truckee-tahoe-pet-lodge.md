@@ -1,7 +1,7 @@
 ---
 name: Truckee-Tahoe Pet Lodge
 city: tahoe-city
-category: services
+category: daycare
 neighborhood: Truckee / West River St
 address: 10960 West River Street #106E, Truckee, CA 96161
 lat: 39.31978
@@ -26,8 +26,7 @@ verification:
   source_url: https://www.truckeetahoepetlodge.com/
 menu: null
 affiliate: null
-tags:
-  - dog-care
+tags: []
 summary: All-suite dog boarding, daycare, and grooming in Truckee — the closest full-service option for a can't-bring-the-dog day, open seven days.
 image: null
 ---

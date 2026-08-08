@@ -1,7 +1,7 @@
 ---
 name: Dog Gone Crazy (Agate Bay Animal Hospital)
 city: tahoe-city
-category: services
+category: daycare
 neighborhood: Tahoe Vista / North Shore
 address: 580 National Ave, Tahoe Vista, CA 96148
 lat: 39.24279
@@ -28,8 +28,7 @@ verification:
   source_url: https://www.agatebayanimalhospital.com/daycare.pml
 menu: null
 affiliate: null
-tags:
-  - dog-care
+tags: []
 summary: Vet-attached boarding and daycare on the North Shore — climate-controlled cabins, an acre of fenced yard, and a patients-only boarding policy with published vaccine requirements.
 image: null
 ---

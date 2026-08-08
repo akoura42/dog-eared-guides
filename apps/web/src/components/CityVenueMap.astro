@@ -20,7 +20,14 @@ interface Props {
   venues: Venue[];
 }
 
-const { city, venues } = Astro.props;
+// Vet venues live on the Emergency layer, not in the regular pin/card
+// set — their venue pages stay published, but the explorer shows them
+// as red-cross emergency pins only.
+const displayVenues = (v: Venue[]) =>
+  v.filter((venue) => !venue.data.tags.includes('emergency-vet'));
+
+const { city, venues: allVenues } = Astro.props;
+const venues = displayVenues(allVenues);
 
 const CATEGORY_COLORS: Record<string, string> = {
   eat: '#c05f33',
@@ -30,6 +37,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   beach: '#2c6e8a',
   activity: '#e8a13c',
   shop: '#7d5ba6',
+  daycare: '#a04f7d',
   services: '#55645c',
 };
 

@@ -22,7 +22,8 @@ export const INDEX_VENUE_FILTERS: Record<string, (d: VenueData) => boolean> = {
   water_access: (d) => d.tags.includes('water-access'),
   trail_access: (d) => d.category === 'trail',
   off_leash: (d) => d.dog_policy.leash_required === false,
-  emergency_vet: (d) => d.tags.includes('emergency-vet'),
+  // emergency_vet deliberately has no venue mapping: vet venues render on
+  // the explorer's Emergency layer, not as regular filterable pins.
 };
 
 export const INDEX_FILTERABLE_KEYS = Object.keys(INDEX_VENUE_FILTERS);
