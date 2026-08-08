@@ -1,7 +1,7 @@
 """Dog-Eared Index v1 — yaml -> scores -> composite (docs/dog-eared-index.md).
 
 Bands and weights live HERE, in code. Measured values live in
-data/towns/<slug>/index.yaml. Hospitality components are computed live from
+data/cities/<slug>/index.yaml. Hospitality components are computed live from
 venue records on every run and are never hand-entered. If a stored score
 disagrees with the band recomputation the run fails (band drift): a band
 change requires a version bump and an explicit --rescore.
@@ -28,8 +28,11 @@ import yaml
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 VENUES_DIR = REPO_ROOT / "apps" / "web" / "src" / "content" / "venues"
-TOWNS_DIR = REPO_ROOT / "data" / "towns"
+TOWNS_DIR = REPO_ROOT / "data" / "cities"
 BANDS_JSON = REPO_ROOT / "data" / "index-bands.json"
+
+sys.path.insert(0, str(REPO_ROOT / "pipeline"))
+from schemas import require_valid  # noqa: E402
 
 VERSION = "index-v1"
 TAGLINE = "This counts what exists; it doesn't know your dog."
@@ -429,6 +432,7 @@ def run(slug: str, check: bool = False, rescore: bool = False) -> dict:
         return out
 
     index_file.parent.mkdir(parents=True, exist_ok=True)
+    require_valid("index", out, str(index_file))
     index_file.write_text(yaml.safe_dump(out, sort_keys=False, allow_unicode=True))
     export_bands()
     c = out["composite"]

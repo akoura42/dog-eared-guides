@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Check log entry (pipeline/ledger/checks/<city>.jsonl)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["ts", "city", "place_id", "actor", "outcome", "note"],
+  "properties": {
+    "ts": { "type": "string" },
+    "city": { "type": "string", "minLength": 1 },
+    "place_id": { "type": "string", "minLength": 1 },
+    "actor": { "type": "string" },
+    "outcome": { "type": "string" },
+    "note": { "type": "string" }
+  }
+}

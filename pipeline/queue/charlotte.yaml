@@ -145,9 +145,9 @@ items:
   city: charlotte
   name: Pet Supplies Plus
   category: pet-supply
-  notes: 'DONE (unverifiable: Which-location ambiguity in ledger entry; resolve
-    location then verify dogs-inside policy.) — Verify which location this ledger
-    entry is and the dogs-inside policy.'
+  notes: 'DONE (unverifiable: Which-location ambiguity in ledger entry; resolve location
+    then verify dogs-inside policy.) — Verify which location this ledger entry is
+    and the dogs-inside policy.'
   done: true
 - type: venue
   city: charlotte
@@ -161,8 +161,8 @@ items:
   city: charlotte
   name: Kimpton Tryon Park Hotel
   category: stay
-  notes: 'Kimpton brand policy: pets stay free, no fee, no size/weight limits —
-    verify the brand page AND this property page both state it.'
+  notes: 'Kimpton brand policy: pets stay free, no fee, no size/weight limits — verify
+    the brand page AND this property page both state it.'
   done: true
 - type: venue
   city: charlotte
@@ -189,8 +189,8 @@ items:
   city: charlotte
   name: Canopy by Hilton Charlotte Southpark
   category: stay
-  notes: 'DONE (unverifiable: Property pet policy not readable; phone needed.) —
-    Canopy brand pet-friendly; verify property fee/limits.'
+  notes: 'DONE (unverifiable: Property pet policy not readable; phone needed.) — Canopy
+    brand pet-friendly; verify property fee/limits.'
   done: true
 - type: venue
   city: charlotte
@@ -211,8 +211,8 @@ items:
   city: charlotte
   name: Embassy Suites by Hilton Charlotte Uptown
   category: stay
-  notes: 'DONE (unverifiable: Property pet policy not readable; phone needed.) —
-    Verify property pet policy.'
+  notes: 'DONE (unverifiable: Property pet policy not readable; phone needed.) — Verify
+    property pet policy.'
   done: true
 - type: venue
   city: charlotte
@@ -256,8 +256,8 @@ items:
   name: Brooks' Sandwich House
   category: eat
   notes: 'DONE (unverifiable: Operating status itself uncertain (2023 sale listing,
-    retirement); verify trading status first.) — NoDa institution, outdoor-only
-    seating. Verify whether dogs at the outdoor tables are addressed anywhere official.'
+    retirement); verify trading status first.) — NoDa institution, outdoor-only seating.
+    Verify whether dogs at the outdoor tables are addressed anywhere official.'
   done: true
 - type: venue
   city: charlotte
@@ -270,9 +270,8 @@ items:
   city: charlotte
   name: Dilworth Neighborhood Grille
   category: eat
-  notes: 'DONE (unverifiable: Policy not publishable from official sources; menu
-    fetch truncated; phone needed.) — Reputed dog-friendly patio near Freedom Park.
-    Verify.'
+  notes: 'DONE (unverifiable: Policy not publishable from official sources; menu fetch
+    truncated; phone needed.) — Reputed dog-friendly patio near Freedom Park. Verify.'
   done: true
 - type: venue
   city: charlotte
@@ -286,15 +285,15 @@ items:
   city: charlotte
   name: Lucky Dog Bark and Brew
   category: activity
-  notes: Bar + off-leash play hybrid. Verify membership/vaccine requirements and
-    which side dogs occupy.
+  notes: Bar + off-leash play hybrid. Verify membership/vaccine requirements and which
+    side dogs occupy.
   done: true
 - type: venue
   city: charlotte
   name: Sycamore Brewing
   category: drink
-  notes: DONE (closed — now Club West Brewing, tier-3; see ledger) — South End.
-    Famous patio; verify their published dog policy (patio vs taproom).
+  notes: DONE (closed — now Club West Brewing, tier-3; see ledger) — South End. Famous
+    patio; verify their published dog policy (patio vs taproom).
   done: true
 - type: venue
   city: charlotte
@@ -313,8 +312,8 @@ items:
   city: charlotte
   name: Freedom Park
   category: trail
-  notes: 'The signature in-town park. Mecklenburg Park & Rec: leashed in parks;
-    dog rules per county ordinance already in the city config.'
+  notes: 'The signature in-town park. Mecklenburg Park & Rec: leashed in parks; dog
+    rules per county ordinance already in the city config.'
   done: true
 - type: venue
   city: charlotte
@@ -329,83 +328,3 @@ items:
   notes: Uptown dog park (First Ward). Verify operator (city/county/private), fencing,
     hours, vaccine rules.
   done: true
-- type: venue
-  city: tahoe-city
-  name: Bridgetender Tavern & Grill
-  category: eat
-  notes: 'TIER 3 — CONFLICTING EVIDENCE, phone call required: (530) 583-3342. Official
-    site publishes no pet policy. Visitor mentions conflict: older reviews (BringFido,
-    TripAdvisor, Yelp ~2019) describe dogs in a designated non-riverfront outdoor
-    area (sometimes only tied adjacent to the patio); the most recent dated mentions
-    (Yelp answers ~2022, a 2022-07-08 phone-check blog comment) report the policy
-    tightened or revoked after patrons abused the back patio. Fails the tier-2 agreement
-    requirement. Whatever the call establishes becomes tier 1 via method: phone.'
-- type: venue
-  city: tahoe-city
-  name: Tahoe City Dog Park (TCPUD, 375 Grove St)
-  category: activity
-  notes: Official TCPUD page confirms location/hours; confirm off-leash/fencing
-    rules.
-  done: true
-- type: venue
-  city: tahoe-city
-  name: Tahoe State Recreation Area — Gatekeepers day-use area
-  category: beach
-  notes: parks.ca.gov page_id=504 — dogs allowed only at Truckee River Outlet day-use
-    area.
-  done: true
-- type: venue
-  city: tahoe-city
-  name: 64-Acres Park
-  category: trail
-  notes: TCPUD park at the Truckee River Trail trailhead.
-  done: true
-- type: guide
-  city: tahoe-city
-  topic: Dog-friendly hikes near Tahoe City
-  notes: USFS LTBMU + State Parks rules; include winter ski-trail ban Nov 1 - May
-    1.
-- type: guide
-  city: tahoe-city
-  topic: Winter in Tahoe City with a dog
-  notes: Plowed TCPUD trail miles, ski-trail dog ban, paw care, dog-friendly patios
-    in winter.
-  done: true
-- type: guide
-  city: tahoe-city
-  topic: A dog-friendly 48-hour Tahoe City itinerary
-  notes: Use existing verified venues via VenueEmbed; keep every stop legal per
-    city regulations.
-- type: guide
-  city: cheyenne
-  topic: 'Dog-friendly Cheyenne: parks, patios, and the rules'
-- type: guide
-  city: kearney
-  topic: 'Dog-friendly Kearney: trails, parks, and the rules'
-- type: guide
-  city: lincoln
-  topic: 'Dog-friendly Lincoln: trails, parks, and the rules'
-- type: guide
-  city: columbia-mo
-  topic: 'Dog-friendly Columbia, MO: the MKT Trail, parks, and the rules'
-- type: guide
-  city: paducah
-  topic: 'Dog-friendly Paducah: riverfront, parks, and the rules'
-- type: guide
-  city: clarksville-tn
-  topic: 'Dog-friendly Clarksville: greenways, parks, and the rules'
-- type: guide
-  city: pigeon-forge
-  topic: 'Dogs in Pigeon Forge: what to do when the Smokies ban dogs on trails'
-- type: guide
-  city: gatlinburg
-  topic: 'Dogs in Gatlinburg: the Gatlinburg Trail and everything else'
-- type: guide
-  city: asheville
-  topic: 'Dog-friendly Asheville: breweries, the Parkway, and the rules'
-- type: guide
-  city: gastonia
-  topic: 'Dog-friendly Gastonia: Crowders Mountain and around town'
-- type: guide
-  city: raleigh
-  topic: 'Dog-friendly Raleigh: greenways, dog parks, and the rules'

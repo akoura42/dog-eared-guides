@@ -1,9 +1,9 @@
 """Fetch dog-zone polygons from OSM and write the explorer's zone layer.
 
-Reads data/towns/<slug>/zones.yaml (curated: policy + note + source per
+Reads data/cities/<slug>/zones.yaml (curated: policy + note + source per
 zone, grounded in the catalog's verified records — OSM supplies geometry
 only), queries Overpass for each zone's polygon, simplifies it, computes
-acreage, and writes data/towns/<slug>/zones.geojson for the web app.
+acreage, and writes data/cities/<slug>/zones.geojson for the web app.
 
 Usage: python pipeline/index/zones.py <town-slug>
 
@@ -25,7 +25,7 @@ from pathlib import Path
 import yaml
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-TOWNS_DIR = REPO_ROOT / "data" / "towns"
+TOWNS_DIR = REPO_ROOT / "data" / "cities"
 OVERPASS = "https://overpass-api.de/api/interpreter"
 SEARCH_RADIUS_M = 12000
 SIMPLIFY_TOLERANCE_M = 8.0
@@ -292,6 +292,10 @@ def trail_features(spec: dict, zone_features: list[dict]) -> list[dict]:
 def run(slug: str) -> None:
     town_dir = TOWNS_DIR / slug
     spec = yaml.safe_load((town_dir / "zones.yaml").read_text())
+    sys.path.insert(0, str(REPO_ROOT / "pipeline"))
+    from schemas import require_valid
+
+    require_valid("zones", spec, str(town_dir / "zones.yaml"))
     zones = spec["zones"]
 
     names = sorted({z["osm_name"] for z in zones})

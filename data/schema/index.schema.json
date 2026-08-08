@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Dog-Eared Index values (data/cities/<slug>/index.yaml)",
+  "description": "Written by pipeline/index/compute.py, read by apps/web/src/lib/dogEaredIndex.ts. Bands and weights live in compute.py, never here.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "town", "computed", "composite", "pillars", "components"],
+  "properties": {
+    "version": { "type": "string" },
+    "town": { "type": "string" },
+    "computed": { "type": "string" },
+    "composite": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["score", "provisional", "components_verified", "components_total"],
+      "properties": {
+        "score": { "type": ["integer", "null"] },
+        "provisional": { "type": "boolean" },
+        "components_verified": { "type": "integer" },
+        "components_total": { "type": "integer" }
+      }
+    },
+    "pillars": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["score", "components_verified", "components_total"],
+        "properties": {
+          "score": { "type": ["integer", "null"] },
+          "components_verified": { "type": "integer" },
+          "components_total": { "type": "integer" }
+        }
+      }
+    },
+    "components": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "value": {},
+          "score": { "type": ["integer", "null"] },
+          "basis": { "type": "object" },
+          "modifiers": { "type": "array" },
+          "geometry": {},
+          "sources": { "type": "array", "items": { "type": "object" } },
+          "last_verified": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}

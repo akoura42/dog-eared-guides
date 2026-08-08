@@ -41,7 +41,10 @@ from pathlib import Path
 from common import REPO_ROOT, VENUES_DIR, split_frontmatter, today
 
 LEDGER_DIR = REPO_ROOT / "pipeline" / "ledger"
-CHECKS_FILE = LEDGER_DIR / "checks.jsonl"
+# Check log is sharded per city (like the place ledgers): a single global
+# append-only file guarantees line-level merge conflicts the moment two
+# city branches are in flight.
+CHECKS_DIR = LEDGER_DIR / "checks"
 
 STATUSES = {
     "unchecked",
@@ -68,6 +71,10 @@ def city_file(city: str) -> Path:
     return LEDGER_DIR / f"{city}.jsonl"
 
 
+def checks_file(city: str) -> Path:
+    return CHECKS_DIR / f"{city}.jsonl"
+
+
 def load_city(city: str) -> dict[str, dict]:
     path = city_file(city)
     if not path.exists():
@@ -83,8 +90,12 @@ def load_city(city: str) -> dict[str, dict]:
 
 
 def save_city(city: str, places: dict[str, dict]) -> Path:
+    from schemas import require_valid
+
     LEDGER_DIR.mkdir(parents=True, exist_ok=True)
     path = city_file(city)
+    for pid in places:
+        require_valid("ledger-place", places[pid], f"{path.name} id={pid}")
     lines = [
         json.dumps(places[pid], ensure_ascii=False, sort_keys=True)
         for pid in sorted(places)
@@ -96,7 +107,7 @@ def save_city(city: str, places: dict[str, dict]) -> Path:
 def ledger_cities() -> list[str]:
     if not LEDGER_DIR.is_dir():
         return []
-    return sorted(p.stem for p in LEDGER_DIR.glob("*.jsonl") if p.name != "checks.jsonl")
+    return sorted(p.stem for p in LEDGER_DIR.glob("*.jsonl"))
 
 
 def upsert_place(
@@ -112,6 +123,7 @@ def upsert_place(
     lat: float | None = None,
     lng: float | None = None,
     evidence: list[str] | None = None,
+    osm_ref: str | None = None,
 ) -> dict:
     """Insert or update; never downgrades a researched status to unchecked."""
     assert status in STATUSES, f"unknown status: {status}"
@@ -128,6 +140,8 @@ def upsert_place(
         if evidence:
             merged = list(dict.fromkeys([*existing.get("evidence", []), *evidence]))
             existing["evidence"] = merged
+        if osm_ref:
+            existing.setdefault("osm_ref", osm_ref)
         return existing
     row = {
         "id": pid,
@@ -144,12 +158,16 @@ def upsert_place(
         row["lat"], row["lng"] = lat, lng
     if evidence:
         row["evidence"] = evidence
+    if osm_ref:
+        row["osm_ref"] = osm_ref
     places[pid] = row
     return row
 
 
 def record_check(city: str, place_id: str, actor: str, outcome: str, note: str = "") -> None:
-    LEDGER_DIR.mkdir(parents=True, exist_ok=True)
+    from schemas import require_valid
+
+    CHECKS_DIR.mkdir(parents=True, exist_ok=True)
     entry = {
         "ts": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
         "city": city,
@@ -158,7 +176,8 @@ def record_check(city: str, place_id: str, actor: str, outcome: str, note: str =
         "outcome": outcome,
         "note": note,
     }
-    with CHECKS_FILE.open("a") as fh:
+    require_valid("check-entry", entry, f"checks/{city}.jsonl")
+    with checks_file(city).open("a") as fh:
         fh.write(json.dumps(entry, ensure_ascii=False, sort_keys=True) + "\n")
 
 

@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Research ledger place row (pipeline/ledger/<city>.jsonl)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "city", "status", "source", "first_seen"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "name": { "type": "string", "minLength": 1 },
+    "city": { "type": "string", "minLength": 1 },
+    "category": { "type": ["string", "null"] },
+    "status": {
+      "enum": [
+        "unchecked",
+        "queued",
+        "published-official",
+        "published-reported",
+        "unverifiable",
+        "rejected-no-dogs",
+        "closed",
+        "duplicate"
+      ]
+    },
+    "note": { "type": ["string", "null"] },
+    "source": { "type": "string" },
+    "first_seen": { "type": "string" },
+    "last_checked": { "type": ["string", "null"] },
+    "lat": { "type": ["number", "null"] },
+    "lng": { "type": ["number", "null"] },
+    "evidence": { "type": "array", "items": { "type": "string" } },
+    "osm_ref": { "type": "string", "pattern": "^[nwr][0-9]+$" },
+    "published_slug": { "type": "string" },
+    "website": { "type": "string" }
+  }
+}

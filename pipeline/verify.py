@@ -151,7 +151,7 @@ def main() -> int:
             print(f"  stale: {p.relative_to(REPO_ROOT)}")
         return 0
 
-    from ledger import CHECKS_FILE, record_check
+    from ledger import checks_file, record_check
 
     print(f"Engine: {model_engine()}")
     touched: list[Path] = []
@@ -193,14 +193,17 @@ def main() -> int:
         print("\n".join(report))
         return 0
 
-    # PID suffix so a same-day re-run after a partial failure doesn't die
-    # on an existing branch.
-    branch = f"verify/recheck-{today()}-{os.getpid()}"
+    # City + PID suffix so matrix jobs and same-day re-runs never collide
+    # on a branch name.
+    scope = f"{args.city}-" if args.city else ""
+    branch = f"verify/recheck-{scope}{today()}-{os.getpid()}"
     body = (
         "Scheduled 90-day re-verification. **Merging this PR is the approval step.**\n\n"
         + "\n".join(report)
     )
-    files = touched + ([CHECKS_FILE] if CHECKS_FILE.exists() else [])
+    cities_touched = sorted({p.parent.name for p in stale_paths})
+    check_logs = [checks_file(c) for c in cities_touched if checks_file(c).exists()]
+    files = touched + check_logs
     open_pr(branch, f"verify: re-checked {len(stale_paths)} stale venue(s)", body, files)
     return 0
 

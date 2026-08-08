@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Curated dog zones (data/cities/<slug>/zones.yaml)",
+  "description": "Read by pipeline/index/zones.py, which fetches geometry from OSM and writes zones.geojson. Policy values are the map legend.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["zones"],
+  "properties": {
+    "zones": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "policy", "source_url"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "label": { "type": "string" },
+          "osm_name": { "type": "string" },
+          "policy": { "enum": ["no-dogs", "off-leash", "leashed", "restricted"] },
+          "note": { "type": "string" },
+          "source_url": { "type": "string", "format": "uri" },
+          "near": {
+            "type": "array",
+            "items": { "type": "number" },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "venue": { "type": ["string", "null"] },
+          "approx_radius_m": { "type": "number" },
+          "max_match_m": { "type": "number" }
+        }
+      }
+    },
+    "trails": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "center": {
+          "type": "array",
+          "items": { "type": "number" },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "radius_m": { "type": "number" },
+        "classes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["selector", "policy", "label", "source_url"],
+            "properties": {
+              "selector": { "enum": ["cycleway", "named-path"] },
+              "policy": { "enum": ["no-dogs", "off-leash", "leashed", "restricted"] },
+              "label": { "type": "string" },
+              "note": { "type": "string" },
+              "source_url": { "type": "string", "format": "uri" },
+              "venue": { "type": ["string", "null"] }
+            }
+          }
+        },
+        "exclude_zone_ids": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

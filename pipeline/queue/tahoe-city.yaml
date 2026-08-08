@@ -1,0 +1,47 @@
+items:
+- type: venue
+  city: tahoe-city
+  name: Bridgetender Tavern & Grill
+  category: eat
+  notes: 'TIER 3 — CONFLICTING EVIDENCE, phone call required: (530) 583-3342. Official
+    site publishes no pet policy. Visitor mentions conflict: older reviews (BringFido,
+    TripAdvisor, Yelp ~2019) describe dogs in a designated non-riverfront outdoor
+    area (sometimes only tied adjacent to the patio); the most recent dated mentions
+    (Yelp answers ~2022, a 2022-07-08 phone-check blog comment) report the policy
+    tightened or revoked after patrons abused the back patio. Fails the tier-2 agreement
+    requirement. Whatever the call establishes becomes tier 1 via method: phone.'
+- type: venue
+  city: tahoe-city
+  name: Tahoe City Dog Park (TCPUD, 375 Grove St)
+  category: activity
+  notes: Official TCPUD page confirms location/hours; confirm off-leash/fencing rules.
+  done: true
+- type: venue
+  city: tahoe-city
+  name: Tahoe State Recreation Area — Gatekeepers day-use area
+  category: beach
+  notes: parks.ca.gov page_id=504 — dogs allowed only at Truckee River Outlet day-use
+    area.
+  done: true
+- type: venue
+  city: tahoe-city
+  name: 64-Acres Park
+  category: trail
+  notes: TCPUD park at the Truckee River Trail trailhead.
+  done: true
+- type: guide
+  city: tahoe-city
+  topic: Dog-friendly hikes near Tahoe City
+  notes: USFS LTBMU + State Parks rules; include winter ski-trail ban Nov 1 - May
+    1.
+- type: guide
+  city: tahoe-city
+  topic: Winter in Tahoe City with a dog
+  notes: Plowed TCPUD trail miles, ski-trail dog ban, paw care, dog-friendly patios
+    in winter.
+  done: true
+- type: guide
+  city: tahoe-city
+  topic: A dog-friendly 48-hour Tahoe City itinerary
+  notes: Use existing verified venues via VenueEmbed; keep every stop legal per city
+    regulations.
