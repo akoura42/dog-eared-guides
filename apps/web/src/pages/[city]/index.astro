@@ -125,6 +125,28 @@ const crumbs = [
     </section>
   )}
 
+  {city.getting_there.length > 0 && (
+    <section class="band">
+      <div class="wrap">
+        <h2>Getting there with a dog</h2>
+        <ul class="gt-list">
+          {city.getting_there.map((g) => (
+            <li>
+              <span class="gt-mode">{g.mode === 'air' ? 'Fly' : 'Rail'}</span>
+              <div>
+                <p class="gt-name">{g.name}</p>
+                <p class="gt-note">
+                  {g.note}
+                  {' '}<a href={g.source_url} rel="noopener nofollow" target="_blank">Source</a>
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
   {city.resources.length > 0 && (
     <section class="band band--tint">
       <div class="wrap">
@@ -185,6 +207,39 @@ const crumbs = [
       grid-template-columns: 1fr;
       gap: 0.5rem;
     }
+  }
+  .gt-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+    max-width: 48rem;
+  }
+  .gt-list li {
+    display: flex;
+    gap: 0.9rem;
+    align-items: baseline;
+  }
+  .gt-mode {
+    flex: none;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--moss);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.15rem 0.6rem;
+  }
+  .gt-name {
+    font-weight: 650;
+    margin: 0 0 0.15rem;
+  }
+  .gt-note {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    margin: 0;
   }
   .res-lede {
     color: var(--ink-soft);

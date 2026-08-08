@@ -71,6 +71,21 @@ categories:
   - pet-supply
   - daycare
   - services
+# Getting there with a dog — airport and rail links with verified pet
+# rules. Coordinates stored for a future map layer.
+getting_there:
+  - mode: air
+    name: Charlotte Douglas International (CLT)
+    note: Service-animal/pet relief areas run post-security (the A/B Connector near Checkpoint A, Concourse E near Gate E36, and the D/E corner) and pre-security outdoors at both ends of the Arrivals/Baggage Claim level. Except for service animals, pets stay in carriers inside the terminal.
+    source_url: https://www.cltairport.com/airport-info/accessibility/terminal-amenities/service-animal-relief-areas/
+    lat: 35.2140
+    lng: -80.9431
+  - mode: rail
+    name: Amtrak (Crescent, Carolinian, Piedmont)
+    note: Amtrak's carry-on pet program takes dogs and cats up to 20 pounds including the carrier, on trips of up to seven hours, in coach, with a per-segment fee and a five-pets-per-train cap — reservations required. The carrier maximum is 19" x 14" x 10.5".
+    source_url: https://www.amtrak.com/pets
+    lat: null
+    lng: null
 # Verified emergency contacts — the /charlotte/emergency/ page and the
 # pocket card render from this. Drive times via OSRM from Trade & Tryon.
 emergency:

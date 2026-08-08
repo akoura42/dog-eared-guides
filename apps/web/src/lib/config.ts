@@ -52,6 +52,21 @@ const citySchema = z.object({
   // Manual override for the explorer map's initial frame radius (km from
   // town center). Unset, the frame self-tunes to the venue distribution.
   map_frame_km: z.number().nullable().default(null),
+  // Getting there with a dog: the airport and rail links that serve the
+  // town, with verified pet rules (relief areas, Amtrak carry-on policy).
+  // Coordinates optional — stored for a future map layer.
+  getting_there: z
+    .array(
+      z.object({
+        mode: z.enum(['air', 'rail']),
+        name: z.string(),
+        note: z.string(),
+        source_url: z.string().url(),
+        lat: z.number().nullable().default(null),
+        lng: z.number().nullable().default(null),
+      })
+    )
+    .default([]),
   // Verified emergency contacts for the /{city}/emergency/ page and the
   // pocket card. Every entry carries the source it was verified against.
   emergency: z

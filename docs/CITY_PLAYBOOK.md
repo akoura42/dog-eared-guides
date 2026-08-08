@@ -27,6 +27,11 @@ Copy `tahoe-city.yaml` as the template. Required before anything else:
   sit in town, (4) USFS/BLM rules if federal land abuts, (5) transit
   agency pet policy (fixed-route + microtransit — almost no guide
   verifies this; it's cheap distinction).
+- `getting_there` — the serving airport's pet/service-animal relief
+  areas (from the airport's own page) and the Amtrak link
+  (amtrak.com/pets carry-on rules + which routes/stations serve the
+  town). Renders as the city page's "Getting there with a dog" section;
+  coordinates optional, stored for a future map layer.
 - `seasonal_notes` — winter bans, HAB/water advisories, giardia. Facts
   with jurisdictions, not advice.
 - `emergency` block — see Phase 6; can land later but the page and

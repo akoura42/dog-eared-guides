@@ -103,6 +103,21 @@ categories:
   - pet-supply
   - daycare
   - services
+# Getting there with a dog — airport and rail links with verified pet
+# rules. Coordinates stored for a future map layer.
+getting_there:
+  - mode: air
+    name: Reno-Tahoe International (RNO), about an hour away
+    note: Three ADA-accessible animal relief areas, including two fenced outdoor "Bark Parks" with running water — Gate K9 South by the ticketing lobby (about 700 square feet) and one north of Baggage Claim — plus a post-security relief station near High Mountain Marketplace.
+    source_url: https://www.renoairport.com/at-the-airport/amenities/
+    lat: 39.4986
+    lng: -119.7681
+  - mode: rail
+    name: Amtrak at Truckee Depot (California Zephyr)
+    note: The Zephyr stops at the 10065 Donner Pass Road depot in Truckee, 25 minutes from town. Amtrak's carry-on pet program takes dogs and cats up to 20 pounds including the carrier on trips of up to seven hours in coach, with a per-segment fee and reservations required — the Truckee-Sacramento and Truckee-Reno runs fit inside that window.
+    source_url: https://www.amtrak.com/pets
+    lat: 39.32749
+    lng: -120.18560
 # Verified emergency contacts — the /tahoe-city/emergency/ page and the
 # pocket card render from this. Drive times via OSRM from town center.
 emergency:
