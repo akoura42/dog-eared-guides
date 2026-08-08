@@ -1,6 +1,106 @@
 items:
 - type: venue
   city: charlotte
+  name: Skiptown
+  category: dog-park
+  notes: Membership dog park + bar in South End — the Dog Bar successor lead from
+    batch 1. Verify membership, vaccine requirements, and the bar/park split. Capture
+    vaccinations_required if published.
+- type: venue
+  city: charlotte
+  name: Wooden Robot
+  category: drink
+  notes: South End brewery; verify taproom/patio dog policy.
+- type: venue
+  city: charlotte
+  name: Resident Culture Brewing Company
+  category: drink
+  notes: Plaza Midwood; verify policy (has had food trucks/patio culture).
+- type: venue
+  city: charlotte
+  name: Birdsong Brewing Company
+  category: drink
+  notes: NoDa-adjacent; verify policy.
+- type: venue
+  city: charlotte
+  name: Romare Bearden Park
+  category: trail
+  notes: Uptown signature park; county rules govern; verify any park-specific posted
+    rules.
+- type: venue
+  city: charlotte
+  name: Frazier Park
+  category: trail
+  notes: Near Uptown; county rules; verify specifics.
+- type: venue
+  city: charlotte
+  name: Pet Supplies Plus
+  category: pet-supply
+  notes: Verify which location this ledger entry is and the dogs-inside policy.
+- type: venue
+  city: charlotte
+  name: Petco
+  category: pet-supply
+  notes: Verify which location and dogs-inside policy (chain policy usually published).
+- type: venue
+  city: charlotte
+  name: Kimpton Tryon Park Hotel
+  category: stay
+  notes: 'Kimpton brand policy: pets stay free, no fee, no size/weight limits —
+    verify the brand page AND this property page both state it.'
+  done: true
+- type: venue
+  city: charlotte
+  name: Grand Bohemian Hotel Charlotte
+  category: stay
+  notes: Marriott Autograph; verify property pet policy (fee/limits) from its own
+    page.
+  done: true
+- type: venue
+  city: charlotte
+  name: Le Méridien Charlotte
+  category: stay
+  notes: Marriott; verify property-specific pet policy.
+  done: true
+- type: venue
+  city: charlotte
+  name: Aloft Charlotte City Center
+  category: stay
+  notes: 'DONE (unverifiable: Property pet policy not readable from official channels;
+    phone needed.) — Aloft brand is dog-forward (ARF program historically); verify
+    current property policy.'
+  done: true
+- type: venue
+  city: charlotte
+  name: Canopy by Hilton Charlotte Southpark
+  category: stay
+  notes: 'DONE (unverifiable: Property pet policy not readable; phone needed.) —
+    Canopy brand pet-friendly; verify property fee/limits.'
+  done: true
+- type: venue
+  city: charlotte
+  name: JW Marriott Charlotte
+  category: stay
+  notes: 'DONE (unverifiable: Third-party signals say no pets, but a ban does not
+    ship uncited either — confirm by phone (704) 333-1101 whether property or brand
+    policy.) — Verify property pet policy — some JWs decline pets.'
+  done: true
+- type: venue
+  city: charlotte
+  name: Homewood Suites by Hilton Charlotte Uptown First Ward
+  category: stay
+  notes: 'DONE (unverifiable: Fee/limits not readable from official channels; phone
+    needed.) — Extended-stay; verify fee and limits.'
+  done: true
+- type: venue
+  city: charlotte
+  name: Embassy Suites by Hilton Charlotte Uptown
+  category: stay
+  notes: 'DONE (unverifiable: Property pet policy not readable; phone needed.) —
+    Verify property pet policy.'
+  done: true
+- type: venue
+  city: charlotte
   name: Mac's Speed Shop
   category: eat
   notes: South End biker-BBQ institution; patio reputation. Verify their own published
