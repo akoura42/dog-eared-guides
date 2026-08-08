@@ -1,6 +1,109 @@
 items:
 - type: venue
   city: charlotte
+  name: Salud Cervezeria
+  category: eat
+  notes: NoDa upstairs cerveceria (Salud Beer Shop family). Verify dog policy for
+    the space; NoDa coverage gap.
+- type: venue
+  city: charlotte
+  name: Heist Brewery
+  category: eat
+  notes: NoDa brewery-restaurant. Verify patio/taproom dog policy.
+- type: venue
+  city: charlotte
+  name: Protagonist Beer
+  category: drink
+  notes: NoDa-adjacent (Villa Heights). Verify policy.
+- type: venue
+  city: charlotte
+  name: Free Range Brewing
+  category: drink
+  notes: NoDa corridor (N Davidson). Verify policy.
+- type: venue
+  city: charlotte
+  name: Divine Barrel Brewing
+  category: drink
+  notes: NoDa/Derita Rd corridor. Verify policy.
+- type: venue
+  city: charlotte
+  name: Pet Station Dog Park
+  category: dog-park
+  notes: Verify operator (private store-run? county?), fencing, rules.
+- type: venue
+  city: charlotte
+  name: Dog Run
+  category: activity
+  notes: Ledger name generic — identify what/where this OSM entry actually is before
+    drafting; skip if unidentifiable.
+- type: venue
+  city: charlotte
+  name: NoDa Bark & Board
+  category: daycare
+  notes: NoDa boarding/daycare. Verify requirements; capture vaccinations_required.
+- type: venue
+  city: charlotte
+  name: Dogs All Day
+  category: daycare
+  notes: Verify hours + vaccine requirements; capture vaccinations_required.
+- type: venue
+  city: charlotte
+  name: Social Pet Charlotte
+  category: daycare
+  notes: Verify; capture vaccinations_required.
+- type: venue
+  city: charlotte
+  name: The Barker Lounge
+  category: daycare
+  notes: Verify; capture vaccinations_required.
+- type: venue
+  city: charlotte
+  name: Hollywood Feed
+  category: pet-supply
+  notes: Identify which location; chain dogs-welcome policy usually published.
+- type: venue
+  city: charlotte
+  name: PetSmart
+  category: pet-supply
+  notes: Identify which location; chain leashed-pets-welcome policy is published.
+- type: venue
+  city: charlotte
+  name: The Ritz-Carlton, Charlotte
+  category: stay
+  notes: Verify pet policy — many Ritz properties decline; a cited no is still content.
+- type: venue
+  city: charlotte
+  name: The Westin Charlotte
+  category: stay
+  notes: Westin brand is dog-forward (Heavenly Dog beds historically); verify property
+    policy.
+- type: venue
+  city: charlotte
+  name: Omni Charlotte Hotel
+  category: stay
+  notes: Verify property pet policy.
+- type: venue
+  city: charlotte
+  name: The Ivey's Hotel
+  category: stay
+  notes: Uptown boutique; verify.
+- type: venue
+  city: charlotte
+  name: The Dunhill Hotel
+  category: stay
+  notes: Uptown historic; verify.
+- type: venue
+  city: charlotte
+  name: Hyatt Centric Charlotte Southpark
+  category: stay
+  notes: Verify property policy.
+- type: venue
+  city: charlotte
+  name: Hyatt House Charlotte/Center City
+  category: stay
+  notes: Extended-stay, usually pet-friendly; verify fee/limits.
+- type: venue
+  city: charlotte
   name: Skiptown
   category: dog-park
   notes: Membership dog park + bar in South End — the Dog Bar successor lead from
