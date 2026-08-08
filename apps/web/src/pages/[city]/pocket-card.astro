@@ -1,0 +1,187 @@
+---
+// One-page printable pocket card: local dog rules + verified emergency
+// numbers. Standalone markup (no site chrome) so it prints on a single
+// sheet; cell coverage around town is spotty and paper doesn't buffer.
+import { getCities } from '~/lib/config';
+import { BRAND_NAME, SITE_URL } from '~/lib/site';
+
+export async function getStaticPaths() {
+  return getCities()
+    .filter((c) => c.launched && c.emergency)
+    .map((city) => ({ params: { city: city.slug }, props: { city } }));
+}
+
+const { city } = Astro.props;
+const em = city.emergency!;
+const built = new Date().toISOString().slice(0, 10);
+const contacts = [
+  ...em.er_vets.map((c) => ({ ...c, kind: 'ER vet' })),
+  ...em.poison.map((c) => ({ ...c, kind: 'Poison' })),
+  ...em.lost_found.map((c) => ({ ...c, kind: 'Lost dog' })),
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>{city.name} Dog Pocket Card — {BRAND_NAME}</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <div class="card">
+      <header>
+        <h1>{city.name}, {city.state_code} — dog pocket card</h1>
+        <p class="sub">{BRAND_NAME} · rules and numbers verified against official sources · printed from a build of {built}</p>
+      </header>
+
+      <section>
+        <h2>The rules</h2>
+        <ul>
+          {city.regulations.map((reg) => <li>{reg.summary}</li>)}
+        </ul>
+      </section>
+
+      <section>
+        <h2>If something goes wrong</h2>
+        <table>
+          <tbody>
+            {contacts.map((c) => (
+              <tr>
+                <td class="kind">{c.kind}</td>
+                <td class="who">{c.name}</td>
+                <td class="phone">{c.phone}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+
+      {city.seasonal_notes.length > 0 && (
+        <section>
+          <h2>Seasonal</h2>
+          <ul>
+            {city.seasonal_notes.map((note) => <li>{note}</li>)}
+          </ul>
+        </section>
+      )}
+
+      <footer>
+        <p>
+          Policies change — the current version of everything on this card lives at
+          {' '}{SITE_URL.replace('https://', '')}/{city.slug}/. Verified listings, the
+          full map, and per-venue dog policies are there.
+        </p>
+      </footer>
+
+      <button class="print" onclick="window.print()">Print this card</button>
+      <a class="back" href={`/${city.slug}/emergency/`}>← Back to emergency info</a>
+    </div>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Georgia, 'Times New Roman', serif;
+        color: #20302a;
+        background: #f4eedf;
+      }
+      .card {
+        max-width: 46rem;
+        margin: 0 auto;
+        padding: 2rem 1.5rem;
+        background: #fff;
+        min-height: 100vh;
+      }
+      h1 {
+        font-size: 1.5rem;
+        margin: 0;
+      }
+      .sub {
+        font-size: 0.8rem;
+        color: #55645c;
+        margin: 0.25rem 0 1rem;
+        border-bottom: 2px solid #20302a;
+        padding-bottom: 0.75rem;
+      }
+      h2 {
+        font-size: 0.85rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin: 1.1rem 0 0.4rem;
+        color: #2f6047;
+      }
+      ul {
+        margin: 0;
+        padding-left: 1.1rem;
+        font-size: 0.85rem;
+        line-height: 1.45;
+      }
+      li {
+        margin-bottom: 0.25rem;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.85rem;
+      }
+      td {
+        padding: 0.22rem 0.5rem 0.22rem 0;
+        border-bottom: 1px solid #ddd6c4;
+        vertical-align: top;
+      }
+      .kind {
+        font-weight: 700;
+        white-space: nowrap;
+        width: 5.5rem;
+      }
+      .phone {
+        font-weight: 700;
+        white-space: nowrap;
+        text-align: right;
+      }
+      footer p {
+        font-size: 0.78rem;
+        color: #55645c;
+        margin: 1.25rem 0 0;
+        border-top: 2px solid #20302a;
+        padding-top: 0.6rem;
+      }
+      .print {
+        margin-top: 1.25rem;
+        font: inherit;
+        font-size: 0.9rem;
+        padding: 0.5rem 1.2rem;
+        background: #2f6047;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .back {
+        display: inline-block;
+        margin: 1.25rem 0 0 1rem;
+        font-size: 0.85rem;
+        color: #2f6047;
+      }
+      @media print {
+        body {
+          background: #fff;
+        }
+        .card {
+          max-width: none;
+          padding: 0;
+          min-height: 0;
+        }
+        .print,
+        .back {
+          display: none;
+        }
+      }
+    </style>
+  </body>
+</html>

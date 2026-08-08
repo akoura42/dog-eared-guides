@@ -69,6 +69,15 @@ regulations:
       Ed Z'berg Sugar Pine Point State Park.
     jurisdiction: California State Parks (Sierra District)
     source_url: https://www.parks.ca.gov/pages/499/files/DSO%20683-22-002%20Dogs.pdf
+  - summary: Dogs can't ride the TART bus, and the local on-demand shuttle is service-animals-only.
+    detail: >-
+      TART's rider rules state that "animals, other than service animals, are
+      not permitted on buses." The free TART Connect shuttle follows the same
+      line in the North Lake Tahoe zone — service animals only. The one
+      exception is the separate Truckee TART Connect zone, which allows
+      well-behaved pets in crates.
+    jurisdiction: Tahoe Truckee Area Regional Transit
+    source_url: https://tahoetruckeetransit.com/how-to-ride/
 resources:
   - label: TCPUD trails & winter snow-removal status
     url: https://www.tcpud.org/trails
@@ -91,4 +100,38 @@ categories:
   - activity
   - shop
   - services
+# Verified emergency contacts — the /tahoe-city/emergency/ page and the
+# pocket card render from this. Drive times via OSRM from town center.
+emergency:
+  er_vets:
+    - name: Burton Creek Veterinary Clinic (in town)
+      phone: (530) 583-8587
+      note: Mon–Fri 8am–5pm. Takes emergencies during business hours; the clinic asks that you call ahead so staff can prepare.
+      source_url: https://burtoncreekvet.com/our-services/emergency-veterinary-care/
+    - name: Donner Truckee Veterinary Hospital
+      phone: (530) 587-4366
+      note: Emergency appointments Mon–Sat 8:00am–5:30pm, on Highway 267 in Truckee.
+      source_url: https://dtvet.com/urgent-care/
+    - name: BluePearl Pet Hospital (Reno)
+      phone: (775) 358-8555
+      note: Open 24 hours daily. 555 Morrill Ave, Reno — about an hour's drive from town.
+      source_url: https://www.yelp.com/biz/bluepearl-pet-hospital-reno
+    - name: Animal Emergency & Specialty Center (Reno)
+      phone: (775) 851-3600
+      note: Staffed 24 hours a day, 365 days a year. 6425 S. Virginia St, Reno — a little over an hour.
+      source_url: https://aecreno.com/
+  poison:
+    - name: ASPCA Animal Poison Control
+      phone: (888) 426-4435
+      note: 24/7, 365 days a year. A consultation fee applies.
+      source_url: https://www.aspca.org/pet-care/animal-poison-control
+  lost_found:
+    - name: Humane Society of Truckee-Tahoe
+      phone: (530) 587-5948
+      note: Placer County's contracted shelter for the North Tahoe area — 10961 Stevens Lane, Truckee. Open Mon–Sat 1–6pm; the Sunday pickup line is (530) 582-2484. Lost-pet reports and the found-pet book are here.
+      source_url: https://www.placer.ca.gov/1932/Find-Lost-Animals-in-Eastern-Placer-Coun
+    - name: Placer County Animal Services
+      phone: (530) 886-5500
+      note: Animal-control reports, Mon–Fri; the weekend line is (530) 823-4411.
+      source_url: https://www.placer.ca.gov/1932/Find-Lost-Animals-in-Eastern-Placer-Coun
 launched: true

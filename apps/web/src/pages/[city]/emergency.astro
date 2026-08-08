@@ -1,0 +1,147 @@
+---
+// The "when it goes wrong" page: verified emergency contacts for the
+// town — ER vets with hours and drive context, poison control, and
+// lost-dog steps. Every entry cites the source it was verified against.
+import Base from '~/layouts/Base.astro';
+import Breadcrumbs from '~/components/Breadcrumbs.astro';
+import PetInsuranceCTA from '~/components/PetInsuranceCTA.astro';
+import AffiliateDisclosure from '~/components/AffiliateDisclosure.astro';
+import { getCities } from '~/lib/config';
+import { PET_INSURANCE_URL, PET_INSURANCE_PARTNER } from '~/lib/affiliate';
+import { breadcrumbJsonLd } from '~/lib/jsonld';
+import { BRAND_NAME } from '~/lib/site';
+
+export async function getStaticPaths() {
+  return getCities()
+    .filter((c) => c.launched && c.emergency)
+    .map((city) => ({ params: { city: city.slug }, props: { city } }));
+}
+
+const { city } = Astro.props;
+const em = city.emergency!;
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: `${city.name}, ${city.state_code}`, url: `/${city.slug}/` },
+  { name: 'Emergency info', url: `/${city.slug}/emergency/` },
+];
+
+const insuranceConfigured = Boolean(PET_INSURANCE_URL && PET_INSURANCE_PARTNER);
+
+const sections = [
+  { title: 'Emergency vet care', items: em.er_vets },
+  { title: 'Poison', items: em.poison },
+  { title: 'Lost dog', items: em.lost_found },
+].filter((s) => s.items.length > 0);
+---
+
+<Base
+  title={`Dog Emergency Info for ${city.name}, ${city.state_code} | ${BRAND_NAME}`}
+  description={`Emergency vets, poison control, and lost-dog contacts for ${city.name} — every number verified against an official source.`}
+  jsonld={[breadcrumbJsonLd(crumbs)]}
+>
+  <div class="wrap">
+    <Breadcrumbs crumbs={crumbs} />
+
+    <header class="page-head">
+      <h1>If something goes wrong in {city.name}</h1>
+      <p class="lede">
+        The numbers below are verified against each organization's own
+        published information. A <a href={`/${city.slug}/pocket-card/`}>printable
+        pocket card</a> carries the same contacts for when there's no signal.
+      </p>
+    </header>
+
+    {sections.map((section) => (
+      <section class="em-section">
+        <h2>{section.title}</h2>
+        <ul class="contacts">
+          {section.items.map((c) => (
+            <li>
+              <div class="c-head">
+                <span class="c-name">{c.name}</span>
+                <a class="c-phone" href={`tel:${c.phone.replace(/[^\d]/g, '')}`}>{c.phone}</a>
+              </div>
+              <p class="c-note">
+                {c.note}
+                {' '}<a href={c.source_url} rel="noopener nofollow" target="_blank">Source</a>
+              </p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+
+    {insuranceConfigured && (
+      <>
+        <AffiliateDisclosure />
+        <PetInsuranceCTA />
+      </>
+    )}
+
+    <p class="verify-note">
+      Numbers and hours change. Every contact here is re-checked on the same
+      cycle as the rest of the site — if something doesn't match what you
+      reach, <a href="/how-we-verify/">let us know</a>.
+    </p>
+  </div>
+</Base>
+
+<style>
+  .page-head {
+    padding: 1rem 0 0.5rem;
+  }
+  .lede {
+    color: var(--ink-soft);
+    max-width: 44rem;
+  }
+  .em-section {
+    margin: 1.75rem 0;
+  }
+  .em-section h2 {
+    margin-bottom: 0.6rem;
+  }
+  .contacts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.8rem;
+    max-width: 46rem;
+  }
+  .contacts li {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 0.85rem 1.1rem;
+  }
+  .c-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .c-name {
+    font-weight: 650;
+  }
+  .c-phone {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--clay);
+    white-space: nowrap;
+  }
+  .c-note {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    margin: 0.3rem 0 0;
+  }
+  .verify-note {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    margin: 2.5rem 0 3rem;
+    max-width: 44rem;
+  }
+</style>

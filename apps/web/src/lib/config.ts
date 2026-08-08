@@ -8,6 +8,13 @@ import { z } from 'astro:content';
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const DATA_DIR = path.resolve(here, '../../../../data');
 
+const emergencyContactSchema = z.object({
+  name: z.string(),
+  phone: z.string(),
+  note: z.string(),
+  source_url: z.string().url(),
+});
+
 const citySchema = z.object({
   name: z.string(),
   slug: z.string(),
@@ -38,6 +45,16 @@ const citySchema = z.object({
     )
     .default([]),
   categories: z.array(z.string()),
+  // Verified emergency contacts for the /{city}/emergency/ page and the
+  // pocket card. Every entry carries the source it was verified against.
+  emergency: z
+    .object({
+      er_vets: z.array(emergencyContactSchema).default([]),
+      poison: z.array(emergencyContactSchema).default([]),
+      lost_found: z.array(emergencyContactSchema).default([]),
+    })
+    .nullable()
+    .default(null),
   launched: z.boolean().default(true),
 });
 

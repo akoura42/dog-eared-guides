@@ -6,7 +6,8 @@ import DogEaredIndex from '~/components/DogEaredIndex.astro';
 import CityVenueMap from '~/components/CityVenueMap.astro';
 import AdSlot from '~/components/AdSlot.astro';
 import { getCities } from '~/lib/config';
-import { venuesForCity } from '~/lib/venues';
+import { venuesForCity, venueSlug } from '~/lib/venues';
+import { inSeason, formatMD } from '~/lib/season';
 import { breadcrumbJsonLd } from '~/lib/jsonld';
 import { BRAND_NAME } from '~/lib/site';
 
@@ -18,6 +19,8 @@ export async function getStaticPaths() {
 
 const { city } = Astro.props;
 const venues = await venuesForCity(city.slug);
+// Venues currently outside their own published season (build-time flag).
+const offSeasonVenues = venues.filter((v) => v.data.season && !inSeason(v.data.season));
 
 const crumbs = [
   { name: 'Home', url: '/' },
@@ -41,9 +44,14 @@ const crumbs = [
         <p class="eyebrow">{city.name}, {city.state}</p>
         <h1>{city.hero.headline}</h1>
       </div>
-      {city.regulations.length > 0 && (
-        <a class="rules-link" href="#dog-rules">Local dog rules ↓</a>
-      )}
+      <div class="head-links">
+        {city.emergency && (
+          <a class="rules-link" href={`/${city.slug}/emergency/`}>Emergency info</a>
+        )}
+        {city.regulations.length > 0 && (
+          <a class="rules-link" href="#dog-rules">Local dog rules ↓</a>
+        )}
+      </div>
     </div>
   </header>
 
@@ -99,10 +107,16 @@ const crumbs = [
             </li>
           ))}
         </ul>
-        {city.seasonal_notes.length > 0 && (
+        {(city.seasonal_notes.length > 0 || offSeasonVenues.length > 0) && (
           <div class="seasonal">
             <h3>Right now / seasonal</h3>
             <ul>
+              {offSeasonVenues.map((v) => (
+                <li>
+                  <a href={`/${city.slug}/venues/${venueSlug(v)}/`}>{v.data.name}</a> is
+                  out of season until {formatMD(v.data.season!.opens)}.
+                </li>
+              ))}
               {city.seasonal_notes.map((note) => <li>{note}</li>)}
             </ul>
           </div>
@@ -147,11 +161,15 @@ const crumbs = [
     gap: 1rem;
     flex-wrap: wrap;
   }
+  .head-links {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.35rem;
+  }
   .rules-link {
     font-size: 0.9rem;
     font-weight: 650;
     white-space: nowrap;
-    margin-bottom: 0.35rem;
   }
   #dog-rules {
     scroll-margin-top: 4.5rem;

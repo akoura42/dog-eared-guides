@@ -43,3 +43,10 @@ attributes:
     rule:
       field: tags
       includes: pet-supply
+  - key: dog-care
+    slug: dog-daycare-boarding
+    label: Daycare & Boarding
+    blurb: Where the dog goes on a can't-bring-the-dog day — hours and requirements verified.
+    rule:
+      field: tags
+      includes: dog-care

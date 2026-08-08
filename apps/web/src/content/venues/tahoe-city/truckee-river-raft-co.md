@@ -19,6 +19,9 @@ dog_policy:
     bring lunch and drinks." No leash rule, size limit, or dog fee is
     published, and the site doesn't address flotation for dogs one way or
     the other.
+season:
+  opens: '05-22'
+  closes: '09-07'
 seasonal:
   - Season runs Memorial Day weekend through Labor Day.
   - The shuttle bus back to the start operates 8:30am to 6:00pm.

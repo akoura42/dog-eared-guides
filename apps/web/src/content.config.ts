@@ -82,6 +82,16 @@ const venues = defineCollection({
     // says about itself.
     cuisines: z.array(z.string()).default([]),
     seasonal: z.array(z.string()).default([]),
+    // Structured operating season (MM-DD), only when the venue publishes
+    // actual dates — fuzzy seasons ("closes at first snow") stay in the
+    // free-text `seasonal` notes and never get a computed flag.
+    season: z
+      .object({
+        opens: z.string().regex(/^\d{2}-\d{2}$/),
+        closes: z.string().regex(/^\d{2}-\d{2}$/),
+      })
+      .nullable()
+      .default(null),
     verification: verificationSchema,
     menu: menuSchema.nullable().default(null),
     // First-person observations from an actual visit — human-editor-only
