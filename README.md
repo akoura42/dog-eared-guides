@@ -16,12 +16,17 @@ apps/web/            # Astro 5 static site → Cloudflare Pages
   src/components/    # DogPolicyBlock, VerifiedBadge, DishSearch, maps, planner, ...
 data/
   cities/            # city configs (the multi-city contract) + waterfront-towns CSV/geo
+  towns/<slug>/      # per-town data: Dog-Eared Index values, dog-zone geometry
   categories.yaml    # category + attribute definitions
 pipeline/            # Python: generation, verification, discovery, geocoding
+  index/             # Dog-Eared Index: compute.py (bands as code), zones.py (map geometry)
   ledger/            # research ledger: every known place per city + check history
   prompts/           # versioned system prompt, style guide, editorial log
 docs/
   RUNBOOK.md         # how to operate everything  ← start here
+  CITY_PLAYBOOK.md   # the phase-by-phase recipe for launching a city
+  dog-eared-index.md # spec for the town-level dog-friendliness index
+  monetization.md    # tiered monetization plan + implementation notes
   voice.md           # the house voice, injected into every generation prompt
 .github/workflows/   # PR build gate, weekly re-verify cron, monthly OSM discovery
 ```

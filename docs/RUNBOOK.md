@@ -163,19 +163,16 @@ permanent doctrine, promote it into the style guide or voice doc.
 
 ## Add a new city (the multi-city contract)
 
-Zero component edits required:
-
-1. Create `data/cities/<slug>.yaml` (copy `tahoe-city.yaml`): name, slug,
-   geo, hero copy, intro, **officially sourced** regulations (every entry
-   needs a `source_url`), seasonal notes, categories. Research agents or a
-   generation run can source the regulations; never publish unsourced rules.
-2. `python pipeline/discover.py --city <slug>` to fill the candidate pool,
-   then `generate.py --from-ledger <slug>` batches + a starter guide via
-   the queue.
-3. Merge PRs. Everything downstream is automatic: city picker + map pin
-   (replacing any "coming soon" dot), hub page, category hubs (browsable
-   from 1 venue; indexed/sitemapped at ≥4 — the thin-page guard), venue
-   map, itinerary planner, sitemap, OG images.
+**Follow `docs/CITY_PLAYBOOK.md`** — the phase-by-phase recipe proven on
+Tahoe City, covering city config, discovery, venue batches, the
+zones/trails layer, the Dog-Eared Index, the emergency block + pocket
+card, logos/photos, the monetization pass, and the QA gate. The short
+version: it's all data — `data/cities/<slug>.yaml`, the ledger,
+`data/towns/<slug>/` — plus optional area aliases and agency domains in
+two lib files. Everything downstream is automatic once `launched: true`:
+city picker + map pin, hub pages (≥4-venue thin-page guard), explorer
+with filters/zones/emergency layer, index block, emergency + pocket-card
+pages, itinerary planner, sitemap, OG images, CSV export.
 
 "Coming soon" dots on the homepage map come from
 `data/cities/waterfront-towns.csv` (tiers 1–2), geocoded by
@@ -197,6 +194,12 @@ changes.
   - `PUBLIC_GA4_ID` — GA4 (consent-gated)
   - `PUBLIC_ADSENSE_CLIENT` — AdSense (consent-gated; also update
     `apps/web/public/ads.txt`)
+  - `BOOKING_AFFILIATE_AID` — Booking.com partner id; unset, lodging CTAs
+    render unwrapped (activation is an env switch, not a content change)
+  - `VIATOR_PARTNER_ID` — Viator partner id (P00xxxxx), same pattern
+  - `PET_INSURANCE_URL` + `PET_INSURANCE_PARTNER` — pet-insurance
+    referral link + display name; both required or the module renders
+    nothing (see docs/monetization.md for placement rules)
 
 ## Maps & Google integration
 
@@ -220,12 +223,21 @@ is the rating/reviews fetch. Expect ≈ $0.04 × (expands beyond 1,000/mo).
 
 ## Monetization notes
 
+**`docs/monetization.md` is the reference** — tiered plan, the
+trust constraint (venue layer only, labeled, never touching listings or
+scores), and per-channel implementation notes. Operational summary:
+
 - Ad slots are consent-gated, lazy, and height-reserved (zero CLS); render
   nothing until `PUBLIC_ADSENSE_CLIENT` is set. Swapping to a premium
   network later = replacing the loader inside `AdSlot.astro`.
 - Affiliate links: set `affiliate.viator_url` / `booking_url` (+
-  `viator_product_code`) in venue frontmatter. Pages with affiliate links
-  auto-render the FTC disclosure; links carry `rel="sponsored nofollow"`.
+  `viator_product_code`) in venue frontmatter; partner ids are appended
+  at render by `lib/affiliate.ts` when the env vars above are set.
+  Identity-verify property URLs (address match) before linking. Pages
+  with affiliate links auto-render the FTC disclosure; links carry
+  `rel="sponsored nofollow"`.
+- Pet-insurance module places itself on emergency-vet venue pages, the
+  emergency page, and pet-fee lodging pages once its env vars are set.
 - `apps/web/public/ads.txt` must carry the real publisher line before ads
   go live.
 - Decision (2026-08-04): reviews/maps stay on the free deep-link pattern
