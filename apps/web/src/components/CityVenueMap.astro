@@ -131,6 +131,19 @@ const cuisineOptions = [...new Set(venues.flatMap((v) => v.data.cuisines))]
   }));
 
 const center = { lat: city.geo.lat, lng: city.geo.lng };
+
+// Initial-frame radius, self-tuned per town: the 90th percentile of venue
+// distances from center +15% margin (floor 3 km), so a compact town opens
+// tight and a sprawling one opens wide, while genuine outliers (the
+// Truckee daycare, North Shore boarding) stay off the opening frame.
+// city.map_frame_km overrides when a town needs manual framing.
+const distKm = (lat: number, lng: number) => {
+  const kx = 111.32 * Math.cos((center.lat * Math.PI) / 180);
+  return Math.hypot((lng - center.lng) * kx, (lat - center.lat) * 110.54);
+};
+const sortedDists = venues.map((v) => distKm(v.data.lat, v.data.lng)).sort((a, b) => a - b);
+const p90 = sortedDists[Math.min(sortedDists.length - 1, Math.floor(sortedDists.length * 0.9))] ?? 0;
+const frameKm = city.map_frame_km ?? Math.max(3, p90 * 1.15);
 // Dog-policy zone polygons (no-dogs beaches, the off-leash park, leashed
 // day-use areas) — generated from OSM geometry, classified from our
 // verified records. Null when the town has no zones file yet.
@@ -293,6 +306,7 @@ const legend = [...new Map(venues.map((v) => {
       <div
         id="venue-map-canvas"
         data-center={JSON.stringify(center)}
+        data-frame-km={frameKm.toFixed(2)}
         data-markers={JSON.stringify(markers)}
         data-zones={zones ? JSON.stringify(zones) : undefined}
         data-emergency={emergencyMarkers.length > 0 ? JSON.stringify(emergencyMarkers) : undefined}
@@ -845,15 +859,16 @@ const legend = [...new Map(venues.map((v) => {
   // Initial framing fits the TOWN CORE, not every marker: out-of-town
   // venues (Truckee daycare, North Shore) would otherwise zoom the
   // opening view out to empty terrain. They stay on the map — just off
-  // the initial frame; Area filters and zooming out reach them.
-  const CORE_RADIUS_KM = 9;
+  // the initial frame; Area filters and zooming out reach them. The
+  // radius is computed per town at build (see frontmatter).
+  const coreRadiusKm = canvasEl?.dataset.frameKm ? Number(canvasEl.dataset.frameKm) : Infinity;
   const townCenter = canvasEl?.dataset.center ? JSON.parse(canvasEl.dataset.center) : null;
   function inCore(lat: number, lng: number): boolean {
     if (!townCenter) return true;
     const kx = 111.32 * Math.cos((townCenter.lat * Math.PI) / 180);
     const dx = (lng - townCenter.lng) * kx;
     const dy = (lat - townCenter.lat) * 110.54;
-    return Math.hypot(dx, dy) <= CORE_RADIUS_KM;
+    return Math.hypot(dx, dy) <= coreRadiusKm;
   }
   const emergencyUrl = canvasEl?.dataset.emergencyUrl ?? '';
   let emergencyOn = false;

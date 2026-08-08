@@ -49,6 +49,9 @@ const citySchema = z.object({
     )
     .default([]),
   categories: z.array(z.string()),
+  // Manual override for the explorer map's initial frame radius (km from
+  // town center). Unset, the frame self-tunes to the venue distribution.
+  map_frame_km: z.number().nullable().default(null),
   // Verified emergency contacts for the /{city}/emergency/ page and the
   // pocket card. Every entry carries the source it was verified against.
   emergency: z
