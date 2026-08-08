@@ -33,7 +33,7 @@ const states = [...byState.entries()].sort(([a], [b]) => a.localeCompare(b));
     </a>
     <nav aria-label="Main">
       <details class="cities-menu" id="cities-menu">
-        <summary>Cities <span class="caret" aria-hidden="true">▾</span></summary>
+        <summary>Cities</summary>
         <div class="panel">
           {states.map(([state, stateCities]) => (
             <div class="state-group">
@@ -83,30 +83,46 @@ const states = [...byState.entries()].sort(([a], [b]) => a.localeCompare(b));
     align-items: center;
     flex-wrap: wrap;
   }
-  nav > a,
-  .cities-menu summary {
+  nav > a {
     font-size: 0.95rem;
     font-weight: 550;
     text-decoration: none;
     color: var(--ink);
-    cursor: pointer;
   }
-  nav > a:hover,
-  .cities-menu summary:hover {
+  nav > a:hover {
     color: var(--clay);
   }
   .cities-menu {
     position: relative;
   }
+  /* Pill summary matching the map toolbars' dropdown idiom. */
   .cities-menu summary {
     list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 550;
+    color: var(--ink);
+    cursor: pointer;
     user-select: none;
+    transition: border-color 0.15s ease, background 0.15s ease;
   }
   .cities-menu summary::-webkit-details-marker {
     display: none;
   }
-  .caret {
-    font-size: 0.7rem;
+  .cities-menu summary::after {
+    content: '▾';
+    font-size: 0.7em;
+    opacity: 0.7;
+  }
+  .cities-menu summary:hover,
+  .cities-menu[open] summary {
+    border-color: var(--moss);
+    background: color-mix(in srgb, var(--moss) 8%, transparent);
   }
   .panel {
     position: absolute;
