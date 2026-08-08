@@ -55,3 +55,201 @@
 {"actor": "generate", "city": "tahoe-city", "note": "The Inn at Boatworks", "outcome": "draft-produced", "place_id": "osm-the-inn-at-boatworks", "ts": "2026-08-06T22:08:13+00:00"}
 {"actor": "generate", "city": "tahoe-city", "note": "Uncorked", "outcome": "unverifiable", "place_id": "osm-uncorked", "ts": "2026-08-06T22:08:13+00:00"}
 {"actor": "generate", "city": "tahoe-city", "note": "US Forest Service Klausen Property", "outcome": "unverifiable", "place_id": "osm-us-forest-service-klausen-property", "ts": "2026-08-06T22:08:13+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "1897 Market", "outcome": "draft-produced", "place_id": "osm-1897-market", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "1900 Mexican", "outcome": "unverifiable", "place_id": "osm-1900-mexican", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "1900 Mexican Grill", "outcome": "unverifiable", "place_id": "osm-1900-mexican-grill", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "204 North", "outcome": "unverifiable", "place_id": "osm-204-north", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "300 East", "outcome": "draft-produced", "place_id": "osm-300-east", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "500 Degrees New York Style Pizzeria", "outcome": "unverifiable", "place_id": "osm-500-degrees-new-york-style-pizzeria", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "7th Restaurant & Lounge", "outcome": "unverifiable", "place_id": "osm-7th-restaurant-lounge", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "88 China Bistro", "outcome": "unverifiable", "place_id": "osm-88-china-bistro", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Açaí Bowl Smoothie", "outcome": "unverifiable", "place_id": "osm-a-a-bowl-smoothie", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Abugida", "outcome": "unverifiable", "place_id": "osm-abugida", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "AC Hotel by Marriott Charlotte City Center", "outcome": "unverifiable", "place_id": "osm-ac-hotel-by-marriott-charlotte-city-center", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "AC Hotel by Marriott Charlotte SouthPark", "outcome": "unverifiable", "place_id": "osm-ac-hotel-by-marriott-charlotte-southpark", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "ACE No. 3", "outcome": "unverifiable", "place_id": "osm-ace-no-3", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "ACE No. 3 Belmont Village", "outcome": "unverifiable", "place_id": "osm-ace-no-3-belmont-village", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Airport Inn", "outcome": "unverifiable", "place_id": "osm-airport-inn", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Akhana Asian Bistro", "outcome": "unverifiable", "place_id": "osm-akhana-asian-bistro", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Alexander Michael's", "outcome": "unverifiable", "place_id": "osm-alexander-michael-s", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Alexander Street Park", "outcome": "draft-produced", "place_id": "osm-alexander-street-park", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "All American Pub", "outcome": "unverifiable", "place_id": "osm-all-american-pub", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Allen Hills Park", "outcome": "draft-produced", "place_id": "osm-allen-hills-park", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Aloft Charlotte Airport", "outcome": "draft-produced", "place_id": "osm-aloft-charlotte-airport", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Amay James Park", "outcome": "unverifiable", "place_id": "osm-amay-james-park", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Amelie’s French Bakery and Cafe", "outcome": "unverifiable", "place_id": "osm-amelie-s-french-bakery-and-cafe", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "American Deli", "outcome": "unverifiable", "place_id": "osm-american-deli", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "American Roadside Burgers", "outcome": "unverifiable", "place_id": "osm-american-roadside-burgers", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Angeline's", "outcome": "unverifiable", "place_id": "osm-angeline-s", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Angry Ale's", "outcome": "draft-produced", "place_id": "osm-angry-ale-s", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Animal Medical Hospital", "outcome": "draft-produced", "place_id": "osm-animal-medical-hospital", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Animal People", "outcome": "draft-produced", "place_id": "osm-animal-people", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Anita’s Mexican Grill", "outcome": "unverifiable", "place_id": "osm-anita-s-mexican-grill", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Anita Stroud Park", "outcome": "draft-produced", "place_id": "osm-anita-stroud-park", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Another Brewery", "outcome": "unverifiable", "place_id": "osm-another-brewery", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Antagonist", "outcome": "unverifiable", "place_id": "osm-antagonist", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Arbol Eatery", "outcome": "unverifiable", "place_id": "osm-arbol-eatery", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Arby's", "outcome": "unverifiable", "place_id": "osm-arby-s", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Archdale Animal Hospital", "outcome": "draft-produced", "place_id": "osm-archdale-animal-hospital", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Archdale Park", "outcome": "unverifiable", "place_id": "osm-archdale-park", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Aria Tuscan Grill", "outcome": "unverifiable", "place_id": "osm-aria-tuscan-grill", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Aroma", "outcome": "unverifiable", "place_id": "osm-aroma", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Astoria Cafe", "outcome": "unverifiable", "place_id": "osm-astoria-cafe", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Auntie Anne's", "outcome": "unverifiable", "place_id": "osm-auntie-anne-s", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Ava Pizza", "outcome": "draft-produced", "place_id": "osm-ava-pizza", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Azteca", "outcome": "unverifiable", "place_id": "osm-azteca", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Babaloo Coffee Club", "outcome": "unverifiable", "place_id": "osm-babaloo-coffee-club", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Bad Daddy's", "outcome": "unverifiable", "place_id": "osm-bad-daddy-s", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Bad Daddy's Burger Bar", "outcome": "draft-produced", "place_id": "osm-bad-daddy-s-burger-bar", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Bakersfield", "outcome": "unverifiable", "place_id": "osm-bakersfield", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Baku", "outcome": "unverifiable", "place_id": "osm-baku", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Bang Bang Burgers", "outcome": "unverifiable", "place_id": "osm-bang-bang-burgers", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Bankers Kitchen", "outcome": "unverifiable", "place_id": "osm-bankers-kitchen", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Bankers Raw Bar", "outcome": "unverifiable", "place_id": "osm-bankers-raw-bar", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Bao & Broth", "outcome": "draft-produced", "place_id": "osm-bao-broth", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Baoding", "outcome": "unverifiable", "place_id": "osm-baoding", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Bar-B-Q King", "outcome": "unverifiable", "place_id": "osm-bar-b-q-king", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Barcelona Wine Bar", "outcome": "unverifiable", "place_id": "osm-barcelona-wine-bar", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Bargarita", "outcome": "unverifiable", "place_id": "osm-bargarita", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Basil Thai Cuisine", "outcome": "unverifiable", "place_id": "osm-basil-thai-cuisine", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Baxter Street Park", "outcome": "unverifiable", "place_id": "osm-baxter-street-park", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Baymont Charlotte-Airport Coliseum", "outcome": "unverifiable", "place_id": "osm-baymont-charlotte-airport-coliseum", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Bean Vegan Cuisine", "outcome": "unverifiable", "place_id": "osm-bean-vegan-cuisine", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Beatrix Market", "outcome": "draft-produced", "place_id": "osm-beatrix-market", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Beef 'N Bottle Steakhouse", "outcome": "unverifiable", "place_id": "osm-beef-n-bottle-steakhouse", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Benny Pennello’s", "outcome": "unverifiable", "place_id": "osm-benny-pennello-s", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Best Western Sterling Hotel & Suites", "outcome": "unverifiable", "place_id": "osm-best-western-sterling-hotel-suites", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Biblio", "outcome": "unverifiable", "place_id": "osm-biblio", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Biddleville Park", "outcome": "unverifiable", "place_id": "osm-biddleville-park", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Billy Jack's Shack", "outcome": "unverifiable", "place_id": "osm-billy-jack-s-shack", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Billy Sunday", "outcome": "unverifiable", "place_id": "osm-billy-sunday", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Bird Pizzeria", "outcome": "unverifiable", "place_id": "osm-bird-pizzeria", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Bisonte Pizza Company", "outcome": "unverifiable", "place_id": "osm-bisonte-pizza-company", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Black Moth Bar", "outcome": "draft-produced", "place_id": "osm-black-moth-bar", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Blasian Asian Way", "outcome": "draft-produced", "place_id": "osm-blasian-asian-way", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Bob's Carry Out", "outcome": "unverifiable", "place_id": "osm-bob-s-carry-out", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Bodrick’s BBQ", "outcome": "unverifiable", "place_id": "osm-bodrick-s-bbq", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Bojangles'", "outcome": "unverifiable", "place_id": "osm-bojangles", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Bop Bop", "outcome": "unverifiable", "place_id": "osm-bop-bop", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Borderline", "outcome": "draft-produced", "place_id": "osm-borderline", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Bossy Beulah's", "outcome": "unverifiable", "place_id": "osm-bossy-beulah-s", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Botiwalla", "outcome": "draft-produced", "place_id": "osm-botiwalla", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Boudreaux’s Louisiana Kitchen", "outcome": "unverifiable", "place_id": "osm-boudreaux-s-louisiana-kitchen", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Boxcar Bettys", "outcome": "unverifiable", "place_id": "osm-boxcar-bettys", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Bradley Motel", "outcome": "unverifiable", "place_id": "osm-bradley-motel", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Brawley's Beverage", "outcome": "draft-produced", "place_id": "osm-brawley-s-beverage", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Brazwells Pub", "outcome": "draft-produced", "place_id": "osm-brazwells-pub", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Brewers At 4001 Yancey", "outcome": "draft-produced", "place_id": "osm-brewers-at-4001-yancey", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Briar Creek Greenway", "outcome": "unverifiable", "place_id": "osm-briar-creek-greenway", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Briarwood Park", "outcome": "draft-produced", "place_id": "osm-briarwood-park", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "BrickTop's", "outcome": "unverifiable", "place_id": "osm-bricktop-s", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Brigid's Irish Pub", "outcome": "unverifiable", "place_id": "osm-brigid-s-irish-pub", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Brixx Wood Fired Pizza", "outcome": "draft-produced", "place_id": "osm-brixx-wood-fired-pizza", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Brookwood BBQ", "outcome": "unverifiable", "place_id": "osm-brookwood-bbq", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Brookwood Inn", "outcome": "unverifiable", "place_id": "osm-brookwood-inn", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Bruegger's Bagels", "outcome": "unverifiable", "place_id": "osm-bruegger-s-bagels", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Bryant Park", "outcome": "unverifiable", "place_id": "osm-bryant-park", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Bubbly Paws", "outcome": "draft-produced", "place_id": "osm-bubbly-paws", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Budget Inn", "outcome": "unverifiable", "place_id": "osm-budget-inn", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Budget Inn - Charlotte", "outcome": "unverifiable", "place_id": "osm-budget-inn-charlotte", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Bulldog Taproom/Social", "outcome": "unverifiable", "place_id": "osm-bulldog-taproom-social", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Burger King", "outcome": "unverifiable", "place_id": "osm-burger-king", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Burial Beer Co.", "outcome": "unverifiable", "place_id": "osm-burial-beer-co", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Burr & Berry Coffee", "outcome": "unverifiable", "place_id": "osm-burr-berry-coffee", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Burtons Grill & Bar of Charlotte", "outcome": "unverifiable", "place_id": "osm-burtons-grill-bar-of-charlotte", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Bytes Cafe", "outcome": "unverifiable", "place_id": "osm-bytes-cafe", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Caffe Siena", "outcome": "unverifiable", "place_id": "osm-caffe-siena", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Caffeto", "outcome": "unverifiable", "place_id": "osm-caffeto", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Cajun Queen", "outcome": "unverifiable", "place_id": "osm-cajun-queen", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Cakeable Cafe", "outcome": "unverifiable", "place_id": "osm-cakeable-cafe", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Cali Restaurant", "outcome": "unverifiable", "place_id": "osm-cali-restaurant", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Calle Sol Latin Café & Cevicheria", "outcome": "unverifiable", "place_id": "osm-calle-sol-latin-caf-cevicheria", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Camp Greene Park", "outcome": "unverifiable", "place_id": "osm-camp-greene-park", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Campbell Creek Park", "outcome": "draft-produced", "place_id": "osm-campbell-creek-park", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Canopy Cocktails & Garden", "outcome": "unverifiable", "place_id": "osm-canopy-cocktails-garden", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Canteen", "outcome": "draft-produced", "place_id": "osm-canteen", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Cantina 1511", "outcome": "unverifiable", "place_id": "osm-cantina-1511", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Capishe", "outcome": "unverifiable", "place_id": "osm-capishe", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Capitaine Bar & Grill", "outcome": "unverifiable", "place_id": "osm-capitaine-bar-grill", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Capital Grille", "outcome": "unverifiable", "place_id": "osm-capital-grille", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Captain D's", "outcome": "unverifiable", "place_id": "osm-captain-d-s", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Captain Jack's Tavern", "outcome": "unverifiable", "place_id": "osm-captain-jack-s-tavern", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "CARE: Charlotte Animal Referral and Emergency", "outcome": "draft-produced", "place_id": "osm-care-charlotte-animal-referral-and-emergency", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Caribbean Hut", "outcome": "unverifiable", "place_id": "osm-caribbean-hut", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Caribou Coffee", "outcome": "unverifiable", "place_id": "osm-caribou-coffee", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Carmella's Pizza Grill", "outcome": "unverifiable", "place_id": "osm-carmella-s-pizza-grill", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Carolina Beer Co.", "outcome": "unverifiable", "place_id": "osm-carolina-beer-co", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Caroline's Oyster Bar", "outcome": "unverifiable", "place_id": "osm-caroline-s-oyster-bar", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Carrabba's Italian Grill", "outcome": "unverifiable", "place_id": "osm-carrabba-s-italian-grill", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Caswell Station", "outcome": "draft-produced", "place_id": "osm-caswell-station", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Catalú", "outcome": "unverifiable", "place_id": "osm-catal", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Catalina Kitchen + Bar", "outcome": "unverifiable", "place_id": "osm-catalina-kitchen-bar", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Catawba Brewing Co.", "outcome": "unverifiable", "place_id": "osm-catawba-brewing-co", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Catch 21", "outcome": "unverifiable", "place_id": "osm-catch-21", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "CAVA", "outcome": "unverifiable", "place_id": "osm-cava", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Cedar Street Tavern", "outcome": "unverifiable", "place_id": "osm-cedar-street-tavern", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Cedarwood Park", "outcome": "draft-produced", "place_id": "osm-cedarwood-park", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Central Coffee", "outcome": "unverifiable", "place_id": "osm-central-coffee", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Chalice Cafe", "outcome": "unverifiable", "place_id": "osm-chalice-cafe", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Change Please", "outcome": "unverifiable", "place_id": "osm-change-please", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Changebaker place", "outcome": "unverifiable", "place_id": "osm-changebaker-place", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Chantilly Park", "outcome": "draft-produced", "place_id": "osm-chantilly-park", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Chapter 6", "outcome": "unverifiable", "place_id": "osm-chapter-6", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Charleys Philly Steaks", "outcome": "draft-produced", "place_id": "osm-charleys-philly-steaks", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Charlotte Beer Garden", "outcome": "draft-produced", "place_id": "osm-charlotte-beer-garden", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Charlotte Express Inn", "outcome": "unverifiable", "place_id": "osm-charlotte-express-inn", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Charlotte Garden Inn Suites", "outcome": "unverifiable", "place_id": "osm-charlotte-garden-inn-suites", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Charlotte Marriott City Center", "outcome": "unverifiable", "place_id": "osm-charlotte-marriott-city-center", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Charlotte Marriott SouthPark", "outcome": "unverifiable", "place_id": "osm-charlotte-marriott-southpark", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Chasers Nightclub", "outcome": "unverifiable", "place_id": "osm-chasers-nightclub", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Cheat's Cheesesteaks", "outcome": "draft-produced", "place_id": "osm-cheat-s-cheesesteaks", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Cheif's Coffee & Cocktails", "outcome": "unverifiable", "place_id": "osm-cheif-s-coffee-cocktails", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Cherry Park", "outcome": "draft-produced", "place_id": "osm-cherry-park", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Cherry Tree Save", "outcome": "unverifiable", "place_id": "osm-cherry-tree-save", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Chex Grill & Wings", "outcome": "unverifiable", "place_id": "osm-chex-grill-wings", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Chick-fil-A", "outcome": "unverifiable", "place_id": "osm-chick-fil-a", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Chicken Box", "outcome": "unverifiable", "place_id": "osm-chicken-box", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Chicken Box Cafe", "outcome": "unverifiable", "place_id": "osm-chicken-box-cafe", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Chicken King", "outcome": "unverifiable", "place_id": "osm-chicken-king", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Chili's", "outcome": "unverifiable", "place_id": "osm-chili-s", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "China Bowl", "outcome": "unverifiable", "place_id": "osm-china-bowl", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "China Buffet", "outcome": "unverifiable", "place_id": "osm-china-buffet", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Chinese Fast Food", "outcome": "unverifiable", "place_id": "osm-chinese-fast-food", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Chipotle", "outcome": "unverifiable", "place_id": "osm-chipotle", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "CHNO Coffee Co", "outcome": "unverifiable", "place_id": "osm-chno-coffee-co", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Chopt", "outcome": "unverifiable", "place_id": "osm-chopt", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Chubz Famous Chiliburgers", "outcome": "unverifiable", "place_id": "osm-chubz-famous-chiliburgers", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Church's Chicken", "outcome": "unverifiable", "place_id": "osm-church-s-chicken", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Church & Union", "outcome": "unverifiable", "place_id": "osm-church-union", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Ciao Gourmet Market", "outcome": "unverifiable", "place_id": "osm-ciao-gourmet-market", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Cicchetti", "outcome": "unverifiable", "place_id": "osm-cicchetti", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Cilantro Noodle", "outcome": "unverifiable", "place_id": "osm-cilantro-noodle", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Cinnabon", "outcome": "unverifiable", "place_id": "osm-cinnabon", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "CityVet", "outcome": "draft-produced", "place_id": "osm-cityvet", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Clanton Park", "outcome": "draft-produced", "place_id": "osm-clanton-park", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Clarion Pointe", "outcome": "unverifiable", "place_id": "osm-clarion-pointe", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Clark's Snack Bar", "outcome": "unverifiable", "place_id": "osm-clark-s-snack-bar", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Clean Eatz Express", "outcome": "unverifiable", "place_id": "osm-clean-eatz-express", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Clean Juice", "outcome": "unverifiable", "place_id": "osm-clean-juice", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Club West Brewing", "outcome": "unverifiable", "place_id": "osm-club-west-brewing", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "CO", "outcome": "unverifiable", "place_id": "osm-co", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Coco and the Director", "outcome": "unverifiable", "place_id": "osm-coco-and-the-director", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Cocos Locos", "outcome": "unverifiable", "place_id": "osm-cocos-locos", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "& Coffee", "outcome": "unverifiable", "place_id": "osm-coffee", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Coffee at Station West", "outcome": "unverifiable", "place_id": "osm-coffee-at-station-west", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Cold Blooded and Bizarre", "outcome": "unverifiable", "place_id": "osm-cold-blooded-and-bizarre", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Collins Park", "outcome": "draft-produced", "place_id": "osm-collins-park", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Colonial Park", "outcome": "draft-produced", "place_id": "osm-colonial-park", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Comet Grill", "outcome": "unverifiable", "place_id": "osm-comet-grill", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Comfort Inn Charlotte Airport Uptown", "outcome": "unverifiable", "place_id": "osm-comfort-inn-charlotte-airport-uptown", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Comfort Suites Airport", "outcome": "draft-produced", "place_id": "osm-comfort-suites-airport", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Commonspace", "outcome": "unverifiable", "place_id": "osm-commonspace", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Commonwealth Animal Hospital", "outcome": "draft-produced", "place_id": "osm-commonwealth-animal-hospital", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Community Matters Cafe", "outcome": "unverifiable", "place_id": "osm-community-matters-cafe", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Como en Mexico", "outcome": "unverifiable", "place_id": "osm-como-en-mexico", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Compa Taco", "outcome": "unverifiable", "place_id": "osm-compa-taco", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Condado Tacos", "outcome": "draft-produced", "place_id": "osm-condado-tacos", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Continental Inn", "outcome": "unverifiable", "place_id": "osm-continental-inn", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Cook Out", "outcome": "unverifiable", "place_id": "osm-cook-out", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Copperhead Social Club", "outcome": "unverifiable", "place_id": "osm-copperhead-social-club", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Coquette", "outcome": "unverifiable", "place_id": "osm-coquette", "ts": "2026-08-08T15:56:15+00:00"}
