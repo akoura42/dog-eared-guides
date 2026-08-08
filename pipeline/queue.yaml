@@ -3,47 +3,57 @@ items:
   city: charlotte
   name: The Dog Bar - Charlotte
   category: drink
-  notes: NoDa. A membership dog bar — off-leash dogs are the venue. Verify the membership/vaccine
-    requirements and any human-age rule from their own site.
+  notes: DONE (closed ~2026-05-31 — not publishable; see ledger) — NoDa. A membership
+    dog bar — off-leash dogs are the venue. Verify the membership/vaccine requirements
+    and any human-age rule from their own site.
+  done: true
 - type: venue
   city: charlotte
   name: Lucky Dog Bark and Brew
   category: activity
   notes: Bar + off-leash play hybrid. Verify membership/vaccine requirements and
     which side dogs occupy.
+  done: true
 - type: venue
   city: charlotte
   name: Sycamore Brewing
   category: drink
-  notes: South End. Famous patio; verify their published dog policy (patio vs taproom).
+  notes: DONE (closed — now Club West Brewing, tier-3; see ledger) — South End.
+    Famous patio; verify their published dog policy (patio vs taproom).
+  done: true
 - type: venue
   city: charlotte
   name: The Olde Mecklenburg Brewery & Biergarten
   category: drink
   notes: The biergarten. Verify where dogs are allowed (biergarten vs indoor halle).
     Note the ledger also has a duplicate entry without "& Biergarten" — same place.
+  done: true
 - type: venue
   city: charlotte
   name: NoDa Brewing Company
   category: drink
   notes: Verify taproom vs patio policy from their site.
+  done: true
 - type: venue
   city: charlotte
   name: Freedom Park
   category: trail
   notes: 'The signature in-town park. Mecklenburg Park & Rec: leashed in parks;
     dog rules per county ordinance already in the city config.'
+  done: true
 - type: venue
   city: charlotte
   name: Little Sugar Creek Greenway
   category: trail
   notes: 'The greenway spine. County greenway rules: leashed dogs.'
+  done: true
 - type: venue
   city: charlotte
   name: 9th Street Dog Park
   category: activity
   notes: Uptown dog park (First Ward). Verify operator (city/county/private), fencing,
     hours, vaccine rules.
+  done: true
 - type: venue
   city: tahoe-city
   name: Bridgetender Tavern & Grill
