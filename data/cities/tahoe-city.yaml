@@ -106,6 +106,8 @@ emergency:
   er_vets:
     - name: Burton Creek Veterinary Clinic (in town)
       phone: (530) 583-8587
+      lat: 39.18593
+      lng: -120.11081
       note: Mon–Fri 8am–5pm. Takes emergencies during business hours; the clinic asks that you call ahead so staff can prepare.
       source_url: https://burtoncreekvet.com/our-services/emergency-veterinary-care/
     - name: Donner Truckee Veterinary Hospital
@@ -114,10 +116,14 @@ emergency:
       source_url: https://dtvet.com/urgent-care/
     - name: BluePearl Pet Hospital (Reno)
       phone: (775) 358-8555
+      lat: 39.5345
+      lng: -119.8024
       note: Open 24 hours daily. 555 Morrill Ave, Reno — about an hour's drive from town.
       source_url: https://www.yelp.com/biz/bluepearl-pet-hospital-reno
     - name: Animal Emergency & Specialty Center (Reno)
       phone: (775) 851-3600
+      lat: 39.4669
+      lng: -119.786
       note: Staffed 24 hours a day, 365 days a year. 6425 S. Virginia St, Reno — a little over an hour.
       source_url: https://aecreno.com/
   poison:
@@ -128,6 +134,8 @@ emergency:
   lost_found:
     - name: Humane Society of Truckee-Tahoe
       phone: (530) 587-5948
+      lat: 39.33565
+      lng: -120.17077
       note: Placer County's contracted shelter for the North Tahoe area — 10961 Stevens Lane, Truckee. Open Mon–Sat 1–6pm; the Sunday pickup line is (530) 582-2484. Lost-pet reports and the found-pet book are here.
       source_url: https://www.placer.ca.gov/1932/Find-Lost-Animals-in-Eastern-Placer-Coun
     - name: Placer County Animal Services

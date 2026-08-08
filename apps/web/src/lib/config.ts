@@ -13,6 +13,10 @@ const emergencyContactSchema = z.object({
   phone: z.string(),
   note: z.string(),
   source_url: z.string().url(),
+  // Coordinates make the contact a pin on the explorer's Emergency layer.
+  // Phone-first contacts (poison lines, animal control) stay null.
+  lat: z.number().nullable().default(null),
+  lng: z.number().nullable().default(null),
 });
 
 const citySchema = z.object({

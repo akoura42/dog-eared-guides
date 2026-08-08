@@ -112,6 +112,16 @@ const center = { lat: city.geo.lat, lng: city.geo.lng };
 // verified records. Null when the town has no zones file yet.
 const zones = getTownZones(city.slug);
 
+// Emergency layer: contacts from the city's verified emergency block that
+// carry coordinates (ER vets, the lost-dog shelter). Off by default;
+// toggling the pill shows them and widens the map to fit.
+const emergencyMarkers = city.emergency
+  ? [
+      ...city.emergency.er_vets.map((c) => ({ ...c, kind: 'ER vet' })),
+      ...city.emergency.lost_found.map((c) => ({ ...c, kind: 'Lost dog' })),
+    ].filter((c) => c.lat !== null && c.lng !== null)
+  : [];
+
 // Zone chips: one toggle per zone type. Trails share the leashed policy
 // but toggle independently — they're a different thing on the map.
 const zoneGroupOf = (f: { properties: { kind?: string; policy: string } }) =>
@@ -203,6 +213,15 @@ const legend = [...new Map(venues.map((v) => {
         </div>
       </details>
     )}
+    {emergencyMarkers.length > 0 && (
+      <button
+        type="button"
+        class="key emergency-toggle"
+        id="emergency-toggle"
+        aria-pressed="false"
+        title="Show emergency locations — ER vets and the lost-dog shelter"
+      ><i aria-hidden="true">+</i>Emergency <span class="n">{emergencyMarkers.length}</span></button>
+    )}
     {cuisineOptions.length > 0 && (
       <details class="fmenu food-menu" data-badge="active">
         <summary>Food <span class="badge" hidden></span></summary>
@@ -236,6 +255,8 @@ const legend = [...new Map(venues.map((v) => {
         data-center={JSON.stringify(center)}
         data-markers={JSON.stringify(markers)}
         data-zones={zones ? JSON.stringify(zones) : undefined}
+        data-emergency={emergencyMarkers.length > 0 ? JSON.stringify(emergencyMarkers) : undefined}
+        data-emergency-url={emergencyMarkers.length > 0 ? `/${city.slug}/emergency/` : undefined}
         data-gmaps-key={GMAPS_API_KEY}
         aria-label={`Map of verified dog-friendly places in ${city.name}`}
       >
@@ -419,6 +440,38 @@ const legend = [...new Map(venues.map((v) => {
     font-size: 0.78rem;
     font-weight: 650;
     margin: 0.25rem 0.3rem 0;
+  }
+  .emergency-toggle i {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #b23a2a;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 1;
+  }
+  .emergency-toggle[aria-pressed='true'] {
+    border-color: #b23a2a;
+    background: color-mix(in srgb, #b23a2a 12%, transparent);
+    color: var(--ink);
+  }
+  :global(.em-pin) {
+    background: #b23a2a;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
   }
   .zgroup[data-zone-group='trails'] i {
     height: 3px;
@@ -741,6 +794,36 @@ const legend = [...new Map(venues.map((v) => {
     approx: boolean;
   };
   const zonesData = canvasEl?.dataset.zones ? JSON.parse(canvasEl.dataset.zones) : null;
+
+  // Emergency layer (ER vets + lost-dog shelter). Hidden by default; the
+  // toggle shows the pins and refits the map to include them (Reno is an
+  // hour east — that stretch is the information).
+  type EmergencyMarker = {
+    name: string;
+    phone: string;
+    note: string;
+    kind: string;
+    lat: number;
+    lng: number;
+  };
+  const emergencyData: EmergencyMarker[] = canvasEl?.dataset.emergency
+    ? JSON.parse(canvasEl.dataset.emergency)
+    : [];
+  const emergencyUrl = canvasEl?.dataset.emergencyUrl ?? '';
+  let emergencyOn = false;
+  let setEmergencyVisible: (() => void) | null = null;
+
+  function emergencyPopupHtml(e: EmergencyMarker): string {
+    return `<div class="venue-popup">
+      <h4>${esc2(e.name)}</h4>
+      <p class="cat">${esc2(e.kind)}</p>
+      <p class="zone-note">${esc2(e.note)}</p>
+      <div class="links">
+        <a href="tel:${e.phone.replace(/[^\d]/g, '')}">${esc2(e.phone)}</a>
+        <a href="${esc2(emergencyUrl)}">All emergency info</a>
+      </div>
+    </div>`;
+  }
   const ZONE_COLORS: Record<string, string> = {
     'no-dogs': '#b23a2a',
     'off-leash': '#2e7d43',
@@ -922,6 +1005,36 @@ const legend = [...new Map(venues.map((v) => {
       maps.event.trigger(map, 'resize');
       if (!bounds.isEmpty()) map.fitBounds(bounds, 48);
     };
+    if (emergencyData.length > 0) {
+      const epins = emergencyData.map((e) => {
+        const marker = new maps.Marker({
+          map: null,
+          position: { lat: e.lat, lng: e.lng },
+          title: `${e.name} — ${e.phone}`,
+          label: { text: '+', color: '#ffffff', fontWeight: '700' },
+          icon: {
+            path: maps.SymbolPath.CIRCLE,
+            scale: 11,
+            fillColor: '#b23a2a',
+            fillOpacity: 1,
+            strokeColor: '#ffffff',
+            strokeWeight: 2,
+          },
+        });
+        marker.addListener('click', () => {
+          info.setContent(emergencyPopupHtml(e));
+          info.open({ map, anchor: marker });
+        });
+        return marker;
+      });
+      setEmergencyVisible = () => {
+        epins.forEach((m) => m.setMap(emergencyOn ? map : null));
+        const combined = new maps.LatLngBounds();
+        combined.union(bounds);
+        if (emergencyOn) emergencyData.forEach((e) => combined.extend({ lat: e.lat, lng: e.lng }));
+        if (!combined.isEmpty()) map.fitBounds(combined, 48);
+      };
+    }
     applyVisibility();
   }
 
@@ -1033,6 +1146,29 @@ const legend = [...new Map(venues.map((v) => {
       map.invalidateSize();
       if (bounds.isValid()) map.fitBounds(bounds.pad(0.15));
     };
+    if (emergencyData.length > 0) {
+      const eLayer = L.layerGroup(
+        emergencyData.map((e) => {
+          const marker = L.marker([e.lat, e.lng], {
+            icon: L.divIcon({ className: 'em-pin', html: '+', iconSize: [24, 24] }),
+          });
+          marker.bindPopup(emergencyPopupHtml(e));
+          marker.bindTooltip(`${e.name} — ${e.phone}`, { direction: 'top', offset: [0, -10] });
+          return marker;
+        })
+      );
+      setEmergencyVisible = () => {
+        if (emergencyOn) {
+          eLayer.addTo(map);
+          const combined = L.latLngBounds(bounds.isValid() ? [bounds.getSouthWest(), bounds.getNorthEast()] : []);
+          emergencyData.forEach((e) => combined.extend([e.lat, e.lng]));
+          if (combined.isValid()) map.fitBounds(combined.pad(0.08));
+        } else {
+          map.removeLayer(eLayer);
+          if (bounds.isValid()) map.fitBounds(bounds.pad(0.15));
+        }
+      };
+    }
     applyVisibility();
   }
 
@@ -1059,6 +1195,14 @@ const legend = [...new Map(venues.map((v) => {
     paneToggle.title = collapsed ? 'Show the list' : 'Hide the list';
     paneToggle.textContent = collapsed ? '‹' : '›';
     requestAnimationFrame(() => resizeMap?.());
+  });
+
+  // Emergency pill shows the ER/shelter pins and widens the map to fit.
+  const emergencyToggle = document.getElementById('emergency-toggle') as HTMLButtonElement | null;
+  emergencyToggle?.addEventListener('click', () => {
+    emergencyOn = !emergencyOn;
+    emergencyToggle.setAttribute('aria-pressed', String(emergencyOn));
+    setEmergencyVisible?.();
   });
 
   // Zone chips toggle each zone type (no-dogs, off-leash, …) on its own.
