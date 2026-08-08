@@ -1,7 +1,7 @@
 ---
 name: Ninth Street Dog Park
 city: charlotte
-category: activity
+category: dog-park
 neighborhood: Fourth Ward
 address: 417 W 9th St, Charlotte, NC 28202
 lat: 35.234

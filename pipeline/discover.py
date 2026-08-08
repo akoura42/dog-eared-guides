@@ -50,7 +50,7 @@ TAG_CATEGORIES: list[tuple[str, str, str]] = [
     ("tourism", "guest_house", "stay"),
     ("tourism", "chalet", "stay"),
     ("tourism", "camp_site", "stay"),
-    ("leisure", "dog_park", "activity"),
+    ("leisure", "dog_park", "dog-park"),
     ("leisure", "park", "trail"),
     ("natural", "beach", "beach"),
     ("shop", "pet", "pet-supply"),

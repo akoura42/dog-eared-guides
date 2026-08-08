@@ -1,7 +1,7 @@
 ---
 name: Lucky Dog Bark & Brew Charlotte
 city: charlotte
-category: activity
+category: dog-park
 neighborhood: Wesley Heights
 address: 2220 Thrift Rd, Charlotte, NC 28208
 lat: 35.2338

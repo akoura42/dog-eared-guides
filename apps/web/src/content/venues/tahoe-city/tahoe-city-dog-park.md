@@ -1,7 +1,7 @@
 ---
 name: Tahoe City Dog Park
 city: tahoe-city
-category: activity
+category: dog-park
 neighborhood: Grove Street / Downtown
 address: 375 Grove St, Tahoe City, CA 96145
 lat: 39.17399

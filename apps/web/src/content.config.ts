@@ -8,6 +8,7 @@ export const CATEGORY_KEYS = [
   'trail',
   'beach',
   'activity',
+  'dog-park',
   'shop',
   'pet-supply',
   'daycare',

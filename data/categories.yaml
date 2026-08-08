@@ -32,6 +32,11 @@ categories:
     label: Activities
     singular: activity
     blurb: Tours, rentals, and outings that let the dog come along.
+  - key: dog-park
+    slug: dog-parks
+    label: Dog Parks
+    singular: dog park
+    blurb: Designated off-leash ground — fencing, rules, and hours verified.
   - key: shop
     slug: dog-friendly-shops
     label: Shops
