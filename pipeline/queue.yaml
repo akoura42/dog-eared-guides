@@ -1,6 +1,66 @@
 items:
 - type: venue
   city: charlotte
+  name: Mac's Speed Shop
+  category: eat
+  notes: South End biker-BBQ institution; patio reputation. Verify their own published
+    dog policy.
+  done: true
+- type: venue
+  city: charlotte
+  name: Pinky's Westside Grill
+  category: eat
+  notes: 'DONE (unverifiable: House rules page exists but no dog policy; phone needed.)
+    — Westside patio icon in a former gas station. Verify policy.'
+  done: true
+- type: venue
+  city: charlotte
+  name: Cabo Fish Taco
+  category: eat
+  notes: 'DONE (unverifiable: No official policy; insufficient independent mentions;
+    phone needed.) — NoDa patio staple. Verify policy.'
+  done: true
+- type: venue
+  city: charlotte
+  name: Midwood Smokehouse
+  category: eat
+  notes: 'DONE (unverifiable: No official channel publishes patio dog policy; phone
+    (704) 295-4227.) — BBQ; multiple locations — anchor the Central Ave original,
+    verify per-location policy.'
+  done: true
+- type: venue
+  city: charlotte
+  name: Common Market - Oakwold
+  category: eat
+  notes: 'Deli/bar with a famous dog-friendly patio culture; NOTE: multiple locations
+    (South End, Plaza Midwood) — verify which this ledger entry is and whether policy
+    is per-location.'
+  done: true
+- type: venue
+  city: charlotte
+  name: Brooks' Sandwich House
+  category: eat
+  notes: 'DONE (unverifiable: Operating status itself uncertain (2023 sale listing,
+    retirement); verify trading status first.) — NoDa institution, outdoor-only
+    seating. Verify whether dogs at the outdoor tables are addressed anywhere official.'
+  done: true
+- type: venue
+  city: charlotte
+  name: Yafo Kitchen
+  category: eat
+  notes: 'DONE (unverifiable: No official policy; phone needed.) — Fast-casual with
+    patios; multiple locations. Verify.'
+  done: true
+- type: venue
+  city: charlotte
+  name: Dilworth Neighborhood Grille
+  category: eat
+  notes: 'DONE (unverifiable: Policy not publishable from official sources; menu
+    fetch truncated; phone needed.) — Reputed dog-friendly patio near Freedom Park.
+    Verify.'
+  done: true
+- type: venue
+  city: charlotte
   name: The Dog Bar - Charlotte
   category: drink
   notes: DONE (closed ~2026-05-31 — not publishable; see ledger) — NoDa. A membership
