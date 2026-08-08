@@ -1,0 +1,63 @@
+# City configuration — the multi-city contract. Phase 0 per
+# docs/CITY_PLAYBOOK.md: unlaunched until the QA gate passes.
+# The big-city counterpoint to Tahoe City for validating scale.
+name: Charlotte
+slug: charlotte
+state: North Carolina
+state_code: NC
+geo:
+  lat: 35.2271
+  lng: -80.8431
+hero:
+  headline: Charlotte with a dog.
+  subhead: Breweries, greenways, patios, and dog parks across the Queen City — every dog policy verified.
+hero_image: null
+hero_image_alt: null
+hero_image_credit: null
+hero_image_credit_url: null
+intro: >-
+  Charlotte is the big-city counterpoint to our mountain towns — a city of
+  neighborhoods where the dog rules are unusually uniform. One county
+  animal ordinance covers the city, one park system runs the parks and
+  greenways, and designated dog parks are the only legal off-leash
+  ground. Every policy here comes from the ordinances themselves.
+seasonal_notes: []
+regulations:
+  - summary: Dogs must be physically restrained — leash, fence, or secure enclosure — everywhere off your own property.
+    detail: >-
+      The Mecklenburg County animal ordinance (Sec. 3-71), enforced in
+      Charlotte by CMPD Animal Care & Control, makes it unlawful to keep
+      any animal (cats excepted) without sufficient physical restraint —
+      a leash, a vehicle, or an adequate fence or enclosure. The one
+      voice-control allowance is on your own property, with an adult
+      immediately beside a dog that responds to direct verbal commands.
+    jurisdiction: Mecklenburg County / CMPD Animal Care & Control
+    source_url: https://www.charlottenc.gov/Animal-Care-and-Control/Pet-Resources/Mecklenburg-County-Animal-Ordinance
+  - summary: In public parks and on greenways, dogs stay leashed — designated dog parks are the off-leash exception.
+    detail: >-
+      Mecklenburg County Park and Recreation requires leashed dogs in all
+      parks and on greenways; its designated dog parks are the off-leash
+      areas, open 7:30am to sunset, free, with posted vaccination
+      requirements (rabies with tag, DHLPP, bordetella) and separate
+      sections for dogs over and under 20 pounds at most locations.
+    jurisdiction: Mecklenburg County Park and Recreation
+    source_url: https://parkandrec.mecknc.gov/Places-to-Visit/Dog-Parks
+resources:
+  - label: Mecklenburg County dog parks
+    url: https://parkandrec.mecknc.gov/Places-to-Visit/Dog-Parks
+    note: The county's own list of designated off-leash dog parks, hours, and vaccination rules.
+  - label: Mecklenburg County Animal Ordinance
+    url: https://www.charlottenc.gov/Animal-Care-and-Control/Pet-Resources/Mecklenburg-County-Animal-Ordinance
+    note: The full ordinance text — restraint, tethering, and enforcement.
+categories:
+  - eat
+  - drink
+  - stay
+  - trail
+  - beach
+  - activity
+  - shop
+  - pet-supply
+  - daycare
+  - services
+launched: false
