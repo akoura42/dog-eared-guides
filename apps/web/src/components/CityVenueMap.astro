@@ -328,10 +328,12 @@ const legend = [...new Map(venues.map((v) => {
         {venues.map((venue, i) => (
           <li data-idx={i} data-slug={venueSlug(venue)}>
             <VenueCard venue={venue} />
-            <label class="pick">
-              <input type="checkbox" />
-              Add to itinerary
-            </label>
+            {venue.data.dog_policy.allowed !== 'no' && (
+              <label class="pick">
+                <input type="checkbox" />
+                Add to itinerary
+              </label>
+            )}
           </li>
         ))}
       </ol>
@@ -839,6 +841,20 @@ const legend = [...new Map(venues.map((v) => {
   const emergencyData: EmergencyMarker[] = canvasEl?.dataset.emergency
     ? JSON.parse(canvasEl.dataset.emergency)
     : [];
+
+  // Initial framing fits the TOWN CORE, not every marker: out-of-town
+  // venues (Truckee daycare, North Shore) would otherwise zoom the
+  // opening view out to empty terrain. They stay on the map — just off
+  // the initial frame; Area filters and zooming out reach them.
+  const CORE_RADIUS_KM = 9;
+  const townCenter = canvasEl?.dataset.center ? JSON.parse(canvasEl.dataset.center) : null;
+  function inCore(lat: number, lng: number): boolean {
+    if (!townCenter) return true;
+    const kx = 111.32 * Math.cos((townCenter.lat * Math.PI) / 180);
+    const dx = (lng - townCenter.lng) * kx;
+    const dy = (lat - townCenter.lat) * 110.54;
+    return Math.hypot(dx, dy) <= CORE_RADIUS_KM;
+  }
   const emergencyUrl = canvasEl?.dataset.emergencyUrl ?? '';
   let emergencyOn = false;
   let setEmergencyVisible: (() => void) | null = null;
@@ -1023,7 +1039,7 @@ const legend = [...new Map(venues.map((v) => {
         info.open({ map, anchor: marker });
         scrollToCard(i);
       });
-      bounds.extend({ lat: m.lat, lng: m.lng });
+      if (inCore(m.lat, m.lng)) bounds.extend({ lat: m.lat, lng: m.lng });
       return marker;
     });
     if (!bounds.isEmpty()) map.fitBounds(bounds, 48);
@@ -1156,7 +1172,7 @@ const legend = [...new Map(venues.map((v) => {
       marker.bindPopup(popupHtml(m));
       marker.bindTooltip(m.name, { direction: 'top', offset: [0, -8] });
       marker.on('click', () => scrollToCard(i));
-      bounds.extend([m.lat, m.lng]);
+      if (inCore(m.lat, m.lng)) bounds.extend([m.lat, m.lng]);
       return marker;
     });
     if (bounds.isValid()) map.fitBounds(bounds.pad(0.15));
