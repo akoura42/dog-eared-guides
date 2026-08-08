@@ -1,86 +1,126 @@
-# Work queue for generate.py. Mark items `done: true` after their PR merges,
-# or delete them. Monthly: feed top/bottom pages from analytics back in here
-# so generation effort follows demand.
-#
-# item types:
-#   - type: venue  -> {city, name, category?, notes?}
-#   - type: guide  -> {city, topic, notes?}
 items:
-  # --- Seed batch (spec step 4): first venues + guides for editor calibration ---
-  - type: venue
-    city: tahoe-city
-    name: Bridgetender Tavern & Grill
-    category: eat
-    notes: >-
-      TIER 3 — CONFLICTING EVIDENCE, phone call required: (530) 583-3342.
-      Official site publishes no pet policy. Visitor mentions conflict:
-      older reviews (BringFido, TripAdvisor, Yelp ~2019) describe dogs in a
-      designated non-riverfront outdoor area (sometimes only tied adjacent
-      to the patio); the most recent dated mentions (Yelp answers ~2022, a
-      2022-07-08 phone-check blog comment) report the policy tightened or
-      revoked after patrons abused the back patio. Fails the tier-2
-      agreement requirement. Whatever the call establishes becomes tier 1
-      via method: phone.
-  - type: venue
-    city: tahoe-city
-    name: Tahoe City Dog Park (TCPUD, 375 Grove St)
-    category: activity
-    notes: Official TCPUD page confirms location/hours; confirm off-leash/fencing rules.
-  - type: venue
-    city: tahoe-city
-    name: Tahoe State Recreation Area — Gatekeepers day-use area
-    category: beach
-    notes: parks.ca.gov page_id=504 — dogs allowed only at Truckee River Outlet day-use area.
-  - type: venue
-    city: tahoe-city
-    name: 64-Acres Park
-    category: trail
-    notes: TCPUD park at the Truckee River Trail trailhead.
-  - type: guide
-    city: tahoe-city
-    topic: Dog-friendly hikes near Tahoe City
-    notes: USFS LTBMU + State Parks rules; include winter ski-trail ban Nov 1 - May 1.
-  - type: guide
-    city: tahoe-city
-    topic: Winter in Tahoe City with a dog
-    notes: Plowed TCPUD trail miles, ski-trail dog ban, paw care, dog-friendly patios in winter.
-  - type: guide
-    city: tahoe-city
-    topic: A dog-friendly 48-hour Tahoe City itinerary
-    notes: Use existing verified venues via VenueEmbed; keep every stop legal per city regulations.
-
-  # --- New-city launches: each city's first guide anchors the hub while venue
-  # --- research fills in. Venue items get added as names are identified.
-  - type: guide
-    city: cheyenne
-    topic: "Dog-friendly Cheyenne: parks, patios, and the rules"
-  - type: guide
-    city: kearney
-    topic: "Dog-friendly Kearney: trails, parks, and the rules"
-  - type: guide
-    city: lincoln
-    topic: "Dog-friendly Lincoln: trails, parks, and the rules"
-  - type: guide
-    city: columbia-mo
-    topic: "Dog-friendly Columbia, MO: the MKT Trail, parks, and the rules"
-  - type: guide
-    city: paducah
-    topic: "Dog-friendly Paducah: riverfront, parks, and the rules"
-  - type: guide
-    city: clarksville-tn
-    topic: "Dog-friendly Clarksville: greenways, parks, and the rules"
-  - type: guide
-    city: pigeon-forge
-    topic: "Dogs in Pigeon Forge: what to do when the Smokies ban dogs on trails"
-  - type: guide
-    city: gatlinburg
-    topic: "Dogs in Gatlinburg: the Gatlinburg Trail and everything else"
-  - type: guide
-    city: asheville
-    topic: "Dog-friendly Asheville: breweries, the Parkway, and the rules"
-  - type: guide
-    city: gastonia
-    topic: "Dog-friendly Gastonia: Crowders Mountain and around town"
-  - type: guide
-    city: raleigh
-    topic: "Dog-friendly Raleigh: greenways, dog parks, and the rules"
+- type: venue
+  city: charlotte
+  name: The Dog Bar - Charlotte
+  category: drink
+  notes: NoDa. A membership dog bar — off-leash dogs are the venue. Verify the membership/vaccine
+    requirements and any human-age rule from their own site.
+- type: venue
+  city: charlotte
+  name: Lucky Dog Bark and Brew
+  category: activity
+  notes: Bar + off-leash play hybrid. Verify membership/vaccine requirements and
+    which side dogs occupy.
+- type: venue
+  city: charlotte
+  name: Sycamore Brewing
+  category: drink
+  notes: South End. Famous patio; verify their published dog policy (patio vs taproom).
+- type: venue
+  city: charlotte
+  name: The Olde Mecklenburg Brewery & Biergarten
+  category: drink
+  notes: The biergarten. Verify where dogs are allowed (biergarten vs indoor halle).
+    Note the ledger also has a duplicate entry without "& Biergarten" — same place.
+- type: venue
+  city: charlotte
+  name: NoDa Brewing Company
+  category: drink
+  notes: Verify taproom vs patio policy from their site.
+- type: venue
+  city: charlotte
+  name: Freedom Park
+  category: trail
+  notes: 'The signature in-town park. Mecklenburg Park & Rec: leashed in parks;
+    dog rules per county ordinance already in the city config.'
+- type: venue
+  city: charlotte
+  name: Little Sugar Creek Greenway
+  category: trail
+  notes: 'The greenway spine. County greenway rules: leashed dogs.'
+- type: venue
+  city: charlotte
+  name: 9th Street Dog Park
+  category: activity
+  notes: Uptown dog park (First Ward). Verify operator (city/county/private), fencing,
+    hours, vaccine rules.
+- type: venue
+  city: tahoe-city
+  name: Bridgetender Tavern & Grill
+  category: eat
+  notes: 'TIER 3 — CONFLICTING EVIDENCE, phone call required: (530) 583-3342. Official
+    site publishes no pet policy. Visitor mentions conflict: older reviews (BringFido,
+    TripAdvisor, Yelp ~2019) describe dogs in a designated non-riverfront outdoor
+    area (sometimes only tied adjacent to the patio); the most recent dated mentions
+    (Yelp answers ~2022, a 2022-07-08 phone-check blog comment) report the policy
+    tightened or revoked after patrons abused the back patio. Fails the tier-2 agreement
+    requirement. Whatever the call establishes becomes tier 1 via method: phone.'
+- type: venue
+  city: tahoe-city
+  name: Tahoe City Dog Park (TCPUD, 375 Grove St)
+  category: activity
+  notes: Official TCPUD page confirms location/hours; confirm off-leash/fencing
+    rules.
+  done: true
+- type: venue
+  city: tahoe-city
+  name: Tahoe State Recreation Area — Gatekeepers day-use area
+  category: beach
+  notes: parks.ca.gov page_id=504 — dogs allowed only at Truckee River Outlet day-use
+    area.
+  done: true
+- type: venue
+  city: tahoe-city
+  name: 64-Acres Park
+  category: trail
+  notes: TCPUD park at the Truckee River Trail trailhead.
+  done: true
+- type: guide
+  city: tahoe-city
+  topic: Dog-friendly hikes near Tahoe City
+  notes: USFS LTBMU + State Parks rules; include winter ski-trail ban Nov 1 - May
+    1.
+- type: guide
+  city: tahoe-city
+  topic: Winter in Tahoe City with a dog
+  notes: Plowed TCPUD trail miles, ski-trail dog ban, paw care, dog-friendly patios
+    in winter.
+  done: true
+- type: guide
+  city: tahoe-city
+  topic: A dog-friendly 48-hour Tahoe City itinerary
+  notes: Use existing verified venues via VenueEmbed; keep every stop legal per
+    city regulations.
+- type: guide
+  city: cheyenne
+  topic: 'Dog-friendly Cheyenne: parks, patios, and the rules'
+- type: guide
+  city: kearney
+  topic: 'Dog-friendly Kearney: trails, parks, and the rules'
+- type: guide
+  city: lincoln
+  topic: 'Dog-friendly Lincoln: trails, parks, and the rules'
+- type: guide
+  city: columbia-mo
+  topic: 'Dog-friendly Columbia, MO: the MKT Trail, parks, and the rules'
+- type: guide
+  city: paducah
+  topic: 'Dog-friendly Paducah: riverfront, parks, and the rules'
+- type: guide
+  city: clarksville-tn
+  topic: 'Dog-friendly Clarksville: greenways, parks, and the rules'
+- type: guide
+  city: pigeon-forge
+  topic: 'Dogs in Pigeon Forge: what to do when the Smokies ban dogs on trails'
+- type: guide
+  city: gatlinburg
+  topic: 'Dogs in Gatlinburg: the Gatlinburg Trail and everything else'
+- type: guide
+  city: asheville
+  topic: 'Dog-friendly Asheville: breweries, the Parkway, and the rules'
+- type: guide
+  city: gastonia
+  topic: 'Dog-friendly Gastonia: Crowders Mountain and around town'
+- type: guide
+  city: raleigh
+  topic: 'Dog-friendly Raleigh: greenways, dog parks, and the rules'
