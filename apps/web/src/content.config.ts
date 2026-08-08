@@ -15,7 +15,10 @@ export const CATEGORY_KEYS = [
   'services',
 ] as const;
 
-const dogPolicySchema = z.object({
+// Schemas are .strict(): an unknown or misplaced key fails the build
+// instead of being silently stripped (a top-level vaccinations_required
+// once vanished exactly this way).
+const dogPolicySchema = z.strictObject({
   allowed: z.enum(['indoors', 'patio_only', 'outdoor_areas', 'grounds_only', 'no']),
   // Vaccination/health proof the venue REQUIRES, from its own published
   // rules (dog parks, daycare, dog bars). Names as the venue states them.
@@ -35,7 +38,7 @@ const dogPolicySchema = z.object({
 //   (tier 3 — no evidence at all — is simply not published)
 // verify.py re-checks anything older than 90 days either way.
 const verificationSchema = z
-  .object({
+  .strictObject({
     last_verified: z.coerce.date(),
     method: z.enum(['official_website', 'phone', 'in_person', 'other']),
     // Tier 1: the official source. Tier 2: the strongest mention link.
@@ -57,7 +60,7 @@ const verificationSchema = z
 
 // Verified menu: real items read from the venue's own published menu —
 // never inferred from cuisine. Powers dish search ("who has spaghetti?").
-const menuSchema = z.object({
+const menuSchema = z.strictObject({
   // Where we read the menu (may be an archive capture when the live site
   // blocks readers).
   source_url: z.string().url(),
@@ -69,7 +72,7 @@ const menuSchema = z.object({
 
 const venues = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/venues' }),
-  schema: z.object({
+  schema: z.strictObject({
     name: z.string(),
     // city slug is derived from the directory (id = "<city>/<slug>"),
     // but stored explicitly too so pipeline output is self-describing

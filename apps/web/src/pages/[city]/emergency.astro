@@ -60,7 +60,7 @@ const sections = [
             <li>
               <div class="c-head">
                 <span class="c-name">{c.name}</span>
-                <a class="c-phone" href={`tel:${c.phone.replace(/[^\d]/g, '')}`}>{c.phone}</a>
+                <a class="c-phone" href={`tel:${c.phone.replace(/[^+\d]/g, '')}`}>{c.phone}</a>
               </div>
               <p class="c-note">
                 {c.note}

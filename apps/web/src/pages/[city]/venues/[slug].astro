@@ -78,7 +78,7 @@ const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
   title={`${d.name} — Dog-Friendly ${category.singular[0].toUpperCase() + category.singular.slice(1)} in ${city.name} | ${BRAND_NAME}`}
   description={`${d.summary} Dog policy verified ${d.verification.last_verified.toISOString().slice(0, 10)}.`}
   jsonld={[venueJsonLd(venue, city), breadcrumbJsonLd(crumbs)]}
-  ogImage={`/og/${d.city}-${venueSlug(venue)}.png`}
+  ogImage={`/og/${d.city}/${venueSlug(venue)}.png`}
 >
   <div class="wrap">
     <Breadcrumbs crumbs={crumbs} />

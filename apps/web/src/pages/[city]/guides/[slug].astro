@@ -40,7 +40,7 @@ const jsonld = [article, breadcrumbJsonLd(crumbs), ...(faq ? [faq] : [])];
   title={`${d.title} | ${BRAND_NAME}`}
   description={d.description}
   jsonld={jsonld}
-  ogImage={`/og/${d.city}-guide-${guideSlug(guide)}.png`}
+  ogImage={`/og/${d.city}/guide/${guideSlug(guide)}.png`}
 >
   <div class="wrap">
     <Breadcrumbs crumbs={crumbs} />

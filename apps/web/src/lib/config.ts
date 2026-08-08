@@ -77,7 +77,9 @@ const citySchema = z.object({
     })
     .nullable()
     .default(null),
-  launched: z.boolean().default(true),
+  // Safe polarity for mass onboarding: a city ships nothing until it has
+  // passed the QA gate and someone deliberately flips this to true.
+  launched: z.boolean().default(false),
 });
 
 const categorySchema = z.object({
@@ -108,30 +110,50 @@ function readYaml(file: string): unknown {
   return yaml.load(fs.readFileSync(file, 'utf8'));
 }
 
+// These loaders are called per page render (header/footer) and per venue
+// card, so they must not touch the filesystem on every call. Data files
+// never change mid-build; cache for the process lifetime.
+let citiesCache: CityConfig[] | null = null;
+let cityBySlug: Map<string, CityConfig> | null = null;
+let categoriesCache: CategoryDef[] | null = null;
+let categoryByKey: Map<string, CategoryDef> | null = null;
+let attributesCache: AttributeDef[] | null = null;
+let upcomingTownsCache: UpcomingTown[] | null = null;
+
 export function getCities(): CityConfig[] {
+  if (citiesCache) return citiesCache;
   const dir = path.join(DATA_DIR, 'cities');
-  return fs
+  citiesCache = fs
     .readdirSync(dir)
     .filter((f) => f.endsWith('.yaml') || f.endsWith('.yml'))
     .map((f) => citySchema.parse(readYaml(path.join(dir, f))))
     .sort((a, b) => a.name.localeCompare(b.name));
+  return citiesCache;
 }
 
 export function getCity(slug: string): CityConfig {
-  const city = getCities().find((c) => c.slug === slug);
+  if (!cityBySlug) {
+    cityBySlug = new Map(getCities().map((c) => [c.slug, c]));
+  }
+  const city = cityBySlug.get(slug);
   if (!city) throw new Error(`Unknown city config: ${slug}`);
   return city;
 }
 
 export function getCategories(): CategoryDef[] {
+  if (categoriesCache) return categoriesCache;
   const raw = readYaml(path.join(DATA_DIR, 'categories.yaml')) as {
     categories: unknown[];
   };
-  return raw.categories.map((c) => categorySchema.parse(c));
+  categoriesCache = raw.categories.map((c) => categorySchema.parse(c));
+  return categoriesCache;
 }
 
 export function getCategoryByKey(key: string): CategoryDef {
-  const cat = getCategories().find((c) => c.key === key);
+  if (!categoryByKey) {
+    categoryByKey = new Map(getCategories().map((c) => [c.key, c]));
+  }
+  const cat = categoryByKey.get(key);
   if (!cat) throw new Error(`Unknown category key: ${key}`);
   return cat;
 }
@@ -152,20 +174,24 @@ export interface UpcomingTown {
  * "coming soon" dots; excludes towns that already have a launched city.
  */
 export function getUpcomingTowns(): UpcomingTown[] {
+  if (upcomingTownsCache) return upcomingTownsCache;
   const file = path.join(DATA_DIR, 'cities', 'waterfront-towns-geo.json');
-  if (!fs.existsSync(file)) return [];
+  if (!fs.existsSync(file)) return (upcomingTownsCache = []);
   const towns = JSON.parse(fs.readFileSync(file, 'utf8')) as UpcomingTown[];
   const launched = new Set(
     getCities().map((c) => `${c.name.toLowerCase()}|${c.state_code}`)
   );
-  return towns.filter(
+  upcomingTownsCache = towns.filter(
     (t) => !launched.has(`${t.name.toLowerCase()}|${t.state_code}`)
   );
+  return upcomingTownsCache;
 }
 
 export function getAttributes(): AttributeDef[] {
+  if (attributesCache) return attributesCache;
   const raw = readYaml(path.join(DATA_DIR, 'attributes.yaml')) as {
     attributes: unknown[];
   };
-  return raw.attributes.map((a) => attributeSchema.parse(a));
+  attributesCache = raw.attributes.map((a) => attributeSchema.parse(a));
+  return attributesCache;
 }

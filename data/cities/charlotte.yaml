@@ -1,5 +1,5 @@
-# City configuration — the multi-city contract. Phase 0 per
-# docs/CITY_PLAYBOOK.md: unlaunched until the QA gate passes.
+# City configuration — the multi-city contract. Launched 2026-08 after the
+# QA gate (Dog-Eared Index 9/9 components, composite 72).
 # The big-city counterpoint to Tahoe City for validating scale.
 name: Charlotte
 slug: charlotte

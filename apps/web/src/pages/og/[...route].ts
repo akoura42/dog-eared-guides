@@ -19,15 +19,17 @@ for (const city of getCities()) {
   };
 }
 
+// Keys use "/" between city and slug: both halves contain "-", so a "-"
+// join is ambiguous (tahoe + city-dog-park === tahoe-city + dog-park).
 for (const venue of await getCollection('venues')) {
-  pages[`${venue.data.city}-${venueSlug(venue)}`] = {
+  pages[`${venue.data.city}/${venueSlug(venue)}`] = {
     title: venue.data.name,
     description: venue.data.summary,
   };
 }
 
 for (const guide of await getCollection('guides')) {
-  pages[`${guide.data.city}-guide-${guideSlug(guide)}`] = {
+  pages[`${guide.data.city}/guide/${guideSlug(guide)}`] = {
     title: guide.data.title,
     description: guide.data.description,
   };
