@@ -42,6 +42,16 @@ regulations:
       sections for dogs over and under 20 pounds at most locations.
     jurisdiction: Mecklenburg County Park and Recreation
     source_url: https://parkandrec.mecknc.gov/Places-to-Visit/Dog-Parks
+  - summary: State rule allows dogs in outdoor dining areas — at the restaurant's discretion.
+    detail: >-
+      The North Carolina food code (15A NCAC 18A .2656, adopting Food Code
+      6-501.115(B)(4)) permits "dogs (Canis lupus familiaris) and cats" in
+      outdoor dining areas "provided that dogs and cats are physically
+      restrained, and do not pass through any indoor areas of the food
+      establishment." Restaurants may still say no — which is why every
+      patio policy in this guide is verified per venue.
+    jurisdiction: North Carolina (state food code)
+    source_url: https://www.animallaw.info/administrative/nc-restaurant-animals-2656-physical-facilities
 resources:
   - label: Mecklenburg County dog parks
     url: https://parkandrec.mecknc.gov/Places-to-Visit/Dog-Parks
@@ -60,4 +70,30 @@ categories:
   - pet-supply
   - daycare
   - services
+# Verified emergency contacts — the /charlotte/emergency/ page and the
+# pocket card render from this. Drive times via OSRM from Trade & Tryon.
+emergency:
+  er_vets:
+    - name: CARE — Charlotte Animal Referral & Emergency
+      phone: (704) 457-2300
+      lat: 35.19498
+      lng: -80.79706
+      note: Open 24 hours, every day. 3726 Latrobe Dr — about 10 minutes from Uptown.
+      source_url: https://carecharlotte.com/services/emergency/
+    - name: BluePearl Pet Hospital South Charlotte (Matthews)
+      phone: (704) 672-5590
+      note: 24-hour emergency and specialty hospital at 2440 Plantation Center Dr, southeast of I-485 off Weddington Road, serving south Charlotte.
+      source_url: https://bluepearlvet.com/hospital/matthews-nc/
+  poison:
+    - name: ASPCA Animal Poison Control
+      phone: (888) 426-4435
+      note: 24/7, 365 days a year. A consultation fee applies.
+      source_url: https://www.aspca.org/pet-care/animal-poison-control
+  lost_found:
+    - name: CMPD Animal Care & Control (main shelter)
+      phone: (704) 336-7600
+      lat: 35.19202
+      lng: -80.94841
+      note: Lost & found, intake, and animal protection run from the main shelter at 8315 Byrum Dr (the Toomey Ave location is adoptions only). Open daily; 311 reaches them from inside Mecklenburg County.
+      source_url: https://www.charlottenc.gov/Animal-Care-and-Control
 launched: false
