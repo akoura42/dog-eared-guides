@@ -11,6 +11,7 @@ import { venuePath, venueSlug, matchesAttribute } from '~/lib/venues';
 import { getCategoryByKey, getAttributes, type CityConfig } from '~/lib/config';
 import { GMAPS_API_KEY } from '~/lib/site';
 import { getTownZones } from '~/lib/zones';
+import { venueAreas } from '~/lib/areas';
 import { getTownIndex, getIndexBands } from '~/lib/dogEaredIndex';
 import { INDEX_VENUE_FILTERS } from '~/lib/indexFilters';
 import VenueCard from './VenueCard.astro';
@@ -65,6 +66,19 @@ const attrsOf = (venue: Venue) =>
     .map((attr) => attr.key)
     .join('|');
 
+// Area filter: normalized from venue neighborhoods (lib/areas.ts).
+// Multi-select, any-of — a compound neighborhood matches all its areas.
+const areaOptions = [
+  ...venues
+    .flatMap((v) => venueAreas(v.data.neighborhood))
+    .reduce((m, a) => m.set(a, (m.get(a) ?? 0) + 1), new Map<string, number>())
+    .entries(),
+]
+  .map(([label, count]) => ({ label, key: label.toLowerCase(), count }))
+  .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
+const areasOf = (venue: Venue) =>
+  venueAreas(venue.data.neighborhood).join('|').toLowerCase();
+
 // Index-component filters: every component that contributed positively to
 // the town's Dog-Eared Index (verified score > 0) and maps to venues
 // becomes a chip, so readers can filter to the venues behind the score.
@@ -99,6 +113,7 @@ const markers = venues.map((venue) => ({
   food: foodTextOf(venue),
   attrs: attrsOf(venue),
   ix: indexKeysOf(venue),
+  areas: areasOf(venue),
   path: venuePath(venue),
   gmaps: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
     `${venue.data.name} ${venue.data.address}`
@@ -173,6 +188,22 @@ const legend = [...new Map(venues.map((v) => {
         ><i style={`background:${item.color}`}></i>{item.label} <span class="n">{item.count}</span></button>
       ))}
     </div>
+    {areaOptions.length > 0 && (
+      <details class="fmenu" data-badge="active">
+        <summary>Area <span class="badge" hidden></span></summary>
+        <div class="panel area-toggles" role="group" aria-label="Filter map by area">
+          {areaOptions.map((a) => (
+            <button
+              type="button"
+              class="key ar"
+              data-area={a.key}
+              aria-pressed="false"
+              title={`Show venues in ${a.label}`}
+            >{a.label} <span class="n">{a.count}</span></button>
+          ))}
+        </div>
+      </details>
+    )}
     {attributeChips.length > 0 && (
       <details class="fmenu" data-badge="active">
         <summary>Lists <span class="badge" hidden></span></summary>
@@ -373,6 +404,7 @@ const legend = [...new Map(venues.map((v) => {
     box-shadow: inset 0 0 0 2px currentColor;
   }
   .attr[aria-pressed='true'],
+  .ar[aria-pressed='true'],
   .ixf[aria-pressed='true'] {
     border-color: var(--moss);
     background: color-mix(in srgb, var(--moss) 15%, transparent);
@@ -760,6 +792,7 @@ const legend = [...new Map(venues.map((v) => {
     food: string;
     attrs: string;
     ix: string;
+    areas: string;
     path: string;
     gmaps: string;
   };
@@ -772,6 +805,8 @@ const legend = [...new Map(venues.map((v) => {
   const activeAttrs = new Set<string>();
   // Active Dog-Eared Index component filters — same every-one semantics.
   const activeIndexFilters = new Set<string>();
+  // Active area chips — any-of semantics, like cuisines.
+  const activeAreas = new Set<string>();
   let applyVisibility: (() => void) | null = null;
   let focusMarker: ((idx: number, on: boolean) => void) | null = null;
   let resizeMap: (() => void) | null = null;
@@ -877,6 +912,10 @@ const legend = [...new Map(venues.map((v) => {
     for (const a of activeAttrs) if (!venueAttrs.includes(a)) return false;
     const venueIx = m.ix.split('|');
     for (const k of activeIndexFilters) if (!venueIx.includes(k)) return false;
+    if (activeAreas.size > 0) {
+      const list = m.areas.split('|');
+      if (![...activeAreas].some((a) => list.includes(a))) return false;
+    }
     return foodOk(m.cuisines, m.food);
   }
 
@@ -1251,6 +1290,21 @@ const legend = [...new Map(venues.map((v) => {
         const nowActive = !activeAttrs.has(key);
         if (nowActive) activeAttrs.add(key);
         else activeAttrs.delete(key);
+        btn.setAttribute('aria-pressed', String(nowActive));
+        updateList();
+        applyVisibility?.();
+      });
+    });
+
+  // Area chips narrow to venues in ANY selected area.
+  document
+    .querySelectorAll<HTMLButtonElement>('.explorer .area-toggles [data-area]')
+    .forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.area!;
+        const nowActive = !activeAreas.has(key);
+        if (nowActive) activeAreas.add(key);
+        else activeAreas.delete(key);
         btn.setAttribute('aria-pressed', String(nowActive));
         updateList();
         applyVisibility?.();
