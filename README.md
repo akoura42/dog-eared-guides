@@ -26,10 +26,11 @@ pipeline/            # Python: generation, verification, discovery, geocoding
 docs/
   RUNBOOK.md         # how to operate everything  ← start here
   CITY_PLAYBOOK.md   # the phase-by-phase recipe for launching a city
+  RESEARCH_CRAFT.md  # how to actually verify a dog policy (read before researching)
   dog-eared-index.md # spec for the town-level dog-friendliness index
   monetization.md    # tiered monetization plan + implementation notes
   voice.md           # the house voice, injected into every generation prompt
-.github/workflows/   # PR build gate, weekly re-verify cron, monthly OSM discovery
+.github/workflows/   # PR build+schema gate, per-city verify cron, monthly OSM discovery, gated CF deploy
 ```
 
 ## Quick start

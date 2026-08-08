@@ -38,7 +38,14 @@ jobs:
       - run: python -m pytest pipeline/index/test_compute.py -q
       - name: Index drift check (compute.py --check per city with an index)
         run: |
-          for f in data/cities/*/index.yaml; do
+          shopt -s nullglob
+          files=(data/cities/*/index.yaml)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No index.yaml files found — the drift gate has nothing to check."
+            echo "If city data moved, update this glob; failing rather than passing silently."
+            exit 1
+          fi
+          for f in "${files[@]}"; do
             slug="$(basename "$(dirname "$f")")"
             python pipeline/index/compute.py "$slug" --check
           done

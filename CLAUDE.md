@@ -59,6 +59,7 @@ python pipeline/generate.py --from-ledger <city> [--parallel 2-3] [--model M]
 python pipeline/ledger.py stats|list|set-status|sync
 python pipeline/verify.py [--city <city>] [--limit N] [--max-age 90] [--dry-run]
 python pipeline/index/compute.py <slug> [--check|--rescore]
+python pipeline/index/compute.py --export-bands      # refresh data/index-bands.json
 python pipeline/index/zones.py <slug>
 python pipeline/fetch_logos.py <slug>
 python pipeline/schemas.py --check-all               # data vs data/schema/

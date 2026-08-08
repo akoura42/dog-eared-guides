@@ -1,5 +1,11 @@
 # Project Spec — Dog-Friendly City Guide (Launch City: Tahoe City)
 
+> **HISTORICAL — this is the original launch spec, kept for context.**
+> The built system has since diverged (brand is Dog-Eared Guides, 11
+> categories, tier-based verification, per-city queues at
+> `pipeline/queue/<city>.yaml`). Current operational truth lives in
+> `CLAUDE.md`, `docs/RUNBOOK.md`, and `docs/CITY_PLAYBOOK.md`.
+
 Handoff spec for Claude Code. Build this as a production project, not a prototype.
 
 ## 1. Vision

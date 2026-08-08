@@ -41,7 +41,10 @@ jobs:
         run: |
           git config user.name "discover-bot"
           git config user.email "discover-bot@users.noreply.github.com"
-          if git diff --quiet pipeline/ledger/; then
+          # git status --porcelain, NOT git diff: a city's FIRST sweep
+          # creates an untracked ledger file that diff can't see — the old
+          # guard silently discarded a new city's entire first discovery.
+          if [ -z "$(git status --porcelain pipeline/ledger/)" ]; then
             echo "No new candidates this month."
             exit 0
           fi

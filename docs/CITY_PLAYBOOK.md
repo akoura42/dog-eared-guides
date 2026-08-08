@@ -7,16 +7,20 @@ operations), `dog-eared-index.md` (index spec), `monetization.md`,
 `voice.md` (all copy).
 
 Everything here is data-driven — launching a city touches `data/` and
-`content/` almost exclusively. The only code files a new city may touch:
-`apps/web/src/lib/areas.ts` (area aliases) and the agency-domain list in
-`apps/web/src/lib/logos.ts`.
+`content/` ONLY. Area aliases and agency domains live in the city's own
+yaml (`areas:` and `agency_domains:` in `data/cities/<slug>.yaml`); a new
+city never edits code.
 
 ## Phase 0 — city config (`data/cities/<slug>.yaml`)
 
 Copy `tahoe-city.yaml` as the template. Required before anything else:
 
-- `name/slug/state/geo` — geo is the town center; it anchors the map, the
-  index isochrone, and drive-time measurements. Pick the actual center.
+- `name/slug/state/state_code/geo` — geo is the town center; it anchors
+  the map, the index isochrone, and drive-time measurements. Pick the
+  actual center. `state_code` is schema-required (build fails without it).
+- `discover_radius_km` — the OSM discovery sweep radius. Default 8 km
+  suits a compact town; metros need more (Charlotte runs 16). Setting it
+  here is what makes `discover.py --all-launched` sweep correctly.
 - `hero` + `intro` — voice.md applies. The intro states the regulatory
   landscape in one breath (whose rules apply where).
 - `regulations` — every entry cites `source_url`. The research set, in
@@ -96,10 +100,11 @@ Per-venue rules beyond STYLE_GUIDE.md, learned the hard way:
    `zones.geojson`. Rerun any time; watch the MISSING/REJECTED lines —
    a REJECTED match is usually a same-named place elsewhere (good) or a
    bad `near` guess (fix the yaml).
-3. Area aliases — `lib/areas.ts`: the Area filter derives from venue
-   neighborhoods; add aliases collapsing sub-spots into the areas locals
-   navigate by, and null-mapping street descriptors. Unknown tokens pass
-   through, so this can trail the content. Big cities NEED this pass —
+3. Area aliases — the `areas:` map in `data/cities/<slug>.yaml`: the Area
+   filter derives from venue neighborhoods; add aliases collapsing
+   sub-spots into the areas locals navigate by (lowercase keys), and
+   null-mapping street descriptors. Unknown tokens pass through, so this
+   can trail the content. Big cities NEED this pass —
    neighborhood taxonomy (NoDa, South End, Plaza Midwood…) is how
    readers filter a large catalog.
 
@@ -140,9 +145,10 @@ python pipeline/fetch_logos.py <slug>     # idempotent; delete a file to refetch
 ```
 
 Card tile priority: business's own logo → licensed photo → agency
-favicon → text. Add new agency domains to `AGENCY_DOMAINS` in
-`lib/logos.ts` so photos beat repetitive government favicons. Photos:
-licensed/owner-supplied only, credit required, set in venue frontmatter.
+favicon → text. Add the city's park/agency domains to `agency_domains:`
+in `data/cities/<slug>.yaml` so photos beat repetitive government
+favicons. Photos: licensed/owner-supplied only, credit required, set in
+venue frontmatter.
 
 ## Phase 7 — monetization pass
 
@@ -158,6 +164,7 @@ only when the product is verifiably the SAME operator.
 cd apps/web && npx astro check && npx astro build   # 0 errors
 python pipeline/index/compute.py <slug> --check
 python pipeline/index/test_compute.py
+python pipeline/schemas.py --check-all              # every data file vs data/schema/
 ```
 
 Then LOOK at the pages (screenshot, both map modes, mobile width):

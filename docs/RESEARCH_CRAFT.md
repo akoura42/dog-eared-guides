@@ -90,8 +90,9 @@ they share a feed.
 - Establish the premise first ("do you have a patio?") before asking about
   dogs — a confident "no dogs" from a venue with no outdoor space answers
   the wrong question.
-- Log every outcome: `ledger.py set-status <city> <id> --note "..."` and
-  a phone-verified policy becomes tier 1 with `method: phone`.
+- Log every outcome:
+  `python pipeline/ledger.py set-status --city <city> --id <id> --status <status> --note "..."`
+  and a phone-verified policy becomes tier 1 with `method: phone`.
 
 ## When a venue turns out closed/rebranded/moved
 

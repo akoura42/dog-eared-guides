@@ -6,7 +6,7 @@ build target of the same verified content graph that powers dogearedguides.com.
 If a fact isn't in the site's data layer with a verification record, it does not
 exist to the book.
 
-Companion to `dog-friendly-tahoe-site-spec.md`. Everything in that spec's
+Companion to `dog_friendly_city_guide_project_spec.md`. Everything in that spec's
 non-negotiables (sourcing, voice, schema) applies here unchanged.
 
 ---
@@ -33,7 +33,7 @@ Outputs to `dist/books/tahoe-2027/`:
 1. **No fact without a source.** Every venue fact in print traces to a
    `verification` record (`last_verified`, `method`, `source_url`) in the data
    layer. The renderer refuses to build otherwise.
-2. **Voice is `prompts/VOICE.md`, verbatim.** Describe the place, not the
+2. **Voice is `docs/voice.md`, verbatim.** Describe the place, not the
    reader. Conditions, not conclusions. No advice. The book earns no exemption;
    chapter intros follow the same rules as venue copy.
 3. **First person appears only via `field_notes`** (human-entered after real

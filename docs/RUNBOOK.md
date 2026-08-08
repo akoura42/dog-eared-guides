@@ -144,10 +144,18 @@ Special frontmatter worth knowing:
 | `discover.yml` | monthly | OSM candidate sweep for all launched cities → PR of new `unchecked` ledger rows |
 | `deploy.yml` | push to main | Builds with production env vars and deploys to Cloudflare Pages via wrangler. Gated on the `CF_PAGES_PROJECT` repo variable — until that's set (and the CF dashboard git integration disconnected), shipping stays on the dashboard integration. |
 
-Auth for the model-using jobs: store `CLAUDE_CODE_OAUTH_TOKEN` as a repo
-secret (mint it locally with `claude setup-token`) to run on the Claude
-subscription; or set `ANTHROPIC_API_KEY` for API billing. All jobs can be
-run manually from the Actions tab or locally (`--dry-run` supported).
+### Repo secrets and variables (one-time setup, all workflows depend on these)
+
+| Name | Kind | Why |
+|---|---|---|
+| `PIPELINE_PAT` | secret | Fine-grained PAT (this repo; Contents + Pull requests write). **Required for CI to run on bot-opened PRs** — GitHub suppresses workflow triggers on events created with the default `GITHUB_TOKEN`. Without it, verify/discover PRs show zero checks. |
+| `CLAUDE_CODE_OAUTH_TOKEN` | secret | Model auth on the Claude subscription (mint with `claude setup-token`). Alternative: `ANTHROPIC_API_KEY` for API billing. |
+| `CF_PAGES_PROJECT` | variable | Activates `deploy.yml` (unset = the workflow skips). |
+| `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` | secrets | Wrangler deploy credentials (token needs Cloudflare Pages: Edit). |
+| `SITE_URL`, `PUBLIC_*`, affiliate vars | vars/secrets | Production env for the deploy build — see `apps/web/.env.example` for the full inventory. Missing vars ship a working site with monetization/analytics silently off. |
+
+All jobs can be run manually from the Actions tab or locally
+(`--dry-run` supported).
 
 ## Monthly: point generation at demand
 
@@ -189,6 +197,12 @@ fallback) into `waterfront-towns-geo.json`. Re-run only when the CSV
 changes.
 
 ## Deploy (Cloudflare Pages)
+
+Preferred: the in-repo `deploy.yml` workflow (push to main → build with
+production env → `wrangler pages deploy --branch main`), activated by
+setting the `CF_PAGES_PROJECT` repo variable — then DISCONNECT the CF
+dashboard git integration so there's exactly one deployer. Until that
+switch, the dashboard integration below is what ships:
 
 - Project connects to `akoura42/dog-eared-guides`, production branch
   `main` (merge = deploy). Custom domain: dogearedguides.com.

@@ -24,9 +24,16 @@ jobs:
       cities: ${{ steps.list.outputs.cities }}
     steps:
       - uses: actions/checkout@v4
+      # Directories only (a stray file must not become a matrix "city").
+      # NOTE: GitHub caps a matrix at 256 jobs — before the city count
+      # approaches that, switch this to emitting chunked city groups.
       - id: list
         run: |
-          cities=$(ls apps/web/src/content/venues | jq -R -s -c 'split("\n") | map(select(. != ""))')
+          cities=$(find apps/web/src/content/venues -mindepth 1 -maxdepth 1 -type d -exec basename {} \; | jq -R -s -c 'split("\n") | map(select(. != ""))')
+          if [ "$cities" = "[]" ]; then
+            echo "No venue directories found — nothing to verify."
+            exit 1
+          fi
           echo "cities=$cities" >> "$GITHUB_OUTPUT"
           echo "Cities: $cities"
 
