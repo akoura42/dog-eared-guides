@@ -1,6 +1,7 @@
 ---
 import Base from '~/layouts/Base.astro';
 import { BRAND_NAME } from '~/lib/site';
+import badge from '~/assets/logo/logo-badge.svg';
 ---
 
 <Base
@@ -8,14 +9,25 @@ import { BRAND_NAME } from '~/lib/site';
   description="Every dog policy on this site is checked against an official source, dated, and re-checked every 90 days. Here's exactly how."
 >
   <div class="wrap prose page">
-    <p class="eyebrow">Trust</p>
-    <h1>How we verify</h1>
-    <p class="lede">
-      Dog policies are the least stable facts in travel. Patio rules change
-      with managers, beach access changes with seasons, and county ordinances
-      change with board votes. Most directories publish once and never look
-      back. We built this site around not doing that.
-    </p>
+    <div class="verify-hero">
+      <div>
+        <p class="eyebrow">Trust</p>
+        <h1>How we verify</h1>
+        <p class="lede">
+          Dog policies are the least stable facts in travel. Patio rules change
+          with managers, beach access changes with seasons, and county ordinances
+          change with board votes. Most directories publish once and never look
+          back. We built this site around not doing that.
+        </p>
+      </div>
+      <img
+        class="field-badge"
+        src={badge.src}
+        alt="Dog-Eared Guides — field-tested"
+        width="150"
+        height="150"
+      />
+    </div>
 
     <h2>Every fact needs a source</h2>
     <p>
@@ -96,5 +108,19 @@ import { BRAND_NAME } from '~/lib/site';
   .lede {
     font-size: 1.15rem;
     color: var(--ink-soft);
+  }
+  .verify-hero {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .field-badge {
+    flex-shrink: 0;
+    transform: rotate(6deg);
+  }
+  @media (max-width: 640px) {
+    .field-badge {
+      display: none;
+    }
   }
 </style>
