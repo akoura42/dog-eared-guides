@@ -6,42 +6,54 @@ items:
   notes: Membership dog park + bar in South End — the Dog Bar successor lead from
     batch 1. Verify membership, vaccine requirements, and the bar/park split. Capture
     vaccinations_required if published.
+  done: true
 - type: venue
   city: charlotte
   name: Wooden Robot
   category: drink
   notes: South End brewery; verify taproom/patio dog policy.
+  done: true
 - type: venue
   city: charlotte
   name: Resident Culture Brewing Company
   category: drink
   notes: Plaza Midwood; verify policy (has had food trucks/patio culture).
+  done: true
 - type: venue
   city: charlotte
   name: Birdsong Brewing Company
   category: drink
   notes: NoDa-adjacent; verify policy.
+  done: true
 - type: venue
   city: charlotte
   name: Romare Bearden Park
   category: trail
   notes: Uptown signature park; county rules govern; verify any park-specific posted
     rules.
+  done: true
 - type: venue
   city: charlotte
   name: Frazier Park
   category: trail
   notes: Near Uptown; county rules; verify specifics.
+  done: true
 - type: venue
   city: charlotte
   name: Pet Supplies Plus
   category: pet-supply
-  notes: Verify which location this ledger entry is and the dogs-inside policy.
+  notes: 'DONE (unverifiable: Which-location ambiguity in ledger entry; resolve
+    location then verify dogs-inside policy.) — Verify which location this ledger
+    entry is and the dogs-inside policy.'
+  done: true
 - type: venue
   city: charlotte
   name: Petco
   category: pet-supply
-  notes: Verify which location and dogs-inside policy (chain policy usually published).
+  notes: 'DONE (unverifiable: Which-location ambiguity; chain policy likely publishable
+    once the store is pinned.) — Verify which location and dogs-inside policy (chain
+    policy usually published).'
+  done: true
 - type: venue
   city: charlotte
   name: Kimpton Tryon Park Hotel
