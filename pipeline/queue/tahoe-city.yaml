@@ -45,3 +45,6 @@ items:
   topic: A dog-friendly 48-hour Tahoe City itinerary
   notes: Use existing verified venues via VenueEmbed; keep every stop legal per city
     regulations.
+  done: true
+  done_date: '2026-08-09'
+  done_note: 'already published: guides/tahoe-city/48-hours-in-tahoe-city-with-a-dog.mdx'
