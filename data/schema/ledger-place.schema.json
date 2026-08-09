@@ -29,6 +29,7 @@
     "lng": { "type": ["number", "null"] },
     "evidence": { "type": "array", "items": { "type": "string" } },
     "osm_ref": { "type": "string", "pattern": "^[nwr][0-9]+$" },
+    "overture_id": { "type": "string", "minLength": 8 },
     "published_slug": { "type": "string" },
     "website": { "type": "string" }
   },

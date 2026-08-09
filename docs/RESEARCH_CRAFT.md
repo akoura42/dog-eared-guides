@@ -69,6 +69,14 @@ they share a feed.
 - Mall food-court counters and contract cafeterias have no independent
   policy; the landlord's rules govern. Usually drop, don't call.
 
+## Discovery blind spots
+
+Every bulk dataset lags reality: OSM by years for businesses, Overture by
+months. A venue that opened recently (evo Hotel Tahoe City, Sept 2025)
+is invisible to both — `discover_recent.py` exists for exactly this, and
+a guest mentioning "I'm staying at X and it's not on your site" is a
+discovery signal worth a queue row on the spot.
+
 ## OSM candidates (discover.py output)
 
 - Check `access=private` before sourcing any `dog_park` — HOA and

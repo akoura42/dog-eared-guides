@@ -124,6 +124,7 @@ def upsert_place(
     lng: float | None = None,
     evidence: list[str] | None = None,
     osm_ref: str | None = None,
+    overture_id: str | None = None,
 ) -> dict:
     """Insert or update; never downgrades a researched status to unchecked."""
     assert status in STATUSES, f"unknown status: {status}"
@@ -142,6 +143,8 @@ def upsert_place(
             existing["evidence"] = merged
         if osm_ref:
             existing.setdefault("osm_ref", osm_ref)
+        if overture_id:
+            existing.setdefault("overture_id", overture_id)
         return existing
     row = {
         "id": pid,
@@ -160,6 +163,8 @@ def upsert_place(
         row["evidence"] = evidence
     if osm_ref:
         row["osm_ref"] = osm_ref
+    if overture_id:
+        row["overture_id"] = overture_id
     places[pid] = row
     return row
 
