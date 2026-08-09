@@ -73,7 +73,33 @@ CATEGORY_MAP: dict[str, str] = {
     "pet_sitting": "daycare",
     "dog_day_care_center": "daycare",
     "pet_trainer": "services",
+    "steakhouse": "eat",
+    "pizzeria": "eat",
+    "diner": "eat",
+    "bistro": "eat",
+    "deli": "eat",
+    "food_truck": "eat",
+    "juice_bar": "eat",
+    "brewpub": "drink",
+    "taproom": "drink",
+    "distillery": "drink",
+    "winery": "drink",
 }
+
+
+def map_category(cat: str | None) -> str | None:
+    """Exact map first, then Overture's subtype conventions: the taxonomy
+    has dozens of *_restaurant and *_bar leaves (barbecue_restaurant,
+    french_restaurant, cocktail_bar…) that all mean eat/drink here."""
+    if not cat:
+        return None
+    if cat in CATEGORY_MAP:
+        return CATEGORY_MAP[cat]
+    if cat.endswith("_restaurant") or cat.endswith("_cafe") or cat.endswith("_coffee_shop"):
+        return "eat"
+    if cat.endswith("_bar"):
+        return "drink"
+    return None
 
 
 def bbox_around(lat: float, lng: float, radius_km: float) -> tuple[float, float, float, float]:
@@ -129,7 +155,7 @@ def discover_overture(city_slug: str, release: str, radius_km: float | None, dry
             continue
         if any(b in name.lower() for b in RENTAL_BRANDS):
             continue  # a managed rental unit, not a venue
-        category = CATEGORY_MAP.get(p["category"] or "")
+        category = map_category(p["category"])
         if not category:
             continue
 
