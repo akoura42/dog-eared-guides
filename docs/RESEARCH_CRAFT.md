@@ -77,6 +77,21 @@ is invisible to both — `discover_recent.py` exists for exactly this, and
 a guest mentioning "I'm staying at X and it's not on your site" is a
 discovery signal worth a queue row on the spot.
 
+## Overture candidates (discover_overture.py output)
+
+- Notes carry the venue's website and phone straight from Overture —
+  start research there, not at a search engine.
+- Overture is Meta-fed: it reflects business listings, including stale
+  ones. Watch for predecessor brand names on rebranded properties, rows
+  for venues that closed years ago but keep aggregator listings, and
+  records for announced-but-unopened projects. "In Overture" is not
+  "currently operating" — corroborate existence first, same as OSM.
+- The same venue often has two Overture entries (spelling variants,
+  chain vs local name). If a published row already adopted one entry,
+  the second becomes a fresh unchecked row — triage it to `duplicate`.
+- A dog policy repeated verbatim across Expedia/Hotels.com/KAYAK/Orbitz
+  mirrors is ONE booking-feed origin. It never counts toward tier 2.
+
 ## OSM candidates (discover.py output)
 
 - Check `access=private` before sourcing any `dog_park` — HOA and

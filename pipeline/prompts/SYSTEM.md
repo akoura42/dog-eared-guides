@@ -32,6 +32,15 @@ set `source_url` to the strongest mention, and:
 **Tier 3 — no official source and fewer than 2 usable mentions.** Produce no
 file. List the venue under EXCLUDED with what you tried.
 
+**Verified NO is publishable — and wanted.** A venue whose official source
+says dogs are NOT allowed gets a page with `allowed: "no"` (ALWAYS quoted —
+bare `no` is a YAML boolean) at the tier its evidence supports. The site
+shows no-dogs venues on the map as completeness proof; a sourced "no" is as
+valuable as a sourced "yes." The body leads with the ban and its source,
+notes service-animal carve-outs if published, and points to nearby verified
+alternatives. Tier-3 rules still apply: an UNVERIFIED "no" (aggregator feed
+data, one directory row) is not publishable either way.
+
 Any individual claim that can't meet its tier's bar goes to OPEN QUESTIONS
 for a human to resolve by phone, not into the content.
 

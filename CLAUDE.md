@@ -66,6 +66,7 @@ python pipeline/index/zones.py <slug>
 python pipeline/fetch_logos.py <slug>
 python pipeline/schemas.py --check-all               # data vs data/schema/
 cd apps/web && npm run check && npm run build        # the machine gate
+cd apps/web && npx wrangler@4 deploy                 # ship main (Workers; see RUNBOOK)
 python -m pytest pipeline/index/test_compute.py -q
 ```
 

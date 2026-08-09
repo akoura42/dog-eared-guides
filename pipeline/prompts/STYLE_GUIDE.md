@@ -35,7 +35,10 @@ lng: <number>
 phone: <string | null>
 website: <url | null>
 dog_policy:
-  allowed: indoors | patio_only | outdoor_areas | grounds_only | no
+  allowed: indoors | patio_only | outdoor_areas | grounds_only | "no"
+                                  # "no" ALWAYS quoted (bare no = YAML bool).
+                                  # Verified no-dogs venues DO get pages —
+                                  # see SYSTEM.md "Verified NO is publishable"
   vaccinations_required: []       # NESTED HERE, never top-level. Proof the
                                   # venue itself requires (daycare, dog parks,
                                   # dog bars), named as the venue states them
