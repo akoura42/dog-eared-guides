@@ -176,6 +176,13 @@ def existing_venue_slugs(city: str) -> list[str]:
     return sorted(p.stem for p in city_dir.glob("*.md"))
 
 
+def _normalize_yaml_no(body: str) -> str:
+    """`allowed: no` unquoted is a YAML 1.1 boolean to Python (and a string
+    to the js-yaml build) — models write it constantly for no-dogs venues.
+    Quote it so both readers agree."""
+    return re.sub(r'(?m)^(\s*allowed:)\s*no\s*$', r'\1 "no"', body)
+
+
 def _strip_code_fences(body: str) -> str:
     """Models occasionally wrap file contents in ``` fences — remove them."""
     lines = body.strip().splitlines()
@@ -192,7 +199,7 @@ def parse_generation_output(text: str) -> GenerationResult:
         # see it (src/content/src/content/...).
         rel_path = re.sub(r"^(?:apps/web/)?(?:src/)?content/", "", m.group("path").strip())
         result.files.append(
-            GeneratedFile(rel_path, _strip_code_fences(m.group("body")))
+            GeneratedFile(rel_path, _normalize_yaml_no(_strip_code_fences(m.group("body"))))
         )
     qm = QUESTIONS_RE.search(text)
     if qm:

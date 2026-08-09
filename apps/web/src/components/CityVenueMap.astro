@@ -102,14 +102,25 @@ const indexKeysOf = (venue: Venue) =>
     .map((c) => c.key)
     .join('|');
 
+// Verified no-dogs venues stay ON the map (comprehensive coverage is the
+// trust signal) — grey marker, labeled, filterable via the toolbar toggle.
+const NO_DOGS_COLOR = '#8f948e';
+const noDogsCount = venues.filter((v) => v.data.dog_policy.allowed === 'no').length;
+
 // Marker order mirrors the card list — index is the shared id between them.
 const markers = venues.map((venue) => ({
   name: venue.data.name,
   lat: venue.data.lat,
   lng: venue.data.lng,
   categoryKey: venue.data.category,
-  category: getCategoryByKey(venue.data.category).label,
-  color: CATEGORY_COLORS[venue.data.category] ?? '#1f4d3a',
+  category:
+    getCategoryByKey(venue.data.category).label +
+    (venue.data.dog_policy.allowed === 'no' ? ' — no dogs' : ''),
+  noDogs: venue.data.dog_policy.allowed === 'no',
+  color:
+    venue.data.dog_policy.allowed === 'no'
+      ? NO_DOGS_COLOR
+      : CATEGORY_COLORS[venue.data.category] ?? '#1f4d3a',
   cuisines: cuisinesOf(venue),
   food: foodTextOf(venue),
   attrs: attrsOf(venue),
@@ -266,6 +277,15 @@ const legend = [...new Map(venues.map((v) => {
           ))}
         </div>
       </details>
+    )}
+    {noDogsCount > 0 && (
+      <button
+        type="button"
+        class="key nodogs-toggle"
+        id="nodogs-toggle"
+        aria-pressed="true"
+        title="Places we verified do NOT allow dogs — shown so you know the list is complete; tap to hide them"
+      ><i style={`background:${NO_DOGS_COLOR}`}></i>No-dogs spots <span class="n">{noDogsCount}</span></button>
     )}
     {emergencyMarkers.length > 0 && (
       <button
@@ -790,6 +810,7 @@ const legend = [...new Map(venues.map((v) => {
     lng: number;
     categoryKey: string;
     category: string;
+    noDogs: boolean;
     color: string;
     cuisines: string;
     food: string;
@@ -901,6 +922,8 @@ const legend = [...new Map(venues.map((v) => {
   // Per-type zone visibility ('no-dogs', 'off-leash', 'leashed', 'trails',
   // 'restricted'). Undefined means visible; chips flip entries to false.
   const zoneGroupState: Record<string, boolean> = {};
+  // Verified no-dogs venues: shown by default, hidden via the toolbar toggle.
+  let showNoDogs = true;
   const zoneGroupOf = (p: { kind?: string; policy: string }) =>
     p.kind === 'trail' ? 'trails' : p.policy;
   const zoneVisible = (p: { kind?: string; policy: string }) =>
@@ -925,6 +948,7 @@ const legend = [...new Map(venues.map((v) => {
   }
 
   function isShown(m: MarkerData): boolean {
+    if (!showNoDogs && m.noDogs) return false;
     if (hiddenCategories.has(m.categoryKey)) return false;
     const venueAttrs = m.attrs.split('|');
     for (const a of activeAttrs) if (!venueAttrs.includes(a)) return false;
@@ -1269,6 +1293,16 @@ const legend = [...new Map(venues.map((v) => {
     emergencyOn = !emergencyOn;
     emergencyToggle.setAttribute('aria-pressed', String(emergencyOn));
     setEmergencyVisible?.();
+  });
+
+  // No-dogs toggle: verified "dogs not allowed" venues are shown by
+  // default (completeness is the point) and hide with one tap.
+  const noDogsToggle = document.getElementById('nodogs-toggle') as HTMLButtonElement | null;
+  noDogsToggle?.addEventListener('click', () => {
+    showNoDogs = !showNoDogs;
+    noDogsToggle.setAttribute('aria-pressed', String(showNoDogs));
+    updateList();
+    applyVisibility?.();
   });
 
   // Zone chips toggle each zone type (no-dogs, off-leash, …) on its own.
