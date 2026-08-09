@@ -163,3 +163,22 @@
 {"actor": "generate", "city": "tahoe-city", "note": "Dollar Point Beach", "outcome": "unverifiable", "place_id": "ovt-d4d21b57-dollar-point-beach", "ts": "2026-08-09T19:54:16+00:00"}
 {"actor": "generate", "city": "tahoe-city", "note": "Thai Kitchen Tahoe City", "outcome": "unverifiable", "place_id": "ovt-d5155bc8-thai-kitchen-tahoe-city", "ts": "2026-08-09T19:54:16+00:00"}
 {"actor": "manual", "city": "tahoe-city", "note": "This is Tahoe City Commons Beach (400 N Lake Blvd) — published as lake-tahoe-commons-beach (no-dogs, tier 1). Overture name variant.", "outcome": "duplicate", "place_id": "ovt-30574156-tahoe-city-public-beach", "ts": "2026-08-09T19:55:42+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 4: Olympic Valley apres + remaining TC eats", "outcome": "queued", "place_id": "ovt-2242b877-le-chamois-loft-bar", "ts": "2026-08-09T20:00:04+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 4: Olympic Valley apres + remaining TC eats", "outcome": "queued", "place_id": "ovt-0ab3ddce-22-bistro", "ts": "2026-08-09T20:00:05+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 4: Olympic Valley apres + remaining TC eats", "outcome": "queued", "place_id": "ovt-6bd5377b-coffeebar", "ts": "2026-08-09T20:00:06+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 4: Olympic Valley apres + remaining TC eats", "outcome": "queued", "place_id": "ovt-4c2a068d-sol-y-lago", "ts": "2026-08-09T20:00:06+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 4: Olympic Valley apres + remaining TC eats", "outcome": "queued", "place_id": "ovt-a4071a97-bacchi-s", "ts": "2026-08-09T20:00:07+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 4: Olympic Valley apres + remaining TC eats", "outcome": "queued", "place_id": "ovt-3ab02c1e-cafe-zenon", "ts": "2026-08-09T20:00:07+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 4: Olympic Valley apres + remaining TC eats", "outcome": "queued", "place_id": "ovt-7847f122-boathouse-on-the-pier", "ts": "2026-08-09T20:00:08+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 4: Olympic Valley apres + remaining TC eats", "outcome": "queued", "place_id": "ovt-1d482d84-little-truckee-ice-creamery", "ts": "2026-08-09T20:00:09+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 4: Olympic Valley apres + remaining TC eats", "outcome": "queued", "place_id": "ovt-85f1b278-speedboat-bar", "ts": "2026-08-09T20:00:09+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "22 Bistro", "outcome": "unverifiable", "place_id": "ovt-0ab3ddce-22-bistro", "ts": "2026-08-09T20:10:00+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Little Truckee Ice Creamery", "outcome": "unverifiable", "place_id": "ovt-1d482d84-little-truckee-ice-creamery", "ts": "2026-08-09T20:10:00+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Le Chamois & Loft Bar", "outcome": "draft-produced", "place_id": "ovt-2242b877-le-chamois-loft-bar", "ts": "2026-08-09T20:10:00+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Kings Beach Lake Tahoe", "outcome": "unverifiable", "place_id": "ovt-253dbbe0-kings-beach-lake-tahoe", "ts": "2026-08-09T20:10:00+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Cafe Zenon", "outcome": "unverifiable", "place_id": "ovt-3ab02c1e-cafe-zenon", "ts": "2026-08-09T20:10:00+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Patton Beach", "outcome": "unverifiable", "place_id": "ovt-454b1fdb-patton-beach", "ts": "2026-08-09T20:10:00+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Sol y Lago", "outcome": "unverifiable", "place_id": "ovt-4c2a068d-sol-y-lago", "ts": "2026-08-09T20:10:00+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Coffeebar", "outcome": "unverifiable", "place_id": "ovt-6bd5377b-coffeebar", "ts": "2026-08-09T20:10:00+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Boathouse on the Pier", "outcome": "unverifiable", "place_id": "ovt-7847f122-boathouse-on-the-pier", "ts": "2026-08-09T20:10:00+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Speedboat Bar", "outcome": "unverifiable", "place_id": "ovt-85f1b278-speedboat-bar", "ts": "2026-08-09T20:10:00+00:00"}
