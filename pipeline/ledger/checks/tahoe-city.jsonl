@@ -189,3 +189,31 @@
 {"actor": "generate", "city": "tahoe-city", "note": "Bacchi's", "outcome": "unverifiable", "place_id": "ovt-a4071a97-bacchi-s", "ts": "2026-08-09T22:05:58+00:00"}
 {"actor": "generate", "city": "tahoe-city", "note": "Bluefish", "outcome": "unverifiable", "place_id": "ovt-e410888e-bluefish", "ts": "2026-08-09T22:05:58+00:00"}
 {"actor": "manual", "city": "tahoe-city", "note": "Bacchi's Inn closed permanently 2022-09-11 after 90 years (Moonshine Ink); domain repurposed; parcel approved 2025-08-26 for redevelopment as an equipment shop (PLN25-00215). No successor.", "outcome": "closed", "place_id": "ovt-a4071a97-bacchi-s", "ts": "2026-08-09T22:07:04+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Duplicate of published skylandia-park-and-beach.", "outcome": "duplicate", "place_id": "ovt-d5864db1-skylandia-beach", "ts": "2026-08-09T22:13:43+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Duplicate of published skylandia-park-and-beach.", "outcome": "duplicate", "place_id": "ovt-2277e862-skylandia-park", "ts": "2026-08-09T22:13:43+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Duplicate of published truckee-river-trail.", "outcome": "duplicate", "place_id": "ovt-1116183a-truckee-river-bike-trail", "ts": "2026-08-09T22:13:43+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Duplicate of published gatekeepers-museum (Layton Park is the museum g", "outcome": "duplicate", "place_id": "ovt-e06d7941-william-b-layton-park", "ts": "2026-08-09T22:13:43+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Duplicate of published pet-station-tahoe-city (tagline name).", "outcome": "duplicate", "place_id": "ovt-b152fe86-your-local-pet-station", "ts": "2026-08-09T22:13:43+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Private HOA/members amenity — not publicly accessible; not publishable", "outcome": "unverifiable", "place_id": "ovt-0508c8a9-lake-tahoe-park-association", "ts": "2026-08-09T22:13:43+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Private HOA/members amenity — not publicly accessible; not publishable", "outcome": "unverifiable", "place_id": "ovt-44a7a929-carnelian-woods-townhouse", "ts": "2026-08-09T22:13:43+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Private HOA/members amenity — not publicly accessible; not publishable", "outcome": "unverifiable", "place_id": "ovt-b5d5ad95-rocky-ridge-beach", "ts": "2026-08-09T22:13:43+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 5: public land + OV dining", "outcome": "queued", "place_id": "ovt-e14dcd34-burton-creek-state-park", "ts": "2026-08-09T22:13:58+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 5: public land + OV dining", "outcome": "queued", "place_id": "ovt-a6123f0f-emerald-bay-state-park", "ts": "2026-08-09T22:13:59+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 5: public land + OV dining", "outcome": "queued", "place_id": "ovt-504f65ed-blackwood-canyon-sno-park", "ts": "2026-08-09T22:13:59+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 5: public land + OV dining", "outcome": "queued", "place_id": "ovt-af301eb0-pomin-park", "ts": "2026-08-09T22:14:00+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 5: public land + OV dining", "outcome": "queued", "place_id": "ovt-e3c89548-squaw-valley-park", "ts": "2026-08-09T22:14:01+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 5: public land + OV dining", "outcome": "queued", "place_id": "ovt-0e84f80e-heritage-plaza", "ts": "2026-08-09T22:14:01+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 5: public land + OV dining", "outcome": "queued", "place_id": "ovt-ded59a1e-antone-meadows-trail", "ts": "2026-08-09T22:14:02+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 5: public land + OV dining", "outcome": "queued", "place_id": "ovt-cc73c941-deer-park", "ts": "2026-08-09T22:14:02+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 5: public land + OV dining", "outcome": "queued", "place_id": "ovt-8544da14-plumpjack-cafe-and-bar", "ts": "2026-08-09T22:14:03+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 5: public land + OV dining", "outcome": "queued", "place_id": "ovt-154e455b-mamasake", "ts": "2026-08-09T22:14:04+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Heritage Plaza", "outcome": "draft-produced", "place_id": "ovt-0e84f80e-heritage-plaza", "ts": "2026-08-09T22:31:24+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Mamasake", "outcome": "unverifiable", "place_id": "ovt-154e455b-mamasake", "ts": "2026-08-09T22:31:24+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Blackwood Canyon SNO-PARK", "outcome": "draft-produced", "place_id": "ovt-504f65ed-blackwood-canyon-sno-park", "ts": "2026-08-09T22:31:24+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "PlumpJack Cafe and Bar", "outcome": "draft-produced", "place_id": "ovt-8544da14-plumpjack-cafe-and-bar", "ts": "2026-08-09T22:31:24+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Emerald Bay State Park", "outcome": "unverifiable", "place_id": "ovt-a6123f0f-emerald-bay-state-park", "ts": "2026-08-09T22:31:24+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Pomin Park", "outcome": "unverifiable", "place_id": "ovt-af301eb0-pomin-park", "ts": "2026-08-09T22:31:24+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Deer Park", "outcome": "unverifiable", "place_id": "ovt-cc73c941-deer-park", "ts": "2026-08-09T22:31:24+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Antone Meadows Trail", "outcome": "unverifiable", "place_id": "ovt-ded59a1e-antone-meadows-trail", "ts": "2026-08-09T22:31:24+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Burton Creek State Park", "outcome": "draft-produced", "place_id": "ovt-e14dcd34-burton-creek-state-park", "ts": "2026-08-09T22:31:24+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Squaw Valley Park", "outcome": "unverifiable", "place_id": "ovt-e3c89548-squaw-valley-park", "ts": "2026-08-09T22:31:24+00:00"}
