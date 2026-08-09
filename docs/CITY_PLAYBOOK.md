@@ -44,18 +44,37 @@ Copy `tahoe-city.yaml` as the template. Required before anything else:
   extras is harmless.
 - `launched: false` until Phase 9.
 
-## Phase 1 — discovery (ledger fill)
+## Phase 1 — discovery (ledger fill, three layers)
 
 ```
-python pipeline/discover.py --city <slug>     # OSM sweep → ledger candidates
-python pipeline/ledger.py stats               # coverage dashboard
+python pipeline/discover.py --city <slug>            # OSM: parks, trails, beaches, public land
+python pipeline/discover_overture.py --city <slug>   # Overture: businesses (websites+phones in notes)
+python pipeline/discover_recent.py --city <slug>     # model sweep: openings the datasets missed → queue
+python pipeline/ledger.py stats                      # coverage dashboard
 ```
 
-Large cities return hundreds of candidates. Do NOT drain the ledger
-linearly — rank batches: (1) the dog-famous anchors (breweries, dog
-bars, signature parks), (2) each category to ≥4 for hub generation,
-(3) demand-driven from search data monthly. Small towns: just work the
-whole pool like Tahoe (77 candidates → 36 published, 23 unverifiable).
+Run all three — each catches what the others miss (OSM lags years on
+businesses; Overture months; only the model sweep sees last month's
+opening). Then do the **sweep triage pass** before drafting anything:
+
+- Overture-internal duplicates: the same venue often appears twice
+  (name variants, old brand names — a stale predecessor brand can mask a
+  rebrand, like Americas Best Value Inn masking evo Hotel). Mark
+  `duplicate` pointing at the canonical row.
+- Private amenities: HOA beaches/piers, members-only clubs → mark
+  `unverifiable` "not publicly accessible", never call.
+- Miscategorizations (a construction company filed as a restaurant) and
+  managed rental units that slipped the brand filter → `unverifiable`.
+
+Large cities return thousands of candidates. Do NOT drain the ledger
+linearly — curate: `set-status --status queued` the priority rows
+(queued outranks unchecked in batch selection), then
+`generate.py --from-ledger <slug> --limit N --parallel 3`. Rank:
+(1) the dog-famous anchors (breweries, dog bars, signature parks),
+(2) each category to ≥4 for hub generation, (3) demand-driven from
+search data monthly. Expect lodging batches to come back mostly tier-3
+(policies live in booking engines) — that's the structural norm, and
+the recorded outcomes are still the product.
 
 ## Phase 2 — venues (batches through the ledger)
 

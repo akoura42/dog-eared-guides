@@ -3,7 +3,7 @@
 ## The one workflow that matters
 
 ```
-discover (monthly, OSM) ──▶ research ledger ──▶ generate.py ──▶ PR ──▶ you review & merge ──▶ Cloudflare deploys
+discover (OSM+Overture+recent) ──▶ research ledger ──▶ generate.py ──▶ PR ──▶ you review & merge ──▶ wrangler deploys
                                    ▲                                          │
                                    └────────── outcomes recorded ◀───────────┘
 ```
@@ -107,6 +107,15 @@ python pipeline/generate.py --from-ledger tahoe-city --limit 5     # run it
 The model researches each candidate against the tier rules, drafts pages
 for the ones that verify (tier 1 or 2), marks the rest `unverifiable` in
 the ledger, and opens one PR containing the drafts + the ledger update.
+A batch with ZERO publishable drafts still opens a bookkeeping PR — the
+recorded outcomes (closures, tier-3 call lists, duplicate resolutions)
+are product too, and merging them prevents re-research.
+
+Verified NO-dogs venues get pages (`allowed: "no"`): the explorer shows
+them as grey markers behind the "No-dogs spots" toggle, which is what
+makes the coverage claim credible. Queue `rejected-no-dogs` ledger rows
+for page generation the same way as any candidate.
+
 Then review:
 
 - Check every `verification.source_url` / mention actually supports the claim.
