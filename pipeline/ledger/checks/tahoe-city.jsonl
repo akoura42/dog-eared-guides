@@ -182,3 +182,9 @@
 {"actor": "generate", "city": "tahoe-city", "note": "Coffeebar", "outcome": "unverifiable", "place_id": "ovt-6bd5377b-coffeebar", "ts": "2026-08-09T20:10:00+00:00"}
 {"actor": "generate", "city": "tahoe-city", "note": "Boathouse on the Pier", "outcome": "unverifiable", "place_id": "ovt-7847f122-boathouse-on-the-pier", "ts": "2026-08-09T20:10:00+00:00"}
 {"actor": "generate", "city": "tahoe-city", "note": "Speedboat Bar", "outcome": "unverifiable", "place_id": "ovt-85f1b278-speedboat-bar", "ts": "2026-08-09T20:10:00+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "reconciled into le-chamois-and-the-loft-bar", "outcome": "duplicate", "place_id": "ovt-2242b877-le-chamois-loft-bar", "ts": "2026-08-09T22:03:15+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "reconciled into carnelian-west-beach", "outcome": "duplicate", "place_id": "ovt-e16b1c8b-carnelian-bay-west-dog-beach", "ts": "2026-08-09T22:03:15+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "reconciled into old-post-office-cafe", "outcome": "duplicate", "place_id": "ovt-e400cbf2-old-post-office-cafe", "ts": "2026-08-09T22:03:15+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Published as tahoe-national-brewing-company (ledger row tahoe-national-brewing-co) — name-variant mismatch; Overture id 44320010 note: Lake Tahoe Brewing Company row may be its predecessor brand", "outcome": "duplicate", "place_id": "ovt-f5857bc3-tahoe-national-brewing-company", "ts": "2026-08-09T22:03:44+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Bacchi's", "outcome": "unverifiable", "place_id": "ovt-a4071a97-bacchi-s", "ts": "2026-08-09T22:05:58+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Bluefish", "outcome": "unverifiable", "place_id": "ovt-e410888e-bluefish", "ts": "2026-08-09T22:05:58+00:00"}
