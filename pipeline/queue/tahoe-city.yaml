@@ -10,6 +10,10 @@ items:
     (Yelp answers ~2022, a 2022-07-08 phone-check blog comment) report the policy
     tightened or revoked after patrons abused the back patio. Fails the tier-2 agreement
     requirement. Whatever the call establishes becomes tier 1 via method: phone.'
+  done: true
+  done_date: '2026-08-09'
+  done_note: duplicative of ledger row bridgetender-tavern-and-grill (unverifiable,
+    phone call pending) — the ledger carries the follow-up
 - type: venue
   city: tahoe-city
   name: Tahoe City Dog Park (TCPUD, 375 Grove St)
@@ -34,6 +38,8 @@ items:
   topic: Dog-friendly hikes near Tahoe City
   notes: USFS LTBMU + State Parks rules; include winter ski-trail ban Nov 1 - May
     1.
+  done: true
+  done_date: '2026-08-09'
 - type: guide
   city: tahoe-city
   topic: Winter in Tahoe City with a dog
@@ -48,3 +54,16 @@ items:
   done: true
   done_date: '2026-08-09'
   done_note: 'already published: guides/tahoe-city/48-hours-in-tahoe-city-with-a-dog.mdx'
+- type: venue
+  city: tahoe-city
+  name: evo Hotel Tahoe City
+  category: stay
+  place_id: evo-hotel-tahoe-city
+  notes: 'NEW hotel (opened Sept 2025), 455 N Lake Blvd — too new for OSM, hence never
+    discovered. DOG-FRIENDLY: official Furry Friends Package page (evohotel.com/tahoe-city/special-offers/furry-friends-package-tahoe-city)
+    — puppuccino, loaner bowls, dog scarf, pet-friendly-areas map; one pet included,
+    ''Additional pets can get pampered too - just $25 extra.'' Check the hotel FAQ/rooms
+    pages for the base pet fee, size limits, leash rules; BringFido claims $25/pet/night
+    any size (feed data — do not cite). Phone (530) 583-3766.'
+  done: true
+  done_date: '2026-08-09'
