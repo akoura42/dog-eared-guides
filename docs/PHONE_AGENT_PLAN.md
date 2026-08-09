@@ -58,7 +58,7 @@ produces evidence, never published pages.
                                                    ▼
                               structured CallOutcome JSON
                                                    ▼
-              pipeline/ledger/ (checks.jsonl + place status + transcript)
+              pipeline/ledger/ (checks/<city>.jsonl + place status + transcript)
                                                    ▼
         human review → transcript note published → venue file → PR → merge
 ```
@@ -142,7 +142,7 @@ Phase 0; models stay resident (~25GB of 512GB) since the daemon is 24/7.
 
 ## 7. Ledger & site integration
 
-- Every call appends to `pipeline/ledger/checks.jsonl` (actor:
+- Every call appends to `pipeline/ledger/checks/<city>.jsonl` (actor:
   `phone-agent`) and saves a transcript to
   `pipeline/ledger/transcripts/<place_id>-<date>.md`.
 - `readback_affirmed: true` outcomes update the place row — but a human

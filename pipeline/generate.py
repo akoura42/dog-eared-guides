@@ -2,18 +2,20 @@
 """Draft venue/guide content from the work queue (or ledger) and open a PR.
 
 Usage:
-  python pipeline/generate.py                 # process pending queue items
-  python pipeline/generate.py --limit 3       # first 3 pending items
+  python pipeline/generate.py                 # all cities' pending queue items
+  python pipeline/generate.py --city charlotte --limit 3
   python pipeline/generate.py --dry-run       # write files, no branch/PR
   python pipeline/generate.py --from-ledger tahoe-city --limit 5
                                               # pull unchecked ledger candidates
   python pipeline/generate.py --from-ledger tahoe-city --list-only
                                               # show what would be selected
 
-Reads pipeline/queue.yaml. Every dog-policy fact must be verified by the
-model against an official source (web search/fetch tools are enabled and the
-system prompt requires citations); anything unverifiable lands in the PR
-description as an open question. Sign-off = PR merge. Never commits to main.
+Reads pipeline/queue/<city>.yaml (one queue per city) and writes done
+markers back after each run — a processed item is never re-drafted. Every
+dog-policy fact must be verified by the model against an official source
+(web search/fetch tools are enabled and the system prompt requires
+citations); anything unverifiable lands in the PR description as an open
+question. Sign-off = PR merge. Never commits to main.
 """
 
 from __future__ import annotations
@@ -43,7 +45,37 @@ from common import (
     validate_venue_file,
 )
 
-QUEUE_FILE = REPO_ROOT / "pipeline" / "queue.yaml"
+# Work queues are sharded per city (pipeline/queue/<city>.yaml) so two
+# city batches in flight never conflict on one file, and completed items
+# are written back automatically instead of hand-marked.
+QUEUE_DIR = REPO_ROOT / "pipeline" / "queue"
+
+
+def load_queues(city: str | None) -> list[tuple[Path, dict]]:
+    """Load per-city queue files; a specific city or all of them."""
+    if not QUEUE_DIR.is_dir():
+        return []
+    paths = [QUEUE_DIR / f"{city}.yaml"] if city else sorted(QUEUE_DIR.glob("*.yaml"))
+    queues = []
+    for path in paths:
+        if not path.exists():
+            raise SystemExit(f"no queue file: {path}")
+        queues.append((path, yaml.safe_load(path.read_text()) or {}))
+    return queues
+
+
+def save_queue(path: Path, doc: dict) -> None:
+    from schemas import require_valid
+
+    # Strip runtime-only keys (e.g. _queue_path) — they must never serialize.
+    clean = dict(doc)
+    clean["items"] = [
+        {k: v for k, v in item.items() if not k.startswith("_")}
+        for item in doc.get("items", [])
+    ]
+    for i, item in enumerate(clean["items"]):
+        require_valid("queue-item", item, f"{path.name} items[{i}]")
+    path.write_text(yaml.safe_dump(clean, sort_keys=False, allow_unicode=True))
 
 
 def build_system_prompt() -> str:
@@ -122,6 +154,7 @@ def ledger_items(city: str, limit: int) -> list[dict]:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=None)
+    parser.add_argument("--city", default=None, help="work only this city's queue file")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--from-ledger", metavar="CITY", default=None)
     parser.add_argument("--list-only", action="store_true")
@@ -143,10 +176,16 @@ def main() -> int:
                 print(f"{item['_ledger_id']:45} {item.get('category') or '?':10} {item['name']}")
             print(f"({len(items)} candidates selected)")
             return 0
-    else:
-        queue = yaml.safe_load(QUEUE_FILE.read_text()) or {}
-        items = [i for i in queue.get("items", []) if not i.get("done")]
-        if args.limit:
+    queue_docs: dict[Path, dict] = {}
+    if not args.from_ledger:
+        queue_docs = dict(load_queues(args.city))
+        items = []
+        for path, doc in queue_docs.items():
+            for i in doc.get("items", []):
+                if not i.get("done"):
+                    i["_queue_path"] = path
+                    items.append(i)
+        if args.limit is not None:  # --limit 0 selects nothing, not everything
             items = items[: args.limit]
     if not items:
         print("Nothing to generate.")
@@ -157,6 +196,7 @@ def main() -> int:
     all_questions: list[str] = []
     titles: list[str] = []
     ledger_outcomes: list[tuple[dict, bool]] = []  # (item, produced_a_file)
+    queue_outcomes: list[tuple[dict, bool]] = []  # (queue item, produced_a_file)
 
     def run_one(item: dict) -> tuple[dict, GenerationResult | None, Exception | None]:
         label = item.get("name") or item.get("topic")
@@ -165,9 +205,11 @@ def main() -> int:
             res = generate_item(args.model, item)
             print(f"[done ] {label}", flush=True)
             return item, res, None
-        except RuntimeError as exc:
-            # One failed item (timeout, rate limit, refusal) must not kill
-            # the batch. Leave its ledger status untouched for a retry.
+        except Exception as exc:  # noqa: BLE001
+            # One failed item (timeout, rate limit, API error, malformed
+            # queue row) must not kill the batch — with --parallel an
+            # uncaught exception here would discard every other item's
+            # finished model output. Leave state untouched for a retry.
             print(f"[error] {label}: {exc}", flush=True)
             return item, None, exc
 
@@ -188,6 +230,7 @@ def main() -> int:
             continue
         all_questions.extend(result.open_questions)
 
+        wrote_for_item = 0
         for gen in result.files:
             target = (CONTENT_DIR / gen.rel_path).resolve()
             if CONTENT_DIR.resolve() not in target.parents:
@@ -205,24 +248,42 @@ def main() -> int:
             target.write_text(gen.content)
             written.append(target)
             titles.append(label)
+            wrote_for_item += 1
             print(f"  wrote {target.relative_to(REPO_ROOT)}")
 
         if not result.files:
             print("  no file produced (unverifiable — see open questions)")
+        # Three outcomes per item — only what was actually WRITTEN counts:
+        #   published    ≥1 file written to disk
+        #   unverifiable model produced no file (evidence missing)
+        #   rejected     model produced files but validation refused them all
+        #                — left pending for retry, never marked done
+        if wrote_for_item:
+            status = "published"
+        elif result.files:
+            status = "rejected"
+        else:
+            status = "unverifiable"
         if item.get("_ledger_id"):
-            ledger_outcomes.append((item, bool(result.files)))
+            ledger_outcomes.append((item, status))
+        if item.get("_queue_path"):
+            queue_outcomes.append((item, status))
 
-    # Ledger bookkeeping: published candidates flip via sync; the rest are
-    # recorded as unverifiable so they aren't re-selected next run.
+    # Ledger bookkeeping: published candidates flip via sync; unverifiable
+    # ones are recorded so they aren't re-selected; rejected drafts keep
+    # their status for a retry. Dry runs write NO state — a dry run must
+    # never consume queue items or flip ledger rows.
     ledger_paths: list[Path] = []
-    if args.from_ledger and ledger_outcomes:
-        from ledger import CHECKS_FILE, city_file, load_city, record_check, save_city, sync_published
+    if not args.dry_run and args.from_ledger and ledger_outcomes:
+        from ledger import checks_file, city_file, load_city, record_check, save_city, sync_published
 
         places = load_city(args.from_ledger)
-        for item, produced in ledger_outcomes:
+        for item, status in ledger_outcomes:
             pid = item["_ledger_id"]
-            outcome = "draft-produced" if produced else "unverifiable"
-            if not produced and pid in places:
+            outcome = {"published": "draft-produced", "rejected": "draft-rejected"}.get(
+                status, "unverifiable"
+            )
+            if status == "unverifiable" and pid in places:
                 places[pid]["status"] = "unverifiable"
                 places[pid]["note"] = (
                     "Generation run found no publishable evidence — see the PR's open questions."
@@ -231,17 +292,56 @@ def main() -> int:
             record_check(args.from_ledger, pid, "generate", outcome, item["name"])
         save_city(args.from_ledger, places)
         sync_published()
-        ledger_paths = [city_file(args.from_ledger), CHECKS_FILE]
+        ledger_paths = [city_file(args.from_ledger), checks_file(args.from_ledger)]
 
-    if not written:
-        print("\nNothing verifiable was produced. Open questions:")
+    # Queue write-back: a processed item is marked done in its city's queue
+    # file — re-running generate must never re-draft it. Unverifiable items
+    # are done too (the ledger + PR open questions carry the evidence trail);
+    # rejected and errored items stay pending for retry.
+    queue_paths: list[Path] = []
+    if not args.dry_run and queue_outcomes:
+        touched = set()
+        for item, status in queue_outcomes:
+            path = item.pop("_queue_path")  # item is a live ref into queue_docs
+            if status == "rejected":
+                continue
+            item["done"] = True
+            item["done_date"] = today()
+            if status == "unverifiable":
+                item["done_note"] = "unverifiable — see the PR's open questions"
+            touched.add(path)
+        for path in sorted(touched):
+            save_queue(path, queue_docs[path])
+            queue_paths.append(path)
+
+    # Open questions carry the research detail behind every non-published
+    # outcome — print them in every mode, or that context is lost.
+    if all_questions:
+        print("\nOpen questions:")
         for q in all_questions:
             print(f"  - {q}")
-        return 1
 
     if args.dry_run:
-        print("\n--dry-run: files written, skipping branch/PR.")
-        return 0
+        print("\n--dry-run: content files written for inspection; no state or PR.")
+        return 0 if written else 1
+
+    bookkeeping = [p for p in [*ledger_paths, *queue_paths] if p.exists()]
+    if not written:
+        # The run still moved state (unverifiable flips, check log, done
+        # markers) — that MUST land in a PR or an ephemeral runner discards
+        # it and next run repeats the whole model spend.
+        print("\nNothing verifiable was produced.")
+        if bookkeeping:
+            question_md = "\n".join(f"- [ ] {q}" for q in all_questions) or "_none_"
+            open_pr(
+                f"content/generate-{today()}-{os.getpid()}",
+                "generate: bookkeeping only — no publishable drafts",
+                "No drafts survived verification this run; this PR records the "
+                "ledger/queue outcomes so the work isn't repeated.\n\n"
+                f"## Open questions\n{question_md}",
+                bookkeeping,
+            )
+        return 1
 
     branch = f"content/generate-{today()}-{os.getpid()}"
     question_md = "\n".join(f"- [ ] {q}" for q in all_questions) or "_none_"
@@ -257,7 +357,7 @@ def main() -> int:
         branch,
         f"content: {len(written)} drafted page(s) for review",
         body,
-        written + [p for p in ledger_paths if p.exists()],
+        written + bookkeeping,
     )
     return 0
 

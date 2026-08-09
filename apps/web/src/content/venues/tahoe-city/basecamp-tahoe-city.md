@@ -26,7 +26,7 @@ verification:
 affiliate:
   viator_product_code: null
   viator_url: null
-  booking_url: null
+  booking_url: https://www.booking.com/hotel/us/basecamp-tahoe-city.html
 tags: []
 summary: Hotel on Tahoe City's main drag with dogs allowed in select rooms and common areas for a $40 one-time pet fee.
 image: null

@@ -58,11 +58,17 @@ Tier-2 listings upgrade to tier 1 when an official policy appears or a
 phone call confirms (`method: phone`). `/how-we-verify/` explains all of
 this to readers — it's a trust asset, keep it accurate.
 
+How to actually execute these tiers on a real city — the mention
+independence test, blocked-site workarounds, chain and lodging rules, OSM
+candidate hygiene — lives in `docs/RESEARCH_CRAFT.md`. Read it before
+researching any queue batch.
+
 ## The research ledger (pipeline/ledger/)
 
 The ledger is the pipeline's memory of every known place per city —
 published or not. One JSONL file per city (PR-diffable on purpose) plus an
-append-only `checks.jsonl` history. Statuses: `unchecked`, `queued`,
+append-only per-city check history (`checks/<city>.jsonl`). Statuses:
+`unchecked`, `queued`,
 `published-official`, `published-reported`, `unverifiable`,
 `rejected-no-dogs` (verified no — saves re-researching), `closed`,
 `duplicate`.
@@ -103,7 +109,7 @@ Then review:
 - Merge → deployed, and `ledger.py sync` (or the next generate run)
   reconciles statuses.
 
-`pipeline/queue.yaml` still works for named work — guides especially
+`pipeline/queue/<city>.yaml` still works for named work — guides especially
 (`type: guide` + `topic:`) — and for venues you want researched that
 discovery hasn't surfaced.
 
@@ -134,13 +140,22 @@ Special frontmatter worth knowing:
 | Workflow | Cadence | What it does |
 |---|---|---|
 | `ci.yml` | every PR/push | Astro build = the schema gate |
-| `verify.yml` | Mondays | Re-checks venues verified >90 days ago; opens one PR (✅ date bumps, ✏️ policy changes, 🚫 closures). Also tries upgrading tier-2 listings to tier 1. Logs to `checks.jsonl`. |
+| `verify.yml` | Mondays | Per-city matrix jobs re-check venues verified >90 days ago (25/city/week, oldest first); one PR per city (✅ date bumps, ✏️ policy changes, 🚫 closures). Also tries upgrading tier-2 listings to tier 1. Logs to `checks/<city>.jsonl`. |
 | `discover.yml` | monthly | OSM candidate sweep for all launched cities → PR of new `unchecked` ledger rows |
+| `deploy.yml` | push to main | Builds with production env vars and deploys to Cloudflare Pages via wrangler. Gated on the `CF_PAGES_PROJECT` repo variable — until that's set (and the CF dashboard git integration disconnected), shipping stays on the dashboard integration. |
 
-Auth for the model-using jobs: store `CLAUDE_CODE_OAUTH_TOKEN` as a repo
-secret (mint it locally with `claude setup-token`) to run on the Claude
-subscription; or set `ANTHROPIC_API_KEY` for API billing. All jobs can be
-run manually from the Actions tab or locally (`--dry-run` supported).
+### Repo secrets and variables (one-time setup, all workflows depend on these)
+
+| Name | Kind | Why |
+|---|---|---|
+| `PIPELINE_PAT` | secret | Fine-grained PAT (this repo; Contents + Pull requests write). **Required for CI to run on bot-opened PRs** — GitHub suppresses workflow triggers on events created with the default `GITHUB_TOKEN`. Without it, verify/discover PRs show zero checks. |
+| `CLAUDE_CODE_OAUTH_TOKEN` | secret | Model auth on the Claude subscription (mint with `claude setup-token`). Alternative: `ANTHROPIC_API_KEY` for API billing. |
+| `CF_PAGES_PROJECT` | variable | Activates `deploy.yml` (unset = the workflow skips). |
+| `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` | secrets | Wrangler deploy credentials (token needs Cloudflare Pages: Edit). |
+| `SITE_URL`, `PUBLIC_*`, affiliate vars | vars/secrets | Production env for the deploy build — see `apps/web/.env.example` for the full inventory. Missing vars ship a working site with monetization/analytics silently off. |
+
+All jobs can be run manually from the Actions tab or locally
+(`--dry-run` supported).
 
 ## Monthly: point generation at demand
 
@@ -163,27 +178,31 @@ permanent doctrine, promote it into the style guide or voice doc.
 
 ## Add a new city (the multi-city contract)
 
-Zero component edits required:
-
-1. Create `data/cities/<slug>.yaml` (copy `tahoe-city.yaml`): name, slug,
-   geo, hero copy, intro, **officially sourced** regulations (every entry
-   needs a `source_url`), seasonal notes, categories. Research agents or a
-   generation run can source the regulations; never publish unsourced rules.
-2. `python pipeline/discover.py --city <slug>` to fill the candidate pool,
-   then `generate.py --from-ledger <slug>` batches + a starter guide via
-   the queue.
-3. Merge PRs. Everything downstream is automatic: city picker + map pin
-   (replacing any "coming soon" dot), hub page, category hubs (browsable
-   from 1 venue; indexed/sitemapped at ≥4 — the thin-page guard), venue
-   map, itinerary planner, sitemap, OG images.
+**Follow `docs/CITY_PLAYBOOK.md`** — the phase-by-phase recipe proven on
+Tahoe City, covering city config, discovery, venue batches, the
+zones/trails layer, the Dog-Eared Index, the emergency block + pocket
+card, logos/photos, the monetization pass, and the QA gate. The short
+version: it's all data — `data/cities/<slug>.yaml` (config, plus optional
+`areas:` aliases and `agency_domains:`), the ledger, and
+`data/cities/<slug>/` computed artifacts. Everything downstream is
+automatic once `launched: true`:
+city picker + map pin, hub pages (≥4-venue thin-page guard), explorer
+with filters/zones/emergency layer, index block, emergency + pocket-card
+pages, itinerary planner, sitemap, OG images, CSV export.
 
 "Coming soon" dots on the homepage map come from
-`data/cities/waterfront-towns.csv` (tiers 1–2), geocoded by
+`data/waterfront-towns.csv` (tiers 1–2), geocoded by
 `python pipeline/geocode_towns.py` (US Census Gazetteer + Nominatim
 fallback) into `waterfront-towns-geo.json`. Re-run only when the CSV
 changes.
 
 ## Deploy (Cloudflare Pages)
+
+Preferred: the in-repo `deploy.yml` workflow (push to main → build with
+production env → `wrangler pages deploy --branch main`), activated by
+setting the `CF_PAGES_PROJECT` repo variable — then DISCONNECT the CF
+dashboard git integration so there's exactly one deployer. Until that
+switch, the dashboard integration below is what ships:
 
 - Project connects to `akoura42/dog-eared-guides`, production branch
   `main` (merge = deploy). Custom domain: dogearedguides.com.
@@ -197,6 +216,12 @@ changes.
   - `PUBLIC_GA4_ID` — GA4 (consent-gated)
   - `PUBLIC_ADSENSE_CLIENT` — AdSense (consent-gated; also update
     `apps/web/public/ads.txt`)
+  - `BOOKING_AFFILIATE_AID` — Booking.com partner id; unset, lodging CTAs
+    render unwrapped (activation is an env switch, not a content change)
+  - `VIATOR_PARTNER_ID` — Viator partner id (P00xxxxx), same pattern
+  - `PET_INSURANCE_URL` + `PET_INSURANCE_PARTNER` — pet-insurance
+    referral link + display name; both required or the module renders
+    nothing (see docs/monetization.md for placement rules)
 
 ## Maps & Google integration
 
@@ -220,12 +245,21 @@ is the rating/reviews fetch. Expect ≈ $0.04 × (expands beyond 1,000/mo).
 
 ## Monetization notes
 
+**`docs/monetization.md` is the reference** — tiered plan, the
+trust constraint (venue layer only, labeled, never touching listings or
+scores), and per-channel implementation notes. Operational summary:
+
 - Ad slots are consent-gated, lazy, and height-reserved (zero CLS); render
   nothing until `PUBLIC_ADSENSE_CLIENT` is set. Swapping to a premium
   network later = replacing the loader inside `AdSlot.astro`.
 - Affiliate links: set `affiliate.viator_url` / `booking_url` (+
-  `viator_product_code`) in venue frontmatter. Pages with affiliate links
-  auto-render the FTC disclosure; links carry `rel="sponsored nofollow"`.
+  `viator_product_code`) in venue frontmatter; partner ids are appended
+  at render by `lib/affiliate.ts` when the env vars above are set.
+  Identity-verify property URLs (address match) before linking. Pages
+  with affiliate links auto-render the FTC disclosure; links carry
+  `rel="sponsored nofollow"`.
+- Pet-insurance module places itself on emergency-vet venue pages, the
+  emergency page, and pet-fee lodging pages once its env vars are set.
 - `apps/web/public/ads.txt` must carry the real publisher line before ads
   go live.
 - Decision (2026-08-04): reviews/maps stay on the free deep-link pattern

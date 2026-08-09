@@ -1,7 +1,11 @@
 ---
-// Build-time inline SVG map of the US with a dot per launched city.
-// No runtime map library, no tile requests — the whole thing is static
-// markup. Clicking a dot scrolls to (and flashes) that city's card.
+// Landing-page map with a Zillow-style filter bar on top: search, state
+// dropdown, and pin-type toggle chips. Pins ARE the navigation — clicking
+// a live-guide pin goes straight to that city's guide.
+//
+// Renders as a build-time inline SVG map of the US (no runtime map library,
+// no tile requests) unless PUBLIC_GMAPS_API_KEY is set, in which case it
+// upgrades to an interactive Google Map.
 //
 // us-atlas ships geometry pre-projected with geoAlbersUsa()
 // .scale(1300).translate([487.5, 305]) into a 975x610 viewBox; we use the
@@ -68,76 +72,316 @@ const upcomingDots = upcoming
     return { town, x: pt[0], y: pt[1] };
   })
   .filter((d): d is NonNullable<typeof d> => d !== null);
+
+const searchText = (name: string, state: string, code: string) =>
+  `${name} ${state} ${code}`.toLowerCase();
+
+// Mode-independent pin index for the filter bar (search + counts).
+const allPins = [
+  ...cities.map((c) => ({
+    kind: 'live',
+    search: searchText(c.name, c.state, c.state_code),
+    state: c.state_code,
+  })),
+  ...upcoming.map((t) => ({
+    kind: 'soon',
+    search: searchText(t.name, t.state, t.state_code),
+    state: t.state_code,
+  })),
+];
+
+const stateOptions = [...new Map(
+  [...cities, ...upcoming].map((p) => [p.state_code, p.state])
+).entries()]
+  .map(([code, name]) => ({
+    code,
+    name,
+    count: allPins.filter((p) => p.state === code).length,
+  }))
+  .sort((a, b) => a.name.localeCompare(b.name));
 ---
 
-<div class="city-map" aria-label="Map of covered cities">
-  {GMAPS_API_KEY && (
-    <div
-      id="us-gmap"
-      data-gmaps-key={GMAPS_API_KEY}
-      data-cities={JSON.stringify(
-        cities.map((c) => ({ name: c.name, code: c.state_code, slug: c.slug, lat: c.geo.lat, lng: c.geo.lng }))
-      )}
-      data-upcoming={JSON.stringify(
-        upcoming.map((t) => ({ name: t.name, code: t.state_code, lat: t.lat, lng: t.lng, tier: t.tier }))
-      )}
-    ></div>
-  )}
-  {!GMAPS_API_KEY && (
-  <svg viewBox="0 0 975 610" role="img">
-    <path class="nation" d={nation}></path>
-    <path class="borders" d={borders}></path>
-    {upcomingDots.map(({ town, x, y }) => (
-      <circle
-        cx={x}
-        cy={y}
-        r={town.tier === 1 ? 3 : 2}
-        class="upcoming"
-      >
-        <title>{town.name}, {town.state_code} — coming soon</title>
-      </circle>
-    ))}
-    {dots.map(({ city, x, y }) => (
-      <a
-        href={`#city-${city.slug}`}
-        class="dot"
-        data-map-city={city.slug}
-        aria-label={`${city.name}, ${city.state_code}`}
-      >
-        <circle cx={x} cy={y} r="14" class="halo"></circle>
-        <circle cx={x} cy={y} r="6.5" class="pin"></circle>
-        <text
-          x={x}
-          y={y - 14}
-          text-anchor="middle"
-          class="label"
-        >{city.name}, {city.state_code}</text>
-      </a>
-    ))}
-  </svg>
-  )}
+<div class="city-map">
+  <div class="map-filters" data-pins={JSON.stringify(allPins)}>
+    <input
+      type="search"
+      id="map-search"
+      placeholder={`Search ${cities.length + upcoming.length} towns…`}
+      aria-label="Search towns on the map"
+      autocomplete="off"
+    />
+    <details class="fmenu" id="state-menu">
+      <summary>State <span class="badge" hidden></span></summary>
+      <div class="panel state-list" role="group" aria-label="Filter by state">
+        {stateOptions.map((s) => (
+          <button type="button" class="chip st" data-state-opt={s.code} aria-pressed="false">
+            {s.name} <span class="n">{s.count}</span>
+          </button>
+        ))}
+      </div>
+    </details>
+    <details class="fmenu" id="pins-menu">
+      <summary>Pins <span class="badge" hidden></span></summary>
+      <div class="panel pin-toggles" role="group" aria-label="Filter map pins by type">
+        <button type="button" class="chip" data-kind="live" aria-pressed="true">
+          <i class="live"></i>Live guides <span class="n">{cities.length}</span>
+        </button>
+        <button type="button" class="chip" data-kind="soon" aria-pressed="true">
+          <i class="soon"></i>Coming soon <span class="n">{upcoming.length}</span>
+        </button>
+      </div>
+    </details>
+    <p class="map-count" aria-live="polite"><span id="map-count">{allPins.length}</span> shown</p>
+  </div>
+
+  <div class="map-body" aria-label="Map of covered cities">
+    {GMAPS_API_KEY && (
+      <div
+        id="us-gmap"
+        data-gmaps-key={GMAPS_API_KEY}
+        data-cities={JSON.stringify(
+          cities.map((c) => ({
+            name: c.name,
+            code: c.state_code,
+            state: c.state,
+            slug: c.slug,
+            lat: c.geo.lat,
+            lng: c.geo.lng,
+          }))
+        )}
+        data-upcoming={JSON.stringify(
+          upcoming.map((t) => ({
+            name: t.name,
+            code: t.state_code,
+            state: t.state,
+            lat: t.lat,
+            lng: t.lng,
+            tier: t.tier,
+          }))
+        )}
+      ></div>
+    )}
+    {!GMAPS_API_KEY && (
+    <svg viewBox="0 0 975 610" role="img">
+      <path class="nation" d={nation}></path>
+      <path class="borders" d={borders}></path>
+      {upcomingDots.map(({ town, x, y }) => (
+        <circle
+          cx={x}
+          cy={y}
+          r={town.tier === 1 ? 3 : 2}
+          class="upcoming"
+          data-pin="soon"
+          data-search={searchText(town.name, town.state, town.state_code)}
+          data-state={town.state_code}
+        >
+          <title>{town.name}, {town.state_code} — coming soon</title>
+        </circle>
+      ))}
+      {dots.map(({ city, x, y }) => (
+        <a
+          href={`/${city.slug}/`}
+          class="dot"
+          data-pin="live"
+          data-search={searchText(city.name, city.state, city.state_code)}
+          data-state={city.state_code}
+          aria-label={`${city.name}, ${city.state_code} — open the guide`}
+        >
+          <circle cx={x} cy={y} r="14" class="halo"></circle>
+          <circle cx={x} cy={y} r="6.5" class="pin"></circle>
+          <text
+            x={x}
+            y={y - 14}
+            text-anchor="middle"
+            class="label"
+          >{city.name}, {city.state_code}</text>
+        </a>
+      ))}
+    </svg>
+    )}
+  </div>
 </div>
 
 <style>
   .city-map {
     margin: 1.25rem 0 0.5rem;
   }
+  .map-filters {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+    padding: 0.65rem 0.85rem;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    border-bottom: none;
+  }
+  #map-search {
+    font: inherit;
+    font-size: 0.92rem;
+    padding: 0.45rem 0.9rem;
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    background: var(--paper);
+    color: var(--ink);
+    flex: 1 1 12rem;
+    min-width: 10rem;
+  }
+  #map-search:focus {
+    outline: 2px solid var(--moss);
+    outline-offset: 1px;
+  }
+  /* Dropdown filter menus, matching the explorer toolbar's idiom. */
+  .fmenu {
+    position: relative;
+  }
+  .fmenu summary {
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    background: none;
+    cursor: pointer;
+    user-select: none;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .fmenu summary::-webkit-details-marker {
+    display: none;
+  }
+  .fmenu summary::after {
+    content: '▾';
+    font-size: 0.7em;
+    opacity: 0.7;
+  }
+  .fmenu summary:hover,
+  .fmenu[open] summary {
+    border-color: var(--moss);
+    background: color-mix(in srgb, var(--moss) 8%, transparent);
+    color: var(--ink);
+  }
+  .fmenu .badge {
+    background: var(--moss);
+    color: #fff;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0 0.45rem;
+    line-height: 1.5;
+  }
+  .fmenu .panel {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    left: 0;
+    z-index: 40;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.35rem;
+    min-width: 13rem;
+    max-height: 20rem;
+    overflow-y: auto;
+    padding: 0.6rem;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+  }
+  .fmenu .panel .chip {
+    border-radius: 8px;
+  }
+  .fmenu .panel .chip .n {
+    margin-left: auto;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.3rem 0.75rem;
+    background: none;
+    font: inherit;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: opacity 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+  .chip:hover {
+    border-color: var(--moss);
+    background: color-mix(in srgb, var(--moss) 8%, transparent);
+  }
+  .chip .n {
+    font-size: 0.72rem;
+    font-weight: 700;
+    opacity: 0.8;
+  }
+  .chip i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .chip i.live {
+    background: var(--clay);
+  }
+  .chip i.soon {
+    background: var(--moss);
+    opacity: 0.6;
+  }
+  /* Pin chips default ON — pressed-off fades them. State chips default
+     OFF (radio-style) — pressed-on highlights instead. */
+  .pin-toggles .chip[aria-pressed='false'] {
+    opacity: 0.45;
+  }
+  .pin-toggles .chip[aria-pressed='false'] i {
+    background: transparent;
+    box-shadow: inset 0 0 0 2px currentColor;
+  }
+  .st[aria-pressed='true'] {
+    border-color: var(--moss);
+    background: color-mix(in srgb, var(--moss) 15%, transparent);
+    color: var(--ink);
+  }
+  .map-count {
+    margin: 0 0 0 auto;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .map-count span {
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .map-body {
+    border: 1px solid var(--line);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    overflow: hidden;
+    background: color-mix(in srgb, var(--moss) 12%, var(--paper-raised));
+  }
   #us-gmap {
     height: 520px;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--line);
-    box-shadow: var(--shadow);
-    background: color-mix(in srgb, var(--moss) 12%, var(--paper-raised));
   }
   @media (max-width: 640px) {
     #us-gmap {
       height: 400px;
+    }
+    .map-count {
+      margin-left: 0;
     }
   }
   svg {
     width: 100%;
     height: auto;
     display: block;
+  }
+  :global(.pin-hidden) {
+    display: none;
   }
   .nation {
     fill: color-mix(in srgb, var(--moss) 16%, var(--paper-raised));
@@ -200,25 +444,90 @@ const upcomingDots = upcoming
 <script>
   import { ensureGoogleMaps } from '~/lib/gmaps-loader';
 
-  function flashCity(slug: string) {
-    const target = document.getElementById(`city-${slug}`);
-    if (!target) return;
-    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    target.classList.remove('flash');
-    requestAnimationFrame(() => target.classList.add('flash'));
+  type PinData = { kind: string; search: string; state: string };
+
+  const searchInput = document.getElementById('map-search') as HTMLInputElement | null;
+  const countEl = document.getElementById('map-count');
+  const filterBar = document.querySelector<HTMLElement>('.map-filters');
+  const allPins: PinData[] = filterBar ? JSON.parse(filterBar.dataset.pins!) : [];
+  const kinds: Record<string, boolean> = { live: true, soon: true };
+  // Radio-style state filter: '' means all states.
+  let activeState = '';
+  let googleApply: (() => void) | null = null;
+
+  function matches(pin: PinData): boolean {
+    if (!kinds[pin.kind]) return false;
+    if (activeState && pin.state !== activeState) return false;
+    const q = searchInput?.value.trim().toLowerCase() ?? '';
+    if (q && !pin.search.includes(q)) return false;
+    return true;
   }
 
-  // Scroll to the city card and flash it. Native anchor jump would hide the
-  // card under the sticky header, so intercept and smooth-scroll instead.
-  document.querySelectorAll<HTMLAnchorElement>('[data-map-city]').forEach((dot) => {
-    dot.addEventListener('click', (e) => {
-      e.preventDefault();
-      flashCity(dot.dataset.mapCity!);
+  function applyFilters() {
+    document.querySelectorAll<SVGElement>('[data-pin]').forEach((el) => {
+      el.classList.toggle(
+        'pin-hidden',
+        !matches({
+          kind: el.dataset.pin!,
+          search: el.dataset.search!,
+          state: el.dataset.state!,
+        })
+      );
+    });
+    googleApply?.();
+    if (countEl) countEl.textContent = String(allPins.filter(matches).length);
+    updateMenuBadges();
+  }
+
+  // Menu badges: the State badge shows the selected state code; the Pins
+  // badge shows how many pin types are toggled off.
+  const stateMenu = document.getElementById('state-menu');
+  const pinsMenu = document.getElementById('pins-menu');
+  function updateMenuBadges() {
+    const sBadge = stateMenu?.querySelector<HTMLElement>('.badge');
+    if (sBadge) {
+      sBadge.textContent = activeState;
+      sBadge.hidden = !activeState;
+    }
+    const off = Object.values(kinds).filter((v) => !v).length;
+    const pBadge = pinsMenu?.querySelector<HTMLElement>('.badge');
+    if (pBadge) {
+      pBadge.textContent = String(off);
+      pBadge.hidden = off === 0;
+    }
+  }
+
+  searchInput?.addEventListener('input', applyFilters);
+  document.querySelectorAll<HTMLButtonElement>('.state-list [data-state-opt]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const code = btn.dataset.stateOpt!;
+      const nowOn = activeState !== code;
+      activeState = nowOn ? code : '';
+      document
+        .querySelectorAll<HTMLButtonElement>('.state-list [data-state-opt]')
+        .forEach((b) => b.setAttribute('aria-pressed', String(b === btn && nowOn)));
+      applyFilters();
     });
   });
+  document.querySelectorAll<HTMLButtonElement>('.pin-toggles [data-kind]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const kind = btn.dataset.kind!;
+      kinds[kind] = !kinds[kind];
+      btn.setAttribute('aria-pressed', String(kinds[kind]));
+      applyFilters();
+    });
+  });
+  // Clicking outside an open menu closes it.
+  document.addEventListener('click', (e) => {
+    for (const menu of [stateMenu, pinsMenu]) {
+      const details = menu as HTMLDetailsElement | null;
+      if (details?.open && !details.contains(e.target as Node)) details.open = false;
+    }
+  });
 
-  // Google Maps mode (PUBLIC_GMAPS_API_KEY set): live-guide pins are
-  // clickable; upcoming towns render as small muted dots with tooltips.
+  // Google Maps mode (PUBLIC_GMAPS_API_KEY set): live-guide pins navigate
+  // to the city guide; upcoming towns render as small muted dots with
+  // tooltips. Both respect the filter bar.
   const gmapEl = document.getElementById('us-gmap') as HTMLElement | null;
   if (gmapEl) {
     (async () => {
@@ -230,11 +539,12 @@ const upcomingDots = upcoming
         streetViewControl: false,
         gestureHandling: 'cooperative',
       });
+      const gmarkers: { marker: { setVisible(v: boolean): void }; pin: PinData }[] = [];
       const upcoming = JSON.parse(gmapEl.dataset.upcoming!) as {
-        name: string; code: string; lat: number; lng: number; tier: number;
+        name: string; code: string; state: string; lat: number; lng: number; tier: number;
       }[];
       for (const t of upcoming) {
-        new maps.Marker({
+        const marker = new maps.Marker({
           map,
           position: { lat: t.lat, lng: t.lng },
           title: `${t.name}, ${t.code} — coming soon`,
@@ -248,15 +558,23 @@ const upcomingDots = upcoming
             strokeWeight: 0,
           },
         });
+        gmarkers.push({
+          marker,
+          pin: {
+            kind: 'soon',
+            search: `${t.name} ${t.state} ${t.code}`.toLowerCase(),
+            state: t.code,
+          },
+        });
       }
       const cities = JSON.parse(gmapEl.dataset.cities!) as {
-        name: string; code: string; slug: string; lat: number; lng: number;
+        name: string; code: string; state: string; slug: string; lat: number; lng: number;
       }[];
       for (const c of cities) {
         const marker = new maps.Marker({
           map,
           position: { lat: c.lat, lng: c.lng },
-          title: `${c.name}, ${c.code}`,
+          title: `${c.name}, ${c.code} — open the guide`,
           icon: {
             path: maps.SymbolPath.CIRCLE,
             scale: 8,
@@ -266,10 +584,21 @@ const upcomingDots = upcoming
             strokeWeight: 2,
           },
         });
-        marker.addListener('click', () => flashCity(c.slug));
+        marker.addListener('click', () => location.assign(`/${c.slug}/`));
+        gmarkers.push({
+          marker,
+          pin: {
+            kind: 'live',
+            search: `${c.name} ${c.state} ${c.code}`.toLowerCase(),
+            state: c.code,
+          },
+        });
       }
+      googleApply = () =>
+        gmarkers.forEach(({ marker, pin }) => marker.setVisible(matches(pin)));
+      googleApply();
     })().catch(() => {
-      gmapEl.textContent = 'Map failed to load — the city list below has every guide.';
+      gmapEl.textContent = 'Map failed to load — every guide is linked in the city list just below.';
     });
   }
 </script>

@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Work-queue item (pipeline/queue/<city>.yaml items[])",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["type", "city"],
+  "properties": {
+    "type": { "enum": ["venue", "guide"] },
+    "city": { "type": "string", "minLength": 1 },
+    "place_id": {
+      "type": "string",
+      "description": "Optional stable join to the city ledger row — prefer this over free-text name matching."
+    },
+    "name": { "type": "string" },
+    "topic": { "type": "string" },
+    "category": { "type": "string" },
+    "notes": { "type": "string" },
+    "done": { "type": "boolean" },
+    "done_date": { "type": "string" },
+    "done_note": { "type": "string" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "type": { "const": "venue" } } },
+      "then": { "required": ["name"] }
+    },
+    {
+      "if": { "properties": { "type": { "const": "guide" } } },
+      "then": { "required": ["topic"] }
+    }
+  ]
+}

@@ -2,6 +2,8 @@
 name: River Ranch Lodge & Restaurant
 city: tahoe-city
 category: eat
+cuisines:
+  - American
 neighborhood: Alpine Meadows / Hwy 89
 address: 2285 River Rd, Tahoe City, CA 96146
 lat: 39.178

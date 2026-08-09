@@ -50,12 +50,13 @@ TAG_CATEGORIES: list[tuple[str, str, str]] = [
     ("tourism", "guest_house", "stay"),
     ("tourism", "chalet", "stay"),
     ("tourism", "camp_site", "stay"),
-    ("leisure", "dog_park", "activity"),
+    ("leisure", "dog_park", "dog-park"),
     ("leisure", "park", "trail"),
     ("natural", "beach", "beach"),
-    ("shop", "pet", "shop"),
+    ("shop", "pet", "pet-supply"),
     ("shop", "pet_grooming", "services"),
     ("amenity", "veterinary", "services"),
+    ("amenity", "animal_boarding", "daycare"),
 ]
 
 
@@ -70,6 +71,16 @@ def overpass_query(lat: float, lng: float, radius_m: int) -> str:
         for k, vals in by_key.items()
     )
     return f"[out:json][timeout:60];({clauses});out center tags;"
+
+
+def _haversine_m(lat1: float, lng1: float, lat2: float, lng2: float) -> float:
+    import math
+
+    r = 6371000.0
+    p1, p2 = math.radians(lat1), math.radians(lat2)
+    dp, dl = math.radians(lat2 - lat1), math.radians(lng2 - lng1)
+    a = math.sin(dp / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2
+    return 2 * r * math.asin(math.sqrt(a))
 
 
 def categorize(tags: dict) -> str | None:
@@ -96,10 +107,13 @@ def launched_city_slugs() -> list[str]:
     return slugs
 
 
-def discover(city_slug: str, radius_km: float, dry_run: bool) -> int:
+def discover(city_slug: str, radius_km: float | None, dry_run: bool) -> int:
     cfg = city_config(city_slug)
     lat, lng = cfg["geo"]["lat"], cfg["geo"]["lng"]
-    query = overpass_query(lat, lng, int(radius_km * 1000))
+    # Radius: CLI override > city yaml `discover_radius_km` > 8 km default.
+    # One global radius under-discovers metros and over-reaches hamlets.
+    effective_km = radius_km if radius_km is not None else cfg.get("discover_radius_km") or 8.0
+    query = overpass_query(lat, lng, int(effective_km * 1000))
 
     elements: list[dict] | None = None
     last_error: Exception | None = None
@@ -121,9 +135,9 @@ def discover(city_slug: str, radius_km: float, dry_run: bool) -> int:
         raise SystemExit(f"all Overpass instances failed: {last_error}")
 
     places = load_city(city_slug)
-    known_names = {norm_name(row["name"]) for row in places.values()}
+    known_refs = {row["osm_ref"] for row in places.values() if row.get("osm_ref")}
 
-    added = 0
+    added = adopted = 0
     for el in elements:
         tags = el.get("tags", {})
         name = tags.get("name")
@@ -132,11 +146,41 @@ def discover(city_slug: str, radius_km: float, dry_run: bool) -> int:
         category = categorize(tags)
         if not category:
             continue
-        if norm_name(name) in known_names:
-            continue  # already tracked (published, rejected, or previously seen)
+        # Identity is the OSM element ref, not the name: two chain stores
+        # with the same name are two places. Name-only dedup used to
+        # collapse them into one row forever.
+        ref = f"{el['type'][0]}{el['id']}"
+        if ref in known_refs:
+            continue  # already tracked under its OSM identity
         el_lat = el.get("lat") or (el.get("center") or {}).get("lat")
         el_lng = el.get("lon") or (el.get("center") or {}).get("lon")
-        pid = f"osm-{slugify(name)}"
+
+        # Legacy rows (pre-osm_ref) are matched by name + proximity: a
+        # same-name row within 500 m with no ref yet is the same place and
+        # adopts this ref. Both coordinates must be KNOWN — a coordless row
+        # matching any same-name element at any distance would let the
+        # wrong chain store adopt the ref. Coordless rows never adopt; a
+        # possible duplicate row is visible and mergeable, a silently
+        # wrong identity is not.
+        legacy = None
+        for row in places.values():
+            if row.get("osm_ref") or norm_name(row["name"]) != norm_name(name):
+                continue
+            r_lat, r_lng = row.get("lat"), row.get("lng")
+            if (
+                r_lat is not None
+                and el_lat is not None
+                and _haversine_m(r_lat, r_lng, el_lat, el_lng) <= 500
+            ):
+                legacy = row
+                break
+        if legacy is not None:
+            legacy["osm_ref"] = ref
+            known_refs.add(ref)
+            adopted += 1
+            continue
+
+        pid = f"osm-{ref}-{slugify(name)}"
         if pid in places:
             continue
         website = tags.get("website") or tags.get("contact:website")
@@ -154,15 +198,19 @@ def discover(city_slug: str, radius_km: float, dry_run: bool) -> int:
             source="osm",
             lat=round(el_lat, 5) if el_lat else None,
             lng=round(el_lng, 5) if el_lng else None,
+            osm_ref=ref,
         )
-        known_names.add(norm_name(name))
+        known_refs.add(ref)
         added += 1
 
     if dry_run:
-        print(f"{city_slug}: would add {added} candidates (dry run)")
+        print(f"{city_slug}: would add {added} candidates, adopt refs onto {adopted} (dry run)")
     else:
         save_city(city_slug, places)
-        print(f"{city_slug}: added {added} candidates ({len(places)} total tracked)")
+        print(
+            f"{city_slug}: added {added} candidates, adopted refs onto {adopted} "
+            f"({len(places)} total tracked)"
+        )
     return added
 
 
@@ -170,7 +218,12 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--city")
     parser.add_argument("--all-launched", action="store_true")
-    parser.add_argument("--radius-km", type=float, default=8.0)
+    parser.add_argument(
+        "--radius-km",
+        type=float,
+        default=None,
+        help="override the city yaml's discover_radius_km (default 8)",
+    )
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
@@ -178,10 +231,20 @@ def main() -> int:
     if not slugs or slugs == [None]:
         parser.error("pass --city <slug> or --all-launched")
 
+    # One city's Overpass failure must not discard every other city's
+    # discoveries — finish the sweep, then fail loudly if anything broke.
+    failed: list[str] = []
     for i, slug in enumerate(slugs):
         if i:
             time.sleep(5)  # be polite to the public Overpass instance
-        discover(slug, args.radius_km, args.dry_run)
+        try:
+            discover(slug, args.radius_km, args.dry_run)
+        except SystemExit as exc:
+            print(f"  {slug}: FAILED ({exc})")
+            failed.append(slug)
+    if failed:
+        print(f"\n{len(failed)} city sweep(s) failed: {', '.join(failed)}")
+        return 1
     return 0
 
 

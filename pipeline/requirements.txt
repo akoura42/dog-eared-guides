@@ -1,2 +1,5 @@
-anthropic>=0.60.0
-PyYAML>=6.0
+anthropic>=0.60.0,<1
+PyYAML>=6.0,<7
+pytest>=8,<9
+jsonschema>=4,<5
+rfc3987>=1.3

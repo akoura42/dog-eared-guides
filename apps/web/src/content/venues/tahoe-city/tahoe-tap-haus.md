@@ -2,6 +2,9 @@
 name: Tahoe Tap Haus
 city: tahoe-city
 category: eat
+cuisines:
+  - Pub fare
+  - Burgers
 neighborhood: Downtown / Commons Beach
 address: 475 N Lake Blvd, Tahoe City, CA 96145
 lat: 39.1721

@@ -1,7 +1,11 @@
 ---
+import { Image } from 'astro:assets';
 import type { Venue } from '~/lib/venues';
 import { venuePath, ALLOWED_LABELS } from '~/lib/venues';
 import { getCategoryByKey } from '~/lib/config';
+import { venueLogoUrl, isAgencyWebsite } from '~/lib/logos';
+import { resolvePhoto } from '~/lib/photos';
+import { inSeason, formatMD } from '~/lib/season';
 import VerifiedBadge from './VerifiedBadge.astro';
 
 interface Props {
@@ -13,6 +17,16 @@ interface Props {
 const { venue, showCategory = true } = Astro.props;
 const d = venue.data;
 const category = getCategoryByKey(d.category);
+const fetchedLogoUrl = venueLogoUrl(venue);
+// Tile priority: a business's own logo wins; for agency-run venues (whose
+// "logo" is the shared TCPUD/State Parks/USFS favicon) a licensed photo
+// beats the favicon. Full credit renders on the venue page; the thumb
+// carries it as title.
+const photoMeta =
+  d.image && (!fetchedLogoUrl || isAgencyWebsite(d.city, d.website)) ? resolvePhoto(d.image) : null;
+const logoUrl = photoMeta ? null : fetchedLogoUrl;
+// Off-season flag, computed at build from the venue's own published dates.
+const offSeason = d.season !== null && !inSeason(d.season);
 ---
 
 <article class="venue-card">
@@ -25,8 +39,26 @@ const category = getCategoryByKey(d.category);
       compact
     />
   </div>
-  <h3><a href={venuePath(venue)}>{d.name}</a></h3>
-  <p class="policy-line">{ALLOWED_LABELS[d.dog_policy.allowed]}{d.dog_policy.fee ? ` · ${d.dog_policy.fee}` : ''}</p>
+  <div class="name-row">
+    {logoUrl && <img class="logo" src={logoUrl} alt="" width="34" height="34" loading="lazy" />}
+    {photoMeta && (
+      <Image
+        class="logo photo-thumb"
+        src={photoMeta}
+        alt=""
+        width={68}
+        height={68}
+        fit="cover"
+        loading="lazy"
+        title={d.image_credit ? `Photo: ${d.image_credit}` : undefined}
+      />
+    )}
+    <h3><a href={venuePath(venue)}>{d.name}</a></h3>
+  </div>
+  <p class="policy-line">
+    {offSeason && <span class="offseason">Off-season until {formatMD(d.season!.opens)}</span>}
+    {ALLOWED_LABELS[d.dog_policy.allowed]}{d.dog_policy.fee ? ` · ${d.dog_policy.fee}` : ''}
+  </p>
   <p class="summary">{d.summary}</p>
   {d.neighborhood && <p class="hood">{d.neighborhood}</p>}
 </article>
@@ -55,9 +87,29 @@ const category = getCategoryByKey(d.category);
     gap: 0.5rem;
     flex-wrap: wrap;
   }
+  .name-row {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: 0.2rem;
+  }
+  .logo {
+    flex: none;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    object-fit: contain;
+    background: #fff;
+    border: 1px solid var(--line);
+    padding: 2px;
+  }
+  .photo-thumb {
+    object-fit: cover;
+    padding: 0;
+  }
   h3 {
     font-size: 1.2rem;
-    margin: 0.2rem 0 0;
+    margin: 0;
   }
   h3 a {
     text-decoration: none;
@@ -71,6 +123,15 @@ const category = getCategoryByKey(d.category);
     font-weight: 600;
     color: var(--ok);
     margin: 0;
+  }
+  .offseason {
+    display: inline-block;
+    background: color-mix(in srgb, #c08a2e 16%, transparent);
+    color: #8a6220;
+    border-radius: 999px;
+    padding: 0.05rem 0.55rem;
+    font-size: 0.75rem;
+    margin-right: 0.35rem;
   }
   .summary {
     font-size: 0.93rem;

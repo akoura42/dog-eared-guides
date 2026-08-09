@@ -17,19 +17,23 @@ const states = [...byState.entries()].sort(([a], [b]) => a.localeCompare(b));
 <header class="site-header">
   <div class="wrap bar">
     <a class="brand" href="/">
-      <svg class="mark" viewBox="0 0 240 240" width="34" height="34" aria-hidden="true">
+      {/* Dog-eared-page mark (images/logo/logo-mark.svg), stroke thickened
+          for legibility at header size. */}
+      <svg class="mark" viewBox="0 0 240 240" width="32" height="32" aria-hidden="true">
         <g transform="translate(0,18)" stroke-linejoin="round" stroke-linecap="round">
-          <path d="M 56 52 C 52 30 56 10 70 4 Q 78 0 86 5 C 100 16 108 34 110 52 Z" fill="#2F6047" stroke="#20302A" stroke-width="9"/>
-          <path d="M 64 40 H 130 L 196 106 V 176 Q 196 202 170 202 H 72 Q 46 202 46 176 V 58 Q 46 40 64 40 Z" fill="#F4EEDF" stroke="#20302A" stroke-width="9"/>
-          <path d="M 130 40 C 127 66 131 90 142 104 C 157 118 182 117 196 106 Z" fill="#2F6047" stroke="#20302A" stroke-width="9"/>
-          <circle cx="98" cy="126" r="9" fill="#20302A"/><circle cx="144" cy="126" r="9" fill="#20302A"/><path d="M 106 152 H 136 Q 143 152 139 160 L 126 175 Q 121 180 116 175 L 103 160 Q 99 152 106 152 Z" fill="#20302A"/>
+          <path d="M 56 52 C 52 30 56 10 70 4 Q 78 0 86 5 C 100 16 108 34 110 52 Z" fill="#2F6047" stroke="#20302A" stroke-width="13"/>
+          <path d="M 64 40 H 130 L 196 106 V 176 Q 196 202 170 202 H 72 Q 46 202 46 176 V 58 Q 46 40 64 40 Z" fill="#F4EEDF" stroke="#20302A" stroke-width="13"/>
+          <path d="M 130 40 C 127 66 131 90 142 104 C 157 118 182 117 196 106 Z" fill="#2F6047" stroke="#20302A" stroke-width="13"/>
+          <circle cx="98" cy="126" r="11" fill="#20302A"/>
+          <circle cx="144" cy="126" r="11" fill="#20302A"/>
+          <path d="M 106 152 H 136 Q 143 152 139 160 L 126 175 Q 121 180 116 175 L 103 160 Q 99 152 106 152 Z" fill="#20302A"/>
         </g>
       </svg>
       <span>{BRAND_NAME}</span>
     </a>
     <nav aria-label="Main">
       <details class="cities-menu" id="cities-menu">
-        <summary>Cities <span class="caret" aria-hidden="true">▾</span></summary>
+        <summary>Cities</summary>
         <div class="panel">
           {states.map(([state, stateCities]) => (
             <div class="state-group">
@@ -79,30 +83,46 @@ const states = [...byState.entries()].sort(([a], [b]) => a.localeCompare(b));
     align-items: center;
     flex-wrap: wrap;
   }
-  nav > a,
-  .cities-menu summary {
+  nav > a {
     font-size: 0.95rem;
     font-weight: 550;
     text-decoration: none;
     color: var(--ink);
-    cursor: pointer;
   }
-  nav > a:hover,
-  .cities-menu summary:hover {
+  nav > a:hover {
     color: var(--clay);
   }
   .cities-menu {
     position: relative;
   }
+  /* Pill summary matching the map toolbars' dropdown idiom. */
   .cities-menu summary {
     list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 550;
+    color: var(--ink);
+    cursor: pointer;
     user-select: none;
+    transition: border-color 0.15s ease, background 0.15s ease;
   }
   .cities-menu summary::-webkit-details-marker {
     display: none;
   }
-  .caret {
-    font-size: 0.7rem;
+  .cities-menu summary::after {
+    content: '▾';
+    font-size: 0.7em;
+    opacity: 0.7;
+  }
+  .cities-menu summary:hover,
+  .cities-menu[open] summary {
+    border-color: var(--moss);
+    background: color-mix(in srgb, var(--moss) 8%, transparent);
   }
   .panel {
     position: absolute;

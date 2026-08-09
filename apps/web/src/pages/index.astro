@@ -2,23 +2,15 @@
 import Base from '~/layouts/Base.astro';
 import CityMap from '~/components/CityMap.astro';
 import { BRAND_NAME, BRAND_TAGLINE } from '~/lib/site';
-import { getCities, getUpcomingTowns } from '~/lib/config';
+import { getCities, getUpcomingTowns, isLaunched } from '~/lib/config';
 import { getCollection } from 'astro:content';
 import { guidePath } from '~/lib/venues';
 import AdSlot from '~/components/AdSlot.astro';
 
 const cities = getCities().filter((c) => c.launched);
 
-// Group by state so the picker scales to hundreds of cities.
-const byState = new Map<string, typeof cities>();
-for (const city of cities) {
-  const list = byState.get(city.state) ?? [];
-  list.push(city);
-  byState.set(city.state, list);
-}
-const states = [...byState.entries()].sort(([a], [b]) => a.localeCompare(b));
-
 const guides = (await getCollection('guides'))
+  .filter((g) => isLaunched(g.data.city))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 6);
 ---
@@ -42,64 +34,19 @@ const guides = (await getCollection('guides'))
 
   <section class="band" id="cities">
     <div class="wrap">
-      <div class="pick-head">
-        <h2>Pick your city</h2>
-        <input
-          type="search"
-          id="city-filter"
-          placeholder={`Search ${cities.length} cities…`}
-          aria-label="Search cities"
-          autocomplete="off"
-        />
-      </div>
-      <CityMap cities={cities} upcoming={getUpcomingTowns()} />
-      <p class="map-key">
-        <span class="key-live">●</span> live guides ·
-        <span class="key-soon">●</span> waterfront towns coming soon
+      <h2>Pick your city</h2>
+      <p class="pick-sub">
+        Click a pin to open the guide — muted dots are towns we're verifying
+        now.
       </p>
-      {states.map(([state, stateCities]) => (
-        <div class="state-block" data-state>
-          <h3 class="state-head">{state}</h3>
-          <ul class="card-grid">
-            {stateCities.map((city) => (
-              <li
-                id={`city-${city.slug}`}
-                data-city={`${city.name} ${city.state} ${city.state_code}`.toLowerCase()}
-              >
-                <a class="city-card" href={`/${city.slug}/`}>
-                  <span class="city-name">{city.name}, {city.state_code}</span>
-                  <span class="city-sub">{city.hero.subhead}</span>
-                  <span class="go">Explore the guide →</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-      <p class="no-match" id="no-match" hidden>No city matches — more are on the way.</p>
+      <CityMap cities={cities} upcoming={getUpcomingTowns()} />
+      <ul class="city-links" aria-label="All city guides">
+        {cities.map((city) => (
+          <li><a href={`/${city.slug}/`}>{city.name}, {city.state_code}</a></li>
+        ))}
+      </ul>
     </div>
   </section>
-
-  <script>
-    const input = document.getElementById('city-filter') as HTMLInputElement | null;
-    if (input) {
-      input.addEventListener('input', () => {
-        const q = input.value.trim().toLowerCase();
-        let any = false;
-        document.querySelectorAll<HTMLElement>('[data-city]').forEach((li) => {
-          const hit = !q || li.dataset.city!.includes(q);
-          li.hidden = !hit;
-          if (hit) any = true;
-        });
-        document.querySelectorAll<HTMLElement>('[data-state]').forEach((block) => {
-          block.hidden = !Array.from(
-            block.querySelectorAll<HTMLElement>('[data-city]')
-          ).some((li) => !li.hidden);
-        });
-        document.getElementById('no-match')!.hidden = any;
-      });
-    }
-  </script>
 
   <AdSlot placement="below-hero" />
 
@@ -148,70 +95,23 @@ const guides = (await getCollection('guides'))
     max-width: 38rem;
     color: var(--ink-soft);
   }
-  .pick-head {
+  .pick-sub {
+    color: var(--ink-soft);
+    margin: -0.25rem 0 1rem;
+  }
+  .city-links {
+    list-style: none;
+    margin: 0.9rem 0 0;
+    padding: 0;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
     flex-wrap: wrap;
-    margin-bottom: 0.5rem;
+    gap: 0.35rem 1.25rem;
+    font-size: 0.92rem;
   }
-  #city-filter {
-    font: inherit;
-    font-size: 0.95rem;
-    padding: 0.55rem 1rem;
-    border: 1.5px solid var(--line);
-    border-radius: 999px;
-    background: var(--paper-raised);
-    color: var(--ink);
-    min-width: 16rem;
+  .city-links a {
+    color: var(--pine-deep);
+    font-weight: 600;
   }
-  #city-filter:focus {
-    outline: 2px solid var(--moss);
-    outline-offset: 1px;
-  }
-  .map-key {
-    font-size: 0.82rem;
-    color: var(--ink-soft);
-    margin: 0.25rem 0 0;
-  }
-  .key-live {
-    color: var(--clay);
-  }
-  .key-soon {
-    color: var(--moss);
-    opacity: 0.6;
-  }
-  .state-head {
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--moss);
-    margin: 1.5rem 0 0;
-  }
-  .state-block .card-grid {
-    margin-top: 0.75rem;
-  }
-  .no-match {
-    color: var(--ink-soft);
-    font-style: italic;
-  }
-  li.flash .city-card {
-    animation: card-flash 1.6s ease;
-  }
-  @keyframes card-flash {
-    0%,
-    35% {
-      outline: 3px solid var(--clay);
-      outline-offset: 3px;
-    }
-    100% {
-      outline: 3px solid transparent;
-      outline-offset: 3px;
-    }
-  }
-  .city-card,
   .guide-card {
     display: flex;
     flex-direction: column;
@@ -225,26 +125,17 @@ const guides = (await getCollection('guides'))
     text-decoration: none;
     transition: transform 0.15s ease;
   }
-  .city-card:hover,
   .guide-card:hover {
     transform: translateY(-2px);
   }
-  .city-name,
   .guide-title {
     font-family: var(--font-display);
     font-size: 1.35rem;
     font-weight: 600;
     color: var(--pine-deep);
   }
-  .city-sub,
   .guide-desc {
     font-size: 0.93rem;
     color: var(--ink-soft);
-  }
-  .go {
-    margin-top: auto;
-    font-size: 0.9rem;
-    font-weight: 650;
-    color: var(--clay);
   }
 </style>

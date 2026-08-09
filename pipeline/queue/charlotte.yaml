@@ -1,0 +1,330 @@
+items:
+- type: venue
+  city: charlotte
+  name: Salud Cervezeria
+  category: eat
+  notes: NoDa upstairs cerveceria (Salud Beer Shop family). Verify dog policy for
+    the space; NoDa coverage gap.
+- type: venue
+  city: charlotte
+  name: Heist Brewery
+  category: eat
+  notes: NoDa brewery-restaurant. Verify patio/taproom dog policy.
+- type: venue
+  city: charlotte
+  name: Protagonist Beer
+  category: drink
+  notes: NoDa-adjacent (Villa Heights). Verify policy.
+- type: venue
+  city: charlotte
+  name: Free Range Brewing
+  category: drink
+  notes: NoDa corridor (N Davidson). Verify policy.
+- type: venue
+  city: charlotte
+  name: Divine Barrel Brewing
+  category: drink
+  notes: NoDa/Derita Rd corridor. Verify policy.
+- type: venue
+  city: charlotte
+  name: Pet Station Dog Park
+  category: dog-park
+  notes: Verify operator (private store-run? county?), fencing, rules.
+- type: venue
+  city: charlotte
+  name: Dog Run
+  category: activity
+  notes: Ledger name generic — identify what/where this OSM entry actually is before
+    drafting; skip if unidentifiable.
+- type: venue
+  city: charlotte
+  name: NoDa Bark & Board
+  category: daycare
+  notes: NoDa boarding/daycare. Verify requirements; capture vaccinations_required.
+- type: venue
+  city: charlotte
+  name: Dogs All Day
+  category: daycare
+  notes: Verify hours + vaccine requirements; capture vaccinations_required.
+- type: venue
+  city: charlotte
+  name: Social Pet Charlotte
+  category: daycare
+  notes: Verify; capture vaccinations_required.
+- type: venue
+  city: charlotte
+  name: The Barker Lounge
+  category: daycare
+  notes: Verify; capture vaccinations_required.
+- type: venue
+  city: charlotte
+  name: Hollywood Feed
+  category: pet-supply
+  notes: Identify which location; chain dogs-welcome policy usually published.
+- type: venue
+  city: charlotte
+  name: PetSmart
+  category: pet-supply
+  notes: Identify which location; chain leashed-pets-welcome policy is published.
+- type: venue
+  city: charlotte
+  name: The Ritz-Carlton, Charlotte
+  category: stay
+  notes: Verify pet policy — many Ritz properties decline; a cited no is still content.
+- type: venue
+  city: charlotte
+  name: The Westin Charlotte
+  category: stay
+  notes: Westin brand is dog-forward (Heavenly Dog beds historically); verify property
+    policy.
+- type: venue
+  city: charlotte
+  name: Omni Charlotte Hotel
+  category: stay
+  notes: Verify property pet policy.
+- type: venue
+  city: charlotte
+  name: The Ivey's Hotel
+  category: stay
+  notes: Uptown boutique; verify.
+- type: venue
+  city: charlotte
+  name: The Dunhill Hotel
+  category: stay
+  notes: Uptown historic; verify.
+- type: venue
+  city: charlotte
+  name: Hyatt Centric Charlotte Southpark
+  category: stay
+  notes: Verify property policy.
+- type: venue
+  city: charlotte
+  name: Hyatt House Charlotte/Center City
+  category: stay
+  notes: Extended-stay, usually pet-friendly; verify fee/limits.
+- type: venue
+  city: charlotte
+  name: Skiptown
+  category: dog-park
+  notes: Membership dog park + bar in South End — the Dog Bar successor lead from
+    batch 1. Verify membership, vaccine requirements, and the bar/park split. Capture
+    vaccinations_required if published.
+  done: true
+- type: venue
+  city: charlotte
+  name: Wooden Robot
+  category: drink
+  notes: South End brewery; verify taproom/patio dog policy.
+  done: true
+- type: venue
+  city: charlotte
+  name: Resident Culture Brewing Company
+  category: drink
+  notes: Plaza Midwood; verify policy (has had food trucks/patio culture).
+  done: true
+- type: venue
+  city: charlotte
+  name: Birdsong Brewing Company
+  category: drink
+  notes: NoDa-adjacent; verify policy.
+  done: true
+- type: venue
+  city: charlotte
+  name: Romare Bearden Park
+  category: trail
+  notes: Uptown signature park; county rules govern; verify any park-specific posted
+    rules.
+  done: true
+- type: venue
+  city: charlotte
+  name: Frazier Park
+  category: trail
+  notes: Near Uptown; county rules; verify specifics.
+  done: true
+- type: venue
+  city: charlotte
+  name: Pet Supplies Plus
+  category: pet-supply
+  notes: 'DONE (unverifiable: Which-location ambiguity in ledger entry; resolve location
+    then verify dogs-inside policy.) — Verify which location this ledger entry is
+    and the dogs-inside policy.'
+  done: true
+- type: venue
+  city: charlotte
+  name: Petco
+  category: pet-supply
+  notes: 'DONE (unverifiable: Which-location ambiguity; chain policy likely publishable
+    once the store is pinned.) — Verify which location and dogs-inside policy (chain
+    policy usually published).'
+  done: true
+- type: venue
+  city: charlotte
+  name: Kimpton Tryon Park Hotel
+  category: stay
+  notes: 'Kimpton brand policy: pets stay free, no fee, no size/weight limits — verify
+    the brand page AND this property page both state it.'
+  done: true
+- type: venue
+  city: charlotte
+  name: Grand Bohemian Hotel Charlotte
+  category: stay
+  notes: Marriott Autograph; verify property pet policy (fee/limits) from its own
+    page.
+  done: true
+- type: venue
+  city: charlotte
+  name: Le Méridien Charlotte
+  category: stay
+  notes: Marriott; verify property-specific pet policy.
+  done: true
+- type: venue
+  city: charlotte
+  name: Aloft Charlotte City Center
+  category: stay
+  notes: 'DONE (unverifiable: Property pet policy not readable from official channels;
+    phone needed.) — Aloft brand is dog-forward (ARF program historically); verify
+    current property policy.'
+  done: true
+- type: venue
+  city: charlotte
+  name: Canopy by Hilton Charlotte Southpark
+  category: stay
+  notes: 'DONE (unverifiable: Property pet policy not readable; phone needed.) — Canopy
+    brand pet-friendly; verify property fee/limits.'
+  done: true
+- type: venue
+  city: charlotte
+  name: JW Marriott Charlotte
+  category: stay
+  notes: 'DONE (unverifiable: Third-party signals say no pets, but a ban does not
+    ship uncited either — confirm by phone (704) 333-1101 whether property or brand
+    policy.) — Verify property pet policy — some JWs decline pets.'
+  done: true
+- type: venue
+  city: charlotte
+  name: Homewood Suites by Hilton Charlotte Uptown First Ward
+  category: stay
+  notes: 'DONE (unverifiable: Fee/limits not readable from official channels; phone
+    needed.) — Extended-stay; verify fee and limits.'
+  done: true
+- type: venue
+  city: charlotte
+  name: Embassy Suites by Hilton Charlotte Uptown
+  category: stay
+  notes: 'DONE (unverifiable: Property pet policy not readable; phone needed.) — Verify
+    property pet policy.'
+  done: true
+- type: venue
+  city: charlotte
+  name: Mac's Speed Shop
+  category: eat
+  notes: South End biker-BBQ institution; patio reputation. Verify their own published
+    dog policy.
+  done: true
+- type: venue
+  city: charlotte
+  name: Pinky's Westside Grill
+  category: eat
+  notes: 'DONE (unverifiable: House rules page exists but no dog policy; phone needed.)
+    — Westside patio icon in a former gas station. Verify policy.'
+  done: true
+- type: venue
+  city: charlotte
+  name: Cabo Fish Taco
+  category: eat
+  notes: 'DONE (unverifiable: No official policy; insufficient independent mentions;
+    phone needed.) — NoDa patio staple. Verify policy.'
+  done: true
+- type: venue
+  city: charlotte
+  name: Midwood Smokehouse
+  category: eat
+  notes: 'DONE (unverifiable: No official channel publishes patio dog policy; phone
+    (704) 295-4227.) — BBQ; multiple locations — anchor the Central Ave original,
+    verify per-location policy.'
+  done: true
+- type: venue
+  city: charlotte
+  name: Common Market - Oakwold
+  category: eat
+  notes: 'Deli/bar with a famous dog-friendly patio culture; NOTE: multiple locations
+    (South End, Plaza Midwood) — verify which this ledger entry is and whether policy
+    is per-location.'
+  done: true
+- type: venue
+  city: charlotte
+  name: Brooks' Sandwich House
+  category: eat
+  notes: 'DONE (unverifiable: Operating status itself uncertain (2023 sale listing,
+    retirement); verify trading status first.) — NoDa institution, outdoor-only seating.
+    Verify whether dogs at the outdoor tables are addressed anywhere official.'
+  done: true
+- type: venue
+  city: charlotte
+  name: Yafo Kitchen
+  category: eat
+  notes: 'DONE (unverifiable: No official policy; phone needed.) — Fast-casual with
+    patios; multiple locations. Verify.'
+  done: true
+- type: venue
+  city: charlotte
+  name: Dilworth Neighborhood Grille
+  category: eat
+  notes: 'DONE (unverifiable: Policy not publishable from official sources; menu fetch
+    truncated; phone needed.) — Reputed dog-friendly patio near Freedom Park. Verify.'
+  done: true
+- type: venue
+  city: charlotte
+  name: The Dog Bar - Charlotte
+  category: drink
+  notes: DONE (closed ~2026-05-31 — not publishable; see ledger) — NoDa. A membership
+    dog bar — off-leash dogs are the venue. Verify the membership/vaccine requirements
+    and any human-age rule from their own site.
+  done: true
+- type: venue
+  city: charlotte
+  name: Lucky Dog Bark and Brew
+  category: activity
+  notes: Bar + off-leash play hybrid. Verify membership/vaccine requirements and which
+    side dogs occupy.
+  done: true
+- type: venue
+  city: charlotte
+  name: Sycamore Brewing
+  category: drink
+  notes: DONE (closed — now Club West Brewing, tier-3; see ledger) — South End. Famous
+    patio; verify their published dog policy (patio vs taproom).
+  done: true
+- type: venue
+  city: charlotte
+  name: The Olde Mecklenburg Brewery & Biergarten
+  category: drink
+  notes: The biergarten. Verify where dogs are allowed (biergarten vs indoor halle).
+    Note the ledger also has a duplicate entry without "& Biergarten" — same place.
+  done: true
+- type: venue
+  city: charlotte
+  name: NoDa Brewing Company
+  category: drink
+  notes: Verify taproom vs patio policy from their site.
+  done: true
+- type: venue
+  city: charlotte
+  name: Freedom Park
+  category: trail
+  notes: 'The signature in-town park. Mecklenburg Park & Rec: leashed in parks; dog
+    rules per county ordinance already in the city config.'
+  done: true
+- type: venue
+  city: charlotte
+  name: Little Sugar Creek Greenway
+  category: trail
+  notes: 'The greenway spine. County greenway rules: leashed dogs.'
+  done: true
+- type: venue
+  city: charlotte
+  name: 9th Street Dog Park
+  category: activity
+  notes: Uptown dog park (First Ward). Verify operator (city/county/private), fencing,
+    hours, vaccine rules.
+  done: true

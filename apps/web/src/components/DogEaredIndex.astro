@@ -1,0 +1,262 @@
+---
+// Town-level Dog-Eared Index block: composite (when published), pillar
+// subtotals, and the full component table with values, band scores, and
+// verification dates. Showing the work is the product. The composite only
+// appears at >= 7 of 9 verified components (spec §6.1); below that the
+// block reports progress and shows what is verified so far.
+import type { CityConfig } from '~/lib/config';
+import {
+  getTownIndex,
+  getIndexBands,
+  formatComponentValue,
+} from '~/lib/dogEaredIndex';
+import { INDEX_FILTERABLE_KEYS } from '~/lib/indexFilters';
+
+interface Props {
+  city: CityConfig;
+}
+
+const { city } = Astro.props;
+const index = getTownIndex(city.slug);
+const bands = getIndexBands();
+
+const published = index !== null && index.composite.score !== null;
+const rows =
+  index === null
+    ? []
+    : bands.components.map((def) => {
+        const data = index.components[def.key];
+        return {
+          def,
+          data,
+          display: data ? formatComponentValue(def, data) : null,
+          // Positively-contributing components with a venue mapping link
+          // to the explorer pre-filtered to the venues behind the score.
+          filterable:
+            INDEX_FILTERABLE_KEYS.includes(def.key) &&
+            (data?.score ?? 0) > 0,
+        };
+      });
+---
+
+{index !== null && (
+  <section class="band band--tint index" id="dog-eared-index">
+    <div class="wrap">
+      <div class="index-head">
+        <div>
+          <h2>The Dog-Eared Index</h2>
+          <p class="index-sub">
+            A town-level dog-friendliness score composed from verified,
+            countable conditions — each with a citable source.
+            <a href="/dog-eared-index/">How it's computed</a>
+          </p>
+        </div>
+        <div class="composite" role="img" aria-label={
+          published
+            ? `Dog-Eared Index composite for ${city.name}: ${index.composite.score} out of 100`
+            : `Dog-Eared Index for ${city.name}: not yet published`
+        }>
+          {published ? (
+            <>
+              <span class="score">{index.composite.score}</span>
+              <span class="denom">/100</span>
+            </>
+          ) : (
+            <span class="pending">{index.composite.components_verified}/{index.composite.components_total}</span>
+          )}
+        </div>
+      </div>
+
+      {published && index.composite.provisional && (
+        <p class="provisional">
+          Provisional ({index.composite.components_verified}/{index.composite.components_total} components
+          verified) — weights renormalize over the verified components until all nine carry data.
+        </p>
+      )}
+      {!published && (
+        <p class="provisional">
+          {index.composite.components_verified} of {index.composite.components_total} components
+          carry verified data. The composite publishes at {bands.publish_gate}; the verified
+          components are shown below.
+        </p>
+      )}
+
+      <div class="pillar-row">
+        {bands.pillars.map((pillar) => {
+          const sub = index.pillars[pillar.toLowerCase()];
+          return (
+            <div class="pillar">
+              <span class="p-name">{pillar}</span>
+              <span class="p-score">{sub?.score ?? '—'}</span>
+              <span class="p-count">{sub?.components_verified}/{sub?.components_total} verified</span>
+            </div>
+          );
+        })}
+      </div>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Weight</th>
+              <th>Measured</th>
+              <th>Score</th>
+              <th>Verified</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map(({ def, data, display, filterable }) => (
+              <tr class:list={{ missing: display === null }}>
+                <td>
+                  <span class="c-label">{def.label}</span>
+                  <span class="c-pillar">{def.pillar}</span>
+                  {filterable && (
+                    <a class="c-map" href={`?ixf=${def.key}#explore`}>See these venues on the map ↑</a>
+                  )}
+                </td>
+                <td>{def.weight}</td>
+                <td>{display ?? 'not yet verified'}</td>
+                <td>{data?.score ?? '—'}</td>
+                <td>{data?.last_verified ?? '—'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <p class="tagline">“{bands.tagline}”</p>
+    </div>
+  </section>
+)}
+
+<style>
+  .index-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .index-sub {
+    color: var(--ink-soft);
+    max-width: 38rem;
+    margin: 0.25rem 0 0;
+  }
+  .composite {
+    display: flex;
+    align-items: baseline;
+    gap: 0.15rem;
+    padding: 0.6rem 1.1rem;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+  }
+  .score {
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: var(--pine-deep);
+    line-height: 1;
+  }
+  .denom {
+    color: var(--ink-soft);
+    font-weight: 650;
+  }
+  .pending {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+    line-height: 1.2;
+  }
+  .provisional {
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    max-width: 44rem;
+    margin: 0.75rem 0 0;
+  }
+  .pillar-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: 0.6rem;
+    margin: 1.1rem 0 0;
+  }
+  .pillar {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 0.6rem 0.85rem;
+  }
+  .p-name {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--moss);
+  }
+  .p-score {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 650;
+    color: var(--pine-deep);
+  }
+  .p-count {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+  .table-scroll {
+    overflow-x: auto;
+    margin-top: 1.1rem;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 0.55rem 0.85rem;
+    border-bottom: 1px solid var(--line);
+  }
+  th {
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+  .c-label {
+    display: block;
+    font-weight: 650;
+  }
+  .c-pillar {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+  .c-map {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 650;
+    margin-top: 0.15rem;
+  }
+  tr.missing td {
+    color: var(--ink-soft);
+  }
+  .tagline {
+    margin: 0.9rem 0 0;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+</style>

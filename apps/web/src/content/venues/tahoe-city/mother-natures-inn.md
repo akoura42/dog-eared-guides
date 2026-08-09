@@ -27,7 +27,7 @@ verification:
 affiliate:
   viator_product_code: null
   viator_url: null
-  booking_url: null
+  booking_url: https://www.booking.com/hotel/us/mother-nature-39-s-inn.html
 tags: []
 summary: Budget-friendly cabin-style inn in the middle of town that markets itself as North Lake Tahoe's pet-friendly stay.
 image: null

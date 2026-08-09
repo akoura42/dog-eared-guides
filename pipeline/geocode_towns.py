@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Geocode data/cities/waterfront-towns.csv into waterfront-towns-geo.json.
+"""Geocode data/waterfront-towns.csv into waterfront-towns-geo.json.
 
 Primary source: US Census Bureau Gazetteer places file (public domain,
 authoritative point coordinates for incorporated places and CDPs).
@@ -22,8 +22,8 @@ import zipfile
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-CSV_FILE = REPO_ROOT / "data" / "cities" / "waterfront-towns.csv"
-OUT_FILE = REPO_ROOT / "data" / "cities" / "waterfront-towns-geo.json"
+CSV_FILE = REPO_ROOT / "data" / "waterfront-towns.csv"
+OUT_FILE = REPO_ROOT / "data" / "waterfront-towns-geo.json"
 
 GAZETTEER_URL = (
     "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/"

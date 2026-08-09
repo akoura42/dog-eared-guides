@@ -28,6 +28,7 @@ verification:
 affiliate: null
 tags:
   - winter-friendly
+  - water-access
 summary: The big trailhead with actual parking — restrooms, picnic tables, river access, and the start of the paved trail network.
 image: null
 ---

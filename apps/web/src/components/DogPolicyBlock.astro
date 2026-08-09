@@ -28,6 +28,13 @@ if (p.leash_required !== null) {
 if (p.water_bowls !== null) {
   rows.push({ label: 'Water bowls', value: p.water_bowls ? 'Provided' : 'Bring your own' });
 }
+if (p.vaccinations_required.length > 0) {
+  rows.push({
+    label: 'Vaccination proof required',
+    value: p.vaccinations_required.join(' · '),
+    tone: 'warn',
+  });
+}
 if (p.size_or_breed_restrictions) {
   rows.push({ label: 'Restrictions', value: p.size_or_breed_restrictions, tone: 'warn' });
 }

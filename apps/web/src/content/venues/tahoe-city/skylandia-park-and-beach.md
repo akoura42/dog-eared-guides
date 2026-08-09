@@ -19,6 +19,9 @@ dog_policy:
     allowed on the beach." The pines, meadow, woodland trails, and picnic
     areas are inside the leashed-dog boundary; the sand and swim beach are
     not.
+season:
+  opens: '05-01'
+  closes: '10-31'
 seasonal:
   - "Posted hours 8:00am–10:00pm, May 1 – October 31, weather permitting."
 verification:

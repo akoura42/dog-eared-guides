@@ -1,0 +1,160 @@
+# City configuration — the multi-city contract. Launched 2026-08 after the
+# QA gate (Dog-Eared Index 9/9 components, composite 72).
+# The big-city counterpoint to Tahoe City for validating scale.
+name: Charlotte
+slug: charlotte
+state: North Carolina
+state_code: NC
+geo:
+  lat: 35.2271
+  lng: -80.8431
+hero:
+  headline: Charlotte with a dog.
+  subhead: Breweries, greenways, patios, and dog parks across the Queen City — every dog policy verified.
+hero_image: null
+hero_image_alt: null
+hero_image_credit: null
+hero_image_credit_url: null
+intro: >-
+  Charlotte is the big-city counterpoint to our mountain towns — a city of
+  neighborhoods where the dog rules are unusually uniform. One county
+  animal ordinance covers the city, one park system runs the parks and
+  greenways, and designated dog parks are the only legal off-leash
+  ground. Every policy here comes from the ordinances themselves.
+seasonal_notes: []
+regulations:
+  - summary: Dogs must be physically restrained — leash, fence, or secure enclosure — everywhere off your own property.
+    detail: >-
+      The Mecklenburg County animal ordinance (Sec. 3-71), enforced in
+      Charlotte by CMPD Animal Care & Control, makes it unlawful to keep
+      any animal (cats excepted) without sufficient physical restraint —
+      a leash, a vehicle, or an adequate fence or enclosure. The one
+      voice-control allowance is on your own property, with an adult
+      immediately beside a dog that responds to direct verbal commands.
+    jurisdiction: Mecklenburg County / CMPD Animal Care & Control
+    source_url: https://www.charlottenc.gov/Animal-Care-and-Control/Pet-Resources/Mecklenburg-County-Animal-Ordinance
+  - summary: In public parks and on greenways, dogs stay leashed — designated dog parks are the off-leash exception.
+    detail: >-
+      Mecklenburg County Park and Recreation requires leashed dogs in all
+      parks and on greenways; its designated dog parks are the off-leash
+      areas, open 7:30am to sunset, free, with posted vaccination
+      requirements (rabies with tag, DHLPP, bordetella) and separate
+      sections for dogs over and under 20 pounds at most locations.
+    jurisdiction: Mecklenburg County Park and Recreation
+    source_url: https://parkandrec.mecknc.gov/Places-to-Visit/Dog-Parks
+  - summary: State rule allows dogs in outdoor dining areas — at the restaurant's discretion.
+    detail: >-
+      The North Carolina food code (15A NCAC 18A .2656, adopting Food Code
+      6-501.115(B)(4)) permits "dogs (Canis lupus familiaris) and cats" in
+      outdoor dining areas "provided that dogs and cats are physically
+      restrained, and do not pass through any indoor areas of the food
+      establishment." Restaurants may still say no — which is why every
+      patio policy in this guide is verified per venue.
+    jurisdiction: North Carolina (state food code)
+    source_url: https://www.animallaw.info/administrative/nc-restaurant-animals-2656-physical-facilities
+resources:
+  - label: Mecklenburg County dog parks
+    url: https://parkandrec.mecknc.gov/Places-to-Visit/Dog-Parks
+    note: The county's own list of designated off-leash dog parks, hours, and vaccination rules.
+  - label: Mecklenburg County Animal Ordinance
+    url: https://www.charlottenc.gov/Animal-Care-and-Control/Pet-Resources/Mecklenburg-County-Animal-Ordinance
+    note: The full ordinance text — restraint, tethering, and enforcement.
+categories:
+  - eat
+  - drink
+  - stay
+  - trail
+  - beach
+  - activity
+  - dog-park
+  - shop
+  - pet-supply
+  - daycare
+  - services
+# Getting there with a dog — airport and rail links with verified pet
+# rules. Coordinates stored for a future map layer.
+getting_there:
+  - mode: air
+    name: Charlotte Douglas International (CLT)
+    note: Service-animal/pet relief areas run post-security (the A/B Connector near Checkpoint A, Concourse E near Gate E36, and the D/E corner) and pre-security outdoors at both ends of the Arrivals/Baggage Claim level. Except for service animals, pets stay in carriers inside the terminal.
+    source_url: https://www.cltairport.com/airport-info/accessibility/terminal-amenities/service-animal-relief-areas/
+    lat: 35.2140
+    lng: -80.9431
+  - mode: rail
+    name: Amtrak (Crescent, Carolinian, Piedmont)
+    note: Amtrak's carry-on pet program takes dogs and cats up to 20 pounds including the carrier, on trips of up to seven hours, in coach, with a per-segment fee and a five-pets-per-train cap — reservations required. The carrier maximum is 19" x 14" x 10.5".
+    source_url: https://www.amtrak.com/pets
+    lat: null
+    lng: null
+# Verified emergency contacts — the /charlotte/emergency/ page and the
+# pocket card render from this. Drive times via OSRM from Trade & Tryon.
+emergency:
+  er_vets:
+    - name: CARE — Charlotte Animal Referral & Emergency
+      phone: (704) 457-2300
+      lat: 35.19498
+      lng: -80.79706
+      note: Open 24 hours, every day. 3726 Latrobe Dr — about 10 minutes from Uptown.
+      source_url: https://carecharlotte.com/services/emergency/
+    - name: BluePearl Pet Hospital South Charlotte (Matthews)
+      phone: (704) 672-5590
+      note: 24-hour emergency and specialty hospital at 2440 Plantation Center Dr, southeast of I-485 off Weddington Road, serving south Charlotte.
+      source_url: https://bluepearlvet.com/hospital/matthews-nc/
+  poison:
+    - name: ASPCA Animal Poison Control
+      phone: (888) 426-4435
+      note: 24/7, 365 days a year. A consultation fee applies.
+      source_url: https://www.aspca.org/pet-care/animal-poison-control
+  lost_found:
+    - name: CMPD Animal Care & Control (main shelter)
+      phone: (704) 336-7600
+      lat: 35.19202
+      lng: -80.94841
+      note: Lost & found, intake, and animal protection run from the main shelter at 8315 Byrum Dr (the Toomey Ave location is adoptions only). Open daily; 311 reaches them from inside Mecklenburg County.
+      source_url: https://www.charlottenc.gov/Animal-Care-and-Control
+# Explorer area chips: neighborhood token -> visitor-level area (null drops
+# the token; the other token in a compound neighborhood carries the area).
+areas:
+  # the wards are Uptown
+  first ward: Uptown
+  second ward: Uptown
+  third ward: Uptown
+  fourth ward: Uptown
+  brooklyn village: Uptown
+  # LoSo folds into South End for visitors
+  loso: South End
+  loso (lower south end): South End
+  lower south end (loso): South End
+  # Camp North End's named yards, and the corridor around it
+  camp north end (keswick): Camp North End
+  camp north end (boileryard): Camp North End
+  north end: Camp North End
+  # adjacency folds
+  the pass: NoDa
+  chantilly: Plaza Midwood
+  cherry: Midtown
+  montford drive: Madison Park
+  montclaire south: Madison Park
+  colonial village: Madison Park
+  oakhurst: Cotswold
+  seversville: West Charlotte
+  clanton park: West Charlotte
+  west boulevard: West Charlotte
+  city park: West Charlotte
+  four seasons: East Charlotte
+  allen hills: North Charlotte
+  derita: North Charlotte
+  brightwalk: North Charlotte
+  druid hills: North Charlotte
+  airport: Airport Area
+  # sub-spots that don't carry a visitor-level area of their own
+  parkdale: null
+  grier heights: null
+# Agency-run venues share these domains' favicons; a licensed photo beats
+# the repeated favicon on cards.
+agency_domains:
+  - charlottenc.gov
+  - mecknc.gov
+# Big-city discovery needs a wider Overpass sweep than the 8 km default.
+discover_radius_km: 16
+launched: true

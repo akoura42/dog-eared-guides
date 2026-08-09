@@ -1,0 +1,108 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "City config (data/cities/<slug>.yaml)",
+  "description": "Canonical shape. The web app's Zod citySchema (apps/web/src/lib/config.ts) must stay in step; CI validates every city yaml against this file.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "slug", "state", "state_code", "geo", "hero", "intro", "categories"],
+  "definitions": {
+    "emergencyContact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "phone", "note", "source_url"],
+      "properties": {
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "note": { "type": "string" },
+        "source_url": { "type": "string", "format": "uri" },
+        "lat": { "type": ["number", "null"] },
+        "lng": { "type": ["number", "null"] }
+      }
+    }
+  },
+  "properties": {
+    "name": { "type": "string", "minLength": 1 },
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "state": { "type": "string" },
+    "state_code": { "type": "string", "pattern": "^[A-Z]{2}$" },
+    "geo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lat", "lng"],
+      "properties": { "lat": { "type": "number" }, "lng": { "type": "number" } }
+    },
+    "hero": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["headline", "subhead"],
+      "properties": { "headline": { "type": "string" }, "subhead": { "type": "string" } }
+    },
+    "hero_image": { "type": ["string", "null"] },
+    "hero_image_alt": { "type": ["string", "null"] },
+    "hero_image_credit": { "type": ["string", "null"] },
+    "hero_image_credit_url": { "type": ["string", "null"] },
+    "resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["label", "url", "note"],
+        "properties": {
+          "label": { "type": "string" },
+          "url": { "type": "string", "format": "uri" },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "intro": { "type": "string" },
+    "seasonal_notes": { "type": "array", "items": { "type": "string" } },
+    "regulations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["summary", "detail", "jurisdiction", "source_url"],
+        "properties": {
+          "summary": { "type": "string" },
+          "detail": { "type": "string" },
+          "jurisdiction": { "type": "string" },
+          "source_url": { "type": "string", "format": "uri" }
+        }
+      }
+    },
+    "categories": { "type": "array", "items": { "type": "string" } },
+    "map_frame_km": { "type": ["number", "null"] },
+    "getting_there": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["mode", "name", "note", "source_url"],
+        "properties": {
+          "mode": { "enum": ["air", "rail"] },
+          "name": { "type": "string" },
+          "note": { "type": "string" },
+          "source_url": { "type": "string", "format": "uri" },
+          "lat": { "type": ["number", "null"] },
+          "lng": { "type": ["number", "null"] }
+        }
+      }
+    },
+    "emergency": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "er_vets": { "type": "array", "items": { "$ref": "#/definitions/emergencyContact" } },
+        "poison": { "type": "array", "items": { "$ref": "#/definitions/emergencyContact" } },
+        "lost_found": { "type": "array", "items": { "$ref": "#/definitions/emergencyContact" } }
+      }
+    },
+    "areas": {
+      "type": "object",
+      "additionalProperties": { "type": ["string", "null"] }
+    },
+    "agency_domains": { "type": "array", "items": { "type": "string" } },
+    "discover_radius_km": { "type": ["number", "null"] },
+    "launched": { "type": "boolean" }
+  }
+}

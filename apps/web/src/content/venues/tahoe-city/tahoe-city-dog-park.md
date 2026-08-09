@@ -1,11 +1,11 @@
 ---
 name: Tahoe City Dog Park
 city: tahoe-city
-category: activity
+category: dog-park
 neighborhood: Grove Street / Downtown
 address: 375 Grove St, Tahoe City, CA 96145
-lat: 39.1731
-lng: -120.1358
+lat: 39.17399
+lng: -120.14196
 phone: (530) 583-3796
 website: https://www.tcpud.org/parks-facilities/facilities-parks-and-rentals/parks/dog-park
 dog_policy:

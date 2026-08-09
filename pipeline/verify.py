@@ -69,7 +69,7 @@ links still stand; if the venue now officially disallows dogs, that's also
 
 def is_stale(path: Path, max_age_days: int) -> tuple[bool, dict]:
     data, _ = split_frontmatter(path.read_text())
-    last = data.get("verification", {}).get("last_verified")
+    last = (data.get("verification") or {}).get("last_verified")
     if isinstance(last, dt.datetime):
         last = last.date()
     if not isinstance(last, dt.date):
@@ -105,40 +105,71 @@ def bump_verified_date(path: Path) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--max-age", type=int, default=90)
+    parser.add_argument("--city", help="only re-verify this city's venues")
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=0,
+        help="cap venues re-verified this run (0 = no cap); oldest first",
+    )
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--model", default=os.environ.get("MODEL", DEFAULT_MODEL))
     args = parser.parse_args()
 
+    pattern = f"{args.city}/*.md" if args.city else "*/*.md"
     stale = []
-    for path in sorted(VENUES_DIR.glob("*/*.md")):
+    for path in sorted(VENUES_DIR.glob(pattern)):
         try:
-            needs_check, _ = is_stale(path, args.max_age)
+            needs_check, data = is_stale(path, args.max_age)
         except ValueError as exc:
             print(f"WARNING {path}: {exc}")
             continue
         if needs_check:
-            stale.append(path)
+            last = data.get("verification", {}).get("last_verified")
+            if isinstance(last, dt.datetime):
+                last = last.date()
+            sort_key = last.isoformat() if isinstance(last, dt.date) else ""
+            stale.append((sort_key, path))
 
-    if not stale:
+    # Oldest first, so a --limit'd (or killed) run always works the venues
+    # most in need of re-verification.
+    stale.sort()
+    stale_paths = [p for _, p in stale]
+    if args.limit > 0:
+        skipped = max(0, len(stale_paths) - args.limit)
+        stale_paths = stale_paths[: args.limit]
+        if skipped:
+            print(f"--limit {args.limit}: deferring {skipped} stale venue(s) to a later run.")
+
+    if not stale_paths:
         print(f"No venues older than {args.max_age} days. Done.")
         return 0
-    print(f"{len(stale)} venue(s) need re-verification.")
+    print(f"{len(stale_paths)} venue(s) need re-verification.")
 
     if args.dry_run:
-        for p in stale:
+        for p in stale_paths:
             print(f"  stale: {p.relative_to(REPO_ROOT)}")
         return 0
 
-    from ledger import CHECKS_FILE, record_check
+    from ledger import checks_file, record_check
 
     print(f"Engine: {model_engine()}")
     touched: list[Path] = []
     report: list[str] = []
 
-    for path in stale:
+    errors = 0
+    for path in stale_paths:
         rel = path.relative_to(REPO_ROOT)
         print(f"\n=== Re-verifying {rel} ===")
-        verdict, new_content, raw = reverify(args.model, path)
+        # One venue's failure (model timeout, API error) must not discard
+        # the whole run's work.
+        try:
+            verdict, new_content, raw = reverify(args.model, path)
+        except Exception as exc:  # noqa: BLE001
+            print(f"  ERROR: {exc}")
+            report.append(f"- ❌ `{rel}` — re-verification errored: {exc}")
+            errors += 1
+            continue
         record_check(path.parent.name, path.stem, "verify", verdict, str(rel))
         print(f"  verdict: {verdict}")
         if verdict == "unchanged":
@@ -159,18 +190,33 @@ def main() -> int:
         else:
             report.append(f"- ⚠️ `{rel}` — needs manual review (model output unclear)")
 
-    if not touched:
-        print("\nNo file changes; report:")
+    if errors and errors == len(stale_paths):
+        # Every venue errored (expired token, rate limit) — this must be a
+        # RED scheduled run, not a silent green no-op.
+        print(f"\nAll {errors} re-verifications errored; failing the run.")
+        print("\n".join(report))
+        return 1
+
+    # Even with zero file changes, closures/errors and the check-log
+    # entries are real outcomes — a PR is the only way they survive an
+    # ephemeral runner.
+    cities_touched = sorted({p.parent.name for p in stale_paths})
+    check_logs = [checks_file(c) for c in cities_touched if checks_file(c).exists()]
+    files = touched + check_logs
+    if not files:
+        print("\nNothing to record; report:")
         print("\n".join(report))
         return 0
 
-    branch = f"verify/recheck-{today()}"
+    # City + PID suffix so matrix jobs and same-day re-runs never collide
+    # on a branch name.
+    scope = f"{args.city}-" if args.city else ""
+    branch = f"verify/recheck-{scope}{today()}-{os.getpid()}"
     body = (
         "Scheduled 90-day re-verification. **Merging this PR is the approval step.**\n\n"
         + "\n".join(report)
     )
-    files = touched + ([CHECKS_FILE] if CHECKS_FILE.exists() else [])
-    open_pr(branch, f"verify: re-checked {len(stale)} stale venue(s)", body, files)
+    open_pr(branch, f"verify: re-checked {len(stale_paths)} stale venue(s)", body, files)
     return 0
 
 

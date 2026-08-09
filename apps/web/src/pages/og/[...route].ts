@@ -1,7 +1,7 @@
 // Template-generated OG images for every page type, rendered at build time.
 import { OGImageRoute } from 'astro-og-canvas';
 import { getCollection } from 'astro:content';
-import { getCities } from '~/lib/config';
+import { getCities, isLaunched } from '~/lib/config';
 import { venueSlug, guideSlug } from '~/lib/venues';
 import { BRAND_NAME } from '~/lib/site';
 
@@ -12,22 +12,27 @@ const pages: Record<string, { title: string; description: string }> = {
   },
 };
 
-for (const city of getCities()) {
+// Launched cities only — unlaunched cities have no pages to share.
+for (const city of getCities().filter((c) => c.launched)) {
   pages[city.slug] = {
     title: `Dog-Friendly ${city.name}, ${city.state_code}`,
     description: city.hero.subhead,
   };
 }
 
+// Keys use "/" between city and slug: both halves contain "-", so a "-"
+// join is ambiguous (tahoe + city-dog-park === tahoe-city + dog-park).
 for (const venue of await getCollection('venues')) {
-  pages[`${venue.data.city}-${venueSlug(venue)}`] = {
+  if (!isLaunched(venue.data.city)) continue;
+  pages[`${venue.data.city}/${venueSlug(venue)}`] = {
     title: venue.data.name,
     description: venue.data.summary,
   };
 }
 
 for (const guide of await getCollection('guides')) {
-  pages[`${guide.data.city}-guide-${guideSlug(guide)}`] = {
+  if (!isLaunched(guide.data.city)) continue;
+  pages[`${guide.data.city}/guide/${guideSlug(guide)}`] = {
     title: guide.data.title,
     description: guide.data.description,
   };
@@ -39,7 +44,7 @@ export const { getStaticPaths, GET } = OGImageRoute({
   getImageOptions: (_path, page) => ({
     title: page.title,
     description: page.description,
-    logo: { path: './src/assets/logo/logo-mark-og.png', size: [88] },
+    logo: { path: './src/assets/logo-mark.png', size: [84, 84] },
     bgGradient: [
       [32, 66, 47],
       [47, 96, 71],

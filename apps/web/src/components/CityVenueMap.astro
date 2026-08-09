@@ -1,20 +1,34 @@
 ---
-// Interactive venue map for a city hub. Leaflet + OpenStreetMap tiles (no
-// API key). Each marker links to our venue page and deep-links to the
-// venue's Google Maps place page — that's where Google reviews live.
-// The map initializes lazily when scrolled near the viewport so tiles
-// never block first paint.
+// Zillow-style explorer for a city hub: filter toolbar on top, map pinned
+// on the left, independently scrolling venue-card list on the right.
+// Map runs on Google Maps when PUBLIC_GMAPS_API_KEY is set, otherwise
+// Leaflet + OpenStreetMap tiles. Each marker links to our venue page and
+// deep-links to the venue's Google Maps place page — that's where Google
+// reviews live. The map initializes lazily when scrolled near the viewport
+// so tiles never block first paint.
 import type { Venue } from '~/lib/venues';
-import { venuePath } from '~/lib/venues';
-import { getCategoryByKey, type CityConfig } from '~/lib/config';
+import { venuePath, venueSlug, matchesAttribute } from '~/lib/venues';
+import { getCategoryByKey, getAttributes, type CityConfig } from '~/lib/config';
 import { GMAPS_API_KEY } from '~/lib/site';
+import { getTownZones } from '~/lib/zones';
+import { venueAreas } from '~/lib/areas';
+import { getTownIndex, getIndexBands } from '~/lib/dogEaredIndex';
+import { INDEX_VENUE_FILTERS } from '~/lib/indexFilters';
+import VenueCard from './VenueCard.astro';
 
 interface Props {
   city: CityConfig;
   venues: Venue[];
 }
 
-const { city, venues } = Astro.props;
+// Vet venues live on the Emergency layer, not in the regular pin/card
+// set — their venue pages stay published, but the explorer shows them
+// as red-cross emergency pins only.
+const displayVenues = (v: Venue[]) =>
+  v.filter((venue) => !venue.data.tags.includes('emergency-vet'));
+
+const { city, venues: allVenues } = Astro.props;
+const venues = displayVenues(allVenues);
 
 const CATEGORY_COLORS: Record<string, string> = {
   eat: '#c05f33',
@@ -23,62 +37,556 @@ const CATEGORY_COLORS: Record<string, string> = {
   trail: '#6d8b74',
   beach: '#2c6e8a',
   activity: '#e8a13c',
+  'dog-park': '#2e7d43',
   shop: '#7d5ba6',
+  'pet-supply': '#7d5ba6',
+  daycare: '#a04f7d',
   services: '#55645c',
 };
 
+// Food-filter text per venue: cuisine labels + real items from the
+// verified menu (never inferred). Empty for venues with neither.
+const cuisinesOf = (venue: Venue) => venue.data.cuisines.join('|').toLowerCase();
+const foodTextOf = (venue: Venue) =>
+  [
+    ...venue.data.cuisines,
+    ...(venue.data.menu?.items ?? []).filter((i) => !i.startsWith('SECTION:')),
+  ]
+    .join(' | ')
+    .toLowerCase();
+
+// Special-list filters (off-leash, water bowls, …) reuse the attribute
+// rules that power the /{city}/{attr}/ hub pages. Chips only appear for
+// attributes at least one venue matches.
+const attributeChips = getAttributes()
+  .map((attr) => ({ attr, count: venues.filter((v) => matchesAttribute(v, attr)).length }))
+  .filter((a) => a.count > 0);
+const attrsOf = (venue: Venue) =>
+  getAttributes()
+    .filter((attr) => matchesAttribute(venue, attr))
+    .map((attr) => attr.key)
+    .join('|');
+
+// Area filter: normalized from venue neighborhoods (lib/areas.ts).
+// Multi-select, any-of — a compound neighborhood matches all its areas.
+const areaOptions = [
+  ...venues
+    .flatMap((v) => venueAreas(v.data.city, v.data.neighborhood))
+    .reduce((m, a) => m.set(a, (m.get(a) ?? 0) + 1), new Map<string, number>())
+    .entries(),
+]
+  .map(([label, count]) => ({ label, key: label.toLowerCase(), count }))
+  .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
+const areasOf = (venue: Venue) =>
+  venueAreas(venue.data.city, venue.data.neighborhood).join('|').toLowerCase();
+
+// Index-component filters: every component that contributed positively to
+// the town's Dog-Eared Index (verified score > 0) and maps to venues
+// becomes a chip, so readers can filter to the venues behind the score.
+const townIndex = getTownIndex(city.slug);
+const indexBands = getIndexBands();
+const indexChips = townIndex
+  ? Object.entries(INDEX_VENUE_FILTERS)
+      .map(([key, pred]) => ({
+        key,
+        pred,
+        label: indexBands.components.find((c) => c.key === key)?.label ?? key,
+        score: townIndex.components[key]?.score ?? null,
+        count: venues.filter((v) => pred(v.data)).length,
+      }))
+      .filter((c) => c.score !== null && c.score! > 0 && c.count > 0)
+  : [];
+const indexKeysOf = (venue: Venue) =>
+  indexChips
+    .filter((c) => c.pred(venue.data))
+    .map((c) => c.key)
+    .join('|');
+
+// Marker order mirrors the card list — index is the shared id between them.
 const markers = venues.map((venue) => ({
   name: venue.data.name,
   lat: venue.data.lat,
   lng: venue.data.lng,
+  categoryKey: venue.data.category,
   category: getCategoryByKey(venue.data.category).label,
-  color: CATEGORY_COLORS[venue.data.category] ?? '#2f6047',
+  color: CATEGORY_COLORS[venue.data.category] ?? '#1f4d3a',
+  cuisines: cuisinesOf(venue),
+  food: foodTextOf(venue),
+  attrs: attrsOf(venue),
+  ix: indexKeysOf(venue),
+  areas: areasOf(venue),
   path: venuePath(venue),
   gmaps: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
     `${venue.data.name} ${venue.data.address}`
   )}`,
 }));
 
+const cuisineOptions = [...new Set(venues.flatMap((v) => v.data.cuisines))]
+  .sort()
+  .map((label) => ({
+    label,
+    key: label.toLowerCase(),
+    count: venues.filter((v) =>
+      v.data.cuisines.some((c) => c.toLowerCase() === label.toLowerCase())
+    ).length,
+  }));
+
 const center = { lat: city.geo.lat, lng: city.geo.lng };
+
+// Initial-frame radius, self-tuned per town: the 90th percentile of venue
+// distances from center +15% margin (floor 3 km), so a compact town opens
+// tight and a sprawling one opens wide, while genuine outliers (the
+// Truckee daycare, North Shore boarding) stay off the opening frame.
+// city.map_frame_km overrides when a town needs manual framing.
+const distKm = (lat: number, lng: number) => {
+  const kx = 111.32 * Math.cos((center.lat * Math.PI) / 180);
+  return Math.hypot((lng - center.lng) * kx, (lat - center.lat) * 110.54);
+};
+const sortedDists = venues.map((v) => distKm(v.data.lat, v.data.lng)).sort((a, b) => a - b);
+const p90 = sortedDists[Math.min(sortedDists.length - 1, Math.floor(sortedDists.length * 0.9))] ?? 0;
+const frameKm = city.map_frame_km ?? Math.max(3, p90 * 1.15);
+// Dog-policy zone polygons (no-dogs beaches, the off-leash park, leashed
+// day-use areas) — generated from OSM geometry, classified from our
+// verified records. Null when the town has no zones file yet.
+const zones = getTownZones(city.slug);
+
+// Emergency layer: contacts from the city's verified emergency block that
+// carry coordinates (ER vets, the lost-dog shelter). Off by default;
+// toggling the pill shows them and widens the map to fit.
+const emergencyMarkers = city.emergency
+  ? [
+      ...city.emergency.er_vets.map((c) => ({ ...c, kind: 'ER vet' })),
+      ...city.emergency.lost_found.map((c) => ({ ...c, kind: 'Lost dog' })),
+    ].filter((c) => c.lat !== null && c.lng !== null)
+  : [];
+
+// Zone chips: one toggle per zone type. Trails share the leashed policy
+// but toggle independently — they're a different thing on the map.
+const zoneGroupOf = (f: { properties: { kind?: string; policy: string } }) =>
+  f.properties.kind === 'trail' ? 'trails' : f.properties.policy;
+const ZONE_GROUP_META = [
+  { key: 'no-dogs', label: 'No dogs', color: '#b23a2a' },
+  { key: 'off-leash', label: 'Off-leash', color: '#2e7d43' },
+  { key: 'leashed', label: 'Leashed areas', color: '#4d7d62' },
+  { key: 'trails', label: 'Trails', color: '#4d7d62' },
+  { key: 'restricted', label: 'Restricted', color: '#c08a2e' },
+];
+const zoneGroupChips = zones
+  ? ZONE_GROUP_META.map((m) => ({
+      ...m,
+      count: zones.features.filter((f) => zoneGroupOf(f) === m.key).length,
+    })).filter((m) => m.count > 0)
+  : [];
 const legend = [...new Map(venues.map((v) => {
   const key = v.data.category;
-  return [key, { label: getCategoryByKey(key).label, color: CATEGORY_COLORS[key] ?? '#2f6047' }];
+  return [key, {
+    key,
+    label: getCategoryByKey(key).label,
+    color: CATEGORY_COLORS[key] ?? '#1f4d3a',
+    count: venues.filter((x) => x.data.category === key).length,
+  }];
 })).values()];
 ---
 
-<div class="venue-map">
-  <div
-    id="venue-map-canvas"
-    data-center={JSON.stringify(center)}
-    data-markers={JSON.stringify(markers)}
-    data-gmaps-key={GMAPS_API_KEY}
-    aria-label={`Map of verified dog-friendly places in ${city.name}`}
-  >
-    <p class="placeholder">Map loading…</p>
+<section class="explorer" id="explore" data-city={city.slug}>
+  <div class="toolbar">
+    <span class="toolbar-label">Filter:</span>
+    <div class="legend" role="group" aria-label="Filter map by category">
+      {legend.map((item) => (
+        <button
+          type="button"
+          class="key"
+          data-category={item.key}
+          aria-pressed="true"
+          title={`Show or hide ${item.label.toLowerCase()}`}
+        ><i style={`background:${item.color}`}></i>{item.label} <span class="n">{item.count}</span></button>
+      ))}
+    </div>
+    {areaOptions.length > 0 && (
+      <details class="fmenu" data-badge="active">
+        <summary>Area <span class="badge" hidden></span></summary>
+        <div class="panel area-toggles" role="group" aria-label="Filter map by area">
+          {areaOptions.map((a) => (
+            <button
+              type="button"
+              class="key ar"
+              data-area={a.key}
+              aria-pressed="false"
+              title={`Show venues in ${a.label}`}
+            >{a.label} <span class="n">{a.count}</span></button>
+          ))}
+        </div>
+      </details>
+    )}
+    {attributeChips.length > 0 && (
+      <details class="fmenu" data-badge="active">
+        <summary title="Verified dog perks — off-leash, water bowls, dogs inside, winter-friendly">Perks <span class="badge" hidden></span></summary>
+        <div class="panel attr-toggles" role="group" aria-label="Filter map by special list">
+          {attributeChips.map(({ attr, count }) => (
+            <button
+              type="button"
+              class="key attr"
+              data-attr={attr.key}
+              aria-pressed="false"
+              title={attr.blurb}
+            >{attr.label} <span class="n">{count}</span></button>
+          ))}
+        </div>
+      </details>
+    )}
+    {indexChips.length > 0 && (
+      <details class="fmenu" data-badge="active">
+        <summary title="The verified components behind this town's score">Dog-Eared Index <span class="badge" hidden></span></summary>
+        <div class="panel index-toggles" role="group" aria-label="Filter by Dog-Eared Index component">
+          {indexChips.map((c) => (
+            <button
+              type="button"
+              class="key ixf"
+              data-ixf={c.key}
+              aria-pressed="false"
+              title={`Scored ${c.score}/100 — show the ${c.count} ${c.count === 1 ? 'venue' : 'venues'} behind it`}
+            >{c.label} <span class="n">{c.count}</span></button>
+          ))}
+          <a class="panel-link" href="/dog-eared-index/">How the index works →</a>
+        </div>
+      </details>
+    )}
+    {zoneGroupChips.length > 0 && (
+      <details class="fmenu" data-badge="off">
+        <summary title="Dog-policy zones and trails drawn on the map">Zones <span class="badge" hidden></span></summary>
+        <div class="panel zone-toggles" role="group" aria-label="Filter dog-policy zones by type">
+          {zoneGroupChips.map((g) => (
+            <button
+              type="button"
+              class="key zgroup"
+              data-zone-group={g.key}
+              aria-pressed="true"
+              title={`Show or hide ${g.label.toLowerCase()} zones`}
+            ><i style={`background:${g.color}`}></i>{g.label} <span class="n">{g.count}</span></button>
+          ))}
+        </div>
+      </details>
+    )}
+    {emergencyMarkers.length > 0 && (
+      <button
+        type="button"
+        class="key emergency-toggle"
+        id="emergency-toggle"
+        aria-pressed="false"
+        title="Show emergency locations — ER vets and the lost-dog shelter"
+      ><i aria-hidden="true">+</i>Emergency <span class="n">{emergencyMarkers.length}</span></button>
+    )}
+    {cuisineOptions.length > 0 && (
+      <details class="fmenu food-menu" data-badge="active">
+        <summary>Food <span class="badge" hidden></span></summary>
+        <div class="panel food-filters" role="group" aria-label="Filter restaurants by cuisine or dish">
+          <input
+            type="search"
+            id="dish-filter"
+            placeholder="Dish, e.g. “burger”…"
+            aria-label="Filter restaurants by dish"
+            title="Matches cuisines and real items from menus we've verified"
+            autocomplete="off"
+          />
+          {cuisineOptions.map((c) => (
+            <button
+              type="button"
+              class="key cx"
+              data-cuisine={c.key}
+              aria-pressed="false"
+              title={`Show restaurants serving ${c.label.toLowerCase()}`}
+            >{c.label} <span class="n">{c.count}</span></button>
+          ))}
+        </div>
+      </details>
+    )}
   </div>
-  <div class="legend">
-    {legend.map((item) => (
-      <span class="key"><i style={`background:${item.color}`}></i>{item.label}</span>
-    ))}
+
+  <div class="split">
+    <div class="map-pane">
+      <div
+        id="venue-map-canvas"
+        data-center={JSON.stringify(center)}
+        data-frame-km={frameKm.toFixed(2)}
+        data-markers={JSON.stringify(markers)}
+        data-zones={zones ? JSON.stringify(zones) : undefined}
+        data-emergency={emergencyMarkers.length > 0 ? JSON.stringify(emergencyMarkers) : undefined}
+        data-emergency-url={emergencyMarkers.length > 0 ? `/${city.slug}/emergency/` : undefined}
+        data-gmaps-key={GMAPS_API_KEY}
+        aria-label={`Map of verified dog-friendly places in ${city.name}`}
+      >
+        <p class="placeholder">Map loading…</p>
+      </div>
+      <button
+        type="button"
+        class="pane-toggle"
+        aria-controls="explorer-list"
+        aria-expanded="true"
+        title="Hide the list"
+      >›</button>
+    </div>
+
+    <aside class="list-pane" id="explorer-list" aria-label={`Verified places in ${city.name}`}>
+      <header class="list-head">
+        <div>
+          <h2>Dog-friendly places in {city.name}</h2>
+          <p class="results" aria-live="polite">
+            <strong id="explorer-count">{venues.length}</strong> results — every
+            dog policy verified against an official source
+          </p>
+        </div>
+        <a class="btn btn--clay plan-cta" href={`/${city.slug}/plan/`}>
+          Build itinerary<span class="plan-n" id="plan-count" hidden>0</span>
+        </a>
+      </header>
+      <ol class="cards">
+        {venues.map((venue, i) => (
+          <li data-idx={i} data-slug={venueSlug(venue)}>
+            <VenueCard venue={venue} />
+            {venue.data.dog_policy.allowed !== 'no' && (
+              <label class="pick">
+                <input type="checkbox" />
+                Add to itinerary
+              </label>
+            )}
+          </li>
+        ))}
+      </ol>
+      <p class="empty" hidden>No places match the active filters.</p>
+      <p class="hint">
+        Each marker links to our verified dog policy and to the venue's
+        Google Maps listing, where its Google reviews live.
+        {zones && ' Zone boundaries © OpenStreetMap contributors; boundaries are approximate.'}
+      </p>
+    </aside>
   </div>
-  <p class="hint">
-    Tap a marker for our verified dog policy — or jump to Google Maps for
-    directions and Google reviews.
-  </p>
-</div>
+</section>
 
 <style>
-  .venue-map {
-    margin: 1.5rem 0;
+  .explorer {
+    border-block: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .toolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+    padding: 0.7rem 1.25rem;
+    background: var(--paper-raised);
+    border-bottom: 1px solid var(--line);
+  }
+  .toolbar-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.5rem;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+  }
+  .key {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.22rem 0.7rem;
+    background: none;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    transition: opacity 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+  .key:hover {
+    border-color: var(--moss);
+    background: color-mix(in srgb, var(--moss) 8%, transparent);
+  }
+  .key .n {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+    opacity: 0.8;
+  }
+  .legend .key[aria-pressed='false'] {
+    opacity: 0.45;
+  }
+  .legend .key[aria-pressed='false'] i {
+    background: transparent !important;
+    box-shadow: inset 0 0 0 2px currentColor;
+  }
+  .attr[aria-pressed='true'],
+  .ar[aria-pressed='true'],
+  .ixf[aria-pressed='true'] {
+    border-color: var(--moss);
+    background: color-mix(in srgb, var(--moss) 15%, transparent);
+    color: var(--ink);
+  }
+  /* Dropdown filter menus (Lists, Index, Map layers) — the pills live
+     inside a panel; the summary is the one visible pill. */
+  .fmenu {
+    position: relative;
+  }
+  .fmenu summary {
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    background: none;
+    cursor: pointer;
+    user-select: none;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .fmenu summary::-webkit-details-marker {
+    display: none;
+  }
+  .fmenu summary::after {
+    content: '▾';
+    font-size: 0.7em;
+    opacity: 0.7;
+  }
+  .fmenu summary:hover,
+  .fmenu[open] summary {
+    border-color: var(--moss);
+    background: color-mix(in srgb, var(--moss) 8%, transparent);
+    color: var(--ink);
+  }
+  .fmenu .badge {
+    background: var(--moss);
+    color: #fff;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0 0.45rem;
+    line-height: 1.5;
+  }
+  .fmenu .panel {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    left: 0;
+    z-index: 40;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.35rem;
+    min-width: 14rem;
+    padding: 0.6rem;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+  .fmenu .panel .key {
+    border-radius: 8px;
+  }
+  .fmenu .panel .key .n {
+    margin-left: auto;
+  }
+  .panel-link {
+    font-size: 0.78rem;
+    font-weight: 650;
+    margin: 0.25rem 0.3rem 0;
+  }
+  .emergency-toggle i {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #b23a2a;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 1;
+  }
+  .emergency-toggle[aria-pressed='true'] {
+    border-color: #b23a2a;
+    background: color-mix(in srgb, #b23a2a 12%, transparent);
+    color: var(--ink);
+  }
+  :global(.em-pin) {
+    background: #b23a2a;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  }
+  .zgroup[data-zone-group='trails'] i {
+    height: 3px;
+    width: 12px;
+    border-radius: 2px;
+  }
+  .zgroup[aria-pressed='false'] {
+    opacity: 0.45;
+  }
+  .zgroup[aria-pressed='false'] i {
+    background: transparent !important;
+    box-shadow: inset 0 0 0 2px currentColor;
+  }
+  .key i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .food-menu .panel {
+    max-height: 20rem;
+    overflow-y: auto;
+  }
+  .cx[aria-pressed='true'] {
+    border-color: var(--moss);
+    background: color-mix(in srgb, var(--moss) 15%, transparent);
+    color: var(--ink);
+  }
+  #dish-filter {
+    font: inherit;
+    font-size: 0.88rem;
+    padding: 0.35rem 0.8rem;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    background: var(--paper);
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+  #dish-filter:focus {
+    outline: 2px solid var(--moss);
+    outline-offset: 1px;
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    height: calc(100dvh - 7.5rem);
+    min-height: 540px;
+  }
+  .map-pane {
+    position: relative;
   }
   #venue-map-canvas {
-    height: 460px;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--line);
-    box-shadow: var(--shadow);
+    position: absolute;
+    inset: 0;
     background: color-mix(in srgb, var(--moss) 12%, var(--paper-raised));
     z-index: 1;
-    position: relative;
   }
   .placeholder {
     position: absolute;
@@ -88,30 +596,159 @@ const legend = [...new Map(venues.map((v) => {
     color: var(--ink-soft);
     margin: 0;
   }
-  .legend {
+  .list-pane {
+    overflow-y: auto;
+    padding: 1.1rem 1.25rem 1.5rem;
+    border-left: 1px solid var(--line);
+    background: var(--paper-raised);
+  }
+  .pane-toggle {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 1.6rem;
+    height: 3.4rem;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+    background: var(--paper-raised);
+    color: var(--ink-soft);
+    font-size: 1.15rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+  }
+  .pane-toggle:hover {
+    color: var(--ink);
+  }
+  .explorer.list-collapsed .split {
+    grid-template-columns: 1fr;
+  }
+  .explorer.list-collapsed .list-pane {
+    display: none;
+  }
+  .list-head {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1rem;
     flex-wrap: wrap;
-    gap: 0.4rem 1rem;
-    margin-top: 0.6rem;
-    font-size: 0.82rem;
+    margin-bottom: 0.9rem;
+  }
+  .list-head h2 {
+    font-size: 1.45rem;
+    margin: 0 0 0.15rem;
+  }
+  .plan-cta {
+    font-size: 0.88rem;
+    padding: 0.5rem 1.1rem;
+    white-space: nowrap;
+  }
+  .plan-n {
+    display: inline-block;
+    background: #fff;
+    color: var(--clay);
+    border-radius: 999px;
+    padding: 0 0.5rem;
+    margin-left: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  .results {
+    margin: 0;
+    font-size: 0.88rem;
     color: var(--ink-soft);
   }
-  .key {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
+  .results strong {
+    color: var(--ink);
   }
-  .key i {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    display: inline-block;
+  .cards {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 1rem;
+  }
+  .cards > li {
+    display: flex;
+    flex-direction: column;
+    scroll-margin-top: 0.5rem;
+  }
+  .cards > li[hidden] {
+    display: none;
+  }
+  .cards > li > :global(.venue-card) {
+    flex: 1;
+  }
+  .pick {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 0.45rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--pine);
+    cursor: pointer;
+    user-select: none;
+    width: fit-content;
+  }
+  .pick input {
+    accent-color: var(--pine);
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+    cursor: pointer;
+  }
+  .cards > li.picked > :global(.venue-card) {
+    outline: 2px solid var(--moss);
+  }
+  .cards > li.flash > :global(.venue-card) {
+    animation: card-flash 1.4s ease;
+  }
+  @keyframes card-flash {
+    0%,
+    60% {
+      border-color: var(--clay);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--clay) 30%, transparent);
+    }
+    100% {
+      border-color: var(--line);
+    }
+  }
+  .empty {
+    margin: 1.5rem 0 0;
+    color: var(--ink-soft);
   }
   .hint {
     font-size: 0.82rem;
     color: var(--ink-soft);
-    margin: 0.35rem 0 0;
+    margin: 1.1rem 0 0;
   }
+
+  @media (max-width: 900px) {
+    .split {
+      grid-template-columns: 1fr;
+      height: auto;
+      min-height: 0;
+    }
+    .map-pane {
+      height: 380px;
+    }
+    .list-pane {
+      overflow-y: visible;
+      border-left: none;
+      border-top: 1px solid var(--line);
+    }
+    .pane-toggle {
+      display: none;
+    }
+  }
+
   /* Popup styling to match the site */
   :global(.leaflet-popup-content-wrapper) {
     border-radius: 10px;
@@ -136,10 +773,11 @@ const legend = [...new Map(venues.map((v) => {
     gap: 0.9rem;
     font-size: 0.88rem;
   }
-  @media (max-width: 640px) {
-    #venue-map-canvas {
-      height: 380px;
-    }
+  :global(.venue-popup .zone-note) {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin: 0 0 0.45rem;
+    max-width: 16rem;
   }
 </style>
 
@@ -150,16 +788,197 @@ const legend = [...new Map(venues.map((v) => {
     name: string;
     lat: number;
     lng: number;
+    categoryKey: string;
     category: string;
     color: string;
+    cuisines: string;
+    food: string;
+    attrs: string;
+    ix: string;
+    areas: string;
     path: string;
     gmaps: string;
   };
+
+  // Categories currently toggled off via the legend. The map initializes
+  // lazily, so the active map registers callbacks once its markers exist;
+  // legend clicks before that still filter the card list.
+  const hiddenCategories = new Set<string>();
+  // Special-list chips currently active — a venue must match every one.
+  const activeAttrs = new Set<string>();
+  // Active Dog-Eared Index component filters — same every-one semantics.
+  const activeIndexFilters = new Set<string>();
+  // Active area chips — any-of semantics, like cuisines.
+  const activeAreas = new Set<string>();
+  let applyVisibility: (() => void) | null = null;
+  let focusMarker: ((idx: number, on: boolean) => void) | null = null;
+  let resizeMap: (() => void) | null = null;
+
+  const listPane = document.getElementById('explorer-list');
+  const countEl = document.getElementById('explorer-count');
+  const cardItems = Array.from(
+    listPane?.querySelectorAll<HTMLLIElement>('[data-idx]') ?? []
+  );
+  // Single source of per-venue filter data: the markers JSON on the map
+  // canvas. Card order mirrors marker order, so a card's index is its
+  // entry in this array.
+  const canvasEl = document.getElementById('venue-map-canvas') as HTMLElement | null;
+  const markersData: MarkerData[] = canvasEl ? JSON.parse(canvasEl.dataset.markers!) : [];
+
+  // Dog-policy zone layer (polygons). Colors by policy; approximate
+  // geometries render dashed. Toggled by the toolbar chip; each map stack
+  // registers its own visibility callback when it initializes.
+  type ZoneProps = {
+    id: string;
+    name: string;
+    kind?: string;
+    policy: string;
+    note: string;
+    source_url: string;
+    venue: string | null;
+    acres: number | null;
+    miles?: number | null;
+    approx: boolean;
+  };
+  const zonesData = canvasEl?.dataset.zones ? JSON.parse(canvasEl.dataset.zones) : null;
+
+  // Emergency layer (ER vets + lost-dog shelter). Hidden by default; the
+  // toggle shows the pins and refits the map to include them (Reno is an
+  // hour east — that stretch is the information).
+  type EmergencyMarker = {
+    name: string;
+    phone: string;
+    note: string;
+    kind: string;
+    lat: number;
+    lng: number;
+  };
+  const emergencyData: EmergencyMarker[] = canvasEl?.dataset.emergency
+    ? JSON.parse(canvasEl.dataset.emergency)
+    : [];
+
+  // Initial framing fits the TOWN CORE, not every marker: out-of-town
+  // venues (Truckee daycare, North Shore) would otherwise zoom the
+  // opening view out to empty terrain. They stay on the map — just off
+  // the initial frame; Area filters and zooming out reach them. The
+  // radius is computed per town at build (see frontmatter).
+  const coreRadiusKm = canvasEl?.dataset.frameKm ? Number(canvasEl.dataset.frameKm) : Infinity;
+  const townCenter = canvasEl?.dataset.center ? JSON.parse(canvasEl.dataset.center) : null;
+  function inCore(lat: number, lng: number): boolean {
+    if (!townCenter) return true;
+    const kx = 111.32 * Math.cos((townCenter.lat * Math.PI) / 180);
+    const dx = (lng - townCenter.lng) * kx;
+    const dy = (lat - townCenter.lat) * 110.54;
+    return Math.hypot(dx, dy) <= coreRadiusKm;
+  }
+  const emergencyUrl = canvasEl?.dataset.emergencyUrl ?? '';
+  let emergencyOn = false;
+  let setEmergencyVisible: (() => void) | null = null;
+
+  function emergencyPopupHtml(e: EmergencyMarker): string {
+    return `<div class="venue-popup">
+      <h4>${esc2(e.name)}</h4>
+      <p class="cat">${esc2(e.kind)}</p>
+      <p class="zone-note">${esc2(e.note)}</p>
+      <div class="links">
+        <a href="tel:${e.phone.replace(/[^\d]/g, '')}">${esc2(e.phone)}</a>
+        <a href="${esc2(emergencyUrl)}">All emergency info</a>
+      </div>
+    </div>`;
+  }
+  const ZONE_COLORS: Record<string, string> = {
+    'no-dogs': '#b23a2a',
+    'off-leash': '#2e7d43',
+    leashed: '#4d7d62',
+    restricted: '#c08a2e',
+  };
+  const ZONE_LABELS: Record<string, string> = {
+    'no-dogs': 'No dogs',
+    'off-leash': 'Off-leash',
+    leashed: 'Dogs on leash',
+    restricted: 'Restricted',
+  };
+  // Per-type zone visibility ('no-dogs', 'off-leash', 'leashed', 'trails',
+  // 'restricted'). Undefined means visible; chips flip entries to false.
+  const zoneGroupState: Record<string, boolean> = {};
+  const zoneGroupOf = (p: { kind?: string; policy: string }) =>
+    p.kind === 'trail' ? 'trails' : p.policy;
+  const zoneVisible = (p: { kind?: string; policy: string }) =>
+    zoneGroupState[zoneGroupOf(p)] !== false;
+  let setZonesVisible: (() => void) | null = null;
+  const emptyMsg = listPane?.querySelector<HTMLElement>('.empty');
+  const dishInput = document.getElementById('dish-filter') as HTMLInputElement | null;
+  // Cuisine chips active in the Food menu — a venue matches if it serves
+  // ANY selected cuisine (unlike attribute filters, which are all-of).
+  const activeCuisines = new Set<string>();
+
+  // Cuisine/dish filter: an active food filter keeps only venues whose
+  // cuisine labels or verified menu items match — everything else hides.
+  function foodOk(cuisines: string, food: string): boolean {
+    if (activeCuisines.size > 0) {
+      const list = cuisines.split('|');
+      if (![...activeCuisines].some((c) => list.includes(c))) return false;
+    }
+    const q = dishInput?.value.trim().toLowerCase() ?? '';
+    if (q && !food.includes(q)) return false;
+    return true;
+  }
+
+  function isShown(m: MarkerData): boolean {
+    if (hiddenCategories.has(m.categoryKey)) return false;
+    const venueAttrs = m.attrs.split('|');
+    for (const a of activeAttrs) if (!venueAttrs.includes(a)) return false;
+    const venueIx = m.ix.split('|');
+    for (const k of activeIndexFilters) if (!venueIx.includes(k)) return false;
+    if (activeAreas.size > 0) {
+      const list = m.areas.split('|');
+      if (![...activeAreas].some((a) => list.includes(a))) return false;
+    }
+    return foodOk(m.cuisines, m.food);
+  }
+
+  function updateList() {
+    let visible = 0;
+    cardItems.forEach((li, i) => {
+      const m = markersData[i];
+      const show = !m || isShown(m);
+      li.hidden = !show;
+      if (show) visible++;
+    });
+    if (countEl) countEl.textContent = String(visible);
+    if (emptyMsg) emptyMsg.hidden = visible > 0;
+  }
+
+  function scrollToCard(idx: number) {
+    const li = cardItems[idx];
+    if (!li || li.hidden) return;
+    li.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    li.classList.remove('flash');
+    requestAnimationFrame(() => li.classList.add('flash'));
+  }
 
   const esc2 = (s: string) =>
     s.replace(/[&<>"']/g, (c) =>
       ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!
     );
+
+  function zonePopupHtml(p: ZoneProps): string {
+    const acres =
+      p.acres != null ? ` · ~${p.acres} acres` : p.miles != null ? ` · ~${p.miles} mi` : '';
+    const cityBase = location.pathname.split('/')[1];
+    const venueLink = p.venue
+      ? `<a href="/${cityBase}/venues/${p.venue}/">Our verified policy</a>`
+      : '';
+    return `<div class="venue-popup">
+      <h4>${esc2(p.name)}</h4>
+      <p class="cat">${esc2(ZONE_LABELS[p.policy] ?? p.policy)}${acres}${p.approx ? ' · boundary approximate' : ''}</p>
+      <p class="zone-note">${esc2(p.note)}</p>
+      <div class="links">
+        ${venueLink}
+        <a href="${esc2(p.source_url)}" target="_blank" rel="noopener nofollow">Official rule ↗</a>
+      </div>
+    </div>`;
+  }
 
   function popupHtml(m: MarkerData): string {
     return `<div class="venue-popup">
@@ -185,33 +1004,108 @@ const legend = [...new Map(venues.map((v) => {
       fullscreenControl: true,
       gestureHandling: 'cooperative',
     });
+    const icon = (m: MarkerData, focused: boolean) => ({
+      path: maps.SymbolPath.CIRCLE,
+      scale: focused ? 12 : 9,
+      fillColor: m.color,
+      fillOpacity: 0.95,
+      strokeColor: '#ffffff',
+      strokeWeight: 2,
+    });
     const bounds = new maps.LatLngBounds();
     const info = new maps.InfoWindow();
-    for (const m of markers) {
+    if (zonesData) {
+      map.data.addGeoJson(zonesData);
+      const styleZones = () =>
+        map.data.setStyle((f: any) => {
+          const props = { kind: f.getProperty('kind'), policy: f.getProperty('policy') };
+          const c = ZONE_COLORS[props.policy] ?? '#666';
+          const visible = zoneVisible(props);
+          if (props.kind === 'trail') {
+            return { strokeColor: c, strokeWeight: 3, strokeOpacity: 0.75, visible };
+          }
+          return {
+            strokeColor: c,
+            strokeWeight: 2,
+            strokeOpacity: 0.9,
+            fillColor: c,
+            fillOpacity: 0.16,
+            visible,
+          };
+        });
+      styleZones();
+      map.data.addListener('click', (e: any) => {
+        const p: any = {};
+        e.feature.forEachProperty((v: unknown, k: string) => (p[k] = v));
+        info.setContent(zonePopupHtml(p as ZoneProps));
+        info.setPosition(e.latLng);
+        info.open({ map });
+      });
+      setZonesVisible = styleZones;
+    }
+    const gmarkers = markers.map((m, i) => {
       const marker = new maps.Marker({
         map,
         position: { lat: m.lat, lng: m.lng },
         title: m.name,
-        icon: {
-          path: maps.SymbolPath.CIRCLE,
-          scale: 9,
-          fillColor: m.color,
-          fillOpacity: 0.95,
-          strokeColor: '#ffffff',
-          strokeWeight: 2,
-        },
+        icon: icon(m, false),
       });
       marker.addListener('click', () => {
         info.setContent(popupHtml(m));
         info.open({ map, anchor: marker });
+        scrollToCard(i);
       });
-      bounds.extend({ lat: m.lat, lng: m.lng });
-    }
+      if (inCore(m.lat, m.lng)) bounds.extend({ lat: m.lat, lng: m.lng });
+      return marker;
+    });
     if (!bounds.isEmpty()) map.fitBounds(bounds, 48);
+    applyVisibility = () => {
+      info.close();
+      gmarkers.forEach((marker, i) => marker.setVisible(isShown(markers[i])));
+    };
+    focusMarker = (idx, on) => {
+      gmarkers[idx]?.setIcon(icon(markers[idx], on));
+      gmarkers[idx]?.setZIndex(on ? 1000 : null);
+    };
+    resizeMap = () => {
+      maps.event.trigger(map, 'resize');
+      if (!bounds.isEmpty()) map.fitBounds(bounds, 48);
+    };
+    if (emergencyData.length > 0) {
+      const epins = emergencyData.map((e) => {
+        const marker = new maps.Marker({
+          map: null,
+          position: { lat: e.lat, lng: e.lng },
+          title: `${e.name} — ${e.phone}`,
+          label: { text: '+', color: '#ffffff', fontWeight: '700' },
+          icon: {
+            path: maps.SymbolPath.CIRCLE,
+            scale: 11,
+            fillColor: '#b23a2a',
+            fillOpacity: 1,
+            strokeColor: '#ffffff',
+            strokeWeight: 2,
+          },
+        });
+        marker.addListener('click', () => {
+          info.setContent(emergencyPopupHtml(e));
+          info.open({ map, anchor: marker });
+        });
+        return marker;
+      });
+      setEmergencyVisible = () => {
+        epins.forEach((m) => m.setMap(emergencyOn ? map : null));
+        const combined = new maps.LatLngBounds();
+        combined.union(bounds);
+        if (emergencyOn) emergencyData.forEach((e) => combined.extend({ lat: e.lat, lng: e.lng }));
+        if (!combined.isEmpty()) map.fitBounds(combined, 48);
+      };
+    }
+    applyVisibility();
   }
 
   async function initMap(el: HTMLElement) {
-    const markers = JSON.parse(el.dataset.markers!) as MarkerData[];
+    const markers = markersData;
 
     if (el.dataset.gmapsKey) {
       try {
@@ -240,13 +1134,50 @@ const legend = [...new Map(venues.map((v) => {
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
 
-    const esc = (s: string) =>
-      s.replace(/[&<>"']/g, (c) =>
-        ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!
-      );
+    if (zonesData) {
+      const zoneStyle = (f: any) => {
+        const c = ZONE_COLORS[f?.properties?.policy] ?? '#666';
+        if (f?.properties?.kind === 'trail') {
+          return { color: c, weight: 3, opacity: 0.75 };
+        }
+        return {
+          color: c,
+          weight: 2,
+          opacity: 0.9,
+          fillColor: c,
+          fillOpacity: 0.16,
+          dashArray: f?.properties?.approx ? '4 4' : undefined,
+        };
+      };
+      // One layer per zone type so chips can toggle them independently.
+      const groupKeys = [
+        ...new Set<string>(zonesData.features.map((f: any) => zoneGroupOf(f.properties))),
+      ];
+      const groupLayers: Record<string, any> = {};
+      for (const key of groupKeys) {
+        groupLayers[key] = L.geoJSON(zonesData, {
+          filter: (f: any) => zoneGroupOf(f.properties) === key,
+          style: zoneStyle,
+          onEachFeature: (f: any, layer: any) => {
+            layer.bindPopup(zonePopupHtml(f.properties));
+            layer.bindTooltip(f.properties.name, { sticky: true });
+          },
+        });
+      }
+      setZonesVisible = () => {
+        for (const [key, layer] of Object.entries(groupLayers)) {
+          if (zoneGroupState[key] !== false) {
+            if (!map.hasLayer(layer)) layer.addTo(map);
+          } else {
+            map.removeLayer(layer);
+          }
+        }
+      };
+      setZonesVisible();
+    }
 
     const bounds = L.latLngBounds([]);
-    for (const m of markers) {
+    const lmarkers = markers.map((m, i) => {
       const marker = L.circleMarker([m.lat, m.lng], {
         radius: 9,
         color: '#ffffff',
@@ -254,33 +1185,296 @@ const legend = [...new Map(venues.map((v) => {
         fillColor: m.color,
         fillOpacity: 0.95,
       }).addTo(map);
-      marker.bindPopup(
-        `<div class="venue-popup">
-          <h4>${esc(m.name)}</h4>
-          <p class="cat">${esc(m.category)}</p>
-          <div class="links">
-            <a href="${m.path}">Our verified policy</a>
-            <a href="${m.gmaps}" target="_blank" rel="noopener nofollow">Google reviews ↗</a>
-          </div>
-        </div>`
-      );
+      marker.bindPopup(popupHtml(m));
       marker.bindTooltip(m.name, { direction: 'top', offset: [0, -8] });
-      bounds.extend([m.lat, m.lng]);
-    }
+      marker.on('click', () => scrollToCard(i));
+      if (inCore(m.lat, m.lng)) bounds.extend([m.lat, m.lng]);
+      return marker;
+    });
     if (bounds.isValid()) map.fitBounds(bounds.pad(0.15));
+    applyVisibility = () => {
+      map.closePopup();
+      lmarkers.forEach((marker, i) => {
+        if (!isShown(markers[i])) {
+          map.removeLayer(marker);
+        } else if (!map.hasLayer(marker)) {
+          marker.addTo(map);
+        }
+      });
+    };
+    focusMarker = (idx, on) => {
+      const marker = lmarkers[idx];
+      if (!marker) return;
+      marker.setStyle({ radius: on ? 12 : 9 });
+      if (on) marker.bringToFront();
+    };
+    resizeMap = () => {
+      map.invalidateSize();
+      if (bounds.isValid()) map.fitBounds(bounds.pad(0.15));
+    };
+    if (emergencyData.length > 0) {
+      const eLayer = L.layerGroup(
+        emergencyData.map((e) => {
+          const marker = L.marker([e.lat, e.lng], {
+            icon: L.divIcon({ className: 'em-pin', html: '+', iconSize: [24, 24] }),
+          });
+          marker.bindPopup(emergencyPopupHtml(e));
+          marker.bindTooltip(`${e.name} — ${e.phone}`, { direction: 'top', offset: [0, -10] });
+          return marker;
+        })
+      );
+      setEmergencyVisible = () => {
+        if (emergencyOn) {
+          eLayer.addTo(map);
+          const combined = L.latLngBounds(bounds.isValid() ? [bounds.getSouthWest(), bounds.getNorthEast()] : []);
+          emergencyData.forEach((e) => combined.extend([e.lat, e.lng]));
+          if (combined.isValid()) map.fitBounds(combined.pad(0.08));
+        } else {
+          map.removeLayer(eLayer);
+          if (bounds.isValid()) map.fitBounds(bounds.pad(0.15));
+        }
+      };
+    }
+    applyVisibility();
   }
 
-  const el = document.getElementById('venue-map-canvas');
-  if (el) {
+  if (canvasEl) {
     const io = new IntersectionObserver(
       (entries) => {
         if (entries.some((e) => e.isIntersecting)) {
           io.disconnect();
-          initMap(el);
+          initMap(canvasEl);
         }
       },
       { rootMargin: '600px' }
     );
-    io.observe(el);
+    io.observe(canvasEl);
   }
+
+  // Pop-out list pane: the divider tab collapses the card list so the map
+  // takes the full width, then restores it. The map re-fits after resize.
+  const explorerRoot = document.getElementById('explore');
+  const paneToggle = document.querySelector<HTMLButtonElement>('.explorer .pane-toggle');
+  paneToggle?.addEventListener('click', () => {
+    const collapsed = explorerRoot?.classList.toggle('list-collapsed') ?? false;
+    paneToggle.setAttribute('aria-expanded', String(!collapsed));
+    paneToggle.title = collapsed ? 'Show the list' : 'Hide the list';
+    paneToggle.textContent = collapsed ? '‹' : '›';
+    requestAnimationFrame(() => resizeMap?.());
+  });
+
+  // Emergency pill shows the ER/shelter pins and widens the map to fit.
+  const emergencyToggle = document.getElementById('emergency-toggle') as HTMLButtonElement | null;
+  emergencyToggle?.addEventListener('click', () => {
+    emergencyOn = !emergencyOn;
+    emergencyToggle.setAttribute('aria-pressed', String(emergencyOn));
+    setEmergencyVisible?.();
+  });
+
+  // Zone chips toggle each zone type (no-dogs, off-leash, …) on its own.
+  document
+    .querySelectorAll<HTMLButtonElement>('.explorer .zone-toggles [data-zone-group]')
+    .forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.zoneGroup!;
+        const nowVisible = zoneGroupState[key] === false;
+        zoneGroupState[key] = nowVisible;
+        btn.setAttribute('aria-pressed', String(nowVisible));
+        setZonesVisible?.();
+      });
+    });
+
+  // Legend chips toggle their category's markers and cards on/off.
+  document
+    .querySelectorAll<HTMLButtonElement>('.explorer .legend [data-category]')
+    .forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.category!;
+        const nowHidden = !hiddenCategories.has(key);
+        if (nowHidden) hiddenCategories.add(key);
+        else hiddenCategories.delete(key);
+        btn.setAttribute('aria-pressed', String(!nowHidden));
+        updateList();
+        applyVisibility?.();
+      });
+    });
+
+  // Special-list chips narrow to venues matching every active attribute.
+  document
+    .querySelectorAll<HTMLButtonElement>('.explorer .attr-toggles [data-attr]')
+    .forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.attr!;
+        const nowActive = !activeAttrs.has(key);
+        if (nowActive) activeAttrs.add(key);
+        else activeAttrs.delete(key);
+        btn.setAttribute('aria-pressed', String(nowActive));
+        updateList();
+        applyVisibility?.();
+      });
+    });
+
+  // Area chips narrow to venues in ANY selected area.
+  document
+    .querySelectorAll<HTMLButtonElement>('.explorer .area-toggles [data-area]')
+    .forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.area!;
+        const nowActive = !activeAreas.has(key);
+        if (nowActive) activeAreas.add(key);
+        else activeAreas.delete(key);
+        btn.setAttribute('aria-pressed', String(nowActive));
+        updateList();
+        applyVisibility?.();
+      });
+    });
+
+  // Index-component chips narrow to the venues behind that component.
+  document
+    .querySelectorAll<HTMLButtonElement>('.explorer .index-toggles [data-ixf]')
+    .forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.ixf!;
+        const nowActive = !activeIndexFilters.has(key);
+        if (nowActive) activeIndexFilters.add(key);
+        else activeIndexFilters.delete(key);
+        btn.setAttribute('aria-pressed', String(nowActive));
+        updateList();
+        applyVisibility?.();
+      });
+    });
+
+  // ?ixf=<key>[,<key>] pre-activates index filters — the Dog-Eared Index
+  // table links here so each contributing component can jump straight to
+  // its venues on the map.
+  const ixfParam = new URLSearchParams(location.search).get('ixf');
+  if (ixfParam) {
+    for (const key of ixfParam.split(',')) {
+      const btn = document.querySelector<HTMLButtonElement>(
+        `.explorer .index-toggles [data-ixf="${CSS.escape(key)}"]`
+      );
+      if (btn) {
+        activeIndexFilters.add(key);
+        btn.setAttribute('aria-pressed', 'true');
+      }
+    }
+    if (activeIndexFilters.size > 0) updateList();
+  }
+
+  // Dropdown filter menus: a badge on each closed menu shows how many of
+  // its filters are engaged (data-badge="active": pressed on; "off":
+  // toggled off). Clicking outside an open menu closes it.
+  const filterMenus = Array.from(
+    document.querySelectorAll<HTMLElement>('.explorer .fmenu')
+  );
+  function updateMenuBadges() {
+    for (const menu of filterMenus) {
+      const engaged = menu.dataset.badge === 'off' ? 'false' : 'true';
+      let n = menu.querySelectorAll(`.panel [aria-pressed="${engaged}"]`).length;
+      // Text inputs inside a panel (the dish search) count as one engaged
+      // filter each when non-empty.
+      menu.querySelectorAll<HTMLInputElement>('.panel input').forEach((input) => {
+        if (input.value.trim()) n++;
+      });
+      const badge = menu.querySelector<HTMLElement>('.badge');
+      if (badge) {
+        badge.textContent = String(n);
+        badge.hidden = n === 0;
+      }
+    }
+  }
+  document.addEventListener('click', (e) => {
+    for (const menu of filterMenus) {
+      if ((menu as HTMLDetailsElement).open && !menu.contains(e.target as Node)) {
+        (menu as HTMLDetailsElement).open = false;
+      }
+    }
+    updateMenuBadges();
+  });
+  updateMenuBadges();
+
+  // --- Itinerary picks: checking a card writes the same localStorage plan
+  // the /plan/ page reads ({slug, day}[] under `plan:<city>`), so the
+  // planner opens with these selections already in place. New picks join
+  // the plan's current last day, matching the planner's own Add behavior.
+  type PlanItem = { slug: string; day: number };
+  const explorerEl = document.getElementById('explore');
+  const planStoreKey = `plan:${explorerEl?.dataset.city ?? ''}`;
+  const planCount = document.getElementById('plan-count');
+
+  function loadPlan(): PlanItem[] {
+    try {
+      const items = JSON.parse(localStorage.getItem(planStoreKey) ?? '[]');
+      return Array.isArray(items) ? items : [];
+    } catch {
+      return [];
+    }
+  }
+
+  function savePlan(plan: PlanItem[]) {
+    try {
+      localStorage.setItem(planStoreKey, JSON.stringify(plan));
+    } catch {
+      // storage unavailable (private mode) — picks just won't persist
+    }
+  }
+
+  function refreshPlanUI() {
+    const plan = loadPlan();
+    for (const li of cardItems) {
+      const picked = plan.some((i) => i.slug === li.dataset.slug);
+      li.classList.toggle('picked', picked);
+      const box = li.querySelector<HTMLInputElement>('.pick input');
+      if (box) box.checked = picked;
+    }
+    if (planCount) {
+      planCount.textContent = String(plan.length);
+      planCount.hidden = plan.length === 0;
+    }
+  }
+
+  cardItems.forEach((li) => {
+    li.querySelector<HTMLInputElement>('.pick input')?.addEventListener('change', (e) => {
+      const slug = li.dataset.slug!;
+      const plan = loadPlan();
+      const existing = plan.findIndex((i) => i.slug === slug);
+      if ((e.target as HTMLInputElement).checked) {
+        if (existing < 0) plan.push({ slug, day: plan.at(-1)?.day ?? 1 });
+      } else if (existing >= 0) {
+        plan.splice(existing, 1);
+      }
+      savePlan(plan);
+      refreshPlanUI();
+    });
+  });
+
+  refreshPlanUI();
+  // Re-read picks when the page is restored from bfcache (e.g. back from
+  // the planner, where the same plan may have changed).
+  window.addEventListener('pageshow', refreshPlanUI);
+
+  document
+    .querySelectorAll<HTMLButtonElement>('.explorer .food-filters [data-cuisine]')
+    .forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.cuisine!;
+        const nowActive = !activeCuisines.has(key);
+        if (nowActive) activeCuisines.add(key);
+        else activeCuisines.delete(key);
+        btn.setAttribute('aria-pressed', String(nowActive));
+        updateList();
+        applyVisibility?.();
+      });
+    });
+  dishInput?.addEventListener('input', () => {
+    updateList();
+    applyVisibility?.();
+    updateMenuBadges();
+  });
+
+  // Hovering a card spotlights its pin, Zillow-style.
+  cardItems.forEach((li, i) => {
+    li.addEventListener('mouseenter', () => focusMarker?.(i, true));
+    li.addEventListener('mouseleave', () => focusMarker?.(i, false));
+  });
 </script>

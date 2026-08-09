@@ -1,0 +1,192 @@
+version: index-v1
+town: tahoe-city
+computed: '2026-08-08'
+components:
+  patio_share:
+    value: 0.8889
+    basis:
+      numerator: 8
+      denominator: 9
+    sources:
+    - method: venue-records
+      note: computed from 9 published venue records
+      date: '2026-08-08'
+    last_verified: '2026-08-08'
+    score: 100
+  indoor_welcome:
+    value: 1.0
+    basis:
+      numerator: 1
+      denominator: 1
+    sources:
+    - method: venue-records
+      note: computed from 1 published venue records
+      date: '2026-08-08'
+    last_verified: '2026-08-08'
+    score: 100
+  lodging_share:
+    value: 1.0
+    basis:
+      numerator: 9
+      denominator: 9
+    sources:
+    - method: venue-records
+      note: computed from 9 published venue records
+      date: '2026-08-08'
+    last_verified: '2026-08-08'
+    score: 100
+  water_access:
+    value: three-seasonal-or-two-yearround
+    sources:
+    - url: http://www.tcpud.org/your-district/frequently-asked-questions
+      method: official_website
+      note: 'TCPUD FAQ: no dog beach, but "dogs are allowed next to the boat ramp
+        in Lake Forest/Pomin Park". Venue record notes the shoreline itself does not
+        close seasonally. Year-round lake entry point.'
+      date: '2026-08-07'
+    - url: https://www.tcpud.org/trails
+      method: official_website
+      note: '64-Acres Park river bank: leashed dogs allowed on the trail network and
+        riverbank under the USFS basin-wide leashed-dog rule; 16 of 23 trail miles
+        plowed in winter. Year-round river entry point.'
+      date: '2026-08-07'
+    - url: https://www.parks.ca.gov/?page_id=504
+      method: official_website
+      note: 'Gatekeepers day-use area: Sierra District dog order allows leashed dogs
+        on the day-use shoreline at the Truckee River outlet. Day-use seasonality
+        unpublished, so not counted as year-round.'
+      date: '2026-08-07'
+    last_verified: '2026-08-07'
+    score: 80
+  trail_access:
+    value: 498
+    sources:
+    - url: https://overpass-api.de/api/interpreter
+      method: osm-overpass
+      note: 'Sum of way lengths, around:16093m of (39.1677, -120.1452), highway in
+        (path, footway not sidewalk/crossing, cycleway): 526.0 mi; minus Burton Creek
+        SP (12.2 mi) and Sugar Pine Point SP (15.9 mi) = 497.9 mi'
+      date: '2026-08-07'
+    - url: https://www.fs.usda.gov/r05/laketahoebasin/recreation/where-can-i-take-my-dog-lake-tahoe
+      method: official_website
+      note: 'LTBMU basin-wide rule: leashed dogs welcome on most forest trails; exclusions
+        are designated swim beaches, not trails'
+      date: '2026-08-07'
+    - url: https://www.parks.ca.gov/pages/499/files/DSO%20683-22-002%20Dogs.pdf
+      method: official_website
+      note: 'Sierra District dog order: state-park unpaved trails and winter ski trails
+        closed to dogs — both parks'' trail miles subtracted from the total'
+      date: '2026-08-07'
+    - url: https://www.tcpud.org/trails
+      method: official_website
+      note: 'TCPUD: leashed dogs allowed on the whole 23-mile paved network (cross-check
+        for the cycleway component of the sum)'
+      date: '2026-08-07'
+    last_verified: '2026-08-07'
+    geometry: fallback
+    score: 100
+  off_leash:
+    value: fenced-run
+    sources:
+    - url: https://www.tcpud.org/parks-recreation/facilities-parks-and-rentals/parks/dog-park
+      method: official_website
+      note: 'TCPUD Dog Park page: 375 Grove St, dawn–dusk, "Small field", water, clean-up
+        bags, seating. No acreage or off-leash text published.'
+      date: '2026-08-07'
+    - url: https://www.bringfido.com/attraction/23357
+      method: reported
+      note: BringFido and other directories (Yelp, DogTrekker) describe a seasonal
+        fenced off-leash area with a small-dog section.
+      date: '2026-08-07'
+    - url: http://www.tcpud.org/your-district/frequently-asked-questions
+      method: official_website
+      note: TCPUD FAQ confirms no designated dog beach exists, ruling out the off-leash-beach
+        band.
+      date: '2026-08-07'
+    last_verified: '2026-08-07'
+    score: 25
+  ordinance:
+    modifiers:
+    - patio-permitted
+    - shoreline-yearround-ban
+    sources:
+    - url: https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=114259.5
+      method: official_website
+      note: 'CA Health & Safety Code 114259.5: a food facility owner may elect to
+        allow pet dogs in its outdoor dining area (leashed or in a carrier, separate
+        entrance, no chairs/tables). +20'
+      date: '2026-08-07'
+    - url: https://www.tcpud.org/parks-facilities/facilities-parks-and-rentals/beaches/commons-beach
+      method: official_website
+      note: Commons Beach — the primary in-town shoreline — prohibits dogs year-round;
+        sole exception is the paved trail at the park's upper edge. TCPUD FAQ confirms
+        no designated dog beach. -25
+      date: '2026-08-07'
+    - url: https://www.placer.ca.gov/DocumentCenter/View/11009/HEALTH-and-HUMAN-SERVICES-ANIMAL-SERVICES-PDF
+      method: official_website
+      note: 'Placer County animal code: unlawful to allow an animal at large — off
+        the owner''s premises and not restrained by lead, leash, or adequate enclosure.
+        No voice-control areas in code, so no +15; standard leash baseline scores
+        no modifier.'
+      date: '2026-08-07'
+    last_verified: '2026-08-07'
+    score: 45
+  emergency_vet:
+    value: 60
+    sources:
+    - url: https://burtoncreekvet.com/our-services/emergency-veterinary-care/
+      method: official_website
+      note: 'Tahoe City clinic''s published after-hours referrals: AESC Reno (775)
+        851-3600 and BluePearl Pet Hospital Reno (775) 358-8555'
+      date: '2026-08-07'
+    - url: https://aecreno.com/
+      method: official_website
+      note: 'AESC Reno, 6425 S Virginia St: "fully staffed 24 hours a day, 365 days
+        a year". OSRM drive from town center: 67.5 min / 52.7 mi'
+      date: '2026-08-07'
+    - url: https://www.yelp.com/biz/bluepearl-pet-hospital-reno
+      method: reported
+      note: 'BluePearl Pet Hospital, 555 Morrill Ave, Reno (former Sierra Veterinary
+        Specialists & Emergency Center): open 24 hours daily per directory listings;
+        official site returns 403 to readers'
+      date: '2026-08-07'
+    - url: https://router.project-osrm.org/route/v1/driving/-120.1452,39.1677;-119.8024,39.5345
+      method: osrm-route
+      note: 'Town center (39.1677, -120.1452) to 555 Morrill Ave Reno (39.5345, -119.8024):
+        59.6 min / 47.0 mi, rounded to 60'
+      date: '2026-08-07'
+    last_verified: '2026-08-07'
+    score: 40
+  heat_risk:
+    value: 0.1
+    sources:
+    - url: https://www.ncei.noaa.gov/access/services/data/v1?dataset=normals-annualseasonal&stations=USC00048758&dataTypes=ANN-TMAX-AVGNDS-GRTH090&format=json
+      method: noaa-normals-1991-2020
+      note: 'Station USC00048758 (TAHOE CITY, CA US; 39.1678, -120.1428; 0.4 mi from
+        town center): ANN-TMAX-AVGNDS-GRTH090 raw value 1, in tenths of days = 0.1
+        days/year (NCEI normals report AVGNDS in tenths)'
+      date: '2026-08-07'
+    last_verified: '2026-08-07'
+    score: 100
+pillars:
+  hospitality:
+    components_verified: 3
+    components_total: 3
+    score: 100
+  access:
+    components_verified: 3
+    components_total: 3
+    score: 74
+  rules:
+    components_verified: 1
+    components_total: 1
+    score: 45
+  practical:
+    components_verified: 2
+    components_total: 2
+    score: 70
+composite:
+  components_verified: 9
+  components_total: 9
+  score: 77
+  provisional: false
