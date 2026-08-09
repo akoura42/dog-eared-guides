@@ -162,3 +162,4 @@
 {"actor": "generate", "city": "tahoe-city", "note": "Tremigo Tahoe", "outcome": "unverifiable", "place_id": "ovt-a8536c77-tremigo-tahoe", "ts": "2026-08-09T19:54:16+00:00"}
 {"actor": "generate", "city": "tahoe-city", "note": "Dollar Point Beach", "outcome": "unverifiable", "place_id": "ovt-d4d21b57-dollar-point-beach", "ts": "2026-08-09T19:54:16+00:00"}
 {"actor": "generate", "city": "tahoe-city", "note": "Thai Kitchen Tahoe City", "outcome": "unverifiable", "place_id": "ovt-d5155bc8-thai-kitchen-tahoe-city", "ts": "2026-08-09T19:54:16+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "This is Tahoe City Commons Beach (400 N Lake Blvd) — published as lake-tahoe-commons-beach (no-dogs, tier 1). Overture name variant.", "outcome": "duplicate", "place_id": "ovt-30574156-tahoe-city-public-beach", "ts": "2026-08-09T19:55:42+00:00"}

@@ -172,6 +172,8 @@ areas:
   ward avenue: West Shore
   commons beach: Downtown
   tahoe vista: North Shore
+  kings beach: North Shore
+  carnelian bay: North Shore
   burton creek: Highlands
   # street descriptors -> dropped (the other token carries the area)
   hwy 89: null
