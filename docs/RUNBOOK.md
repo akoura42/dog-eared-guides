@@ -150,8 +150,8 @@ Special frontmatter worth knowing:
 |---|---|---|
 | `PIPELINE_PAT` | secret | Fine-grained PAT (this repo; Contents + Pull requests write). **Required for CI to run on bot-opened PRs** — GitHub suppresses workflow triggers on events created with the default `GITHUB_TOKEN`. Without it, verify/discover PRs show zero checks. |
 | `CLAUDE_CODE_OAUTH_TOKEN` | secret | Model auth on the Claude subscription (mint with `claude setup-token`). Alternative: `ANTHROPIC_API_KEY` for API billing. |
-| `CF_PAGES_PROJECT` | variable | Activates `deploy.yml` (unset = the workflow skips). |
-| `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` | secrets | Wrangler deploy credentials (token needs Cloudflare Pages: Edit). |
+| `CF_DEPLOY_ENABLED` | variable | Set `true` to activate `deploy.yml` (unset = the workflow skips). |
+| `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` | secrets | Wrangler deploy credentials (token needs Workers Scripts: Edit + Zone → Workers Routes: Edit). |
 | `SITE_URL`, `PUBLIC_*`, affiliate vars | vars/secrets | Production env for the deploy build — see `apps/web/.env.example` for the full inventory. Missing vars ship a working site with monetization/analytics silently off. |
 
 All jobs can be run manually from the Actions tab or locally
@@ -196,17 +196,21 @@ pages, itinerary planner, sitemap, OG images, CSV export.
 fallback) into `waterfront-towns-geo.json`. Re-run only when the CSV
 changes.
 
-## Deploy (Cloudflare Pages)
+## Deploy (Cloudflare Workers, static assets)
 
-Preferred: the in-repo `deploy.yml` workflow (push to main → build with
-production env → `wrangler pages deploy --branch main`), activated by
-setting the `CF_PAGES_PROJECT` repo variable — then DISCONNECT the CF
-dashboard git integration so there's exactly one deployer. Until that
-switch, the dashboard integration below is what ships:
+The site is a Cloudflare **Workers** project named `dog-eared-guides` —
+config (name, assets dir, custom domains dogearedguides.com + www) lives
+in `apps/web/wrangler.jsonc`. Custom-domain bindings are created by the
+deploy itself; no hand-managed DNS records for the apex/www (a stale A
+record there took the whole site down with 522s once — 2026-08-09).
 
-- Project connects to `akoura42/dog-eared-guides`, production branch
-  `main` (merge = deploy). Custom domain: dogearedguides.com.
-- Build: command `npm run build` · output `dist` · **root dir `apps/web`**.
+- Manual deploy (works from any machine with `wrangler login`):
+  `cd apps/web && npm run build && npx wrangler@4 deploy`
+- Automated: `deploy.yml` on push to main, activated by setting the
+  `CF_DEPLOY_ENABLED=true` repo variable + `CLOUDFLARE_API_TOKEN` /
+  `CLOUDFLARE_ACCOUNT_ID` secrets.
+- The dashboard "Workers Builds" git integration never produced a working
+  build — leave it disconnected; exactly one deployer.
 - Environment variables (Production + Preview):
   - `NODE_VERSION` — `22`
   - `SITE_URL` — `https://dogearedguides.com` (canonicals/sitemap/OG; also
