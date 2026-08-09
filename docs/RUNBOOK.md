@@ -80,11 +80,20 @@ python pipeline/ledger.py set-status --city tahoe-city --id X --status queued
 python pipeline/ledger.py sync                       # reconcile with published files
 ```
 
-- **Discovery**: `python pipeline/discover.py --city <slug>` seeds
-  candidates from OpenStreetMap (© OpenStreetMap contributors, ODbL — the
-  open license is why OSM, not Google, is the seed source). The monthly
-  `discover.yml` GitHub Action sweeps all launched cities and opens a PR
-  with new candidates.
+- **Discovery is three layers** (Google Places is off-limits — its terms
+  forbid storing the data; all three below have storage-permitting
+  licenses or produce leads, not stored data):
+  1. `discover.py --city <slug>` — OpenStreetMap (© OSM contributors,
+     ODbL). Best for parks, trails, beaches, public land.
+  2. `discover_overture.py --city <slug>` — Overture Maps places
+     (CDLA-Permissive 2.0; Meta-fed, monthly releases). Best for
+     businesses; catches openings years before OSM. Bump the release
+     with `--release` as new monthly versions publish.
+  3. `discover_recent.py --city <slug>` — model + web search for venues
+     opened/rebranded in the last 18 months → sourced queue rows (the
+     only layer that catches last month's opening; the evo Hotel case).
+  The monthly `discover.yml` GitHub Action runs the OSM sweep for all
+  launched cities and opens a PR with new candidates.
 - Phone-call outcomes and manual findings go in with `set-status` (with a
   `--note`); the check history records who/when/why.
 

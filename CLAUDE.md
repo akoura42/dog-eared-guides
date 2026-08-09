@@ -54,6 +54,8 @@ impute** — a missing fact renders as missing; that honesty is the brand.
 ```
 python pipeline/discover.py --city <city>            # OSM sweep (radius from city yaml)
 python pipeline/discover.py --all-launched
+python pipeline/discover_overture.py --city <city>   # Overture places sweep (businesses)
+python pipeline/discover_recent.py --city <city>     # model sweep for recent openings -> queue
 python pipeline/generate.py --city <city> [--limit N]        # queue items
 python pipeline/generate.py --from-ledger <city> [--parallel 2-3] [--model M]
 python pipeline/ledger.py stats|list|set-status|sync
