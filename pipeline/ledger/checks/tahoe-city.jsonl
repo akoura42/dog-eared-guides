@@ -141,3 +141,24 @@
 {"actor": "generate", "city": "tahoe-city", "note": "Old Post Office Cafe", "outcome": "draft-produced", "place_id": "ovt-e400cbf2-old-post-office-cafe", "ts": "2026-08-09T19:35:26+00:00"}
 {"actor": "generate", "city": "tahoe-city", "note": "The Blue Agave", "outcome": "unverifiable", "place_id": "ovt-e7c8a5ad-the-blue-agave", "ts": "2026-08-09T19:35:26+00:00"}
 {"actor": "generate", "city": "tahoe-city", "note": "Tahoe National Brewing Company", "outcome": "draft-produced", "place_id": "ovt-f5857bc3-tahoe-national-brewing-company", "ts": "2026-08-09T19:35:26+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Overture-internal duplicate of ovt-d5155bc8-thai-kitchen-tahoe-city (low-confidence variant)", "outcome": "duplicate", "place_id": "ovt-efe07155-thai-kitchen", "ts": "2026-08-09T19:43:18+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 3: public beaches + downtown eats + village drink spots", "outcome": "queued", "place_id": "ovt-30574156-tahoe-city-public-beach", "ts": "2026-08-09T19:43:19+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 3: public beaches + downtown eats + village drink spots", "outcome": "queued", "place_id": "ovt-253dbbe0-kings-beach-lake-tahoe", "ts": "2026-08-09T19:43:19+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 3: public beaches + downtown eats + village drink spots", "outcome": "queued", "place_id": "ovt-d4d21b57-dollar-point-beach", "ts": "2026-08-09T19:43:20+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 3: public beaches + downtown eats + village drink spots", "outcome": "queued", "place_id": "ovt-7dbab5ed-rocker", "ts": "2026-08-09T19:43:21+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 3: public beaches + downtown eats + village drink spots", "outcome": "queued", "place_id": "ovt-11cf71e6-kt-base-bar", "ts": "2026-08-09T19:43:21+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 3: public beaches + downtown eats + village drink spots", "outcome": "queued", "place_id": "ovt-36c0c9b7-tahoe-mountain-brewing-co", "ts": "2026-08-09T19:43:22+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 3: public beaches + downtown eats + village drink spots", "outcome": "queued", "place_id": "ovt-e410888e-bluefish", "ts": "2026-08-09T19:43:22+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 3: public beaches + downtown eats + village drink spots", "outcome": "queued", "place_id": "ovt-d5155bc8-thai-kitchen-tahoe-city", "ts": "2026-08-09T19:43:23+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 3: public beaches + downtown eats + village drink spots", "outcome": "queued", "place_id": "ovt-a8536c77-tremigo-tahoe", "ts": "2026-08-09T19:43:24+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Priority batch 3: public beaches + downtown eats + village drink spots", "outcome": "queued", "place_id": "ovt-098f3158-wildflour-baking-company", "ts": "2026-08-09T19:43:24+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Wildflour Baking Company", "outcome": "unverifiable", "place_id": "ovt-098f3158-wildflour-baking-company", "ts": "2026-08-09T19:54:16+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "KT Base Bar", "outcome": "unverifiable", "place_id": "ovt-11cf71e6-kt-base-bar", "ts": "2026-08-09T19:54:16+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Kings Beach Lake Tahoe", "outcome": "draft-produced", "place_id": "ovt-253dbbe0-kings-beach-lake-tahoe", "ts": "2026-08-09T19:54:16+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Tahoe City Public Beach", "outcome": "unverifiable", "place_id": "ovt-30574156-tahoe-city-public-beach", "ts": "2026-08-09T19:54:16+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Tahoe Mountain Brewing Co.", "outcome": "unverifiable", "place_id": "ovt-36c0c9b7-tahoe-mountain-brewing-co", "ts": "2026-08-09T19:54:16+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Patton Beach", "outcome": "draft-produced", "place_id": "ovt-454b1fdb-patton-beach", "ts": "2026-08-09T19:54:16+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Rocker", "outcome": "unverifiable", "place_id": "ovt-7dbab5ed-rocker", "ts": "2026-08-09T19:54:16+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Tremigo Tahoe", "outcome": "unverifiable", "place_id": "ovt-a8536c77-tremigo-tahoe", "ts": "2026-08-09T19:54:16+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Dollar Point Beach", "outcome": "unverifiable", "place_id": "ovt-d4d21b57-dollar-point-beach", "ts": "2026-08-09T19:54:16+00:00"}
+{"actor": "generate", "city": "tahoe-city", "note": "Thai Kitchen Tahoe City", "outcome": "unverifiable", "place_id": "ovt-d5155bc8-thai-kitchen-tahoe-city", "ts": "2026-08-09T19:54:16+00:00"}
