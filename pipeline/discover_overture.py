@@ -36,6 +36,11 @@ S3_PATTERN = (
 # Below this Overture confidence score a row is more noise than lead.
 MIN_CONFIDENCE = 0.5
 
+# Individual vacation-rental units are out of scope (they're inventory,
+# not venues with policies); Overture lists them under lodging categories
+# with the manager's brand in the name.
+RENTAL_BRANDS = ("vacasa", "vrbo", "airbnb", "redawning", "turnkey", "casago", "evolve rentals")
+
 # Overture category -> our category. First match wins; unmapped skipped.
 CATEGORY_MAP: dict[str, str] = {
     "restaurant": "eat",
@@ -54,7 +59,6 @@ CATEGORY_MAP: dict[str, str] = {
     "bed_and_breakfast": "stay",
     "resort": "stay",
     "lodging": "stay",
-    "vacation_rental": "stay",
     "campground": "stay",
     "rv_park": "stay",
     "hostel": "stay",
@@ -123,6 +127,8 @@ def discover_overture(city_slug: str, release: str, radius_km: float | None, dry
         name = p["name"]
         if not name or p["id"] in known_ovt:
             continue
+        if any(b in name.lower() for b in RENTAL_BRANDS):
+            continue  # a managed rental unit, not a venue
         category = CATEGORY_MAP.get(p["category"] or "")
         if not category:
             continue
