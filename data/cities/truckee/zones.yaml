@@ -1,0 +1,62 @@
+# Dog-policy zones for the Truckee explorer map.
+# Policy values: no-dogs | off-leash | leashed | restricted.
+# POLICY COMES FROM VERIFIED RECORDS (city yaml regulations), never OSM
+# tags — OSM supplies geometry only. Baseline everywhere else: Town of
+# Truckee voice-and-visual control (Title 8).
+zones:
+  - id: donner-memorial-sp
+    label: Donner Memorial State Park
+    osm_name: Donner Memorial State Park
+    policy: leashed
+    note: >-
+      Six-foot leash; dogs allowed on the Lakeside Interpretive Trail,
+      Zig Zag Trail, fire roads, and the Donner Lake shore except China
+      Cove Beach. No dogs in the visitor center, on the Nature Trail, or
+      on designated ski trails when snow is present.
+    source_url: https://www.parks.ca.gov/?page_id=503
+    near: [39.3211, -120.2325]
+    max_match_m: 2500
+  - id: west-end-beach
+    label: West End Beach
+    osm_name: West End Beach
+    policy: no-dogs
+    note: >-
+      The district's main Donner Lake swim beach — no dogs (posted with
+      the no-glass and no-smoking rules).
+    source_url: https://www.tdrpd.org/165/West-End-Beach
+    near: [39.3244, -120.2656]
+    approx_radius_m: 150
+  - id: truckee-river-regional-park
+    label: Truckee River Regional Park
+    osm_name: Truckee River Regional Park
+    policy: leashed
+    note: >-
+      The Town's one strict seasonal leash zone — dogs leashed and under
+      full control May 1 through October 31. Off-season, the Town's
+      voice-and-visual-control standard applies.
+    source_url: https://www.truckeepolice.gov/faq/is-there-a-leash-law-in-truckee-2/
+    near: [39.3175, -120.1780]
+    max_match_m: 1500
+trails:
+  center: [39.3280, -120.1833]
+  radius_m: 9000
+  classes:
+    - selector: cycleway
+      policy: restricted
+      label: Paved trail (Legacy Trail network)
+      note: >-
+        Town of Truckee voice-and-visual control is the baseline standard;
+        leash rules apply where posted (Truckee River Regional Park
+        sections, May–October).
+      source_url: https://www.truckeepolice.gov/faq/is-there-a-leash-law-in-truckee-2/
+      venue: null
+    - selector: named-path
+      policy: restricted
+      label: Forest path
+      note: >-
+        Tahoe National Forest and town open space around Truckee — the
+        Town's voice-and-visual-control standard applies inside town
+        limits; check posted rules at trailheads.
+      source_url: https://www.truckeepolice.gov/faq/is-there-a-leash-law-in-truckee-2/
+      venue: null
+  exclude_zone_ids: []

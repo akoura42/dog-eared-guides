@@ -1,0 +1,158 @@
+version: index-v1
+town: truckee
+computed: '2026-08-10'
+components:
+  patio_share:
+    value: 1.0
+    basis:
+      numerator: 3
+      denominator: 3
+    sources:
+    - method: venue-records
+      note: computed from 3 published venue records
+      date: '2026-08-10'
+    last_verified: '2026-08-10'
+    score: 100
+  indoor_welcome:
+    value: 0.0
+    basis:
+      numerator: 0
+      denominator: 2
+    sources:
+    - method: venue-records
+      note: computed from 2 published venue records
+      date: '2026-08-10'
+    last_verified: '2026-08-10'
+    score: 0
+  lodging_share:
+    value: 0.5
+    basis:
+      numerator: 1
+      denominator: 2
+    sources:
+    - method: venue-records
+      note: computed from 2 published venue records
+      date: '2026-08-10'
+    last_verified: '2026-08-10'
+    score: 80
+  water_access:
+    value: three-seasonal-or-two-yearround
+    sources:
+    - url: https://www.parks.ca.gov/pages/499/files/DSO%20683-22-002%20Dogs.pdf
+      method: official_website
+      note: Sierra District Order 683-22-002 designates East Beach at Donner Memorial
+        SP as a legal leashed dog beach (within 200 yards of the Tahoe-Donner boat
+        launch) — year-round day-use, sunrise to sunset. Entry point 1, year-round.
+      date: '2026-08-10'
+    - url: https://www.parks.ca.gov/?page_id=503
+      method: official_website
+      note: Park rules allow leashed dogs "along the shore of Donner Lake except for
+        China Cove Beach" — legal lake entry beyond the designated beach. Counted
+        with East Beach as one shoreline system.
+      date: '2026-08-10'
+    - url: https://www.truckeepolice.gov/faq/is-there-a-leash-law-in-truckee-2/
+      method: official_website
+      note: Truckee River bank at Truckee River Regional Park — dogs allowed (leashed
+        May 1–Oct 31, voice control otherwise); the river bank does not close seasonally.
+        Entry point 2, year-round.
+      date: '2026-08-10'
+    last_verified: null
+    score: 80
+  trail_access:
+    value: 156
+    sources:
+    - url: https://overpass-api.de/api/interpreter
+      method: overpass-sum
+      note: 'zones.py trail fetch, 9 km radius: 3.9 mi paved (Legacy Trail network)
+        + 156.4 mi named forest paths (Tahoe NF + town open space). Town voice-control
+        standard applies in town; USFS lands allow dogs. geometry: fallback radius,
+        not isochrone.'
+      date: '2026-08-10'
+    last_verified: null
+    geometry: fallback
+    score: 100
+  off_leash:
+    value: none
+    sources:
+    - url: https://www.tdrpd.org/101/Facilities
+      method: official_website
+      note: The district's facilities index lists no dog park or off-leash area; the
+        2016 Truckee dog-park project stalled (site last updated 2018, domain lapsed).
+        No State Parks order designates any off-leash area at Donner Lake. Voice-control
+        at-large rules are an ordinance fact, not a designated space — scored 0 honestly.
+      date: '2026-08-10'
+    last_verified: null
+    score: 0
+  ordinance:
+    modifiers:
+    - patio-permitted
+    - voice-control-areas
+    - shoreline-open
+    sources:
+    - url: https://www.truckeepolice.gov/faq/is-there-a-leash-law-in-truckee-2/
+      method: official_website
+      note: 'Town of Truckee Municipal Code Title 8: at-large prohibited but voice-and-visual
+        control satisfies the law town-wide — the voice-control modifier''s clearest
+        possible case.'
+      date: '2026-08-10'
+    - url: https://www.parks.ca.gov/pages/499/files/DSO%20683-22-002%20Dogs.pdf
+      method: official_website
+      note: The primary shoreline (Donner Lake) has a designated dog beach (East Beach)
+        by district order — shoreline-open applies.
+      date: '2026-08-10'
+    - url: https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=HSC&sectionNum=114259.5
+      method: official_website
+      note: California HSC 114259.5 — statewide statute permitting pet dogs in outdoor
+        dining areas at the operator's discretion.
+      date: '2026-08-10'
+    last_verified: null
+    score: 100
+  emergency_vet:
+    value: 40
+    sources:
+    - url: https://www.yelp.com/biz/bluepearl-pet-hospital-reno
+      method: official_website
+      note: Nearest 24/7 ER is BluePearl Pet Hospital, 555 Morrill Ave, Reno — open
+        24 hours daily. Donner Truckee Veterinary Hospital in town takes emergencies
+        Mon–Sat business hours only (dtvet.com).
+      date: '2026-08-10'
+    - url: https://router.project-osrm.org/route/v1/driving/-120.1833,39.3280;-119.8024,39.5345
+      method: osrm-drive-time
+      note: 'OSRM: 40 minutes from town center (Donner Pass Rd/Bridge St) to BluePearl
+        Reno via I-80.'
+      date: '2026-08-10'
+    last_verified: null
+    score: 60
+  heat_risk:
+    value: 7.4
+    sources:
+    - url: https://www.ncei.noaa.gov/access/services/data/v1?dataset=normals-annualseasonal&stations=USC00049043&dataTypes=ANN-TMAX-AVGNDS-GRTH090&format=json
+      method: noaa-normals-1991-2020
+      note: 'Station USC00049043 (TRUCKEE RANGER STATION, CA — in town): ANN-TMAX-AVGNDS-GRTH090
+        raw value 74, in tenths of days = 7.4 days/year with normal high ≥ 90°F (NCEI
+        normals report AVGNDS in tenths).'
+      date: '2026-08-10'
+    last_verified: null
+    score: 85
+pillars:
+  hospitality:
+    components_verified: 3
+    components_total: 3
+    score: 77
+  access:
+    components_verified: 3
+    components_total: 3
+    score: 69
+  rules:
+    components_verified: 1
+    components_total: 1
+    score: 100
+  practical:
+    components_verified: 2
+    components_total: 2
+    score: 72
+composite:
+  components_verified: 9
+  components_total: 9
+  score: 76
+  provisional: false

@@ -1,0 +1,154 @@
+# City configuration — the multi-city contract. Phase 0 per
+# docs/CITY_PLAYBOOK.md: unlaunched until the QA gate passes.
+# Truckee's headline: a VOICE-CONTROL town — leash optional under
+# immediate voice/visual control, the rare regime that earns the
+# ordinance rubric's off-leash modifier.
+name: Truckee
+slug: truckee
+state: California
+state_code: CA
+geo:
+  lat: 39.3280
+  lng: -120.1833
+hero:
+  headline: Truckee with a dog.
+  subhead: The rare California town where voice control is the law, Donner Lake has a legal dog shore, and the forest starts at the sidewalk.
+intro: >-
+  Truckee runs on an unusual rule: the Town's animal code prohibits dogs
+  at large but does not require a leash — immediate voice and visual
+  control is the legal standard on town streets and trails. The strict
+  exceptions are posted where they apply: Truckee River Regional Park
+  requires leashes May 1 through October 31, Donner Memorial State Park
+  requires a six-foot leash everywhere dogs are allowed, and West End
+  Beach admits no dogs at all. Every listing here cites the rule it
+  rests on.
+hero_image: null
+hero_image_alt: null
+hero_image_credit: null
+hero_image_credit_url: null
+resources:
+  - label: Town of Truckee Animal Services — the at-large / voice-control rule
+    url: https://www.truckeepolice.gov/faq/is-there-a-leash-law-in-truckee-2/
+    note: The Town's own statement of the control standard, with Title 8 behind it.
+  - label: Donner Memorial State Park — dog rules
+    url: https://www.parks.ca.gov/?page_id=503
+    note: Where dogs may go in the park, verbatim.
+  - label: Sierra District dog order (DSO 683-22-002)
+    url: https://www.parks.ca.gov/pages/499/files/DSO%20683-22-002%20Dogs.pdf
+    note: The State Parks district superintendent's posted order for dog restrictions.
+  - label: Truckee-Donner Recreation & Park District
+    url: https://www.tdrpd.org/
+    note: District parks and facilities, including West End Beach.
+seasonal_notes:
+  - Truckee River Regional Park requires dogs on leash May 1 – October 31 (Town of Truckee).
+  - Donner Memorial State Park bans dogs from designated ski trails when snow is present (California State Parks).
+regulations:
+  - summary: Dogs at large are prohibited; leash OR immediate voice-and-visual control is required
+    detail: >-
+      "Dog owners are required to keep their dogs under control by visual
+      and voice control or by leash control. Voice and visual control
+      requires that the owner is in the immediate presence of the animal
+      and can demonstrate effective control of the animal." (Town of
+      Truckee Municipal Code, Title 8.)
+    jurisdiction: Town of Truckee
+    source_url: https://www.truckeepolice.gov/faq/is-there-a-leash-law-in-truckee-2/
+  - summary: Truckee River Regional Park — leash required May 1 through October 31
+    detail: >-
+      The Town's one strict seasonal leash zone: dogs must be leashed and
+      under full control in any area of Truckee River Regional Park from
+      May 1 to October 31.
+    jurisdiction: Town of Truckee
+    source_url: https://www.truckeepolice.gov/faq/is-there-a-leash-law-in-truckee-2/
+  - summary: Donner Memorial State Park — six-foot leash; shore access except China Cove
+    detail: >-
+      "Dogs are allowed on the Lakeside Interpretive Trail, Zig Zag Trail,
+      fire roads, and along the shore of Donner Lake except for China Cove
+      Beach," on a six-foot maximum leash; dogs are not allowed in the
+      visitor center, on the Nature Trail, at China Cove Beach, or on
+      designated ski trails when snow is present.
+    jurisdiction: California State Parks, Sierra District
+    source_url: https://www.parks.ca.gov/?page_id=503
+  - summary: West End Beach — no dogs
+    detail: >-
+      The district's main Donner Lake swim beach admits no dogs (posted
+      with the no-glass and no-smoking rules).
+    jurisdiction: Truckee-Donner Recreation & Park District
+    source_url: https://www.tdrpd.org/165/West-End-Beach
+categories:
+  - eat
+  - drink
+  - stay
+  - trail
+  - beach
+  - activity
+  - dog-park
+  - shop
+  - pet-supply
+  - daycare
+  - services
+map_frame_km: null
+getting_there:
+  - mode: rail
+    name: Amtrak at Truckee Depot (California Zephyr) — in town
+    note: The Zephyr stops at the 10065 Donner Pass Road depot in downtown Truckee. Amtrak's carry-on pet program takes dogs and cats up to 20 pounds including the carrier on trips of up to seven hours in coach, with a per-segment fee and reservations required — the Truckee-Sacramento and Truckee-Reno runs fit inside that window.
+    source_url: https://www.amtrak.com/pets
+    lat: 39.32749
+    lng: -120.18560
+  - mode: air
+    name: Reno-Tahoe International (RNO), about 45 minutes away
+    note: Three ADA-accessible animal relief areas, including two fenced outdoor "Bark Parks" with running water — Gate K9 South by the ticketing lobby (about 700 square feet) and one north of Baggage Claim — plus a post-security relief station near High Mountain Marketplace.
+    source_url: https://www.renoairport.com/at-the-airport/amenities/
+    lat: 39.4986
+    lng: -119.7681
+emergency:
+  er_vets:
+    - name: Donner Truckee Veterinary Hospital (in town)
+      phone: (530) 587-4366
+      lat: 39.32446
+      lng: -120.15974
+      note: Emergency appointments Mon–Sat 8:00am–5:30pm, on Highway 267 in Truckee.
+      source_url: https://dtvet.com/urgent-care/
+    - name: BluePearl Pet Hospital (Reno)
+      phone: (775) 358-8555
+      lat: 39.5345
+      lng: -119.8024
+      note: Open 24 hours daily. 555 Morrill Ave, Reno — about 40 minutes down I-80.
+      source_url: https://www.yelp.com/biz/bluepearl-pet-hospital-reno
+    - name: Animal Emergency & Specialty Center (Reno)
+      phone: (775) 851-3600
+      lat: 39.4669
+      lng: -119.786
+      note: Staffed 24 hours a day, 365 days a year. 6425 S. Virginia St, Reno — about 45 minutes.
+      source_url: https://aecreno.com/
+  poison:
+    - name: ASPCA Animal Poison Control
+      phone: (888) 426-4435
+      note: 24/7, 365 days a year. A consultation fee applies.
+      source_url: https://www.aspca.org/pet-care/animal-poison-control
+  lost_found:
+    - name: Humane Society of Truckee-Tahoe
+      phone: (530) 587-5948
+      lat: 39.33565
+      lng: -120.17077
+      note: The town's shelter — 10961 Stevens Lane. Open Mon–Sat 1–6pm; lost-pet reports and the found-pet book are here.
+      source_url: https://hstt.org/
+# Explorer area chips: neighborhood token -> visitor-level area.
+areas:
+  downtown truckee: Downtown
+  brickelltown: Downtown
+  donner lake: Donner Lake
+  west end: Donner Lake
+  tahoe donner: Tahoe Donner
+  glenshire: Glenshire
+  gray's crossing: Gray's Crossing
+  old greenwood: Old Greenwood
+  martis valley: Martis Valley
+  donner pass: Donner Summit
+agency_domains:
+  - tdrpd.org
+  - parks.ca.gov
+  - townoftruckee.gov
+  - truckeepolice.gov
+  - fs.usda.gov
+discover_radius_km: 9
+launched: false
