@@ -392,6 +392,20 @@ const legend = [...new Map(venues.map((v) => {
       </div>
       <button
         type="button"
+        class="locate-btn"
+        id="locate-btn"
+        aria-pressed="false"
+        title="Show my location — follows you until tapped again"
+        aria-label="Show my location on the map"
+      >
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3.2" fill="currentColor" stroke="none" />
+          <circle cx="12" cy="12" r="8" />
+          <path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3" stroke-linecap="round" />
+        </svg>
+      </button>
+      <button
+        type="button"
         class="pane-toggle"
         aria-controls="explorer-list"
         aria-expanded="true"
@@ -662,6 +676,31 @@ const legend = [...new Map(venues.map((v) => {
   }
   .map-pane {
     position: relative;
+  }
+  .locate-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 5;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--paper-raised);
+    color: var(--ink-soft);
+    cursor: pointer;
+    box-shadow: var(--shadow);
+  }
+  .locate-btn[aria-pressed='true'] {
+    background: var(--pine);
+    border-color: var(--pine);
+    color: #fff;
+  }
+  .locate-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
   }
   #venue-map-canvas {
     position: absolute;
@@ -1152,6 +1191,51 @@ const legend = [...new Map(venues.map((v) => {
       info.close();
       gmarkers.forEach((marker, i) => marker.setVisible(isShown(markers[i])));
     };
+    let userDot: any = null;
+    let userRing: any = null;
+    setUserPos = (lat, lng, acc, first) => {
+      const pos = { lat, lng };
+      if (!userDot) {
+        userDot = new maps.Marker({
+          map,
+          position: pos,
+          zIndex: 2000,
+          clickable: false,
+          icon: {
+            path: maps.SymbolPath.CIRCLE,
+            scale: 8,
+            fillColor: '#3579c8',
+            fillOpacity: 1,
+            strokeColor: '#ffffff',
+            strokeWeight: 3,
+          },
+        });
+        userRing = new maps.Circle({
+          map,
+          center: pos,
+          radius: acc,
+          fillColor: '#3579c8',
+          fillOpacity: 0.12,
+          strokeColor: '#3579c8',
+          strokeOpacity: 0.35,
+          strokeWeight: 1,
+          clickable: false,
+        });
+      } else {
+        userDot.setPosition(pos);
+        userRing.setCenter(pos);
+        userRing.setRadius(acc);
+      }
+      if (first) {
+        map.panTo(pos);
+        if ((map.getZoom() ?? 0) < 14) map.setZoom(14);
+      }
+    };
+    clearUserPos = () => {
+      userDot?.setMap(null);
+      userRing?.setMap(null);
+      userDot = userRing = null;
+    };
     focusMarker = (idx, on) => {
       gmarkers[idx]?.setIcon(icon(markers[idx], on));
       gmarkers[idx]?.setZIndex(on ? 1000 : null);
@@ -1291,6 +1375,40 @@ const legend = [...new Map(venues.map((v) => {
         }
       });
     };
+    let userDot: any = null;
+    let userRing: any = null;
+    setUserPos = (lat, lng, acc, first) => {
+      if (!userDot) {
+        userDot = L.circleMarker([lat, lng], {
+          radius: 8,
+          color: '#ffffff',
+          weight: 3,
+          fillColor: '#3579c8',
+          fillOpacity: 1,
+          interactive: false,
+          pane: 'markerPane',
+        }).addTo(map);
+        userRing = L.circle([lat, lng], {
+          radius: acc,
+          color: '#3579c8',
+          opacity: 0.35,
+          weight: 1,
+          fillColor: '#3579c8',
+          fillOpacity: 0.12,
+          interactive: false,
+        }).addTo(map);
+      } else {
+        userDot.setLatLng([lat, lng]);
+        userRing.setLatLng([lat, lng]);
+        userRing.setRadius(acc);
+      }
+      if (first) map.setView([lat, lng], Math.max(map.getZoom(), 14));
+    };
+    clearUserPos = () => {
+      if (userDot) map.removeLayer(userDot);
+      if (userRing) map.removeLayer(userRing);
+      userDot = userRing = null;
+    };
     focusMarker = (idx, on) => {
       const marker = lmarkers[idx];
       if (!marker) return;
@@ -1375,6 +1493,46 @@ const legend = [...new Map(venues.map((v) => {
     showNeighbors = !showNeighbors;
     neighborToggle.setAttribute('aria-pressed', String(showNeighbors));
     applyVisibility?.();
+  });
+
+  // Locate-me: user-initiated only (the permission prompt fires on tap,
+  // never on load). While active, the position dot follows the device;
+  // tapping again stops the watch and removes the dot. Each map mode
+  // registers its own renderer.
+  let setUserPos: ((lat: number, lng: number, acc: number, first: boolean) => void) | null = null;
+  let clearUserPos: (() => void) | null = null;
+  let geoWatch: number | null = null;
+  let geoFirstFix = true;
+  const locateBtn = document.getElementById('locate-btn') as HTMLButtonElement | null;
+  function stopLocate() {
+    if (geoWatch !== null) navigator.geolocation.clearWatch(geoWatch);
+    geoWatch = null;
+    geoFirstFix = true;
+    clearUserPos?.();
+    locateBtn?.setAttribute('aria-pressed', 'false');
+  }
+  locateBtn?.addEventListener('click', () => {
+    if (geoWatch !== null) {
+      stopLocate();
+      return;
+    }
+    if (!('geolocation' in navigator)) {
+      locateBtn.disabled = true;
+      locateBtn.title = 'Location is not available in this browser';
+      return;
+    }
+    locateBtn.setAttribute('aria-pressed', 'true');
+    geoWatch = navigator.geolocation.watchPosition(
+      (pos) => {
+        setUserPos?.(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy, geoFirstFix);
+        geoFirstFix = false;
+      },
+      () => {
+        stopLocate();
+        if (locateBtn) locateBtn.title = 'Location unavailable — check the browser permission';
+      },
+      { enableHighAccuracy: true, maximumAge: 10000, timeout: 20000 }
+    );
   });
 
   // Zone chips toggle each zone type (no-dogs, off-leash, …) on its own.
