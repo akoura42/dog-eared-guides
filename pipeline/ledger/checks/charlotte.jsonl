@@ -241,3 +241,25 @@
 {"actor": "generate", "city": "charlotte", "note": "Shuffletown Park", "outcome": "draft-produced", "place_id": "ovt-323c0c12-shuffletown-park", "ts": "2026-08-10T14:12:25+00:00"}
 {"actor": "generate", "city": "charlotte", "note": "Barkingham Park Dog Park", "outcome": "draft-produced", "place_id": "ovt-62a39fa9-barkingham-park-dog-park", "ts": "2026-08-10T14:12:25+00:00"}
 {"actor": "generate", "city": "charlotte", "note": "Hollywood Feed", "outcome": "unverifiable", "place_id": "ovt-644ec272-hollywood-feed", "ts": "2026-08-10T14:12:25+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "THE Dog Bar (NoDa) closed — Facebook farewell + dead domains. 'Stay tuned for the next…' suggests a successor may open; watch for it. Last number (704) 370-3595 if confirmation wanted.", "outcome": "closed", "place_id": "ovt-251022b1-dog-bar", "ts": "2026-08-10T14:14:26+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Petco #1546 (E Arbors Dr) — store URL 404s, Yelp CLOSED. Gone from Petco's own locator.", "outcome": "closed", "place_id": "ovt-9b299a45-petco", "ts": "2026-08-10T14:14:27+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "MECA's private HQ, not a public park (established ruling) — the county park is Dowd Park next door, separate row.", "outcome": "unverifiable", "place_id": "osm-dowd-house-historic-site", "ts": "2026-08-10T14:14:28+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 3: county/city parks — ordinance + Parks GIS tier-1 path", "outcome": "queued", "place_id": "osm-dowd-park", "ts": "2026-08-10T14:14:29+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 3: county/city parks — ordinance + Parks GIS tier-1 path", "outcome": "queued", "place_id": "osm-first-ward-park", "ts": "2026-08-10T14:14:30+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 3: county/city parks — ordinance + Parks GIS tier-1 path", "outcome": "queued", "place_id": "osm-fourth-ward-park", "ts": "2026-08-10T14:14:31+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 3: county/city parks — ordinance + Parks GIS tier-1 path", "outcome": "queued", "place_id": "osm-elizabeth-park", "ts": "2026-08-10T14:14:32+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 3: county/city parks — ordinance + Parks GIS tier-1 path", "outcome": "queued", "place_id": "osm-eastway-park", "ts": "2026-08-10T14:14:33+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 3: county/city parks — ordinance + Parks GIS tier-1 path", "outcome": "queued", "place_id": "osm-edwards-branch-greenway", "ts": "2026-08-10T14:14:34+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 3: county/city parks — ordinance + Parks GIS tier-1 path", "outcome": "queued", "place_id": "osm-double-oaks-park", "ts": "2026-08-10T14:14:35+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 3: county/city parks — ordinance + Parks GIS tier-1 path", "outcome": "queued", "place_id": "osm-enderly-park", "ts": "2026-08-10T14:14:36+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 3: county/city parks — ordinance + Parks GIS tier-1 path", "outcome": "queued", "place_id": "osm-druid-hills-park", "ts": "2026-08-10T14:14:37+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Petco Metropolitan #2533, 900 Metropolitan Ave, (704) 916-4047 — LIVE store, corporate tier-1 path; batch-6-era draft never merged", "outcome": "queued", "place_id": "osm-petco", "ts": "2026-08-10T14:14:38+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Double Oaks Park", "outcome": "draft-produced", "place_id": "osm-double-oaks-park", "ts": "2026-08-10T14:38:13+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Dowd Park", "outcome": "draft-produced", "place_id": "osm-dowd-park", "ts": "2026-08-10T14:38:13+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Druid Hills Park", "outcome": "draft-produced", "place_id": "osm-druid-hills-park", "ts": "2026-08-10T14:38:13+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Eastway Park", "outcome": "draft-produced", "place_id": "osm-eastway-park", "ts": "2026-08-10T14:38:13+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Elizabeth Park", "outcome": "draft-produced", "place_id": "osm-elizabeth-park", "ts": "2026-08-10T14:38:13+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Enderly Park", "outcome": "unverifiable", "place_id": "osm-enderly-park", "ts": "2026-08-10T14:38:13+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "First Ward Park", "outcome": "draft-produced", "place_id": "osm-first-ward-park", "ts": "2026-08-10T14:38:13+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Fourth Ward Park", "outcome": "draft-produced", "place_id": "osm-fourth-ward-park", "ts": "2026-08-10T14:38:13+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Pet Paradise", "outcome": "unverifiable", "place_id": "osm-pet-paradise", "ts": "2026-08-10T14:38:13+00:00"}
