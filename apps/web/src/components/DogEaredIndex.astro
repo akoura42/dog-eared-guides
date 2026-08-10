@@ -94,36 +94,42 @@ const rows =
         })}
       </div>
 
-      <div class="table-scroll">
-        <table>
-          <thead>
-            <tr>
-              <th>Component</th>
-              <th>Weight</th>
-              <th>Measured</th>
-              <th>Score</th>
-              <th>Verified</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map(({ def, data, display, filterable }) => (
-              <tr class:list={{ missing: display === null }}>
-                <td>
-                  <span class="c-label">{def.label}</span>
-                  <span class="c-pillar">{def.pillar}</span>
-                  {filterable && (
-                    <a class="c-map" href={`?ixf=${def.key}#explore`}>See these venues on the map ↑</a>
-                  )}
-                </td>
-                <td>{def.weight}</td>
-                <td>{display ?? 'not yet verified'}</td>
-                <td>{data?.score ?? '—'}</td>
-                <td>{data?.last_verified ?? '—'}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <ul class="component-grid">
+        {rows.map(({ def, data, display, filterable }) => (
+          <li class:list={['component', { missing: display === null }]}>
+            <div class="c-top">
+              <span class="c-label">{def.label}</span>
+              <span class="c-score">{data?.score ?? '—'}</span>
+            </div>
+            <div
+              class="c-bar"
+              role="img"
+              aria-label={
+                data?.score != null
+                  ? `${def.label}: ${data.score} out of 100`
+                  : `${def.label}: not yet verified`
+              }
+            >
+              <span class="c-fill" style={`width:${data?.score ?? 0}%`}></span>
+            </div>
+            <p class="c-measured">{display ?? 'Not yet verified'}</p>
+            <p class="c-meta">
+              <span>{def.pillar}</span>
+              <span>·</span>
+              <span>weight {def.weight}</span>
+              {data?.last_verified && (
+                <>
+                  <span>·</span>
+                  <span>verified {data.last_verified}</span>
+                </>
+              )}
+            </p>
+            {filterable && (
+              <a class="c-map" href={`?ixf=${def.key}#explore`}>See these venues on the map ↑</a>
+            )}
+          </li>
+        ))}
+      </ul>
 
       <p class="tagline">“{bands.tagline}”</p>
     </div>
@@ -209,49 +215,79 @@ const rows =
     font-size: 0.78rem;
     color: var(--ink-soft);
   }
-  .table-scroll {
-    overflow-x: auto;
-    margin-top: 1.1rem;
+  .component-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: 0.6rem;
+    margin: 1.1rem 0 0;
+    padding: 0;
   }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9rem;
+  .component {
     background: var(--paper-raised);
     border: 1px solid var(--line);
     border-radius: var(--radius-lg);
+    padding: 0.75rem 0.9rem 0.7rem;
   }
-  th,
-  td {
-    text-align: left;
-    padding: 0.55rem 0.85rem;
-    border-bottom: 1px solid var(--line);
-  }
-  th {
-    font-size: 0.78rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-  }
-  tbody tr:last-child td {
-    border-bottom: none;
+  .c-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
   }
   .c-label {
-    display: block;
     font-weight: 650;
   }
-  .c-pillar {
-    font-size: 0.78rem;
+  .c-score {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+    color: var(--pine-deep);
+  }
+  .c-bar {
+    height: 6px;
+    border-radius: 4px;
+    background: var(--line);
+    margin-top: 0.4rem;
+    overflow: hidden;
+  }
+  .c-fill {
+    display: block;
+    height: 100%;
+    border-radius: 4px;
+    background: var(--pine);
+  }
+  .c-measured {
+    font-size: 0.88rem;
+    color: var(--ink);
+    margin: 0.45rem 0 0;
+    line-height: 1.4;
+  }
+  .c-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    font-size: 0.75rem;
     color: var(--ink-soft);
+    margin: 0.3rem 0 0;
   }
   .c-map {
-    display: block;
+    display: inline-block;
     font-size: 0.78rem;
     font-weight: 650;
-    margin-top: 0.15rem;
+    margin-top: 0.3rem;
   }
-  tr.missing td {
+  .component.missing .c-measured,
+  .component.missing .c-score {
     color: var(--ink-soft);
+  }
+  .component.missing .c-bar {
+    background: repeating-linear-gradient(
+      90deg,
+      var(--line) 0 6px,
+      transparent 6px 12px
+    );
   }
   .tagline {
     margin: 0.9rem 0 0;
