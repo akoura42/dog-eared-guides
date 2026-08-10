@@ -263,3 +263,10 @@
 {"actor": "generate", "city": "charlotte", "note": "First Ward Park", "outcome": "draft-produced", "place_id": "osm-first-ward-park", "ts": "2026-08-10T14:38:13+00:00"}
 {"actor": "generate", "city": "charlotte", "note": "Fourth Ward Park", "outcome": "draft-produced", "place_id": "osm-fourth-ward-park", "ts": "2026-08-10T14:38:13+00:00"}
 {"actor": "generate", "city": "charlotte", "note": "Pet Paradise", "outcome": "unverifiable", "place_id": "osm-pet-paradise", "ts": "2026-08-10T14:38:13+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "reconciled into first-ward-park", "outcome": "duplicate", "place_id": "osm-first-ward-park", "ts": "2026-08-10T14:42:36+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "reconciled into shuffletown-dog-park", "outcome": "duplicate", "place_id": "ovt-323c0c12-shuffletown-park", "ts": "2026-08-10T14:42:36+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "reconciled into barkingham-park-dog-park", "outcome": "duplicate", "place_id": "ovt-62a39fa9-barkingham-park-dog-park", "ts": "2026-08-10T14:42:36+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Petco", "outcome": "draft-produced", "place_id": "osm-petco", "ts": "2026-08-10T14:56:45+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "PetSmart", "outcome": "unverifiable", "place_id": "ovt-04113f1f-petsmart", "ts": "2026-08-10T14:56:45+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "McMullen Dog Park", "outcome": "draft-produced", "place_id": "ovt-b9614307-mcmullen-dog-park", "ts": "2026-08-10T14:56:45+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Clarks Creek Community Park", "outcome": "draft-produced", "place_id": "ovt-fd2aaf8b-clarks-creek-community-park", "ts": "2026-08-10T14:56:45+00:00"}
