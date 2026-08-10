@@ -58,3 +58,20 @@
 {"actor": "generate", "city": "truckee", "note": "Petra Restaurant & Wine Bar", "outcome": "unverifiable", "place_id": "ovt-1d9965e8-petra-restaurant-wine-bar", "ts": "2026-08-10T20:32:14+00:00"}
 {"actor": "generate", "city": "truckee", "note": "Mellow Fellow Of Truckee", "outcome": "unverifiable", "place_id": "ovt-28a26828-mellow-fellow-of-truckee", "ts": "2026-08-10T20:32:14+00:00"}
 {"actor": "generate", "city": "truckee", "note": "Old Town Tap", "outcome": "draft-produced", "place_id": "ovt-7c1cc184-old-town-tap", "ts": "2026-08-10T20:32:14+00:00"}
+{"actor": "manual", "city": "truckee", "note": "Truckee batch 4: downtown eats + lodging + vets (3 errored retries lead)", "outcome": "queued", "place_id": "osm-n12181124195-dark-horse-coffee-roasters", "ts": "2026-08-10T20:41:43+00:00"}
+{"actor": "manual", "city": "truckee", "note": "Truckee batch 4: downtown eats + lodging + vets (3 errored retries lead)", "outcome": "queued", "place_id": "osm-n11099462530-trokay", "ts": "2026-08-10T20:41:43+00:00"}
+{"actor": "manual", "city": "truckee", "note": "Truckee batch 4: downtown eats + lodging + vets (3 errored retries lead)", "outcome": "queued", "place_id": "osm-n11099462529-casa-baeza-mexican-restaurant", "ts": "2026-08-10T20:41:44+00:00"}
+{"actor": "manual", "city": "truckee", "note": "Truckee batch 4: downtown eats + lodging + vets (3 errored retries lead)", "outcome": "queued", "place_id": "osm-n11099864694-pianeta", "ts": "2026-08-10T20:41:45+00:00"}
+{"actor": "manual", "city": "truckee", "note": "Truckee batch 4: downtown eats + lodging + vets (3 errored retries lead)", "outcome": "queued", "place_id": "osm-n13947334205-truckee-donner-lodge", "ts": "2026-08-10T20:41:45+00:00"}
+{"actor": "manual", "city": "truckee", "note": "Truckee batch 4: downtown eats + lodging + vets (3 errored retries lead)", "outcome": "queued", "place_id": "ovt-9b3e8abd-sierra-pet-clinic", "ts": "2026-08-10T20:41:46+00:00"}
+{"actor": "manual", "city": "truckee", "note": "Truckee batch 4: downtown eats + lodging + vets (3 errored retries lead)", "outcome": "queued", "place_id": "ovt-4251188a-doctors-office-for-pets", "ts": "2026-08-10T20:41:47+00:00"}
+{"actor": "generate", "city": "truckee", "note": "Casa Baeza Mexican Restaurant", "outcome": "unverifiable", "place_id": "osm-n11099462529-casa-baeza-mexican-restaurant", "ts": "2026-08-10T20:56:44+00:00"}
+{"actor": "generate", "city": "truckee", "note": "Trokay", "outcome": "unverifiable", "place_id": "osm-n11099462530-trokay", "ts": "2026-08-10T20:56:44+00:00"}
+{"actor": "generate", "city": "truckee", "note": "Pianeta", "outcome": "unverifiable", "place_id": "osm-n11099864694-pianeta", "ts": "2026-08-10T20:56:44+00:00"}
+{"actor": "generate", "city": "truckee", "note": "Dark Horse Coffee Roasters", "outcome": "unverifiable", "place_id": "osm-n12181124195-dark-horse-coffee-roasters", "ts": "2026-08-10T20:56:44+00:00"}
+{"actor": "generate", "city": "truckee", "note": "Truckee Donner Lodge", "outcome": "unverifiable", "place_id": "osm-n13947334205-truckee-donner-lodge", "ts": "2026-08-10T20:56:44+00:00"}
+{"actor": "generate", "city": "truckee", "note": "Doctors Office for Pets", "outcome": "draft-produced", "place_id": "ovt-4251188a-doctors-office-for-pets", "ts": "2026-08-10T20:56:44+00:00"}
+{"actor": "generate", "city": "truckee", "note": "Got Dogs", "outcome": "unverifiable", "place_id": "ovt-7e8b671f-got-dogs", "ts": "2026-08-10T20:56:44+00:00"}
+{"actor": "generate", "city": "truckee", "note": "Sierra Pet Clinic", "outcome": "draft-produced", "place_id": "ovt-9b3e8abd-sierra-pet-clinic", "ts": "2026-08-10T20:56:44+00:00"}
+{"actor": "generate", "city": "truckee", "note": "Redlight", "outcome": "draft-produced", "place_id": "ovt-aeaa0d09-redlight", "ts": "2026-08-10T20:56:44+00:00"}
+{"actor": "generate", "city": "truckee", "note": "Scraps Pet Store & Dog Bakery", "outcome": "draft-produced", "place_id": "ovt-dae74019-scraps-pet-store-dog-bakery", "ts": "2026-08-10T20:56:44+00:00"}
