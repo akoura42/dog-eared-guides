@@ -211,11 +211,16 @@ def parse_generation_output(text: str) -> GenerationResult:
 
 
 def split_frontmatter(text: str) -> tuple[dict, str]:
-    """Parse a markdown file's YAML frontmatter. Raises on malformed files."""
+    """Parse a markdown file's YAML frontmatter. Raises ValueError on
+    malformed files — including YAML syntax errors (an unquoted colon in a
+    model draft once escaped as ScannerError and killed a whole batch)."""
     m = re.match(r"^---\n(.*?)\n---\n(.*)$", text, re.DOTALL)
     if not m:
         raise ValueError("missing frontmatter block")
-    data = yaml.safe_load(m.group(1))
+    try:
+        data = yaml.safe_load(m.group(1))
+    except yaml.YAMLError as exc:
+        raise ValueError(f"frontmatter YAML does not parse: {exc}") from exc
     if not isinstance(data, dict):
         raise ValueError("frontmatter is not a mapping")
     return data, m.group(2)
