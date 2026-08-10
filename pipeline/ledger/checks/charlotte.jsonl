@@ -196,3 +196,24 @@
 {"actor": "generate", "city": "charlotte", "note": "Cook Out", "outcome": "unverifiable", "place_id": "osm-cook-out", "ts": "2026-08-08T15:56:15+00:00"}
 {"actor": "generate", "city": "charlotte", "note": "Copperhead Social Club", "outcome": "unverifiable", "place_id": "osm-copperhead-social-club", "ts": "2026-08-08T15:56:15+00:00"}
 {"actor": "generate", "city": "charlotte", "note": "Coquette", "outcome": "unverifiable", "place_id": "osm-coquette", "ts": "2026-08-08T15:56:15+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Duplicate of published free-range-brewing (sweep name-match missed on coords)", "outcome": "duplicate", "place_id": "ovt-0ad86724-free-range-brewing", "ts": "2026-08-10T13:33:36+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch: dog-scene anchors + chain tier-1 wins", "outcome": "queued", "place_id": "ovt-0b717629-sugar-creek-brewing-company", "ts": "2026-08-10T13:33:37+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch: dog-scene anchors + chain tier-1 wins", "outcome": "queued", "place_id": "ovt-0cd314e8-tyber-creek-pub", "ts": "2026-08-10T13:33:38+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch: dog-scene anchors + chain tier-1 wins", "outcome": "queued", "place_id": "ovt-1baa1f7c-dilworth-tasting-room-southpark", "ts": "2026-08-10T13:33:39+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch: dog-scene anchors + chain tier-1 wins", "outcome": "queued", "place_id": "ovt-70a8fe00-small-bar-south-end", "ts": "2026-08-10T13:33:40+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch: dog-scene anchors + chain tier-1 wins", "outcome": "queued", "place_id": "ovt-0d0b6540-the-summit-beer-shop", "ts": "2026-08-10T13:33:41+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch: dog-scene anchors + chain tier-1 wins", "outcome": "queued", "place_id": "ovt-1677fa20-tap-and-vine-quail-hollow", "ts": "2026-08-10T13:33:42+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch: dog-scene anchors + chain tier-1 wins", "outcome": "queued", "place_id": "ovt-044248c6-the-wine-vault-elizabeth", "ts": "2026-08-10T13:33:43+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch: dog-scene anchors + chain tier-1 wins", "outcome": "queued", "place_id": "ovt-176002bb-greyhound", "ts": "2026-08-10T13:33:44+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch: dog-scene anchors + chain tier-1 wins", "outcome": "queued", "place_id": "ovt-24feefad-petco", "ts": "2026-08-10T13:33:45+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch: dog-scene anchors + chain tier-1 wins", "outcome": "queued", "place_id": "ovt-644ec272-hollywood-feed", "ts": "2026-08-10T13:33:45+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "The Wine Vault Elizabeth", "outcome": "unverifiable", "place_id": "ovt-044248c6-the-wine-vault-elizabeth", "ts": "2026-08-10T13:47:19+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Sugar Creek Brewing Company", "outcome": "unverifiable", "place_id": "ovt-0b717629-sugar-creek-brewing-company", "ts": "2026-08-10T13:47:19+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Tyber Creek Pub", "outcome": "unverifiable", "place_id": "ovt-0cd314e8-tyber-creek-pub", "ts": "2026-08-10T13:47:19+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "The Summit Beer Shop", "outcome": "unverifiable", "place_id": "ovt-0d0b6540-the-summit-beer-shop", "ts": "2026-08-10T13:47:19+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Tap and Vine Quail Hollow", "outcome": "unverifiable", "place_id": "ovt-1677fa20-tap-and-vine-quail-hollow", "ts": "2026-08-10T13:47:19+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Greyhound", "outcome": "unverifiable", "place_id": "ovt-176002bb-greyhound", "ts": "2026-08-10T13:47:19+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Dilworth Tasting Room SouthPark", "outcome": "unverifiable", "place_id": "ovt-1baa1f7c-dilworth-tasting-room-southpark", "ts": "2026-08-10T13:47:19+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Petco", "outcome": "draft-produced", "place_id": "ovt-24feefad-petco", "ts": "2026-08-10T13:47:19+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Hollywood Feed", "outcome": "draft-produced", "place_id": "ovt-644ec272-hollywood-feed", "ts": "2026-08-10T13:47:19+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Small Bar South End", "outcome": "unverifiable", "place_id": "ovt-70a8fe00-small-bar-south-end", "ts": "2026-08-10T13:47:19+00:00"}
