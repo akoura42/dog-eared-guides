@@ -8,7 +8,8 @@
 // so tiles never block first paint.
 import type { Venue } from '~/lib/venues';
 import { venuePath, venueSlug, matchesAttribute } from '~/lib/venues';
-import { getCategoryByKey, getAttributes, type CityConfig } from '~/lib/config';
+import { getCollection } from 'astro:content';
+import { getCategoryByKey, getAttributes, getCity, isLaunched, type CityConfig } from '~/lib/config';
 import { GMAPS_API_KEY } from '~/lib/site';
 import { getTownZones } from '~/lib/zones';
 import { venueAreas } from '~/lib/areas';
@@ -107,7 +108,9 @@ const indexKeysOf = (venue: Venue) =>
 const NO_DOGS_COLOR = '#8f948e';
 const noDogsCount = venues.filter((v) => v.data.dog_policy.allowed === 'no').length;
 
-// Marker order mirrors the card list — index is the shared id between them.
+// Marker order mirrors the card list — index is the shared id between
+// them. Home venues FIRST (their indexes must align with the cards);
+// neighbor-town markers are appended after and never map to a card.
 const markers = venues.map((venue) => ({
   name: venue.data.name,
   lat: venue.data.lat,
@@ -117,6 +120,7 @@ const markers = venues.map((venue) => ({
     getCategoryByKey(venue.data.category).label +
     (venue.data.dog_policy.allowed === 'no' ? ' — no dogs' : ''),
   noDogs: venue.data.dog_policy.allowed === 'no',
+  neighbor: false,
   color:
     venue.data.dog_policy.allowed === 'no'
       ? NO_DOGS_COLOR
@@ -156,6 +160,46 @@ const distKm = (lat: number, lng: number) => {
 const sortedDists = venues.map((v) => distKm(v.data.lat, v.data.lng)).sort((a, b) => a - b);
 const p90 = sortedDists[Math.min(sortedDists.length - 1, Math.floor(sortedDists.length * 0.9))] ?? 0;
 const frameKm = city.map_frame_km ?? Math.max(3, p90 * 1.15);
+
+// Neighbor-town venues: launched sister cities within range render on
+// this map too — adjacent towns are one geography to a visitor (Truckee
+// and Tahoe City are 20 minutes apart). Semi-transparent markers, town
+// named in the label, one toolbar toggle. The card list, counts, chips,
+// and index stay home-city so the numbers keep meaning something.
+const NEIGHBOR_KM = 35;
+const neighborVenues = (await getCollection('venues')).filter(
+  (v) =>
+    v.data.city !== city.slug &&
+    isLaunched(v.data.city) &&
+    !v.data.tags.includes('emergency-vet') &&
+    distKm(v.data.lat, v.data.lng) <= NEIGHBOR_KM
+);
+const neighborTowns = [...new Set(neighborVenues.map((v) => getCity(v.data.city).name))];
+const neighborMarkers = neighborVenues.map((venue) => ({
+  name: venue.data.name,
+  lat: venue.data.lat,
+  lng: venue.data.lng,
+  categoryKey: venue.data.category,
+  category:
+    `${getCategoryByKey(venue.data.category).label} — ${getCity(venue.data.city).name}` +
+    (venue.data.dog_policy.allowed === 'no' ? ' · no dogs' : ''),
+  noDogs: venue.data.dog_policy.allowed === 'no',
+  neighbor: true,
+  color:
+    venue.data.dog_policy.allowed === 'no'
+      ? NO_DOGS_COLOR
+      : CATEGORY_COLORS[venue.data.category] ?? '#1f4d3a',
+  cuisines: '',
+  food: '',
+  attrs: '',
+  ix: '',
+  areas: '',
+  path: venuePath(venue),
+  gmaps: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    `${venue.data.name} ${venue.data.address}`
+  )}`,
+}));
+const allMarkers = [...markers, ...neighborMarkers];
 // Dog-policy zone polygons (no-dogs beaches, the off-leash park, leashed
 // day-use areas) — generated from OSM geometry, classified from our
 // verified records. Null when the town has no zones file yet.
@@ -278,6 +322,15 @@ const legend = [...new Map(venues.map((v) => {
         </div>
       </details>
     )}
+    {neighborMarkers.length > 0 && (
+      <button
+        type="button"
+        class="key neighbor-toggle"
+        id="neighbor-toggle"
+        aria-pressed="true"
+        title={`Venues from ${neighborTowns.join(' and ')} shown on this map — tap to hide`}
+      ><i class="nbi"></i>Nearby: {neighborTowns.join(', ')} <span class="n">{neighborMarkers.length}</span></button>
+    )}
     {noDogsCount > 0 && (
       <button
         type="button"
@@ -328,7 +381,7 @@ const legend = [...new Map(venues.map((v) => {
         id="venue-map-canvas"
         data-center={JSON.stringify(center)}
         data-frame-km={frameKm.toFixed(2)}
-        data-markers={JSON.stringify(markers)}
+        data-markers={JSON.stringify(allMarkers)}
         data-zones={zones ? JSON.stringify(zones) : undefined}
         data-emergency={emergencyMarkers.length > 0 ? JSON.stringify(emergencyMarkers) : undefined}
         data-emergency-url={emergencyMarkers.length > 0 ? `/${city.slug}/emergency/` : undefined}
@@ -518,6 +571,14 @@ const legend = [...new Map(venues.map((v) => {
     font-size: 0.78rem;
     font-weight: 650;
     margin: 0.25rem 0.3rem 0;
+  }
+  .neighbor-toggle .nbi {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    border: 2px solid var(--moss);
+    background: color-mix(in srgb, var(--moss) 40%, transparent);
+    display: inline-block;
   }
   .emergency-toggle i {
     width: 14px;
@@ -811,6 +872,7 @@ const legend = [...new Map(venues.map((v) => {
     categoryKey: string;
     category: string;
     noDogs: boolean;
+    neighbor: boolean;
     color: string;
     cuisines: string;
     food: string;
@@ -924,6 +986,8 @@ const legend = [...new Map(venues.map((v) => {
   const zoneGroupState: Record<string, boolean> = {};
   // Verified no-dogs venues: shown by default, hidden via the toolbar toggle.
   let showNoDogs = true;
+  // Neighbor-town markers: shown by default, hidden via their toggle.
+  let showNeighbors = true;
   const zoneGroupOf = (p: { kind?: string; policy: string }) =>
     p.kind === 'trail' ? 'trails' : p.policy;
   const zoneVisible = (p: { kind?: string; policy: string }) =>
@@ -948,6 +1012,7 @@ const legend = [...new Map(venues.map((v) => {
   }
 
   function isShown(m: MarkerData): boolean {
+    if (m.neighbor && !showNeighbors) return false;
     if (!showNoDogs && m.noDogs) return false;
     if (hiddenCategories.has(m.categoryKey)) return false;
     const venueAttrs = m.attrs.split('|');
@@ -1030,11 +1095,11 @@ const legend = [...new Map(venues.map((v) => {
     });
     const icon = (m: MarkerData, focused: boolean) => ({
       path: maps.SymbolPath.CIRCLE,
-      scale: focused ? 12 : 9,
+      scale: focused ? 12 : m.neighbor ? 7 : 9,
       fillColor: m.color,
-      fillOpacity: 0.95,
+      fillOpacity: m.neighbor ? 0.55 : 0.95,
       strokeColor: '#ffffff',
-      strokeWeight: 2,
+      strokeWeight: m.neighbor ? 1.5 : 2,
     });
     const bounds = new maps.LatLngBounds();
     const info = new maps.InfoWindow();
@@ -1203,11 +1268,11 @@ const legend = [...new Map(venues.map((v) => {
     const bounds = L.latLngBounds([]);
     const lmarkers = markers.map((m, i) => {
       const marker = L.circleMarker([m.lat, m.lng], {
-        radius: 9,
+        radius: m.neighbor ? 7 : 9,
         color: '#ffffff',
-        weight: 2,
+        weight: m.neighbor ? 1.5 : 2,
         fillColor: m.color,
-        fillOpacity: 0.95,
+        fillOpacity: m.neighbor ? 0.55 : 0.95,
       }).addTo(map);
       marker.bindPopup(popupHtml(m));
       marker.bindTooltip(m.name, { direction: 'top', offset: [0, -8] });
@@ -1302,6 +1367,13 @@ const legend = [...new Map(venues.map((v) => {
     showNoDogs = !showNoDogs;
     noDogsToggle.setAttribute('aria-pressed', String(showNoDogs));
     updateList();
+    applyVisibility?.();
+  });
+
+  const neighborToggle = document.getElementById('neighbor-toggle') as HTMLButtonElement | null;
+  neighborToggle?.addEventListener('click', () => {
+    showNeighbors = !showNeighbors;
+    neighborToggle.setAttribute('aria-pressed', String(showNeighbors));
     applyVisibility?.();
   });
 
