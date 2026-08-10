@@ -270,3 +270,22 @@
 {"actor": "generate", "city": "charlotte", "note": "PetSmart", "outcome": "unverifiable", "place_id": "ovt-04113f1f-petsmart", "ts": "2026-08-10T14:56:45+00:00"}
 {"actor": "generate", "city": "charlotte", "note": "McMullen Dog Park", "outcome": "draft-produced", "place_id": "ovt-b9614307-mcmullen-dog-park", "ts": "2026-08-10T14:56:45+00:00"}
 {"actor": "generate", "city": "charlotte", "note": "Clarks Creek Community Park", "outcome": "draft-produced", "place_id": "ovt-fd2aaf8b-clarks-creek-community-park", "ts": "2026-08-10T14:56:45+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 4: PetSmart chain pass + parks", "outcome": "queued", "place_id": "ovt-2addf0e4-petsmart", "ts": "2026-08-10T16:09:27+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 4: PetSmart chain pass + parks", "outcome": "queued", "place_id": "ovt-9df67bcc-petsmart", "ts": "2026-08-10T16:09:28+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 4: PetSmart chain pass + parks", "outcome": "queued", "place_id": "ovt-d83702dc-petsmart", "ts": "2026-08-10T16:09:29+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 4: PetSmart chain pass + parks", "outcome": "queued", "place_id": "ovt-f38185d9-petsmart", "ts": "2026-08-10T16:09:30+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 4: PetSmart chain pass + parks", "outcome": "queued", "place_id": "osm-eastover-park", "ts": "2026-08-10T16:09:31+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 4: PetSmart chain pass + parks", "outcome": "queued", "place_id": "osm-edgehill-park", "ts": "2026-08-10T16:09:32+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 4: PetSmart chain pass + parks", "outcome": "queued", "place_id": "osm-firestone-park", "ts": "2026-08-10T16:09:33+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 4: PetSmart chain pass + parks", "outcome": "queued", "place_id": "osm-five-points-park", "ts": "2026-08-10T16:09:34+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 4: PetSmart chain pass + parks", "outcome": "queued", "place_id": "osm-eva-b-barber-park", "ts": "2026-08-10T16:09:35+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Eastover Park", "outcome": "draft-produced", "place_id": "osm-eastover-park", "ts": "2026-08-10T16:30:37+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Edgehill Park", "outcome": "draft-rejected", "place_id": "osm-edgehill-park", "ts": "2026-08-10T16:30:37+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Edwards Branch Greenway", "outcome": "draft-produced", "place_id": "osm-edwards-branch-greenway", "ts": "2026-08-10T16:30:37+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Eva B. Barber Park", "outcome": "draft-produced", "place_id": "osm-eva-b-barber-park", "ts": "2026-08-10T16:30:37+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Firestone Park", "outcome": "draft-produced", "place_id": "osm-firestone-park", "ts": "2026-08-10T16:30:37+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Five Points Park", "outcome": "draft-produced", "place_id": "osm-five-points-park", "ts": "2026-08-10T16:30:37+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "PetSmart", "outcome": "draft-produced", "place_id": "ovt-2addf0e4-petsmart", "ts": "2026-08-10T16:30:37+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "PetSmart", "outcome": "draft-produced", "place_id": "ovt-9df67bcc-petsmart", "ts": "2026-08-10T16:30:37+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Petsmart", "outcome": "draft-produced", "place_id": "ovt-d83702dc-petsmart", "ts": "2026-08-10T16:30:37+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "PetSmart", "outcome": "draft-produced", "place_id": "ovt-f38185d9-petsmart", "ts": "2026-08-10T16:30:37+00:00"}
