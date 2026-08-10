@@ -14,13 +14,13 @@ components:
     last_verified: '2026-08-10'
     score: 100
   indoor_welcome:
-    value: 0.5
+    value: 0.5263
     basis:
-      numerator: 9
-      denominator: 18
+      numerator: 10
+      denominator: 19
     sources:
     - method: venue-records
-      note: computed from 18 published venue records
+      note: computed from 19 published venue records
       date: '2026-08-10'
     last_verified: '2026-08-10'
     score: 100
