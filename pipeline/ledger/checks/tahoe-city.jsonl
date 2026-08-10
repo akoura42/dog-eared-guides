@@ -258,3 +258,4 @@
 {"actor": "generate", "city": "tahoe-city", "note": "Morelos Tacos | Mexican", "outcome": "unverifiable", "place_id": "ovt-d29e7a91-morelos-tacos-mexican", "ts": "2026-08-10T13:24:09+00:00"}
 {"actor": "generate", "city": "tahoe-city", "note": "Six Peaks Grille", "outcome": "draft-produced", "place_id": "ovt-d791a987-six-peaks-grille", "ts": "2026-08-10T13:24:09+00:00"}
 {"actor": "generate", "city": "tahoe-city", "note": "Terrace Bar & Restaurant", "outcome": "unverifiable", "place_id": "ovt-fca5e935-terrace-bar-restaurant", "ts": "2026-08-10T13:24:09+00:00"}
+{"actor": "manual", "city": "tahoe-city", "note": "Former name of The Inn at Boatworks (published, tier 1) — rebrand; Overture carries the stale name.", "outcome": "duplicate", "place_id": "ovt-cf31ccc3-tahoe-city-inn", "ts": "2026-08-10T13:25:42+00:00"}
