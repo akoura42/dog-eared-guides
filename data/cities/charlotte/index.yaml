@@ -1,6 +1,6 @@
 version: index-v1
 town: charlotte
-computed: '2026-08-08'
+computed: '2026-08-10'
 components:
   patio_share:
     value: 1.0
@@ -10,19 +10,19 @@ components:
     sources:
     - method: venue-records
       note: computed from 28 published venue records
-      date: '2026-08-08'
-    last_verified: '2026-08-08'
+      date: '2026-08-10'
+    last_verified: '2026-08-10'
     score: 100
   indoor_welcome:
-    value: 0.4375
+    value: 0.5
     basis:
-      numerator: 7
-      denominator: 16
+      numerator: 9
+      denominator: 18
     sources:
     - method: venue-records
-      note: computed from 16 published venue records
-      date: '2026-08-08'
-    last_verified: '2026-08-08'
+      note: computed from 18 published venue records
+      date: '2026-08-10'
+    last_verified: '2026-08-10'
     score: 100
   lodging_share:
     value: 1.0
@@ -32,8 +32,8 @@ components:
     sources:
     - method: venue-records
       note: computed from 8 published venue records
-      date: '2026-08-08'
-    last_verified: '2026-08-08'
+      date: '2026-08-10'
+    last_verified: '2026-08-10'
     score: 100
   water_access:
     value: none
