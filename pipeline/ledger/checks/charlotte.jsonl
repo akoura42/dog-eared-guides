@@ -306,3 +306,22 @@
 {"actor": "generate", "city": "charlotte", "note": "Grayson Park", "outcome": "draft-produced", "place_id": "osm-grayson-park", "ts": "2026-08-10T18:02:50+00:00"}
 {"actor": "generate", "city": "charlotte", "note": "Independence Park", "outcome": "draft-produced", "place_id": "osm-independence-park", "ts": "2026-08-10T18:02:50+00:00"}
 {"actor": "generate", "city": "charlotte", "note": "Kilborne Park", "outcome": "draft-produced", "place_id": "osm-kilborne-park", "ts": "2026-08-10T18:02:50+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 6: parks continuation (Hidden Valley retry leads)", "outcome": "queued", "place_id": "osm-latta-park", "ts": "2026-08-10T18:14:38+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 6: parks continuation (Hidden Valley retry leads)", "outcome": "queued", "place_id": "osm-marion-diehl-park", "ts": "2026-08-10T18:14:39+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 6: parks continuation (Hidden Valley retry leads)", "outcome": "queued", "place_id": "osm-marshall-park", "ts": "2026-08-10T18:14:40+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 6: parks continuation (Hidden Valley retry leads)", "outcome": "queued", "place_id": "osm-martin-luther-king-park", "ts": "2026-08-10T18:14:41+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 6: parks continuation (Hidden Valley retry leads)", "outcome": "queued", "place_id": "osm-lakewood-park", "ts": "2026-08-10T18:14:42+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 6: parks continuation (Hidden Valley retry leads)", "outcome": "queued", "place_id": "osm-grier-heights-park", "ts": "2026-08-10T18:14:43+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 6: parks continuation (Hidden Valley retry leads)", "outcome": "queued", "place_id": "osm-lincoln-heights-neighborhood-park", "ts": "2026-08-10T18:14:44+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 6: parks continuation (Hidden Valley retry leads)", "outcome": "queued", "place_id": "osm-eagles-landing-neighborhood-park", "ts": "2026-08-10T18:14:45+00:00"}
+{"actor": "manual", "city": "charlotte", "note": "Priority batch 6: parks continuation (Hidden Valley retry leads)", "outcome": "queued", "place_id": "osm-forest-pawtuckett-neighborhood-park", "ts": "2026-08-10T18:14:46+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Derita Creek Park", "outcome": "unverifiable", "place_id": "osm-derita-creek-park", "ts": "2026-08-10T18:39:18+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Eagles Landing Neighborhood Park ​", "outcome": "draft-produced", "place_id": "osm-eagles-landing-neighborhood-park", "ts": "2026-08-10T18:39:18+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Forest Pawtuckett Neighborhood Park", "outcome": "draft-produced", "place_id": "osm-forest-pawtuckett-neighborhood-park", "ts": "2026-08-10T18:39:18+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Grier Heights Park", "outcome": "draft-produced", "place_id": "osm-grier-heights-park", "ts": "2026-08-10T18:39:18+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Hidden Valley Park", "outcome": "draft-produced", "place_id": "osm-hidden-valley-park", "ts": "2026-08-10T18:39:18+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Lakewood Park", "outcome": "draft-produced", "place_id": "osm-lakewood-park", "ts": "2026-08-10T18:39:18+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Latta Park", "outcome": "draft-produced", "place_id": "osm-latta-park", "ts": "2026-08-10T18:39:18+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Lincoln Heights Neighborhood Park", "outcome": "draft-produced", "place_id": "osm-lincoln-heights-neighborhood-park", "ts": "2026-08-10T18:39:18+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Marion Diehl Park", "outcome": "draft-produced", "place_id": "osm-marion-diehl-park", "ts": "2026-08-10T18:39:18+00:00"}
+{"actor": "generate", "city": "charlotte", "note": "Marshall Park", "outcome": "draft-produced", "place_id": "osm-marshall-park", "ts": "2026-08-10T18:39:18+00:00"}
