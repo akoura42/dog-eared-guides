@@ -151,4 +151,4 @@ agency_domains:
   - truckeepolice.gov
   - fs.usda.gov
 discover_radius_km: 9
-launched: false
+launched: true

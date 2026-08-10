@@ -5,11 +5,11 @@ components:
   patio_share:
     value: 1.0
     basis:
-      numerator: 3
-      denominator: 3
+      numerator: 4
+      denominator: 4
     sources:
     - method: venue-records
-      note: computed from 3 published venue records
+      note: computed from 4 published venue records
       date: '2026-08-10'
     last_verified: '2026-08-10'
     score: 100
@@ -27,11 +27,11 @@ components:
   lodging_share:
     value: 0.5
     basis:
-      numerator: 1
-      denominator: 2
+      numerator: 2
+      denominator: 4
     sources:
     - method: venue-records
-      note: computed from 2 published venue records
+      note: computed from 4 published venue records
       date: '2026-08-10'
     last_verified: '2026-08-10'
     score: 80
